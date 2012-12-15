@@ -1,0 +1,172 @@
+<?php
+$this->headTitle('Gestion des eleveurs');
+$tableCategorie = new Application_Model_Categorie_DbTable();
+$tableDaral = new Application_Model_Daral_DbTable();
+?>
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+<div class="page-header">
+  <h2 style="text-align: center">Liste des eleveurs</h2>
+</div>
+
+<div class="pull-right">
+ <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
+    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+ <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Inscrire</a>
+    <!--  ********************************************************** -->
+ </div> <br />
+
+<form method="get" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">
+<div>
+Rechercher: <input class="input-large search-query" placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp
+<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => '-------------Tout------------',
+  'id_farmer' => 'Identifiant',
+  'firstname_farmer' => 'Prenom',
+  'lastname_farmer' => 'Nom',
+  'national_id' => 'Identification nationale',
+  'address_farmer' => 'Adresse',
+  'phone_farmer'=>'Telephone',
+  //'daral_originel' => 'Daral Originel',
+  'daral_actuel' => 'Daral d\'appartenance',
+  
+  //'birthplace_farmer' => 'Birthplace Farmer',
+  'id_localite' => 'Localite',
+)); ?>&nbsp
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
+</div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<table class="table table-bordered table-condensed " >
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+           
+            <th <?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+               <span class="label label-inverse"> Indentifiant 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+			<th<?php if ('firstname_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Prenom
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'firstname_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'firstname_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('lastname_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Nom 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lastname_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lastname_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('categorie' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Categorie
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'categorie', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'categorie', '_so' => 'desc')); ?>'>&#x25BC;</a>
+				</span> 
+                
+            </th>
+            <th<?php if ('national_id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Identification nationale
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'national_id', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'national_id', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('address_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Adresse
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'address_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'address_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('telephone' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Telephone
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'telephone', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'telephone', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span> 
+            </th>
+           
+            <th<?php if ('daral_actuel' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Daral d'appartenance
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'daral_actuel', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'daral_actuel', '_so' => 'desc')); ?>'>&#x25BC;</a>
+				</span>
+               
+            </th>
+            
+           
+            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Localite
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span> 
+            </th>
+            <th><span class="label label-inverse">Actions</span></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+ 
+<?php foreach ($this->paginator as $row): ?>
+        
+         <tr>
+       
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id_farmer; ?>" /></td>
+            <td><?php echo $row->id_farmer; ?></td>
+			<td><?php echo $row->firstname_farmer; ?></td>
+            <td><?php echo $row->lastname_farmer; ?></td>
+            <td><?php     $linkedRow = $tableCategorie->find($row->categorie)->current();
+    if ($linkedRow) {
+        echo $linkedRow->getZodekenAutoLabel();
+    } else {
+        echo $linkedRow->categorie, ' (unlinked)';
+    } ?></td>
+            <td><?php echo $row->national_id; ?></td>
+            <td><?php echo $row->address_farmer; ?></td>
+            <td><?php echo $row->phone_farmer; ?></td>
+            <td><?php echo $row->daral_actuel; ?></td>
+            <td><?php echo $row->id_localite; ?></td>
+            <td align="center"><a href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit', 'id' => $row->id_farmer), null, true); ?>">Modifier</a> 
+    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete', 'del_id' => $row->id_farmer), null, true); ?>">Supprimer</a></td>
+     </tr>
+     
+<?php  endforeach; ?>
+    </tbody>
+</table><br />
+
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+</form>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');

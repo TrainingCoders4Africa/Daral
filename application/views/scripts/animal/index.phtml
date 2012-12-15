@@ -1,0 +1,124 @@
+<?php
+$tableFarmer = new Application_Model_Farmer_DbTable();
+$tableAnimalType = new Application_Model_AnimalType_DbTable();
+?>
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+
+<div class="pull-right">
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i>Actualiser</a>
+</div>
+
+<form method="get" action="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index'), null, true); ?>">
+<div>
+Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp
+<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => '-------------Tout------------',
+  'fk_id_farmer' => 'Identifiant Eleveur',
+  'fk_animal_type' => 'Type d\'animal',
+  'photo_left' => 'VUE GAUCHE',
+  'photo_right' => 'VUE DROITE',
+  'photo_front' => 'VUE FACE',
+)); ?>&nbsp 
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
+
+</div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
+    cellpadding="3">
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Id 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('fk_id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Identifiant Eleveur
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('fk_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Type d'animal
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('photo_left' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">VUE GAUCHE
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'photo_left', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'photo_left', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('photo_right' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">VUE DROITE 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'photo_right', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'photo_right', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('photo_front' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">VUE FACE 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'photo_front', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'photo_front', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th><span class="label label-inverse">Actions</span></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+<?php foreach ($this->paginator as $row): ?>
+        <tr>
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
+            <td align="right"><?php echo $row->id; ?></td>
+            <td><?php echo $row->fk_id_farmer; ?></td>
+            <td><?php echo $row->fk_animal_type; ?></td>
+            <td><?php echo $row->photo_left; ?></td>
+            <td><?php echo $row->photo_right; ?></td>
+            <td><?php echo $row->photo_front; ?></td>
+            <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'update', 'id' => $row->id), null, true); ?>">Modifier</a> 
+    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Supprimer</a></td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table><br />
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+</form>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');

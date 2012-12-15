@@ -1,0 +1,35 @@
+<?php
+error_reporting(E_ALL);
+?>
+
+<div class="page-header">
+<h2>Gestion des eleveurs</h2>
+</div>
+
+<?php 
+$IDCard_path = $this->IDCard_path;
+$tableFarmer = new Application_Model_Farmer_DbTable_Farmer();
+$op_syst = $tableFarmer->getOS();
+
+if($op_syst=='WINDOWS')
+{$name= substr(strrchr($IDCard_path,"\\"),1,20);}
+else
+{$name= substr(strrchr($IDCard_path,"/"),1,20);}	
+
+?>
+
+
+<div class="row ">
+         <div class="offset7 span4 alert alert-success ">L'eleveur <?php echo $this->firstname.' '.$this->lastname;?> a bien ete enregistre.</div>
+      </div><br/>
+     <div class="row">
+      <div class="span7 "></div>
+         <div><img src="<?php echo $this->baseUrl()?>/image/<?php echo $name; ?>" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
+      </div>
+      
+      <br/>
+
+<div class="row">
+ <div class="span9"></div>
+ <a class="btn" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-ok-sign"></i> OK</a>
+</div>

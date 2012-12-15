@@ -1,0 +1,181 @@
+<?php
+$tableLangue = new Application_Model_Langue_DbTable();
+$tableMaladie = new Application_Model_Maladie_DbTable();
+?>
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+
+<div style="text-align:right">
+<a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>">Reset Filters</a>
+- <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
+
+<form method="get" action="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>">
+<div>
+Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
+<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => 'All',
+  'titre' => 'Titre',
+  'langue' => 'Langue',
+  'lien' => 'Lien',
+  'maladie' => 'Maladie',
+)); ?>
+<input type="submit" value="Go" />
+</div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'media', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
+    cellpadding="3">
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+            <th<?php if ('id_media' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Id Media 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_media', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_media', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('titre' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Titre 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'titre', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'titre', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('langue' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Langue 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'langue', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'langue', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <?php
+    echo $this->formSelect('langue', $this->paramlangue, array('onchange' => 'updateFilters(\'langue\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableLangue->fetchPairs());
+?>
+            </th>
+            <th<?php if ('date_insertion' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Date Insertion 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'date_insertion', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'date_insertion', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('lien' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Lien 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lien', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lien', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('maladie' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Maladie 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'maladie', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'maladie', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <?php
+    echo $this->formSelect('maladie', $this->parammaladie, array('onchange' => 'updateFilters(\'maladie\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableMaladie->fetchPairs());
+?>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+            <th<?php if ('id_media' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Id Media 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_media', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_media', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('titre' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Titre 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'titre', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'titre', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('langue' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Langue 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'langue', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'langue', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <?php
+    echo $this->formSelect('langue', $this->paramlangue, array('onchange' => 'updateFilters(\'langue\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableLangue->fetchPairs());
+?>
+            </th>
+            <th<?php if ('date_insertion' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Date Insertion 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'date_insertion', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'date_insertion', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('lien' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Lien 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lien', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lien', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </th>
+            <th<?php if ('maladie' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Maladie 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'maladie', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'maladie', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <?php
+    echo $this->formSelect('maladie', $this->parammaladie, array('onchange' => 'updateFilters(\'maladie\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableMaladie->fetchPairs());
+?>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </tfoot>
+    <tbody>
+<?php foreach ($this->paginator as $row): ?>
+        <tr>
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id_media; ?>" /></td>
+            <td align="right"><?php echo $row->id_media; ?></td>
+            <td><?php echo $row->titre; ?></td>
+            <td><?php     $linkedRow = $tableLangue->find($row->langue)->current();
+    if ($linkedRow) {
+        echo $linkedRow->getZodekenAutoLabel();
+    } else {
+        echo $linkedRow->langue, ' (unlinked)';
+    } ?></td>
+            <td><?php echo $row->date_insertion; ?></td>
+            <td><?php echo $row->lien; ?></td>
+            <td><?php     $linkedRow = $tableMaladie->find($row->maladie)->current();
+    if ($linkedRow) {
+        echo $linkedRow->getZodekenAutoLabel();
+    } else {
+        echo $linkedRow->maladie, ' (unlinked)';
+    } ?></td>
+            <td align="center"><a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'update', 'id' => $row->id_media), null, true); ?>">Edit</a> 
+    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'media', 'action' => 'delete', 'del_id' => $row->id_media), null, true); ?>">Delete</a></td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table><br />
+<input type="submit" value="Delete Selected Rows" />
+</form>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');
