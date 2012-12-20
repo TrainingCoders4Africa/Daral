@@ -8,25 +8,23 @@
  * @version $Id$
  *
  */
+
 class Application_Form_EditFarmer extends Zend_Form
 {
     public function init()
     {
         $this->setMethod('post');
-
-        $this->addElement(
-            $this->createElement('hidden', 'rank_farmer')
-                
-        );
-
-        $this->addElement(
+        $this->setAttrib('enctype', 'multipart/form-data');
+       
+         $this->addElement(
             $this->createElement('text', 'id_farmer')
                 ->setLabel('Identifiant')
         		->setAttribs(array('maxlenght'=>'30'))
+         		->setAttrib('readonly','readonly')
                 ->setRequired(false)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
                 ->addFilter(new Zend_Filter_StringTrim())
-        );
+        ); 
 		
         $this->addElement(
         		$this->createElement('text', 'firstname_farmer')
@@ -49,14 +47,14 @@ class Application_Form_EditFarmer extends Zend_Form
         
         $this->addElement(
             $this->createElement('select', 'categorie')
-                ->setLabel('Categorie choisie')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableCategorie->fetchPairs())
+                ->setLabel('Categorie ')
+                ->setMultiOptions(array("" => "- - - - - - - - - Choisir - - - - - - - - -") + $tableCategorie->fetchPairs())
                 ->setRequired(true)
         );
 
         $this->addElement(
             $this->createElement('text', 'national_id')
-                ->setLabel('Numero d\'identification nationale')
+                ->setLabel('No d\'identification nationale')
                 ->setAttrib("maxlength", 50)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 50)))
@@ -83,17 +81,17 @@ class Application_Form_EditFarmer extends Zend_Form
         );
 
        
-
+ 
         $tableDaral = new Application_Model_Daral_DbTable();
         
         
         $this->addElement(
             $this->createElement('select', 'daral_actuel')
                 ->setLabel('Daral Actuel')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableDaral->fetchDaral()) //fetchDaral : to get the proper "value" to be sent
+                ->setMultiOptions(array("" => "- - - - - - - - - Choisir - - - - - - - - -") + $tableDaral->fetchDaral()) //fetchDaral : to get the proper "value" to be sent
                 ->setRequired(true)
         );
-
+ 
         
 
        
@@ -102,10 +100,12 @@ class Application_Form_EditFarmer extends Zend_Form
             $this->createElement('text', 'birthdate_farmer')
                 ->setLabel('Date de naissance')
                 ->setValue(date("Y-m-d"))
+       			->setAttrib("readonly", "readonly")
                 ->setRequired(true)
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
+       
         $this->addElement(
             $this->createElement('text', 'birthplace_farmer')
                 ->setLabel('Lieu de naissance')
@@ -114,13 +114,51 @@ class Application_Form_EditFarmer extends Zend_Form
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
                 ->addFilter(new Zend_Filter_StringTrim())
         );
+        
+        
+         $file = new Zend_Form_Element_File('photo');
+        $file->setDestination(IMAGE_PATH)
+        ->setRequired(false)
+        ->addValidator('Count', false, 1)
+        // only JPEG, PNG, and GIFs
+        ->addValidator('Extension', false, 'jpg,png');
+        
+        $this->addElement($file,'photo'); 
+        
+        
+        
+        
 
 
+        //*********** HIDDEN ELEMENTS ************//
         $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Enregistrer')
-                ->setAttrib('type', 'submit')
+        		$this->createElement('hidden', 'rank_farmer')
+        
         );
+        
+        
+        
+        $this->addElement(
+        		$this->createElement('hidden', 'registration_date')
+        		// ->setLabel('Registration Date')
+        		->setValue(date("Y-m-d"))
+        		//->setRequired(true)
+        		->addFilter(new Zend_Filter_StringTrim())
+        );
+        
+        
+        
+        
+        
+        $this->addElement(
+        		$this->createElement('hidden', 'isactive_farmer')
+        		//->setLabel('Isactive Farmer')
+        		//->setRequired(true)
+        		->setValue('1')
+        		//->addValidator(new Zend_Validate_Int())
+        		// ->addFilter(new Zend_Filter_StringTrim())
+        );
+        
 
         parent::init();
     }

@@ -1,4 +1,50 @@
-<h1>Create Media</h1>
-
 <?php
-echo $this->form->setAction($this->url());
+$this->headTitle('Media');
+$form = $this->form;
+?>
+
+
+	
+<div class="page-header">
+   <h2>Nouveau Media</h2>
+</div>
+
+<form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
+<div style="position: static; width: 90%; margin: auto;">
+	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
+    <?php
+    $i = 1;
+    
+   
+    
+    /* @var $form Zend_Form */
+    foreach ($form->getElements() as $element):
+        /* @var $element Zend_Form_Element */
+        $errors = $element->getMessages();
+        $elementName = $element->getName();
+        $i++;
+        ?>
+        <?php if($i%2 == 1) echo '</tr><tr>'; ?>
+	           
+	            <td width="25%" align="right" class="control-group<?php if ($errors) echo ' error'; ?>">
+            	<?php if ($element->getType() != 'Zend_Form_Element_Button'): ?>
+                        <?php echo $element->getLabel(); ?>
+                <?php endif; ?>
+	            </td>
+            	<td width="25%" align="left">
+                <?php echo $element->renderViewHelper(); ?>
+                <?php if ($errors): ?>
+                    <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
+                <?php endif; ?>
+                <?php if ('submit' == $elementName): ?>
+                    <a class="btn" href="<?php echo $this->url(array('controller' => 'animal'), null, true); ?>">Annuler</a>
+                <?php endif; ?>
+	            </td>
+        <?php
+        endforeach;
+        ?>
+        </tr></table>
+  </div>
+
+</form>
+    

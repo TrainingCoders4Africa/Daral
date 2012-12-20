@@ -13,7 +13,7 @@ error_reporting(E_ALL);
  */
 
 class Application_Form_Farmer extends Zend_Form
-//class Application_Form_Farmer extends Twitter_Form
+
 {
 	
     public function init()
@@ -45,7 +45,7 @@ class Application_Form_Farmer extends Zend_Form
         
         $this->addElement(
         		$this->createElement('text', 'national_id')
-        		->setLabel('Numero d\'identification nationale')
+        		->setLabel('No d\'identification nationale')
         		->setAttrib("maxlength", 50)
         		->setRequired(true)
         		->addValidator(new Zend_Validate_StringLength(array("max" => 50)))
@@ -74,7 +74,8 @@ class Application_Form_Farmer extends Zend_Form
         $this->addElement(
             $this->createElement('text', 'birthdate_farmer')
                 ->setLabel('Date de naissance')
-                ->setValue(date("Y-m-d"))
+                ->setValue(date("d/m/Y"))
+        		->setAttrib("readonly", "readonly")
                 ->setRequired(true)
                 ->addFilter(new Zend_Filter_StringTrim())
         );
@@ -91,14 +92,13 @@ class Application_Form_Farmer extends Zend_Form
         $tableCategorie = new Application_Model_Categorie_DbTable();
         $this->addElement(
         		$this->createElement('select', 'categorie')
-        		->setLabel('Categorie choisie')
-        		->setMultiOptions(array("" => "- - Select - -") + $tableCategorie->fetchPairs())
+        		->setLabel('Categorie')
+        		->setMultiOptions(array("" => "- - - - - - - -  Choisir - - - - - - - -") + $tableCategorie->fetchPairs())
         		->setRequired(true)
         );
         
         $file = new Zend_Form_Element_File('photo');
-        $file->setLabel('Photo')
-        ->setDestination(IMAGE_PATH)
+        $file->setDestination(IMAGE_PATH)
         ->setRequired(false) 
         ->addValidator('Count', false, 1)
         // only JPEG, PNG, and GIFs
@@ -108,11 +108,15 @@ class Application_Form_Farmer extends Zend_Form
         
         
         
-        $this->addElement(
+        
+        
+        
+        
+        /* $this->addElement(
         		$this->createElement('button', 'submit')
         		->setLabel('Save')
         		->setAttrib('type', 'submit')
-        );
+        ); */
  
         //*********** HIDDEN ELEMENTS ************//
           $this->addElement(

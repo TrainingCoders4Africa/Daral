@@ -33,9 +33,18 @@ function updateFilters(paramName, paramValue)
 
     self.location.href = '?' + newQuery.join('&');
 }
+
+
+</script>
+
+<script>
+
+$(function (){
+	   $(".pop").popover(); 
+	});
 </script>
 <div class="page-header">
-  <h2 style="text-align: center">Liste des eleveurs</h2>
+  <h3 style="text-align: center">Liste des eleveurs</h3>
 </div>
 
 <div class="pull-right">
@@ -72,51 +81,48 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
            
-            <th <?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th style="text-align: center;" <?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                <span class="label label-inverse"> Indentifiant 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-			<th<?php if ('firstname_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+			<th style="text-align: center;" <?php if ('firstname_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Prenom
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'firstname_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'firstname_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('lastname_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th style="text-align: center;" <?php if ('lastname_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Nom 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'lastname_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'lastname_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('categorie' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th style="text-align: center;" <?php if ('categorie' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Categorie
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'categorie', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'categorie', '_so' => 'desc')); ?>'>&#x25BC;</a>
 				</span> 
                 
             </th>
-            <th<?php if ('national_id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th style="text-align: center;" <?php if ('national_id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Identification nationale
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'national_id', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'national_id', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('address_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th style="text-align: center;" <?php if ('address_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Adresse
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'address_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'address_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('telephone' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Telephone
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'telephone', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'telephone', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                </span> 
+            <th style="text-align: center;">
+                <span class="label label-inverse">Telephone</span> 
             </th>
            
-            <th<?php if ('daral_actuel' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th style="text-align: center;" <?php if ('daral_actuel' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Daral d'appartenance
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'daral_actuel', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'daral_actuel', '_so' => 'desc')); ?>'>&#x25BC;</a>
@@ -125,13 +131,8 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
             </th>
             
            
-            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Localite
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                </span> 
-            </th>
-            <th><span class="label label-inverse">Actions</span></th>
+            
+            <th style="text-align: center;" ><span class="label label-inverse">Actions</span></th>
         </tr>
     </thead>
     
@@ -142,22 +143,25 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
          <tr>
        
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id_farmer; ?>" /></td>
-            <td><?php echo $row->id_farmer; ?></td>
-			<td><?php echo $row->firstname_farmer; ?></td>
-            <td><?php echo $row->lastname_farmer; ?></td>
-            <td><?php     $linkedRow = $tableCategorie->find($row->categorie)->current();
+            <td style="text-align: center;" ><?php echo $row->id_farmer; ?></td>
+			<td style="text-align: center;" ><?php echo $row->firstname_farmer; ?></td>
+            <td style="text-align: center;" ><?php echo $row->lastname_farmer; ?></td>
+            <td style="text-align: center;" ><?php     $linkedRow = $tableCategorie->find($row->categorie)->current();
     if ($linkedRow) {
         echo $linkedRow->getZodekenAutoLabel();
     } else {
         echo $linkedRow->categorie, ' (unlinked)';
     } ?></td>
-            <td><?php echo $row->national_id; ?></td>
-            <td><?php echo $row->address_farmer; ?></td>
-            <td><?php echo $row->phone_farmer; ?></td>
-            <td><?php echo $row->daral_actuel; ?></td>
-            <td><?php echo $row->id_localite; ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit', 'id' => $row->id_farmer), null, true); ?>">Modifier</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete', 'del_id' => $row->id_farmer), null, true); ?>">Supprimer</a></td>
+            <td style="text-align: center;" ><?php echo $row->national_id; ?></td>
+            <td style="text-align: center;" ><?php echo $row->address_farmer; ?></td>
+            <td style="text-align: center;" ><?php echo $row->phone_farmer; ?></td>
+            <td style="text-align: center;" ><a href="#" class="pop" data-content="<?php echo $row->id_localite; ?> "data-original-title="Localite"><?php echo $row->daral_actuel; ?></a> </td>
+            <td style="text-align: center;" >
+             <a data-toggle="modal" data-target="#infos" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'displayfarmer', 'id' => $row->id_farmer), null, true); ?>" >Plus d'info</a> 
+           - <a href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit', 'id' => $row->id_farmer), null, true); ?>">Modifier</a> 
+           - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete', 'del_id' => $row->id_farmer), null, true); ?>">Supprimer</a></td>
+   
+    
      </tr>
      
 <?php  endforeach; ?>
@@ -166,6 +170,20 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
 </form>
+
+ 
+    <div class="modal hide fade" id="infos">
+  <div class="modal-header"> <a class="close" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">×</a>
+    <h3>Plus d'informations</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer"> <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">Fermer</a> </div>
+</div>
+
+
+
+
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',

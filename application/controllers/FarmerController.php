@@ -9,9 +9,18 @@ error_reporting(E_ALL);
  * @version $Id$
  *
  */
+
+
+
 class FarmerController extends Zend_Controller_Action
+
 {
-    public function indexAction()
+
+	//**************************************************************************************************//
+	//									       INDEX
+	//**************************************************************************************************//
+	
+	public function indexAction()
     {
         $this->getFrontController()->getRequest()->setParams($_GET);
         
@@ -46,9 +55,9 @@ class FarmerController extends Zend_Controller_Action
     }
 
     
-    //*****************************************
-    //   ADD
-    
+    //**************************************************************************************************//
+    //									       ADD
+    //**************************************************************************************************//
     public function addAction()
     {
         $form = new Application_Form_Farmer();
@@ -67,6 +76,11 @@ class FarmerController extends Zend_Controller_Action
     			$address_farmer = $form->getValue('address_farmer');
     			$phone_farmer = $form->getValue('phone_farmer');
     			$birthdate_farmer = $form->getValue('birthdate_farmer');
+    			
+    			//**** put date into SQL Format 
+    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
+    			$birthdate_farmer=$date;
+    			//*********
     			$birthplace_farmer = $form->getValue('birthplace_farmer');
     			$categorie = $form->getValue('categorie');
     			$registration_date= $form->getValue('registration_date');
@@ -82,7 +96,8 @@ class FarmerController extends Zend_Controller_Action
     			
     			
     		    $rank=$farmer->getFarmerRank($daral_originel);//use "daral_originel" to avoid assigning twice or more the same ID, 
-    		                                                 //a farmer is never really deleted so we have a history of all the number already attributed 
+    		                                                 //a farmer is never really deleted so we have a history of all the number
+    		                                                 // already attributed 
     		    
     		    
     		    $id_farmer=$daral_originel.$rank;
@@ -113,19 +128,25 @@ class FarmerController extends Zend_Controller_Action
     		    
     		    else
     		    {//The form was not valid or the photo was not successfully uploaded
-    		    $form->populate($formData);
+    		   	 $form->populate($formData);
     		    }  
     	   }
     	   
     	   $this->view->form = $form;
     }
     
+    
+    
+    //**************************************************************************************************//
+    //									       DISPLAY CARD
+    //**************************************************************************************************//
+    
     public function displaycardAction()
     {
     
     	$session = new Zend_Session_Namespace('session');
     
-    	//Display the value at the resulting view
+    	
     	$path = $session->photo_path;
     	$firstname= $session->firstname_farmer;
     	$lastname=$session->lastname_farmer;
@@ -139,115 +160,87 @@ class FarmerController extends Zend_Controller_Action
     
     
     
+    //**************************************************************************************************//
+    //									       EDIT 
+    //**************************************************************************************************//
     
-    
-    
-    //****************************************
-    
-    
-    /* public function updateAction()
-    {
-        $tableFarmer = new Application_Model_Farmer_DbTable();
-        //$form = new Application_Form_EditFarmer();
-        $form = new Application_Form_Farmer();
-        $id = (int) $this->_getParam('id', 0);
-        
-        $row = $tableFarmer->find($id)->current();
-
-        if (!$row) {
-            $this->_helper->redirector('index');
-            exit;
-        }
-            
-        if ($this->_request->isPost()) {
-            if ($form->isValid($this->_request->getPost())) {
-                $values = $form->getValues();
-        
-                $where = array('rank_farmer = ?' => $id);
-        
-                $tableFarmer->update($values, $where);
-                    
-                $this->_helper->redirector('index');
-                exit;
-            }
-        } else {
-            
-            $form->populate($row->toArray());
-        }
-        
-        $this->view->form = $form;
-        $this->view->row = $row;
-    } */
+  
     public function editAction()
     {
     	$form = new Application_Form_EditFarmer();
     	$this->view->form = $form;
     
-    	 if ($this->getRequest()->isPost()) { 
+    	if ($this->getRequest()->isPost()) {
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)) {
-    			
+    			 
     			$id_farmer = $form->getValue('id_farmer');
     			$firstname_farmer = $form->getValue('firstname_farmer');
     			$lastname_farmer = $form->getValue('lastname_farmer');
     			$phone_farmer = $form->getValue('phone_farmer');
     			$birthdate_farmer = $form->getValue('birthdate_farmer');
+    			//**** put date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
+    			$birthdate_farmer=$date;
+    			//*********
     			$birthplace_farmer = $form->getValue('birthplace_farmer');
     			$address_farmer = $form->getValue('address_farmer');
     			$categorie = $form->getValue('categorie');
     			$national_id = $form->getValue('national_id');
     			$daral_actuel = $form->getValue('daral_actuel');
-    		    
-    		   
-    			
+    
+    				
+    			 
     			$farmer = new Application_Model_Farmer_DbTable_Farmer();
     			$tableDaral = new Application_Model_Daral_DbTable_Daral();
-    			
+    			 
     			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    			 
+    			 
     			
-    			
-    			//$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
-    					//$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite);
     			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
-    					             $address_farmer,$categorie,$national_id,$daral_actuel,$id_localite);
+    				$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite); 
+    			
     			$this->_helper->redirector('index','farmer');
-    		} 
-    		
-    	    else {
-    	    	$id_farmer = $this->_getParam('id');
-    	    	
-    	    	$farmer = new Application_Model_Farmer_DbTable_Farmer();
-    	    	$form->populate($farmer->getFarmer($id_farmer));
+    		}
+    
+    		else {
+    			$id_farmer = $this->_getParam('id');
+    
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$form->populate($farmer->getFarmer($id_farmer));
     			$form->populate($formData);
     		}
     	}
+    	
     	else {
-    		    $id_farmer = $this->_getParam('id');
-    		
-    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
-    			$form->populate($farmer->getFarmer($id_farmer));
-    			
+    		$id_farmer = $this->_getParam('id');
+    
+    		$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    		$form->populate($farmer->getFarmer($id_farmer));
+    		 
     	}
     
     }
-    public function createAction()
+    
+    //**************************************************************************************************//
+    //									       DISPLAY FARMER
+    //**************************************************************************************************//
+    
+    public function displayfarmerAction()
+    
+    
     {
-    	$form = new Application_Form_EditFarmer();
-    
-    	if ($this->_request->isPost()) {
-    		if ($form->isValid($this->_request->getPost())) {
-    			$values = $form->getValues();
-    
-    			$tableFarmer = new Application_Model_Farmer_DbTable();
-    			$tableFarmer->insert($values);
-    
-    			$this->_helper->redirector('index');
-    			exit;
-    		}
-    	}
-    
-    	$this->view->form = $form;
+    	
+    	$this->_helper->layout->setLayout('layout2');
+      $id_farmer = $this->_getParam('id');
+      $this->view->assign(array('id'=>$id_farmer));
+      
     }
+    
+    //**************************************************************************************************//
+    //									       DELETE
+    //**************************************************************************************************//
     
     public function deleteAction()
     {
@@ -275,3 +268,57 @@ class FarmerController extends Zend_Controller_Action
        }
     }
 }
+
+/* public function createAction()
+ {
+$form = new Application_Form_EditFarmer();
+
+if ($this->_request->isPost()) {
+if ($form->isValid($this->_request->getPost())) {
+$values = $form->getValues();
+
+$tableFarmer = new Application_Model_Farmer_DbTable();
+$tableFarmer->insert($values);
+
+$this->_helper->redirector('index');
+exit;
+}
+}
+
+$this->view->form = $form;
+} */
+    
+
+/* public function updateAction()
+ {
+$tableFarmer = new Application_Model_Farmer_DbTable();
+//$form = new Application_Form_EditFarmer();
+$form = new Application_Form_Farmer();
+$id = (int) $this->_getParam('id', 0);
+
+$row = $tableFarmer->find($id)->current();
+
+if (!$row) {
+$this->_helper->redirector('index');
+exit;
+}
+
+if ($this->_request->isPost()) {
+if ($form->isValid($this->_request->getPost())) {
+$values = $form->getValues();
+
+$where = array('rank_farmer = ?' => $id);
+
+$tableFarmer->update($values, $where);
+
+$this->_helper->redirector('index');
+exit;
+}
+} else {
+
+$form->populate($row->toArray());
+}
+
+$this->view->form = $form;
+$this->view->row = $row;
+} */

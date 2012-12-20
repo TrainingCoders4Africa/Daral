@@ -15,7 +15,10 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	protected $_name = 'farmer';
 	
 	
-	//
+	
+	//**************************************************************************************//
+	//************* FUNCTION FOR ADDING FARMER INTO DATABASE *******************************//
+	
 	public function addFarmer($id_farmer,$categorie,$national_id,$address_farmer,$phone_farmer,$registration_date,$daral_originel,$daral_actuel,
 			$firstname_farmer,$lastname_farmer,$isactive_farmer,$birthdate_farmer,$birthplace_farmer,$id_localite)
 	{
@@ -39,7 +42,8 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	}
 	
 	//****************************************************************************************//
-	//**************************** UPDATE FARMER INFO AND SAVE TO DATABASE ******************//
+	//**************************** UPDATE FARMER INFO AND SAVE TO DATABASE *******************//
+	
 	public function updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
     					             $address_farmer,$categorie,$national_id,$daral_actuel,$id_localite)
 	{
@@ -59,8 +63,12 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 		
 		$this->update($data, 'id_farmer = '.$id_farmer); 
 	}
+	
+	
+	
 	//**************************************************************************************//
 	//************* FUNCTION FOR SETTING FARMER INACTIVE ***********************************//
+	
 	public function archiveFarmer($id_farmer) //a farmer is not delete, it is just "archived"
 	{
 		$data = array(
@@ -72,6 +80,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	//*********************************************************************//
 	//*************** GETS ALL DATA ON FARMER THROUGH ID *******************//
+	
 	public function getFarmer($id_farmer)
 	
 	{
@@ -82,19 +91,27 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 		if (!$row) {
 			throw new Exception("Could not find row $id_farmer");
 		}
-		return $row->toArray();
+		//return $row->toArray();
+		$data=$row->toArray();
+		$new_birthdate_format=implode('/',array_reverse(explode('-',$data['birthdate_farmer'])));
+		$data['birthdate_farmer']=$new_birthdate_format;
+		//print_r($data);break;
+		return $data;
+		
+		
 		
 	}
 	
 	//*********************************************************************//
 	//*************** GETS FARMER CATEGORIE THROUGH ID *******************//
+	
 	public function getCategorie($id_farmer)
 	
 	{
 	
 		$IsActive_farmer = '1';
 			
-		$row = $this->fetchRow(array('id_farmer = '.$id_farmer,'isactive_farmer = '.$IsActive_farmer));
+		$row = $this->fetchRow(array('id_farmer =?'=>$id_farmer,'isactive_farmer = ?'=>$IsActive_farmer));
 		if (!$row) {
 			throw new Exception("Could not find row $id_farmer");
 		}
@@ -103,8 +120,11 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	}
 	
+	
+	
 	//*********************************************************************//
-	//*************** Checks if farmer is active  *******************//
+	//********************* Checks if farmer is active  *******************//
+	
 	public function exist_farmer($id_farmer)
 	
 	{
@@ -149,7 +169,8 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	
 	
-	
+	//*************************************************************************************************//
+	//*************************** DETERMINES THE CLIENT OS  *******************************************//
 	public function getOS()
 	{
 		
@@ -160,6 +181,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	//*********************************************************************************//
 	//********** DETERMINES IF A PICTURE IS IN PNG OR JPEG FORMAT *********************//
+	
 	public 	function is_png($filename)
 	{
 	
@@ -174,6 +196,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	//****************************************************************************************************************//
 	//*********** CREATES THE IMAGE OF THE "DARAL ID CARD" USING THE FARMER'S PICTURE AND INFO ***********************//
+	
 	public function createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer)
 	{
 		$Op_Syst=$this->getOS();
@@ -247,6 +270,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	//*****************************************************************************************//
 	//********************** RESIZE PICTURE TO 90X120 PIXELS **********************************//
+	
 	public function resize_picture($filename)
 	{
 		

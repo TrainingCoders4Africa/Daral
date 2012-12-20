@@ -282,6 +282,7 @@ abstract class Application_Model_Farmer_DbTable_Abstract extends Zend_Db_Table_A
             $select = $where;
         }
 
+        $select="SELECT id_farmer, concat(id_farmer,' ',firstname_farmer,' ',lastname_farmer) as firstname_farmer FROM farmer";
         $stmt = $this->_db->query($select);
         $rows = $stmt->fetchAll(Zend_Db::FETCH_NUM);
 

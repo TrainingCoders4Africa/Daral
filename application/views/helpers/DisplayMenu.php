@@ -21,40 +21,51 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
           
           if($controller != 'index' && $controller !='auth')
 		  {
-		   $dash= $this->view->url(array('controller'=>'dash','action'=>'index'));
-		   $daral= $this->view->url(array('controller'=>'daral','action'=>'index'));
-		   $farmer= $this->view->url(array('controller'=>'farmer','action'=>'index'));
-		   $cheptel = $this->view->url(array('controller'=>'cheptel','action'=>'index'));
-		   $notification = $this->view->url(array('controller'=>'notification','action'=>'index'));
-		   $media = $this->view->url(array('controller'=>'media','action'=>'index'));
-		   $veterinaire = $this->view->url(array('controller'=>'veterinaire','action'=>'index'));
 		   
+		   $dash=$this->view->baseUrl().'/dash';
+		   $daral=$this->view->baseUrl().'/daral';
+		   $farmer=$this->view->baseUrl().'/farmer';
+		   $cheptel=$this->view->baseUrl().'/cheptel';
+		   $notification=$this->view->baseUrl().'/notification';
+		   $media=$this->view->baseUrl().'/media';			
+		   $veterinaire=$this->view->baseUrl().'/veterinaire';
 		   
             return '
 			        <div class="navbar-inner">
 			        <div class="container">
-					<a class="brand" href="#">DARAL</a>
+					<span class="brand" href="#">DARAL '.$daral_current.'</span>
                        <ul class="nav pull-right">
 					       <li class="divider-vertical"><a href="'.$dash.'"><span>Tableau de bord</span></a></li>
 	                       <li class="divider-vertical"><a href="'.$daral.'">Darals</a></li> 
-	                       <li class="divider-vertical"><a href="'.$farmer.'">Eleveurs</a></li>
-						   <li class="divider-vertical"><a href="'.$cheptel.'">Cheptel</a></li>
-	                       <li class="divider-vertical"><a href="'.$notification.'"><span>Notifications</span></a></li>
+	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="'.$farmer.'"> Eleveur <b class="caret"></b> </a>
+					          <ul class="dropdown-menu">
+					            <li><a href="'.$farmer.'/add">Inscription</a></li>
+					             <li><a href="'.$farmer.'">Liste des eleveurs</a></li>
+					            <li><a href="#">Recherche</a></li>
+					          </ul>						   
+						   </li>
+	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="'.$cheptel.'"> Cheptel <b class="caret"></b> </a>
+					          <ul class="dropdown-menu">
+					            <li><a href="'.$cheptel.'/add">Enregistrement</a></li>
+					            <li><a href="'.$cheptel.'">Liste</a></li>
+					            <li><a href="#">Mouvements</a></li>
+					            <li><a href="#">Recherche</a></li>
+					          </ul>						   
+						   </li>
+	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="'.$notification.'"> Notifications <b class="caret"></b> </a>
+					          <ul class="dropdown-menu">
+					            <li><a href="'.$notification.'/create">Nouvelle notification</a></li>
+					            <li><a href="'.$notification.'">Historique</a></li>
+					            <li><a href="#">Recherche</a></li>
+					            
+					          </ul>						   
+						   </li>
 	                       <li class="divider-vertical"><a href="'.$media.'">Mediatheque</a></li>
 	                       <li class="divider-vertical"><a href="'.$veterinaire.'">Veterinaires</a></li>
-	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Temoignages(test) <b class="caret"></b> </a>
-					          <ul class="dropdown-menu">
-					            <li><a href="#">Dompteurs</a></li>
-					            <li><a href="#">Zoos</a></li>
-					            <li><a href="#">Chasseurs</a></li>
-					            <li class="divider"></li>
-					            <li><a href="#">Autres temoignages</a></li>
-					          </ul>
-					        </li>
+	                       
 						</ul>
 					</div>
-					</div>
-					<h3>Daral '.$daral_current.'</h3>';
+					</div>';
 			}
 		}  
 

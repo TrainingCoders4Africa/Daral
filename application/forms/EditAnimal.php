@@ -14,10 +14,7 @@ class Application_Form_EditAnimal extends Zend_Form
     {
         $this->setMethod('post');
 
-        $this->addElement(
-            $this->createElement('hidden', 'id')
-                
-        );
+
 
         $tableFarmer = new Application_Model_Farmer_DbTable();
         $this->addElement(
@@ -67,6 +64,11 @@ class Application_Form_EditAnimal extends Zend_Form
             $this->createElement('button', 'submit')
                 ->setLabel('Save')
                 ->setAttrib('type', 'submit')
+        );
+		
+       $this->addElement(
+            $this->createElement('hidden', 'id')
+                
         );
 
         parent::init();

@@ -22,8 +22,8 @@ class Application_Form_EditCheptel extends Zend_Form
          $tableFarmer = new Application_Model_Farmer_DbTable();
         $this->addElement(
             $this->createElement('select', 'fk_id_farmer')
-                ->setLabel('Fk Id Farmer')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableFarmer->fetchPairs())
+                ->setLabel('Identifiant eleveur')
+                ->setMultiOptions(array("" => "- - Choisir - -") + $tableFarmer->fetchPairs())
                 ->setRequired(true)
         );  
 		
