@@ -45,11 +45,7 @@ class Application_Form_Cheptel extends Zend_Form
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
-        $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Enregistrer')
-                ->setAttrib('type', 'submit')
-        );
+        
 
         parent::init();
     }
