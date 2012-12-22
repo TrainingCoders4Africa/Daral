@@ -122,7 +122,7 @@ class AnimalController extends Zend_Controller_Action
     
     public function deleteAction()
     {
-        $ids = $this->_getParam('del_id', array());
+        /* $ids = $this->_getParam('del_id', array());
         
         if (!is_array($ids)) {
             $ids = array($ids);
@@ -134,6 +134,6 @@ class AnimalController extends Zend_Controller_Action
         }
         
         $this->_helper->redirector('index');
-        exit;
+        exit; */
     }
 }

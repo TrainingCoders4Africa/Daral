@@ -35,7 +35,7 @@ function updateFilters(paramName, paramValue)
 </script>
 
 <div class="pull-right">
-<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i>Actualiser</a>
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>">Annuler</a>
 </div>
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index'), null, true); ?>">
@@ -110,8 +110,8 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td><?php echo $row->photo_left; ?></td>
             <td><?php echo $row->photo_right; ?></td>
             <td><?php echo $row->photo_front; ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'update', 'id' => $row->id), null, true); ?>">Modifier</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Supprimer</a></td>
+            <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i class="icon-pencil" ></i></a> 
+    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i class="icon-trash" ></i></a></td>
         </tr>
 <?php endforeach; ?>
     </tbody>

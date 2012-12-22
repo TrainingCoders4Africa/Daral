@@ -200,8 +200,16 @@ class FarmerController extends Zend_Controller_Action
     			
     			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
     				$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite); 
+    	
+    		 
+    			// ID CARD GENERATION
+    			$filename = $form->photo->getFileName();
+    			$filename= $farmer->resize_picture($filename);
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
     			
-    			$this->_helper->redirector('index','farmer');
+    		
+    		  
+    		  $this->_helper->redirector('index','farmer');
     		}
     
     		else {

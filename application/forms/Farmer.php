@@ -75,9 +75,10 @@ class Application_Form_Farmer extends Zend_Form
             $this->createElement('text', 'birthdate_farmer')
                 ->setLabel('Date de naissance')
                 ->setValue(date("d/m/Y"))
-        		->setAttrib("readonly", "readonly")
+        		//->setAttrib("readonly", "readonly")
                 ->setRequired(true)
                 ->addFilter(new Zend_Filter_StringTrim())
+        		->addValidator(new Zend_Validate_Date('DD/MM/YYYY'), true, array('messages' => 'La date doit tre au format dd/mm/aaaa'))
         );
 
         $this->addElement(
@@ -99,7 +100,7 @@ class Application_Form_Farmer extends Zend_Form
         
         $file = new Zend_Form_Element_File('photo');
         $file->setDestination(IMAGE_PATH)
-        ->setRequired(false) 
+        ->setRequired(true) 
         ->addValidator('Count', false, 1)
         // only JPEG, PNG, and GIFs
         ->addValidator('Extension', false, 'jpg,png');

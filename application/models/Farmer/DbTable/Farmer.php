@@ -90,11 +90,15 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 		$row = $this->fetchRow(array('id_farmer = '.$id_farmer,'isactive_farmer = '.$IsActive_farmer));
 		if (!$row) {
 			throw new Exception("Could not find row $id_farmer");
+			
 		}
 		//return $row->toArray();
 		$data=$row->toArray();
 		$new_birthdate_format=implode('/',array_reverse(explode('-',$data['birthdate_farmer'])));
 		$data['birthdate_farmer']=$new_birthdate_format;
+		
+		$new_registration_date_format=implode('/',array_reverse(explode('-',$data['registration_date'])));
+		$data['registration_date']=$new_registration_date_format;
 		//print_r($data);break;
 		return $data;
 		

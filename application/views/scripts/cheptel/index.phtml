@@ -122,8 +122,8 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
     - <a onclick="return confirm('Confirm deletion!');" href="<?php //echo $this->url(array('controller' => 'cheptel', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
         </tr>
         -->
-        <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $row->fk_id_farmer,'fk_animal_type'=>$row->fk_animal_type), null, true); ?>">Afficher</a> 
-    - <a  href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index','fk_id_farmer' => $row->fk_id_farmer,'fk_animal_type'=>$row->fk_animal_type ), null, true); ?>">Modifier</a></td>
+        <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $row->fk_id_farmer,'fk_animal_type'=>$row->fk_animal_type), null, true); ?>"><i class="icon-zoom-in"></i></a> 
+    - <a  href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index','fk_id_farmer' => $row->fk_id_farmer,'fk_animal_type'=>$row->fk_animal_type ), null, true); ?>"><i class="icon-pencil"></i></a></td>
         </tr>
 <?php  endforeach; ?>
     </tbody>

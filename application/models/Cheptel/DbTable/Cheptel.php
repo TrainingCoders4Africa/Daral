@@ -139,7 +139,28 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  		    return 0;
 	  	}
 	  }
-	  	
+ //*************************************************
+ //**********  GET FARMER CHEPTEL ********************
+	  
+	  public function getFarmerCheptel($id_farmer)
+	  {
+	  	$tableFarmer= new Application_Model_Farmer_DbTable_Farmer();
+	  	if($tableFarmer->exist_farmer($id_farmer))
+	  	{
+	  		$rows=$this->fetchAll(array('fk_id_farmer=?'=>$id_farmer));
+	  
+	  		$rows_arr = $rows->toArray();
+	  
+	  		
+	  		 
+	  		return $rows_arr;
+	  	}
+	  
+	  	else
+	  	{
+	  		return null;
+	  	}
+	  }
 	  
 	  /**
 	   * Get Db_Select for pagination by params sent from controller
