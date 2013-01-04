@@ -31,41 +31,75 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $veterinaire=$this->view->baseUrl().'/veterinaire';
 		   
             return '
-			        <div class="navbar-inner">
-			        <div class="container">
-					<span class="brand" href="#">DARAL '.$daral_current.'</span>
-                       <ul class="nav pull-right">
-					       <li class="divider-vertical"><a href="'.$dash.'"><span>Tableau de bord</span></a></li>
-	                       <li class="divider-vertical"><a href="'.$daral.'">Darals</a></li> 
-	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="'.$farmer.'"> Eleveur <b class="caret"></b> </a>
-					          <ul class="dropdown-menu">
-					            <li><a href="'.$farmer.'/add">Inscription</a></li>
-					             <li><a href="'.$farmer.'">Liste des eleveurs</a></li>
-					            <li><a href="#">Recherche</a></li>
-					          </ul>						   
-						   </li>
-	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="'.$cheptel.'"> Cheptel <b class="caret"></b> </a>
-					          <ul class="dropdown-menu">
-					            <li><a href="'.$cheptel.'/add">Enregistrement</a></li>
-					            <li><a href="'.$cheptel.'">Liste</a></li>
-					            <li><a href="#">Mouvements</a></li>
-					            <li><a href="#">Recherche</a></li>
-					          </ul>						   
-						   </li>
-	                       <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="'.$notification.'"> Notifications <b class="caret"></b> </a>
-					          <ul class="dropdown-menu">
-					            <li><a href="'.$notification.'/create">Nouvelle notification</a></li>
-					            <li><a href="'.$notification.'">Historique</a></li>
-					            <li><a href="#">Recherche</a></li>
-					            
-					          </ul>						   
-						   </li>
-	                       <li class="divider-vertical"><a href="'.$media.'">Mediatheque</a></li>
-	                       <li class="divider-vertical"><a href="'.$veterinaire.'">Veterinaires</a></li>
-	                       
-						</ul>
-					</div>
-					</div>';
+			<div class="navbar-inner" >
+                <ul class="nav pull-right">
+                    
+                    
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-user"></i>'.$this->view->loggedInAs().'
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">My Account</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
+                            <li class="divider visible-phone"></li>
+                            <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+                <span class="brand" href="#">DARAL '.$daral_current.'</span>
+        </div>
+    </div>
+   
+    <div class="sidebar-nav">
+        <a href="'.$dash.'" class="nav-header"><i class="icon-th-large"></i>Tableau de bord</a>
+        
+            
+        
+        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral</a>
+        <ul id="mon-daral-menu" class="nav nav-list collapse">
+           
+            <li> <a href="#eleveur-menu" class="nav-header " data-toggle="collapse" >Eleveurs</a></li>
+              <ul id="eleveur-menu" class="nav nav-list collapse">
+               <li ><a href="'.$farmer.'">Liste</a></li>
+               <li ><a href="'.$farmer.'/add">Inscription</a></li>
+               <li ><a href="#">Recherche</a></li>
+             </ul>
+             
+            <li ><a href="#notification-menu" class="nav-header collapsed" data-toggle="collapse">Notifications</a></li>
+             <ul id="notification-menu" class="nav nav-list collapse">
+               <li ><a href="'.$notification.'/create">Nouvelle Notification</a></li>
+               <li><a href="'.$notification.'">Historique</a></li>
+             </ul>
+        
+        </ul>
+        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>Mediatheque</a>
+         <ul id="media-menu" class="nav nav-list collapse">
+               <li ><a href="'.$media.'">Liste des videos</a></li>
+               <li><a href="#">Recherche</a></li>
+         </ul>
+		
+         <a href="#stat-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-filter"></i>Statistiques</a>
+         <ul id="stat-menu" class="nav nav-list collapse">
+               <li ><a href="#">Darals</a></li>
+               <li><a href="#">Localites</a></li>
+               <li><a href="#">Departements</a></li>
+               <li><a href="#">Regions</a></li>
+               <li><a href="#">Pays</a></li>
+         </ul>
+        <a href="#contact-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>Contacts</a>
+         <ul id="contact-menu" class="nav nav-list collapse">
+               <li ><a href="'.$veterinaire.'">Veterinaires</a></li>
+               <li><a href="#">Administrateur</a></li>
+               <li><a href="#">Aures Gerants</a></li>
+         </ul>
+    </div>
+            
+            	
+                ';
 			}
 		}  
 

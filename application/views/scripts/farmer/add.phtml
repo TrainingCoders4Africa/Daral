@@ -8,11 +8,17 @@ $form = $this->form;
 		$( "#birthdate_farmer" ).datepicker();
 	});
 </script>
-	
-<div class="page-header">
-   <h3 style="text-align: center;">Inscription</h3>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Inscription</h1>
 </div>
 
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li class="active">Inscription</li>
+        </ul>
+<br/> <br/>
 <form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
 <div style="position: static; width: 90%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
@@ -69,4 +75,5 @@ $form = $this->form;
   
 
 </form>
+</div>
     

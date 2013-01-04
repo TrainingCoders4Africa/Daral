@@ -5,10 +5,16 @@ $form = $this->form;
 
 
 	
-<div class="page-header">
-   <h2>Ajout Notification</h2>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Nouvelle Notification</h1>
 </div>
 
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Notifications</a> <span class="divider">/</span></li>
+            <li class="active">Nouvelle Notification</li>
+        </ul>
 <form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
 <div style="position: static; width: 90%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
@@ -37,7 +43,7 @@ $form = $this->form;
                     <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
                 <?php endif; ?>
                 <?php if ('submit' == $elementName): ?>
-                    <a class="btn" href="<?php echo $this->url(array('controller' => 'animal'), null, true); ?>">Annuler</a>
+                    <a class="btn" href="<?php echo $this->url(array('controller' => 'notification'), null, true); ?>">Annuler</a>
                 <?php endif; ?>
 	            </td>
         <?php
@@ -47,4 +53,4 @@ $form = $this->form;
   </div>
 
 </form>
-    
+</div>    

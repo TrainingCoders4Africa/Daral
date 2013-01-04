@@ -3,11 +3,17 @@ $this->headTitle('Ajout animal');
 $form = $this->form;
 ?>
 
-
-	
-<div class="page-header">
-   <h2>Ajout animal</h2>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Ajouter un animal</h1>
 </div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
+            <li class="active">Nouvel animal</li>
+        </ul>
 
 <form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
 <div style="position: static; width: 90%; margin: auto;">
@@ -47,4 +53,4 @@ $form = $this->form;
   </div>
 
 </form>
-    
+</div>

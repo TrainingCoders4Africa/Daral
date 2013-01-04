@@ -2,9 +2,16 @@
 error_reporting(E_ALL);
 ?>
 
-<div class="page-header">
-<h3 style="text-align:center;">Inscription</h3>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Inscription</h1>
 </div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li class="active">Inscription</li>
+        </ul>
 
 <?php 
 $IDCard_path = $this->IDCard_path;
@@ -32,4 +39,5 @@ else
 <div class="row">
  <div class="span9"></div>
  <a class="btn" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-ok-sign"></i> OK</a>
+</div>
 </div>

@@ -43,11 +43,21 @@ $(function (){
 	   $(".pop").popover(); 
 	});
 </script>
-<div class="page-header">
-  <h3 style="text-align: center">Liste des eleveurs</h3>
+    
+
+
+<div class = "content"  >
+<div class="header">
+  <h1 class="page-title">Liste des eleveurs</h1>
 </div>
 
-<div class="pull-right">
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li class="active">Liste</li>
+        </ul>
+
+<div style="float:right; margin-top: 1em;margin-right:1em;">
  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
     <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
  <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Inscrire</a>
@@ -55,7 +65,7 @@ $(function (){
  </div> <br />
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">
-<div>
+<div style="margin-left:1em;">
 Rechercher: <input class="input-large search-query" placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => '-------------Tout------------',
@@ -70,12 +80,13 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
   
   //'birthplace_farmer' => 'Birthplace Farmer',
   'id_localite' => 'Localite',
-)); ?>&nbsp
+)); ?> &nbsp
 <button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
 <table class="table table-bordered table-condensed " >
     <thead>
         <tr>
@@ -169,6 +180,7 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 </table><br />
 
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+</div>
 </form>
 
  
@@ -188,3 +200,5 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');
+?>
+</div>

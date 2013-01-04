@@ -32,11 +32,19 @@ function updateFilters(paramName, paramValue)
     self.location.href = '?' + newQuery.join('&');
 }
 </script>
-
-<div class="page-header">
- <h2>Gestion des eleveurs</h2>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Liste des Darals</h1>
 </div>
 
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Daral</a> <span class="divider">/</span></li>
+            <li class="active">Liste</li>
+        </ul>
+
+
+<div style="text-align:right">
 <div class="pull-right">
 <a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>">Reset Filters</a>
 - <a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
@@ -122,4 +130,5 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
-                                    'pagination_control.phtml');
+                                    'pagination_control.phtml');?>
+</div>

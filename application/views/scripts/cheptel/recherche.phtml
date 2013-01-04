@@ -34,10 +34,17 @@ function updateFilters(paramName, paramValue)
     self.location.href = '?' + newQuery.join('&');
 }
 </script>
-<div class="page-header">
-  <h2 style="text-align: center">Cheptels</h2>
- </div>
-  
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Cheptel: recherche</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
+            <li class="active">Recherche</li>
+        </ul>  
   <?php //echo $this->fk_id_farmer.'<br/>';?>
   <?php //echo $this->fk_id_animal.'<br/>';?>
   <?php //echo $this->total_animal.'<br/>';?>
@@ -133,4 +140,5 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
-                                    'pagination_control.phtml');
+                                    'pagination_control.phtml');?>
+</div>

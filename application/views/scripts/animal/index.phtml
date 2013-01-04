@@ -33,6 +33,17 @@ function updateFilters(paramName, paramValue)
     self.location.href = '?' + newQuery.join('&');
 }
 </script>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Ajouter un animal</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
+            <li class="active">Liste</li>
+        </ul>
 
 <div class="pull-right">
 <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>">Annuler</a>
@@ -121,4 +132,5 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
-                                    'pagination_control.phtml');
+                                    'pagination_control.phtml');?>
+</div>

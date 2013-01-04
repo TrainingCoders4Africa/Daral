@@ -11,9 +11,17 @@ $form = $this->form;
 	});
 	</script>
 	
-<div class="page-header">
-   <h2>Modificaion Veterinaire: <?php echo $this->row->getZodekenAutoLabel(); ?></h2>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Mise a jour info animal</h1>
 </div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
+            <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
+            <li class="active">Mise a jourinfo animal </li>
+        </ul>
 
 <form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
 <div style="position: static; width: 90%; margin: auto;">
@@ -53,4 +61,4 @@ $form = $this->form;
   </div>
 
 </form>
-    
+</div>
