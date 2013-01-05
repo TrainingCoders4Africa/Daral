@@ -38,7 +38,7 @@ class Application_Form_EditNotification extends Zend_Form
         $this->addElement(
             $this->createElement('text', 'date')
                 ->setLabel('Date')
-                ->setValue(date("Y-m-d H:i:s"))
+                ->setValue(date("Y-m-d"))
                 ->setRequired(true)
                 ->addFilter(new Zend_Filter_StringTrim())
         );
@@ -46,8 +46,7 @@ class Application_Form_EditNotification extends Zend_Form
         $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
         $this->addElement(
             $this->createElement('select', 'type')
-                ->setLabel('Type')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableTypeNotification->fetchPairs())
+                ->setLabel('Type')->setMultiOptions(array("" => "- - Select - -") + $tableTypeNotification->fetchPairs())
                 ->setRequired(true)
         );
 
@@ -57,12 +56,6 @@ class Application_Form_EditNotification extends Zend_Form
                 ->setLabel('Id User')
                 ->setMultiOptions(array("" => "- - Select - -") + $tableUsers->fetchPairs())
                 ->setRequired(true)
-        );
-
-        $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Save')
-                ->setAttrib('type', 'submit')
         );
 
         parent::init();

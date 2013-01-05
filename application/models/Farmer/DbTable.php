@@ -28,7 +28,20 @@ class Application_Model_Farmer_DbTable extends Application_Model_Farmer_DbTable_
 		return $row->toArray();
 	}
 	
+	//*********************************************************************//
+	//*************** GET ALL DATA ON FARMER THROUGH ID *******************//
+	public function getFarmerById($id_farmer)
 	
+	{
+		$id_farmer = (int)$id_farmer;
+		$IsActive_farmer = '1';
+			
+		$row = $this->fetchRow(array('id_farmer = '.$id_farmer,'IsActive_farmer = '.$IsActive_farmer));
+		if (!$row) {
+			throw new Exception("Could not find row $id_farmer");
+		}
+		return $row;
+	}
 	
 	
 	

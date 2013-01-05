@@ -46,167 +46,123 @@ function updateFilters(paramName, paramValue)
             <li class="active">Historique</li>
         </ul>
 
+<div
+	class="pull-right"><a class="btn btn-info"
+	href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>"><i
+	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+<a class="btn btn-success"
+	href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'create'), null, true); ?>"><i
+	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+</div>
+<br />
+
 <div style="text-align:right">
 <a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>">Reset Filters</a>
 - <a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
 
-<form method="get" action="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>">
-<div>
-Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
-<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+<form method="get"
+	action="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>">
+<div>Rechercher: <input class="input-large search-query"
+	placeholder="Mots cles..." type="text" name="_kw"
+	value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans
+&nbsp <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => 'All',
-  'id_farmer' => 'Id Farmer',
-  'id_localite' => 'Id Localite',
+  'id_farmer' => 'Eleveur',
+  'id_localite' => ' Localite',
   'type' => 'Type',
-  'id_user' => 'Id User',
-)); ?>
-<input type="submit" value="Go" />
+  'id_user' => 'Utilisateur',
+)); ?>&nbsp
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
 
-<form method="post" action="<?php echo $this->url(array('controller' => 'notification', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
-    cellpadding="3">
-    <thead>
-        <tr>
-            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id Farmer 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('id_farmer', $this->paramid_farmer, array('onchange' => 'updateFilters(\'id_farmer\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableFarmer->fetchPairs());
-?>
-            </th>
-            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id Localite 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('id_localite', $this->paramid_localite, array('onchange' => 'updateFilters(\'id_localite\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableLocalite->fetchPairs());
-?>
-            </th>
-            <th<?php if ('date' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Date 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'date', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'date', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('type', $this->paramtype, array('onchange' => 'updateFilters(\'type\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableTypeNotification->fetchPairs());
-?>
-            </th>
-            <th<?php if ('id_user' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id User 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_user', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_user', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('id_user', $this->paramid_user, array('onchange' => 'updateFilters(\'id_user\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableUsers->fetchPairs());
-?>
-            </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id Farmer 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('id_farmer', $this->paramid_farmer, array('onchange' => 'updateFilters(\'id_farmer\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableFarmer->fetchPairs());
-?>
-            </th>
-            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id Localite 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('id_localite', $this->paramid_localite, array('onchange' => 'updateFilters(\'id_localite\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableLocalite->fetchPairs());
-?>
-            </th>
-            <th<?php if ('date' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Date 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'date', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'date', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('type', $this->paramtype, array('onchange' => 'updateFilters(\'type\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableTypeNotification->fetchPairs());
-?>
-            </th>
-            <th<?php if ('id_user' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id User 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_user', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_user', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('id_user', $this->paramid_user, array('onchange' => 'updateFilters(\'id_user\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableUsers->fetchPairs());
-?>
-            </th>
-            <th>Actions</th>
-        </tr>
-    </tfoot>
-    <tbody>
-<?php foreach ($this->paginator as $row): ?>
-        <tr>
-            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
-            <td align="right"><?php echo $row->id; ?></td>
-            <td><?php     $linkedRow = $tableFarmer->find($row->id_farmer)->current();
-    if ($linkedRow) {
-        echo $linkedRow->getZodekenAutoLabel();
-    } else {
-        echo $linkedRow->id_farmer, ' (unlinked)';
-    } ?></td>
-            <td><?php     $linkedRow = $tableLocalite->find($row->id_localite)->current();
-    if ($linkedRow) {
-        echo $linkedRow->getZodekenAutoLabel();
-    } else {
-        echo $linkedRow->id_localite, ' (unlinked)';
-    } ?></td>
-            <td><?php echo $row->date; ?></td>
-            <td><?php     $linkedRow = $tableTypeNotification->find($row->type)->current();
-    if ($linkedRow) {
-        echo $linkedRow->getZodekenAutoLabel();
-    } else {
-        echo $linkedRow->type, ' (unlinked)';
-    } ?></td>
-            <td><?php     $linkedRow = $tableUsers->find($row->id_user)->current();
-    if ($linkedRow) {
-        echo $linkedRow->getZodekenAutoLabel();
-    } else {
-        echo $linkedRow->id_user, ' (unlinked)';
-    } ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
-        </tr>
-<?php endforeach; ?>
-    </tbody>
-</table><br />
-<input type="submit" value="Delete Selected Rows" />
-</form>
+<form method="post"
+	action="<?php echo $this->url(array('controller' => 'notification', 'action' => 'delete'), null, true); ?>"
+	onsubmit="return confirm('Delete selected rows?');">
+<table class="table table-bordered table-condensed ">
+	<thead>
+		<tr>
+			<th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+			<th style="text-align: center;"
+			<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+			<span class="label label-inverse">Identifiant <a
+				href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
+			<a
+				href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
+			</span></th>
+			<th style="text-align: center;"
+			<?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+			<span class="label label-inverse">Eleveur <a
+				href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+			<a
+				href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+			</span></th>
+			<th style="text-align: center;"
+			<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+			<span class="label label-inverse">Localite <a
+				href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
+			<a
+				href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
+			</span></th>
+			<th style="text-align: center;"
+			<?php if ('date' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+			<span class="label label-inverse">Date <a
+				href='<?php echo $this->url($_GET + array('_sf' => 'date', '_so' => 'asc')); ?>'>&#x25B2;</a>
+			<a
+				href='<?php echo $this->url($_GET + array('_sf' => 'date', '_so' => 'desc')); ?>'>&#x25BC;</a>
+			</span></th>
+			<th style="text-align: center;"
+			<?php if ('type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+			<span class="label label-inverse">Type <a
+				href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'asc')); ?>'>&#x25B2;</a>
+			<a
+				href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+			</span></th>
+			<th>Actions</th>
+		</tr>
+	</thead>
 
-<?php echo $this->paginationControl($this->paginator,
+	<tbody>
+	<?php foreach ($this->paginator as $row): ?>
+		<tr>
+			<td align="center"><input type="checkbox" name="del_id[]"
+				value="<?php echo $row->id; ?>" /></td>
+			<td align="right"><?php echo $row->id; ?></td>
+			<td><?php     $linkedRow = $tableFarmer->getFarmerById($row->id_farmer);
+			if ($linkedRow) {
+				echo $linkedRow->getZodekenAutoLabel();
+			} else {
+				echo $linkedRow->id_farmer, ' (unlinked)';
+			} ?></td>
+			<td><?php     $linkedRow = $tableLocalite->find($row->id_localite)->current();
+			if ($linkedRow) {
+				echo $linkedRow->getZodekenAutoLabel();
+			} else {
+				echo $linkedRow->id_localite, ' (unlinked)';
+			} ?></td>
+			<td><?php echo $row->date; ?></td>
+			<td><?php     $linkedRow = $tableTypeNotification->find($row->type)->current();
+			if ($linkedRow) {
+				echo $linkedRow->getZodekenAutoLabel();
+			} else {
+				echo $linkedRow->type, ' (unlinked)';
+			} ?></td>
+			<td style="text-align: left"><a title="Envoyer sms"
+				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'sendsms', 'id' => $row->id, 'id_localite' => $row->id_localite, 'id_farmer' => $row->id_farmer, 'type' => $row->type), null, true); ?>"><i
+				class="icon-mail-open"></i></a> - <a title="Modifier"
+				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
+				class="icon-pencil"></i></a> - <a title="Archiver"
+				onclick="return confirm('Confirmez la suppression!');"
+				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
+				class="icon-trash"></i></a></td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+<br />
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
+
+		<?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');?>
 </div>

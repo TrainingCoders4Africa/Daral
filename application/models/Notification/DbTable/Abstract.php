@@ -160,6 +160,10 @@ abstract class Application_Model_Notification_DbTable_Abstract extends Zend_Db_T
             $select->where('id_user = ?', $params['id_user']);
         }
         
+        if (isset($params['disabled']) && !empty($params['disabled'])) {
+            $select->where('disabled = ?', $params['disabled']);
+        }
+        
         // _kw = keywords, _sm = search mode
         if (isset($params['_kw']) && !empty($params['_kw'])) {
             $dbAdapter = $this->getAdapter();

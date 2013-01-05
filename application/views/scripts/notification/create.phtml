@@ -3,7 +3,11 @@ $this->headTitle('Ajout Notification');
 $form = $this->form;
 ?>
 
-
+<script>
+	$(function() {
+		$( "#date" ).datepicker();
+	});
+</script>
 	
 <div class="content">	
 <div class="header">
@@ -50,6 +54,13 @@ $form = $this->form;
         endforeach;
         ?>
         </tr></table>
+         <br/>
+        <div class="row">
+      <div class="span7"></div>
+        <button class="btn btn-success" type="submit">Valider</button>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'typeNotification', 'action' => 'create'), null, true); ?>">Nouveau type</a>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'notification'), null, true); ?>">Annuler</a>
+       </div>
   </div>
 
 </form>
