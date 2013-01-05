@@ -166,7 +166,7 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
             <td style="text-align: center;" ><?php echo $row->national_id; ?></td>
             <td style="text-align: center;" ><?php echo $row->address_farmer; ?></td>
             <td style="text-align: center;" ><?php echo $row->phone_farmer; ?></td>
-            <td style="text-align: center;" ><a href="#" class="pop" data-content="<?php echo $row->id_localite; ?> "data-original-title="Localite"><?php echo $row->daral_actuel; ?></a> </td>
+            <td style="text-align: center;" ><a href="#" class="pop black" data-content="<?php echo $row->id_localite; ?> "data-original-title="Localite"><?php echo $row->daral_actuel; ?></a> </td>
             <td style="text-align: center;" >
              <a data-toggle="modal" data-target="#infos" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'displayfarmer', 'id' => $row->id_farmer), null, true); ?>" ><i class="icon-zoom-in"></i></a> 
            - <a href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit', 'id' => $row->id_farmer), null, true); ?>"><i class="icon-pencil"></i></a> 
