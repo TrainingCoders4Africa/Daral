@@ -56,10 +56,6 @@ function updateFilters(paramName, paramValue)
 </div>
 <br />
 
-<div style="text-align:right">
-<a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>">Reset Filters</a>
-- <a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
-
 <form method="get"
 	action="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>">
 <div>Rechercher: <input class="input-large search-query"
