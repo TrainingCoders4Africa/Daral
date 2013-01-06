@@ -94,7 +94,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
          <ul id="contact-menu" class="nav nav-list collapse">
                <li ><a href="'.$veterinaire.'">Veterinaires</a></li>
                <li><a href="#">Administrateur</a></li>
-               <li><a href="#">Aures Gerants</a></li>
+               <li><a href="#">Autres Gerants</a></li>
          </ul>
     </div>
             
