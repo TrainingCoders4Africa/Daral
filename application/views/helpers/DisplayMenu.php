@@ -81,7 +81,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
               </script>
                <li ><a href="'.$farmer.'">Liste</a></li>
                <li ><a href="'.$farmer.'/add">Inscription</a></li>
-               <li ><a href="#">Recherche</a></li>
+               <li ><a href="'.$farmer.'/recherche">Recherche</a></li>
              </ul>
              
             <li ><a href="#notification-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-chevron-right" id="chevron-notifications"></i>Notifications</a></li>

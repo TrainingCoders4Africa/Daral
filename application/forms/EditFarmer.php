@@ -99,7 +99,7 @@ class Application_Form_EditFarmer extends Zend_Form
         $this->addElement(
             $this->createElement('text', 'birthdate_farmer')
                 ->setLabel('Date de naissance')
-                ->setValue(date("Y-m-d"))
+                //->setValue(date("Y-m-d"))
        			//->setAttrib("readonly", "readonly")
                 ->setRequired(true)
                 ->addFilter(new Zend_Filter_StringTrim())

@@ -275,6 +275,107 @@ class FarmerController extends Zend_Controller_Action
         exit;
        }
     }
+    
+    //**************************************************************************************************//
+    //									       SEARCH
+    //**************************************************************************************************//
+    
+    
+    public function rechercheAction()
+    {
+    	$form = new Application_Form_EditFarmer();
+    	$this->view->form = $form;
+    	$this->getFrontController()->getRequest()->setParams($_GET);
+    
+    	// zsf = zodeken sort field, zso = zodeken sort order
+    	$sortField = $this->_getParam('_sf', '');
+    	$sortOrder = $this->_getParam('_so', '');
+    	$pageNumber = $this->_getParam('page', 1);
+    	//$isactive= $this->_getParam('isactive_farmer','1');
+    
+    	$params = array();
+    	$params['isactive_farmer']= '1' ;
+    	 
+    	 
+    	if (isset($_POST['rank_farmer']) && !empty($_POST['rank_farmer'])) {
+    		$params['rank_farmer'] = $_POST['rank_farmer'];
+    	}
+    	 
+    	if (isset($_POST['id_farmer']) && !empty($_POST['id_farmer'])) {
+    		$params['id_farmer'] = $_POST['id_farmer'];
+    	}
+    	 
+    	if (isset($_POST['categorie']) && !empty($_POST['categorie'])) {
+    		$params['categorie'] = $_POST['categorie'];
+    	}
+    	 
+    	if (isset($_POST['national_id']) && !empty($_POST['national_id'])) {
+    		$params['national_id'] = $_POST['national_id'];
+    	}
+    	 
+    	if (isset($_POST['address_farmer']) && !empty($_POST['address_farmer'])) {
+    		$params['address_farmer'] = $_POST['address_farmer'];
+    	}
+    	 
+    	if (isset($_POST['registration_date']) && !empty($_POST['registration_date'])) {
+    		$params['registration_date'] = $_POST['registration_date'];
+    	}
+    	 
+    	if (isset($_POST['daral_originel']) && !empty($_POST['daral_originel'])) {
+    		$params['daral_originel'] = $_POST['daral_originel'];
+    	}
+    	 
+    	if (isset($_POST['daral_actuel']) && !empty($_POST['daral_actuel'])) {
+    		$params['daral_actuel'] = $_POST['daral_actuel'];
+    	}
+    	 
+    	if (isset($_POST['firstname_farmer']) && !empty($_POST['firstname_farmer'])) {
+    		$params['firstname_farmer'] = $_POST['firstname_farmer'];
+    	}
+    	 
+    	if (isset($_POST['lastname_farmer']) && !empty($_POST['lastname_farmer'])) {
+    		$params['lastname_farmer'] = $_POST['lastname_farmer'];
+    	}
+    	 
+    	if (isset($_POST['isactive_farmer']) && !empty($_POST['isactive_farmer'])) {
+    		$params['isactive_farmer'] = $_POST['isactive_farmer'];
+    	}
+    	 
+    	if (isset($_POST['birthdate_farmer']) && !empty($_POST['birthdate_farmer'])) {
+    		$params['birthdate_farmer'] = $_POST['birthdate_farmer'];
+    	}
+    	 
+    	if (isset($_POST['birthplace_farmer']) && !empty($_POST['birthplace_farmer'])) {
+    		$params['birthplace_farmer'] = $_POST['birthplace_farmer'];
+    	}
+    	 
+    	if (isset($_POST['id_localite']) && !empty($_POST['id_localite'])) {
+    		$params['id_localite'] = $_POST['id_localite'];
+    	}
+    	 
+    	$tableFarmer = new Application_Model_Farmer_DbTable();
+    	$gridSelect = $tableFarmer->getDbSelectByParams($params, $sortField, $sortOrder);
+    	$paginator = Zend_Paginator::factory($gridSelect);
+    	$paginator->setItemCountPerPage(10)
+    	->setCurrentPageNumber($pageNumber);
+    
+    
+    
+    
+    	$this->view->assign(array(
+    			'paginator' => $paginator,
+    			'sortField' => $sortField,
+    			'sortOrder' => $sortOrder,
+    			'pageNumber' => $pageNumber,
+    
+    	));
+    
+    	foreach ($this->_getAllParams() as $paramName => $paramValue)
+    	{
+    		// prepend 'param' to avoid error of setting private/protected members
+    		$this->view->assign('param' . $paramName, $paramValue);
+    	}
+    }
 }
 
 /* public function createAction()
