@@ -2425,6 +2425,12 @@ table th[class*="span"],
   background-position: 0 -72px;
 }
 
+.icon-mail-open {
+  background-position: -72px 0;
+}
+
+.icon-suitcase { background-position: -112px -96px; }
+
 .icon-map-marker {
   background-position: -24px -72px;
 }

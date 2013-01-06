@@ -50,7 +50,7 @@ class TypeNotificationController extends Zend_Controller_Action
                 $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
                 $tableTypeNotification->insert($values);
                     
-                $this->_helper->redirector('index');
+                $this->_helper->redirector->gotoUrl("/notification/create");
                 exit;
             }
         }
