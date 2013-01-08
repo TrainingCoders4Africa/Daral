@@ -61,7 +61,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
         
             
    <!--------------MON DARAL------------------>
-        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-down" id="chevron-mon-daral" style="margin-left:8.5em"></i></a>
+        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-down" id="chevron-mon-daral" style="margin-left:8.3em"></i></a>
         <ul id="mon-daral-menu" class="nav nav-list collapse">
         
         <script type="text/javascript">
@@ -101,7 +101,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
    <!---------------END------------------------>
    
    <!---------------MEDIATHEQUE---------------->
-        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>Mediatheque<i class="icon-chevron-down" id="chevron-media" style="margin-left: 7.2em"></i></a>
+        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>Mediatheque<i class="icon-chevron-down" id="chevron-media" style="margin-left: 7.0em"></i></a>
          <ul id="media-menu" class="nav nav-list collapse">
          <script type="text/javascript">
         $("a").click(function(){
