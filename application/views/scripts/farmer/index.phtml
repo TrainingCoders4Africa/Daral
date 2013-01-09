@@ -103,12 +103,7 @@ $(function (){
 				</span> 
                 
             </th>
-            <th style="text-align: center;" <?php if ('national_id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Identification nationale
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'national_id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'national_id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                </span>
-            </th>
+            
             <th style="text-align: center;" <?php if ('address_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Adresse
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'address_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
@@ -149,7 +144,7 @@ $(function (){
     } else {
         echo $linkedRow->categorie, ' (unlinked)';
     } ?></td>
-            <td><?php echo $row->national_id; ?></td>
+            
             <td><?php echo $row->address_farmer; ?></td>
             <td><?php echo $row->phone_farmer; ?></td>
             <td><a href="#" class="pop black" data-content="<?php echo $row->id_localite; ?> "data-original-title="Localite"><?php echo $row->daral_actuel; ?></a> </td>
