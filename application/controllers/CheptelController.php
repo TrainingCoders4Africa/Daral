@@ -10,6 +10,14 @@
  */
 class CheptelController extends Zend_Controller_Action
 {
+	
+	protected $_redirector = null;
+	
+	public function init()
+	{
+		$this->_redirector = $this->_helper->getHelper('Redirector');
+	}
+	
 	public function indexAction()
 	{
 		$this->getFrontController()->getRequest()->setParams($_GET);
@@ -130,13 +138,15 @@ class CheptelController extends Zend_Controller_Action
 				$cheptel = new Application_Model_Cheptel_DbTable_Cheptel();
 				try{
 					$result=$cheptel->addCheptel($fk_id_farmer,$fk_animal_type,$total_animal_type);
+					$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$fk_id_farmer);
 				} catch (Exception $e)
 				{
 					die('Erreur: '.$e->getMessage());
 				}
 				//$message = $cheptel->addCheptel($fk_id_farmer,$fk_animal_type,$total_animal_type);
 				$session->message=$result;
-	
+				
+				
 				$this->_helper->redirector('index','cheptel');
 			}
 	

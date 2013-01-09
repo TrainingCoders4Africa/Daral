@@ -15,6 +15,12 @@ error_reporting(E_ALL);
 class FarmerController extends Zend_Controller_Action
 
 {
+	protected $_redirector = null;
+	
+	public function init()
+	{
+		$this->_redirector = $this->_helper->getHelper('Redirector');
+	}
 
 	//**************************************************************************************************//
 	//									       INDEX
@@ -120,6 +126,7 @@ class FarmerController extends Zend_Controller_Action
     			$session->photo_path = $path;// to be used by the displaycardAction()
     			$session->firstname_farmer=$firstname_farmer;
     			$session->lastname_farmer=$lastname_farmer;
+    			$session->id_farmer=$id_farmer;
 
     			    		 
     			$this->_helper->redirector('displaycard','farmer');
@@ -150,12 +157,13 @@ class FarmerController extends Zend_Controller_Action
     	$path = $session->photo_path;
     	$firstname= $session->firstname_farmer;
     	$lastname=$session->lastname_farmer;
+    	$id_farmer=$session->id_farmer;
     	
     
     	$this->view->assign("IDCard_path",$path);
     	$this->view->assign("firstname",$firstname);
     	$this->view->assign("lastname",$lastname);
-    	 
+    	$this->view->assign("id_farmer",$id_farmer); 
     }
     
     
@@ -172,7 +180,7 @@ class FarmerController extends Zend_Controller_Action
     
     	if ($this->getRequest()->isPost()) {
     		$formData = $this->getRequest()->getPost();
-    		if ($form->isValid($formData)) {
+    		if ($form->isValid($formData)&& $form->photo->receive()) {
     			 
     			$id_farmer = $form->getValue('id_farmer');
     			$firstname_farmer = $form->getValue('firstname_farmer');
@@ -208,8 +216,8 @@ class FarmerController extends Zend_Controller_Action
     			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
     			
     		
-    		  
-    		  $this->_helper->redirector('index','farmer');
+    			$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$id_farmer);
+    		  //$this->_helper->redirector('index','farmer');
     		}
     
     		else {
@@ -281,9 +289,9 @@ class FarmerController extends Zend_Controller_Action
     //**************************************************************************************************//
     
     
-    public function rechercheAction()
-    {
-    	$form = new Application_Form_EditFarmer();
+    public function rechercheAction(){
+    
+    	$form = new Application_Form_EditFarmer2();
     	$this->view->form = $form;
     	$this->getFrontController()->getRequest()->setParams($_GET);
     

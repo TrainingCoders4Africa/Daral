@@ -22,7 +22,7 @@ Language: PHP 5 ( Zend Framework v1.12)
    
    (take a look around!)
 
-!!!!  NOTE: WE RECOMMEND USING "MOZILLA FIREFOX" FOR BEST DISPLAY, THE FIX FOR "CHROME" HAS NOT BEEN PUSHED YET TO OPENSHIFT !!!!!
+!!! WE RECOMMEND USING FIREFOX OR CHROME FOR BEST DISPLAY (for now avoid IE ) !!!
 
 
 
