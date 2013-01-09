@@ -61,8 +61,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
         
             
    <!--------------MON DARAL------------------>
-        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-down" id="chevron-mon-daral" style="margin-left:8.5em"></i></a>
-        <ul id="mon-daral-menu" class="nav nav-list collapse">
+        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-up" id="chevron-mon-daral" style="margin-left:8.3em"></i></a>
+        <ul id="mon-daral-menu" class="nav nav-list in collapse">
         
         <script type="text/javascript">
         $("a").click(function(){
@@ -79,9 +79,22 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		      });
               </script>
-               <li ><a href="'.$farmer.'">Liste</a></li>
-               <li ><a href="'.$farmer.'/add">Inscription</a></li>
-               <li ><a href="'.$farmer.'/recherche">Recherche</a></li>
+               <li ><a href="'.$farmer.'/add">Inscrire</a></li>
+               <li ><a href="'.$farmer.'">Afficher la Liste</a></li>
+               <li ><a href="'.$farmer.'/recherche">Rechercher</a></li>
+             </ul>
+             
+             <li> <a href="#cheptel-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-cheptel"></i>Cheptel</a></li>
+              <ul id="cheptel-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-cheptel").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$cheptel.'/add">Ajouter des animaux</a></li>
+               <li ><a href="'.$cheptel.'">Afficher le Cheptel</a></li>
+               <li ><a href="'.$cheptel.'/recherche">Rechercher</a></li>
              </ul>
              
             <li ><a href="#notification-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-chevron-right" id="chevron-notifications"></i>Notifications</a></li>
@@ -101,7 +114,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
    <!---------------END------------------------>
    
    <!---------------MEDIATHEQUE---------------->
-        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>Mediatheque<i class="icon-chevron-down" id="chevron-media" style="margin-left: 7.2em"></i></a>
+        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>Mediatheque<i class="icon-chevron-down" id="chevron-media" style="margin-left: 7.0em"></i></a>
          <ul id="media-menu" class="nav nav-list collapse">
          <script type="text/javascript">
         $("a").click(function(){
@@ -123,7 +136,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		  });
         </script>
-               <li ><a href="#">Darals</a></li>
+               <li ><a href="'.$daral.'">Darals</a></li>
                <li><a href="#">Localites</a></li>
                <li><a href="#">Departements</a></li>
                <li><a href="#">Regions</a></li>

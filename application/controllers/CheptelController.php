@@ -26,7 +26,7 @@ class CheptelController extends Zend_Controller_Action
 		->setCurrentPageNumber($pageNumber);
 	
 	
-		//****test add****
+		//-----------------------  test add ---------------------
 	
 		$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
 		$fk_id_farmer=$session->fk_id_farmer;
@@ -34,7 +34,7 @@ class CheptelController extends Zend_Controller_Action
 		$total_animal_type=$session->total_animal_type;
 		$message=$session->message;
 	
-		//********
+		//-------------------------------------------------------
 	
 		$this->view->assign(array(
 				'paginator' => $paginator,
@@ -72,7 +72,7 @@ class CheptelController extends Zend_Controller_Action
 		->setCurrentPageNumber($pageNumber);
 
 
-		//****test add****
+		//--------------- test add --------------------
 
 		$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
 		$fk_id_farmer=$session->fk_id_farmer;
@@ -80,7 +80,7 @@ class CheptelController extends Zend_Controller_Action
 		$total_animal_type=$session->total_animal_type;
 		$message=$session->message;
 
-		//********
+		//---------------------------------------------
 
 		$this->view->assign(array(
             'paginator' => $paginator,
@@ -99,9 +99,12 @@ class CheptelController extends Zend_Controller_Action
 			$this->view->assign('param' . $paramName, $paramValue);
 		}
 	}
+	
+	
 
-	//*****************************************
-	//   ADD
+	//************************************************************************************
+	//                                  ADD
+	//************************************************************************************
 	
 	public function addAction()
 	{
@@ -140,17 +143,23 @@ class CheptelController extends Zend_Controller_Action
 	
 			else
 			{//The form was not valid or the photo was not successfully uploaded
+				
 				$form->populate($formData);
 			}
 		}
-	
+		
+		else{
+		$id_farmer = $this->_getParam('id');
+		
+		$form->populate(array('fk_id_farmer'=>$id_farmer));
 		$this->view->form = $form;
+		}
 	}
 	
-	
+}	
+//############################################################################################################################################
 
-
-	public function createAction()
+/*	public function createAction()
 	{
 		$form = new Application_Form_EditCheptel();
 
@@ -217,5 +226,6 @@ class CheptelController extends Zend_Controller_Action
 
 		$this->_helper->redirector('index');
 		exit;
-	}
-}
+	}*/
+	
+//#################################################################################################################################################	

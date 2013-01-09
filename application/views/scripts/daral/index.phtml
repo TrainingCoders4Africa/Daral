@@ -45,87 +45,58 @@ function updateFilters(paramName, paramValue)
 
 
 <div style="text-align:right">
-<div class="pull-right">
-<a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>">Reset Filters</a>
-- <a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
+<div class="pull-right" style="margin-right:1em">
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>"><i class="icon-refresh icon-white"></i>Actualiser</a>
+</div>
 </div>
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>">
-<div>
-Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
+<div style="margin-left:1em">
+Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp 
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
-  'all' => 'All',
-  'id_localite' => 'Id Localite',
-  'name' => 'Name',
+  'all' => 'Tout',
+  'id_localite' => 'Localite',
+  'name' => 'Numero Daral',
 )); ?>
-<input type="submit" value="Go" />
+<button class="btn btn-success" type="submit" /><i class="icon-search icon-white"></i>Rechercher</button>
 </div>
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'daral', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
+<table width="97%" border="1" style="border-collapse:collapse; margin-left:1em; margin-right:1em;" cellspacing="0" 
     cellpadding="3">
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Localite 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
-            </th>
+            
             <th<?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Name 
+                 <span class="label label-inverse">Numero Daral
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                </span>
             </th>
-            <th>Actions</th>
+            
+            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Localite 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th><span class="label label-inverse">Actions</span></th>
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                 Localite 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_localite', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Name 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th>Actions</th>
-        </tr>
-    </tfoot>
+    
     <tbody>
 <?php foreach ($this->paginator as $row): ?>
         <tr>
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
-            <td align="right"><?php echo $row->id; ?></td>
-            <td><?php echo $row->id_localite; ?></td>
             <td><?php echo $row->name; ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
-        </tr>
+            <td><?php echo $row->id_localite; ?></td>
+            <td align="center"><a  href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'display'), null, true); ?>" ><i class="icon-zoom-in"></i></a> </tr>
 <?php endforeach; ?>
     </tbody>
 </table><br />
-<input type="submit" value="Delete Selected Rows" />
+
 </form>
 
 <?php echo $this->paginationControl($this->paginator,

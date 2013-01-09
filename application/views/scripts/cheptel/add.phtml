@@ -9,15 +9,18 @@ $form = $this->form;
 
 <div class="content">	
 <div class="header">
-   <h1 class="page-title" >Enregistrement du cheptel</h1>
+   <h1 class="page-title" >Ajouter des animaux</h1>
 </div>
 
         <ul class="breadcrumb">
             <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
-            <li class="active">Enregistrement du cheptel</li>
+            <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
+            <li class="active">Ajouter des animaux</li>
         </ul>
 
+        
+ <br>
+    
 <form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
 <div style="position: static; width: 90%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
@@ -66,7 +69,7 @@ $form = $this->form;
         </tr></table>
         <br/>
         <div class="row">
-      <div class="span7"></div>
+      <div class="span5"></div>
         <button class="btn btn-success" type="submit">Valider</button>
         <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel'), null, true); ?>">Annuler</a>
        </div>

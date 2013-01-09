@@ -43,7 +43,7 @@ function updateFilters(paramName, paramValue)
             <li class="active" >Liste des video</li>
         </ul>
 <div style="text-align:right">
-<a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>">Reset Filters</a>
+<a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>"><i class="icon-refresh icon-white"></i>Actualiser</a>
 - <a href="<?php echo $this->url(array('controller' => 'media', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>">

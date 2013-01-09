@@ -26,7 +26,7 @@ class Application_Form_Farmer extends Zend_Form
         
          $this->addElement(
         		$this->createElement('text', 'firstname_farmer')
-        		->setLabel('Prenom')
+        		->setLabel('Pr&eacute;noms')
         		->setAttrib("maxlength", 30)
         		->setRequired(true)
         		->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
@@ -42,13 +42,23 @@ class Application_Form_Farmer extends Zend_Form
         		->addFilter(new Zend_Filter_StringTrim())
         );
 		
+        $this->addElement(
+        		$this->createElement('text', 'birthdate_farmer')
+        		->setLabel('Date de naissance')
+        		->setValue("JJ/MM/AAAA")
+        		//->setAttrib("readonly", "readonly")
+        		->setRequired(true)
+        		->addFilter(new Zend_Filter_StringTrim())
+        		->addValidator(new Zend_Validate_Date('DD/MM/YYYY'), true, array('messages' => 'La date doit tre au format dd/mm/aaaa'))
+        );
+        
         
         $this->addElement(
-        		$this->createElement('text', 'national_id')
-        		->setLabel('No d\'identification nationale')
-        		->setAttrib("maxlength", 50)
+        		$this->createElement('text', 'birthplace_farmer')
+        		->setLabel('Lieu de naissance')
+        		->setAttrib("maxlength", 30)
         		->setRequired(true)
-        		->addValidator(new Zend_Validate_StringLength(array("max" => 50)))
+        		->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
         		->addFilter(new Zend_Filter_StringTrim())
         );
         
@@ -61,9 +71,21 @@ class Application_Form_Farmer extends Zend_Form
         		->addFilter(new Zend_Filter_StringTrim())
         );
         
+        
+        $this->addElement(
+        		$this->createElement('text', 'national_id')
+        		->setLabel('No d\'identification nationale')
+        		->setAttrib("maxlength", 13)
+        		->setRequired(true)
+        		->addValidator(new Zend_Validate_StringLength(array("max" => 13,"min"=> 13)))
+        		->addFilter(new Zend_Filter_StringTrim())
+        );
+        
+        
+        
         $this->addElement(
         		$this->createElement('text', 'phone_farmer')
-        		->setLabel('Telephone')
+        		->setLabel('T&eacute;l&eacute;phone')
         		->setAttrib("maxlength", 100)
         		->setRequired(true)
         		->addValidator(new Zend_Validate_StringLength(array("max" => 100)))
@@ -71,29 +93,13 @@ class Application_Form_Farmer extends Zend_Form
         );
         
         
-        $this->addElement(
-            $this->createElement('text', 'birthdate_farmer')
-                ->setLabel('Date de naissance')
-                ->setValue(date("d/m/Y"))
-        		//->setAttrib("readonly", "readonly")
-                ->setRequired(true)
-                ->addFilter(new Zend_Filter_StringTrim())
-        		->addValidator(new Zend_Validate_Date('DD/MM/YYYY'), true, array('messages' => 'La date doit tre au format dd/mm/aaaa'))
-        );
+        
 
-        $this->addElement(
-            $this->createElement('text', 'birthplace_farmer')
-                ->setLabel('Lieu de naissance')
-                ->setAttrib("maxlength", 30)
-                ->setRequired(true)
-                ->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
-                ->addFilter(new Zend_Filter_StringTrim())
-        );
         
         $tableCategorie = new Application_Model_Categorie_DbTable();
         $this->addElement(
         		$this->createElement('select', 'categorie')
-        		->setLabel('Categorie')
+        		->setLabel('Categorie (?)')
         		->setMultiOptions(array("" => "- - - - - - - -  Choisir - - - - - - - -") + $tableCategorie->fetchPairs())
         		->setRequired(true)
         );

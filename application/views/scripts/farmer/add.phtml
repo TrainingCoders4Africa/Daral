@@ -1,12 +1,21 @@
 <?php
 $this->headTitle('Ajout eleveur');
 $form = $this->form;
+$tableCategorie = new Application_Model_Categorie_DbTable();
+$categories= $tableCategorie->displayCategories();
 ?>
 
 <script>
 	$(function() {
 		$( "#birthdate_farmer" ).datepicker();
 	});
+
+	
+
+	$(function (){
+		   $(".pop").popover({placement:'bottom'}); 
+		});
+	
 </script>
 <div class="content">	
 <div class="header">
@@ -34,7 +43,7 @@ $form = $this->form;
         $elementName = $element->getName();
         $i++;
         ?>
-        <?php if($i%2 == 1) echo '</tr><tr>'; ?>
+        <?php if($i%2 == 0) echo '</tr><tr>'; ?>
 	           
 	            <td width="25%" align="right" class="control-group<?php if ($errors) echo ' error'; ?>">
             	<?php if ($element->getType() != 'Zend_Form_Element_Button'&& $element->getType() != 'Zend_Form_Element_File'): ?>
@@ -64,10 +73,30 @@ $form = $this->form;
         <?php
         endforeach;
         ?>
+              <td  ><div class="btn btn-group"><a class="btn btn-warning" data-toggle="dropdown" href="#"> ?</a>
+  <ul class="dropdown-menu">
+  <?php foreach ($categories as $categorie): ?>
+    <li><a href="#"><?php echo $categorie;?></a></li>
+    
+    <li class="divider"></li>
+    <?php endforeach; ?>
+  </ul></div>
+  
+                      </td><td></td>                                               
+                                                                                    
+                                                                        
+                                                                                     
+                                                                                      
+                                                                     
+                                                                     
+                                                                     
         </tr></table>
         <br/>
+        
+        
         <div class="row">
-      <div class="span7"></div>
+       
+      <div class="span6"></div>
         <button class="btn btn-success" type="submit">Valider</button>
         <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer'), null, true); ?>">Annuler</a>
        </div>
@@ -75,5 +104,7 @@ $form = $this->form;
   
 
 </form>
+
+
 </div>
     

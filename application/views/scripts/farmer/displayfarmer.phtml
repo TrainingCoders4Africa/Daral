@@ -2,17 +2,18 @@
 $farmer = new Application_Model_Farmer_DbTable_Farmer(); 
 $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
 ?>   
-
-<div class="row">
-  <div><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
-</div>
-      
+<div class="content" >
+<div style="margin-left:2em;">
 <br/>
+  <div><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
+
+      
 
 <?php 
 
   $farmer_cheptel=$cheptel->getFarmerCheptel($this->id);
 ?>
+<hr>
  <p><b>CHEPTEL: </b></p>
 <?php 
  if($farmer_cheptel!=null) 
@@ -31,9 +32,10 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
  	echo "Aucun cheptel enregistre";
  }
 ?>
-
-<br/>
-
+  <br>
+  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">Retour</a>
+  <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add','id'=>$this->id), null, true); ?>"><i class="icon-plus icon-white"></i>Ajouter</a>
+<hr>
 <p><b>INFORMATIONS PERSONNELLES:</b></p>
 
 <?php 
@@ -49,4 +51,8 @@ $farmer_info=$farmer->getFarmer($this->id);
    <li>Date de naissance: <?php echo " ".$farmer_info['birthdate_farmer']; ?></li>
    <li>Lieu de naissance: <?php echo " ".$farmer_info['birthplace_farmer']; ?></li>
   </ul>
-
+  
+  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">Retour</a>
+  <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit','id'=>$this->id), null, true); ?>">Modifier</a>
+</div>
+</div>

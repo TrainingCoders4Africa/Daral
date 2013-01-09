@@ -240,7 +240,7 @@ class FarmerController extends Zend_Controller_Action
     
     {
     	
-    	$this->_helper->layout->setLayout('layout2');
+    	//$this->_helper->layout->setLayout('layout2');
       $id_farmer = $this->_getParam('id');
       $this->view->assign(array('id'=>$id_farmer));
       

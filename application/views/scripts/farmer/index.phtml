@@ -57,33 +57,19 @@ $(function (){
             <li class="active">Liste</li>
         </ul>
 
-<div style="float:right; margin-top: 1em;margin-right:1em;">
- <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
-    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
- <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Inscrire</a>
-    <!--  ********************************************************** -->
- </div> <br />
 
-<form method="get" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">
-<div style="margin-left:1em;">
-Rechercher: <input class="input-large search-query" placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp
-<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
-  'all' => '-------------Tout------------',
-  'id_farmer' => 'Identifiant',
-  'firstname_farmer' => 'Prenom',
-  'lastname_farmer' => 'Nom',
-  'national_id' => 'Identification nationale',
-  'address_farmer' => 'Adresse',
-  'phone_farmer'=>'Telephone',
-  //'daral_originel' => 'Daral Originel',
-  'daral_actuel' => 'Daral d\'appartenance',
-  
-  //'birthplace_farmer' => 'Birthplace Farmer',
-  'id_localite' => 'Localite',
-)); ?> &nbsp
-<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
+
+        
+<br>        
+<div style="margin-left: 1em; padding-bottom:0.5em;">
+<a class="btn" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
+    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+<a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Nouveau</a>
+    <!--  ********************************************************** -->
 </div>
-</form>
+<br>
+
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
 <div style="margin-left:1em; margin-right:1em;">
@@ -154,21 +140,21 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
          <tr>
        
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id_farmer; ?>" /></td>
-            <td style="text-align: center;" ><?php echo $row->id_farmer; ?></td>
-			<td style="text-align: center;" ><?php echo $row->firstname_farmer; ?></td>
-            <td style="text-align: center;" ><?php echo $row->lastname_farmer; ?></td>
-            <td style="text-align: center;" ><?php     $linkedRow = $tableCategorie->find($row->categorie)->current();
+            <td><?php echo $row->id_farmer; ?></td>
+			<td><?php echo $row->firstname_farmer; ?></td>
+            <td><?php echo $row->lastname_farmer; ?></td>
+            <td><?php     $linkedRow = $tableCategorie->find($row->categorie)->current();
     if ($linkedRow) {
         echo $linkedRow->getZodekenAutoLabel();
     } else {
         echo $linkedRow->categorie, ' (unlinked)';
     } ?></td>
-            <td style="text-align: center;" ><?php echo $row->national_id; ?></td>
-            <td style="text-align: center;" ><?php echo $row->address_farmer; ?></td>
-            <td style="text-align: center;" ><?php echo $row->phone_farmer; ?></td>
-            <td style="text-align: center;" ><a href="#" class="pop black" data-content="<?php echo $row->id_localite; ?> "data-original-title="Localite"><?php echo $row->daral_actuel; ?></a> </td>
-            <td style="text-align: center;" >
-             <a data-toggle="modal" data-target="#infos" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'displayfarmer', 'id' => $row->id_farmer), null, true); ?>" ><i class="icon-zoom-in"></i></a> 
+            <td><?php echo $row->national_id; ?></td>
+            <td><?php echo $row->address_farmer; ?></td>
+            <td><?php echo $row->phone_farmer; ?></td>
+            <td><a href="#" class="pop black" data-content="<?php echo $row->id_localite; ?> "data-original-title="Localite"><?php echo $row->daral_actuel; ?></a> </td>
+            <td>
+             <a  href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'displayfarmer', 'id' => $row->id_farmer), null, true); ?>" ><i class="icon-zoom-in"></i></a> 
            - <a href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit', 'id' => $row->id_farmer), null, true); ?>"><i class="icon-pencil"></i></a> 
            - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete', 'del_id' => $row->id_farmer), null, true); ?>"><i class="icon-trash"></i></a></td>
    

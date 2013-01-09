@@ -23,19 +23,13 @@ class Application_Form_Cheptel extends Zend_Form
         		$this->createElement('text', 'fk_id_farmer')
         		->setLabel('Identifiant Eleveur')
         		->setAttrib("maxlength", 8)
+        		//->setAttrib('readonly','readonly')
         		->setRequired(true)
         		->addValidator(new Zend_Validate_StringLength(array("max" => 8,"min"=> 8)))
         		->addFilter(new Zend_Filter_StringTrim())
         );
        
         
-        $tableAnimalType = new Application_Model_AnimalType_DbTable();
-        $this->addElement(
-            $this->createElement('select', 'fk_animal_type')
-                ->setLabel('Type d\'animal')
-                ->setMultiOptions(array("" => "- - Choisir - -") + $tableAnimalType->fetchAnimal())
-                ->setRequired(true)
-        );
 
         $this->addElement(
             $this->createElement('text', 'total_animal_type')
@@ -43,6 +37,15 @@ class Application_Form_Cheptel extends Zend_Form
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_Int())
                 ->addFilter(new Zend_Filter_StringTrim())
+        );
+        
+        
+        $tableAnimalType = new Application_Model_AnimalType_DbTable();
+        $this->addElement(
+        		$this->createElement('select', 'fk_animal_type')
+        		->setLabel('Type d\'animal')
+        		->setMultiOptions(array("" => "- - Choisir - -") + $tableAnimalType->fetchAnimal())
+        		->setRequired(true)
         );
 
         
