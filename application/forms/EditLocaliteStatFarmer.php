@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table localite_stat_farmer.
+ * Form definition for table localitestatfarmer.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditLocaliteStatFarmer extends Zend_Form
+class Application_Form_EditLocalitestatfarmer extends Zend_Form
 {
     public function init()
     {

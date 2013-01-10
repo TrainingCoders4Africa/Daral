@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Row definition class for table departement_stat_animal.
+ * Row definition class for table departementstatanimal.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_DepartementStatAnimal_Row extends Application_Model_DepartementStatAnimal_Row_Abstract
+class Application_Model_Departementstatanimal_Row extends Application_Model_Departementstatanimal_Row_Abstract
 {
     // write your custom functions here
 }

@@ -1,29 +1,29 @@
 <?php
 
 /**
- * Data mapper class for table departement_stat_farmer.
+ * Data mapper class for table departementstatfarmer.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_DepartementStatFarmerMapper
+class Application_Model_DepartementstatfarmerMapper
 {
     /**
      *
-     * @var Application_Model_DepartementStatFarmer_DbTable
+     * @var Application_Model_Departementstatfarmer_DbTable
      */
     protected $_dbTable;
 
     public function __construct()
     {
-        $this->_dbTable = new Application_Model_DepartementStatFarmer_DbTable();
+        $this->_dbTable = new Application_Model_Departementstatfarmer_DbTable();
     }
 
     /**
      *
-     * @return Application_Model_DepartementStatFarmer_DbTable
+     * @return Application_Model_Departementstatfarmer_DbTable
      */
     public function getDbTabe()
     {

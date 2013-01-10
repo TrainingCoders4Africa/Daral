@@ -35,8 +35,8 @@ abstract class Application_Model_Region_DbTable_Abstract extends Zend_Db_Table_A
     protected $_dependentTables = array (
   0 => 'Application_Model_Departement_DbTable',
   1 => 'Application_Model_Localite_DbTable',
-  2 => 'Application_Model_RegionStatAnimal_DbTable',
-  3 => 'Application_Model_RegionStatFarmer_DbTable',
+  2 => 'Application_Model_Regionstatanimal_DbTable',
+  3 => 'Application_Model_Regionstatfarmer_DbTable',
 );
 
     /**

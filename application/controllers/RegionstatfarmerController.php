@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table localite_stat_farmer
+ * Controller for table regionstatfarmer
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class LocaliteStatFarmerController extends Zend_Controller_Action
+class RegionstatfarmerController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class LocaliteStatFarmerController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableLocaliteStatFarmer = new Application_Model_LocaliteStatFarmer_DbTable();
-        $gridSelect = $tableLocaliteStatFarmer->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableRegionstatfarmer = new Application_Model_Regionstatfarmer_DbTable();
+        $gridSelect = $tableRegionstatfarmer->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class LocaliteStatFarmerController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditLocaliteStatFarmer();
+        $form = new Application_Form_EditRegionstatfarmer();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableLocaliteStatFarmer = new Application_Model_LocaliteStatFarmer_DbTable();
-                $tableLocaliteStatFarmer->insert($values);
+                $tableRegionstatfarmer = new Application_Model_Regionstatfarmer_DbTable();
+                $tableRegionstatfarmer->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class LocaliteStatFarmerController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableLocaliteStatFarmer = new Application_Model_LocaliteStatFarmer_DbTable();
-        $form = new Application_Form_EditLocaliteStatFarmer();
+        $tableRegionstatfarmer = new Application_Model_Regionstatfarmer_DbTable();
+        $form = new Application_Form_EditRegionstatfarmer();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableLocaliteStatFarmer->find($id)->current();
+        $row = $tableRegionstatfarmer->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class LocaliteStatFarmerController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableLocaliteStatFarmer->update($values, $where);
+                $tableRegionstatfarmer->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class LocaliteStatFarmerController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableLocaliteStatFarmer = new Application_Model_LocaliteStatFarmer_DbTable();
-            $tableLocaliteStatFarmer->deleteMultipleIds($ids);
+            $tableRegionstatfarmer = new Application_Model_Regionstatfarmer_DbTable();
+            $tableRegionstatfarmer->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

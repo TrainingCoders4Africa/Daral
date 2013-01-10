@@ -25,20 +25,20 @@ USE `daral`;
 CREATE TABLE `animal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_id_farmer` varchar(30) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
   `photo_left` varchar(100) NOT NULL,
   `photo_right` varchar(100) NOT NULL,
   `photo_front` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Contenu de la table `animal`
 --
 
-INSERT INTO `animal` (`id`, `fk_id_farmer`, `fk_animal_type`, `photo_left`, `photo_right`, `photo_front`) VALUES
+INSERT INTO `animal` (`id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`) VALUES
 (1, '10010025', 'Cheval', 'VUE GAUCHE', 'VUE DROITE', 'VUE FACE'),
 (2, '10010025', 'Cheval', 'VUE GAUCHE', 'VUE DROITE', 'VUE FACE'),
 (3, '10010025', 'Cheval', 'VUE GAUCHE', 'VUE DROITE', 'VUE FACE'),
@@ -72,10 +72,10 @@ INSERT INTO `animal` (`id`, `fk_id_farmer`, `fk_animal_type`, `photo_left`, `pho
 -- --------------------------------------------------------
 
 --
--- Structure de la table `animal_type`
+-- Structure de la table `animaltype`
 --
 
-CREATE TABLE `animal_type` (
+CREATE TABLE `animaltype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
@@ -83,10 +83,10 @@ CREATE TABLE `animal_type` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `animal_type`
+-- Contenu de la table `animaltype`
 --
 
-INSERT INTO `animal_type` (`id`, `name`) VALUES
+INSERT INTO `animaltype` (`id`, `name`) VALUES
 (1, 'Cheval'),
 (2, 'Ndama');
 
@@ -121,18 +121,18 @@ INSERT INTO `categorie` (`id`, `categorie_id`, `max_animal`) VALUES
 CREATE TABLE `cheptel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_id_farmer` varchar(30) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `cheptel`
 --
 
-INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animal_type`, `total_animal_type`) VALUES
+INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animaltype`, `total_animaltype`) VALUES
 (1, '10010025', 'Cheval', 3),
 (2, '10010025', 'Ndama', 12),
 (3, '10010001', 'Cheval', 5),
@@ -169,26 +169,26 @@ INSERT INTO `daral` (`id`, `id_localite`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `daral_stat_animal`
+-- Structure de la table `daralstatanimal`
 --
 
-CREATE TABLE `daral_stat_animal` (
+CREATE TABLE `daralstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_daral_name` varchar(30) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_daral_name` (`fk_daral_name`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_daral_name` (`fk_daral_name`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `daral_stat_farmer`
+-- Structure de la table `daralstatfarmer`
 --
 
-CREATE TABLE `daral_stat_farmer` (
+CREATE TABLE `daralstatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_daral_name` varchar(30) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -265,26 +265,26 @@ INSERT INTO `departement` (`id`, `name`, `region`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `departement_stat_animal`
+-- Structure de la table `departementstatanimal`
 --
 
-CREATE TABLE `departement_stat_animal` (
+CREATE TABLE `departementstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_departement_name` varchar(50) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_departement_name` (`fk_departement_name`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_departement_name` (`fk_departement_name`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `departement_stat_farmer`
+-- Structure de la table `departementstatfarmer`
 --
 
-CREATE TABLE `departement_stat_farmer` (
+CREATE TABLE `departementstatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_departement_name` varchar(50) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -385,26 +385,26 @@ INSERT INTO `localite` (`id`, `name`, `departement`, `region`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `localite_stat_animal`
+-- Structure de la table `localitestatanimal`
 --
 
-CREATE TABLE `localite_stat_animal` (
+CREATE TABLE `localitestatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_localite_name` varchar(50) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_localite_name` (`fk_localite_name`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_localite_name` (`fk_localite_name`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `localite_stat_farmer`
+-- Structure de la table `localitestatfarmer`
 --
 
-CREATE TABLE `localite_stat_farmer` (
+CREATE TABLE `localitestatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_localite_name` varchar(50) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -454,11 +454,11 @@ CREATE TABLE `media` (
 
 CREATE TABLE `national` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_animal_type` (`fk_animal_type`),
-  KEY `fk_animal_type_2` (`fk_animal_type`)
+  KEY `fk_animaltype` (`fk_animaltype`),
+  KEY `fk_animaltype_2` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -519,27 +519,27 @@ INSERT INTO `region` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `region_stat_animal`
+-- Structure de la table `regionstatanimal`
 --
 
-CREATE TABLE `region_stat_animal` (
+CREATE TABLE `regionstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_region_name` varchar(50) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_region_name` (`fk_region_name`,`fk_animal_type`),
+  KEY `fk_region_name` (`fk_region_name`,`fk_animaltype`),
   KEY `fk_region_name_2` (`fk_region_name`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `region_stat_farmer`
+-- Structure de la table `regionstatfarmer`
 --
 
-CREATE TABLE `region_stat_farmer` (
+CREATE TABLE `regionstatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_region_name` varchar(50) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -551,10 +551,10 @@ CREATE TABLE `region_stat_farmer` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `role_users`
+-- Structure de la table `roleusers`
 --
 
-CREATE TABLE `role_users` (
+CREATE TABLE `roleusers` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `description` varchar(20) NOT NULL COMMENT 'valeur = admin ou gerant',
   PRIMARY KEY (`id`),
@@ -562,10 +562,10 @@ CREATE TABLE `role_users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `role_users`
+-- Contenu de la table `roleusers`
 --
 
-INSERT INTO `role_users` (`id`, `description`) VALUES
+INSERT INTO `roleusers` (`id`, `description`) VALUES
 (1, 'admin'),
 (2, 'gerant');
 
@@ -641,14 +641,14 @@ CREATE TABLE `veterinaire` (
 --
 ALTER TABLE `animal`
   ADD CONSTRAINT `animal_ibfk_1` FOREIGN KEY (`fk_id_farmer`) REFERENCES `farmer` (`id_farmer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `cheptel`
 --
 ALTER TABLE `cheptel`
   ADD CONSTRAINT `cheptel_ibfk_1` FOREIGN KEY (`fk_id_farmer`) REFERENCES `farmer` (`id_farmer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cheptel_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cheptel_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `daral`
@@ -657,17 +657,17 @@ ALTER TABLE `daral`
   ADD CONSTRAINT `daral_ibfk_3` FOREIGN KEY (`id_localite`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `daral_stat_animal`
+-- Contraintes pour la table `daralstatanimal`
 --
-ALTER TABLE `daral_stat_animal`
-  ADD CONSTRAINT `daral_stat_animal_ibfk_1` FOREIGN KEY (`fk_daral_name`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `daral_stat_animal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `daralstatanimal`
+  ADD CONSTRAINT `daralstatanimal_ibfk_1` FOREIGN KEY (`fk_daral_name`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `daralstatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `daral_stat_farmer`
+-- Contraintes pour la table `daralstatfarmer`
 --
-ALTER TABLE `daral_stat_farmer`
-  ADD CONSTRAINT `daral_stat_farmer_ibfk_1` FOREIGN KEY (`fk_daral_name`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `daralstatfarmer`
+  ADD CONSTRAINT `daralstatfarmer_ibfk_1` FOREIGN KEY (`fk_daral_name`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `departement`
@@ -676,17 +676,17 @@ ALTER TABLE `departement`
   ADD CONSTRAINT `departement_ibfk_1` FOREIGN KEY (`region`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `departement_stat_animal`
+-- Contraintes pour la table `departementstatanimal`
 --
-ALTER TABLE `departement_stat_animal`
-  ADD CONSTRAINT `departement_stat_animal_ibfk_1` FOREIGN KEY (`fk_departement_name`) REFERENCES `departement` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `departement_stat_animal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `departementstatanimal`
+  ADD CONSTRAINT `departementstatanimal_ibfk_1` FOREIGN KEY (`fk_departement_name`) REFERENCES `departement` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `departementstatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `departement_stat_farmer`
+-- Contraintes pour la table `departementstatfarmer`
 --
-ALTER TABLE `departement_stat_farmer`
-  ADD CONSTRAINT `departement_stat_farmer_ibfk_1` FOREIGN KEY (`fk_departement_name`) REFERENCES `departement` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `departementstatfarmer`
+  ADD CONSTRAINT `departementstatfarmer_ibfk_1` FOREIGN KEY (`fk_departement_name`) REFERENCES `departement` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `farmer`
@@ -705,17 +705,17 @@ ALTER TABLE `localite`
   ADD CONSTRAINT `localite_ibfk_2` FOREIGN KEY (`region`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `localite_stat_animal`
+-- Contraintes pour la table `localitestatanimal`
 --
-ALTER TABLE `localite_stat_animal`
-  ADD CONSTRAINT `localite_stat_animal_ibfk_1` FOREIGN KEY (`fk_localite_name`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `localite_stat_animal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `localitestatanimal`
+  ADD CONSTRAINT `localitestatanimal_ibfk_1` FOREIGN KEY (`fk_localite_name`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `localitestatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `localite_stat_farmer`
+-- Contraintes pour la table `localitestatfarmer`
 --
-ALTER TABLE `localite_stat_farmer`
-  ADD CONSTRAINT `localite_stat_farmer_ibfk_1` FOREIGN KEY (`fk_localite_name`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `localitestatfarmer`
+  ADD CONSTRAINT `localitestatfarmer_ibfk_1` FOREIGN KEY (`fk_localite_name`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `media`
@@ -728,7 +728,7 @@ ALTER TABLE `media`
 -- Contraintes pour la table `national`
 --
 ALTER TABLE `national`
-  ADD CONSTRAINT `national_ibfk_1` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `national_ibfk_1` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `notification`
@@ -740,21 +740,21 @@ ALTER TABLE `notification`
   ADD CONSTRAINT `notification_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `region_stat_animal`
+-- Contraintes pour la table `regionstatanimal`
 --
-ALTER TABLE `region_stat_animal`
-  ADD CONSTRAINT `region_stat_animal_ibfk_1` FOREIGN KEY (`fk_region_name`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `region_stat_animal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animal_type` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `regionstatanimal`
+  ADD CONSTRAINT `regionstatanimal_ibfk_1` FOREIGN KEY (`fk_region_name`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `regionstatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `region_stat_farmer`
+-- Contraintes pour la table `regionstatfarmer`
 --
-ALTER TABLE `region_stat_farmer`
-  ADD CONSTRAINT `region_stat_farmer_ibfk_1` FOREIGN KEY (`fk_region_name`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `regionstatfarmer`
+  ADD CONSTRAINT `regionstatfarmer_ibfk_1` FOREIGN KEY (`fk_region_name`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `role_users` (`description`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roleusers` (`description`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`user_daral`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;

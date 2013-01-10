@@ -17,7 +17,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 //*********************************************************************
 //*************************** ADD CHEPTEL******************************
 
-	public function addCheptel($fk_id_farmer,$fk_animal_type,$total_animal_type)
+	public function addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype)
 	{
 	   $tableFarmer = new Application_Model_Farmer_DbTable_Farmer();
 	   $tableCategorie= new Application_Model_Categorie_DbTable_Categorie();
@@ -30,26 +30,26 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	        	$categorie = $tableFarmer->getCategorie($fk_id_farmer);
 	        	$max_animal= $tableCategorie->getMaxAnimal($categorie);
 	        	
-	        	$row = $this->fetchRow($this->select()->where('fk_id_farmer=?',$fk_id_farmer)->where('fk_animal_type=?',$fk_animal_type));
-	             if($row) //farmer already has an entry in the table for this animal type
+	        	$row = $this->fetchRow($this->select()->where('fk_id_farmer=?',$fk_id_farmer)->where('fk_animaltype=?',$fk_animaltype));
+	             if($row) //farmer already has an entry in the table for this Animaltype
 	             	
 				   { 
 				         $total=$this->getFarmerTotal($fk_id_farmer);//current total for ALL animal types
-				         $total+=$total_animal_type;//new total for ALL animal types
+				         $total+=$total_animaltype;//new total for ALL animal types
 				            
 				             	if ($total<= $max_animal)
 				             	{
 				             	        //table "cheptel" is updated
 				             		    $row_arr = $row->toArray();
-				             		    $total_animal=$row_arr['total_animal_type'];//current total for animal type
-				             		    $total_animal+=$total_animal_type;//new total for animal type
-						             	$this->update(array('total_animal_type'=>$total_animal),
-						             			      array('fk_id_farmer=?'=>$fk_id_farmer,'fk_animal_type=?'=>$fk_animal_type));
+				             		    $total_animal=$row_arr['total_animaltype'];//current total for Animaltype
+				             		    $total_animal+=$total_animaltype;//new total for Animaltype
+						             	$this->update(array('total_animaltype'=>$total_animal),
+						             			      array('fk_id_farmer=?'=>$fk_id_farmer,'fk_animaltype=?'=>$fk_animaltype));
 						             	
 						             	//new animals are inserted
-						             	for($i=0;$i<$total_animal_type;$i++)
+						             	for($i=0;$i<$total_animaltype;$i++)
 						             	{	
-						             	  $tableAnimal->addAnimal($fk_id_farmer,$fk_animal_type); 
+						             	  $tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype); 
 						             	}
 				                 
 				             		   return '0=update and insertion ok'; // update and insertion ok
@@ -65,8 +65,8 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 
 	             else //farmer has no previous entry in the table for this animal type
 	             { 
-	             	$total=$this->getFarmerTotal($fk_id_farmer);//current total for ALL animal types
-	             	$total+=$total_animal_type;//new total for ALL animal types
+	             	$total=$this->getFarmerTotal($fk_id_farmer);//current total for ALL Animaltypes
+	             	$total+=$total_animaltype;//new total for ALL Animaltypes
 				             	 
 				             	if ($total<= $max_animal)
 				             	{
@@ -74,8 +74,8 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             	    $isactive=1;
 				             		$data = array(
 				             				 'fk_id_farmer'=>$fk_id_farmer,
-				             				 'fk_animal_type'=>$fk_animal_type,
-				             				 'total_animal_type'=>$total_animal_type,
+				             				 'fk_animaltype'=>$fk_animaltype,
+				             				 'total_animaltype'=>$total_animaltype,
 				             				 'isactive'=>$isactive,
 				             				
 				             				);
@@ -83,9 +83,9 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             		$this->insert($data);
 				             		
 				             		//new animals are inserted
-				             		for($i=0;$i<$total_animal_type;$i++)
+				             		for($i=0;$i<$total_animaltype;$i++)
 				             		{
-				             		$tableAnimal->addAnimal($fk_id_farmer,$fk_animal_type);
+				             		$tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype);
 				             		}
 				             	
 				             		return '0=insertion ok'; // insertion ok
@@ -128,7 +128,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 			  	$total=0;
 			  	foreach ($rows_arr as $row)
 			  	{
-			  		 $total+=$row['total_animal_type'];
+			  		 $total+=$row['total_animaltype'];
 			  	}
 			    
 			    return $total;
@@ -192,12 +192,12 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  		$select->where('fk_id_farmer = ?', $params['fk_id_farmer']);
 	  	}
 	  
-	  	if (isset($params['fk_animal_type']) && !empty($params['fk_animal_type'])) {
-	  		$select->where('fk_animal_type = ?', $params['fk_animal_type']);
+	  	if (isset($params['fk_animaltype']) && !empty($params['fk_animaltype'])) {
+	  		$select->where('fk_animaltype = ?', $params['fk_animaltype']);
 	  	}
 	  
-	  	if (isset($params['total_animal_type']) && !empty($params['total_animal_type'])) {
-	  		$select->where('total_animal_type = ?', $params['total_animal_type']);
+	  	if (isset($params['total_animaltype']) && !empty($params['total_animaltype'])) {
+	  		$select->where('total_animaltype = ?', $params['total_animaltype']);
 	  	}
 	  	
 	  	if (isset($params['isactive']) && !empty($params['isactive'])) {
@@ -215,8 +215,8 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  			$searchWheres[] = $dbAdapter->quoteInto('fk_id_farmer LIKE ?', "%$keywords%");
 	  		}
 	  
-	  		if ('all' === $searchMode || 'fk_animal_type' === $searchMode) {
-	  			$searchWheres[] = $dbAdapter->quoteInto('fk_animal_type LIKE ?', "%$keywords%");
+	  		if ('all' === $searchMode || 'fk_animaltype' === $searchMode) {
+	  			$searchWheres[] = $dbAdapter->quoteInto('fk_animaltype LIKE ?', "%$keywords%");
 	  		}
 	  
 	  		if (!empty($searchWheres)) {

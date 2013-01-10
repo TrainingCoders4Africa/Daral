@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table departement_stat_farmer.
+ * Form definition for table departementstatfarmer.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditDepartementStatFarmer extends Zend_Form
+class Application_Form_EditDepartementstatfarmer extends Zend_Form
 {
     public function init()
     {

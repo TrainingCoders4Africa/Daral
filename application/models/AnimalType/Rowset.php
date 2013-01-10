@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Rowset definition class for table animal_type.
+ * Rowset definition class for table animaltype.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_AnimalType_Rowset extends Application_Model_AnimalType_Rowset_Abstract
+class Application_Model_Animaltype_Rowset extends Application_Model_Animaltype_Rowset_Abstract
 {
     // write your custom functions here
 }

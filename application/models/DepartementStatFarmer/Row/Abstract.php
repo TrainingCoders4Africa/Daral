@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Row definition class for table departement_stat_farmer.
+ * Row definition class for table departementstatfarmer.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,20 +9,20 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_DepartementStatFarmer_Row setFromArray($data)
+ * @method Application_Model_Departementstatfarmer_Row setFromArray($data)
  *
  * @property integer $id
  * @property string $fk_departement_name
  * @property integer $total_farmer
  */
-abstract class Application_Model_DepartementStatFarmer_Row_Abstract extends Zend_Db_Table_Row_Abstract
+abstract class Application_Model_Departementstatfarmer_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
     /**
      * Set value for 'id' field
      *
      * @param integer $Id
      *
-     * @return Application_Model_DepartementStatFarmer_Row
+     * @return Application_Model_Departementstatfarmer_Row
      */
     public function setId($Id)
     {
@@ -45,7 +45,7 @@ abstract class Application_Model_DepartementStatFarmer_Row_Abstract extends Zend
      *
      * @param string $FkDepartementName
      *
-     * @return Application_Model_DepartementStatFarmer_Row
+     * @return Application_Model_Departementstatfarmer_Row
      */
     public function setFkDepartementName($FkDepartementName)
     {
@@ -68,7 +68,7 @@ abstract class Application_Model_DepartementStatFarmer_Row_Abstract extends Zend
      *
      * @param integer $TotalFarmer
      *
-     * @return Application_Model_DepartementStatFarmer_Row
+     * @return Application_Model_Departementstatfarmer_Row
      */
     public function setTotalFarmer($TotalFarmer)
     {

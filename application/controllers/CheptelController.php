@@ -38,8 +38,8 @@ class CheptelController extends Zend_Controller_Action
 	
 		$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
 		$fk_id_farmer=$session->fk_id_farmer;
-		$fk_animal_type=$session->fk_animal_type;
-		$total_animal_type=$session->total_animal_type;
+		$fk_animaltype=$session->fk_animaltype;
+		$total_animaltype=$session->totalanimaltype;
 		$message=$session->message;
 	
 		//-------------------------------------------------------
@@ -50,8 +50,8 @@ class CheptelController extends Zend_Controller_Action
 				'sortOrder' => $sortOrder,
 				'pageNumber' => $pageNumber,
 				'fk_id_farmer'=>$fk_id_farmer,
-				'fk_id_animal'=>$fk_animal_type,
-				'total_animal'=>$total_animal_type,
+				'fk_id_animal'=>$fk_animaltype,
+				'total_animal'=>$total_animaltype,
 				'message'=>$message,
 		));
 	
@@ -84,8 +84,8 @@ class CheptelController extends Zend_Controller_Action
 
 		$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
 		$fk_id_farmer=$session->fk_id_farmer;
-		$fk_animal_type=$session->fk_animal_type;
-		$total_animal_type=$session->total_animal_type;
+		$fk_animaltype=$session->fk_animaltype;
+		$total_animaltype=$session->total_animaltype;
 		$message=$session->message;
 
 		//---------------------------------------------
@@ -96,8 +96,8 @@ class CheptelController extends Zend_Controller_Action
             'sortOrder' => $sortOrder,
             'pageNumber' => $pageNumber,
         		'fk_id_farmer'=>$fk_id_farmer,
-        		'fk_id_animal'=>$fk_animal_type,
-        		'total_animal'=>$total_animal_type,
+        		'fk_id_animal'=>$fk_animaltype,
+        		'total_animal'=>$total_animaltype,
         		'message'=>$message,
 		));
 
@@ -126,24 +126,24 @@ class CheptelController extends Zend_Controller_Action
 			if ($form->isValid($formData)  )
 			{
 				$fk_id_farmer = $form->getValue('fk_id_farmer');
-				$fk_animal_type = $form->getValue('fk_animal_type');
-				$total_animal_type = $form->getValue('total_animal_type');
+				$fk_animaltype = $form->getValue('fk_animaltype');
+				$total_animaltype = $form->getValue('total_animaltype');
 				 
 				$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
 				//$session->fk_id_farmer=$fk_id_farmer;
-				//$session->fk_animal_type=$fk_animal_type;
-				//$session->total_animal_type=$total_animal_type;
+				//$session->fk_animaltype=$fk_animaltype;
+				//$session->total_animaltype=$total_animaltype;
 					
 				 
 				$cheptel = new Application_Model_Cheptel_DbTable_Cheptel();
 				try{
-					$result=$cheptel->addCheptel($fk_id_farmer,$fk_animal_type,$total_animal_type);
+					$result=$cheptel->addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype);
 					$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$fk_id_farmer);
 				} catch (Exception $e)
 				{
 					die('Erreur: '.$e->getMessage());
 				}
-				//$message = $cheptel->addCheptel($fk_id_farmer,$fk_animal_type,$total_animal_type);
+				//$message = $cheptel->addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype);
 				$session->message=$result;
 				
 				

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table region_stat_animal
+ * Controller for table animaltype
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class RegionStatAnimalController extends Zend_Controller_Action
+class AnimaltypeController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class RegionStatAnimalController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableRegionStatAnimal = new Application_Model_RegionStatAnimal_DbTable();
-        $gridSelect = $tableRegionStatAnimal->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableAnimaltype = new Application_Model_Animaltype_DbTable();
+        $gridSelect = $tableAnimaltype->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class RegionStatAnimalController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditRegionStatAnimal();
+        $form = new Application_Form_EditAnimaltype();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableRegionStatAnimal = new Application_Model_RegionStatAnimal_DbTable();
-                $tableRegionStatAnimal->insert($values);
+                $tableAnimaltype = new Application_Model_Animaltype_DbTable();
+                $tableAnimaltype->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class RegionStatAnimalController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableRegionStatAnimal = new Application_Model_RegionStatAnimal_DbTable();
-        $form = new Application_Form_EditRegionStatAnimal();
+        $tableAnimaltype = new Application_Model_Animaltype_DbTable();
+        $form = new Application_Form_EditAnimaltype();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableRegionStatAnimal->find($id)->current();
+        $row = $tableAnimaltype->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class RegionStatAnimalController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableRegionStatAnimal->update($values, $where);
+                $tableAnimaltype->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class RegionStatAnimalController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableRegionStatAnimal = new Application_Model_RegionStatAnimal_DbTable();
-            $tableRegionStatAnimal->deleteMultipleIds($ids);
+            $tableAnimaltype = new Application_Model_Animaltype_DbTable();
+            $tableAnimaltype->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

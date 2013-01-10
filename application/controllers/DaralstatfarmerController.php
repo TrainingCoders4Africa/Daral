@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table daral_stat_animal
+ * Controller for table daralstatfarmer
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class DaralStatAnimalController extends Zend_Controller_Action
+class DaralstatfarmerController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class DaralStatAnimalController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableDaralStatAnimal = new Application_Model_DaralStatAnimal_DbTable();
-        $gridSelect = $tableDaralStatAnimal->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableDaralstatfarmer = new Application_Model_Daralstatfarmer_DbTable();
+        $gridSelect = $tableDaralstatfarmer->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class DaralStatAnimalController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditDaralStatAnimal();
+        $form = new Application_Form_EditDaralstatfarmer();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableDaralStatAnimal = new Application_Model_DaralStatAnimal_DbTable();
-                $tableDaralStatAnimal->insert($values);
+                $tableDaralstatfarmer = new Application_Model_Daralstatfarmer_DbTable();
+                $tableDaralstatfarmer->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class DaralStatAnimalController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableDaralStatAnimal = new Application_Model_DaralStatAnimal_DbTable();
-        $form = new Application_Form_EditDaralStatAnimal();
+        $tableDaralstatfarmer = new Application_Model_Daralstatfarmer_DbTable();
+        $form = new Application_Form_EditDaralstatfarmer();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableDaralStatAnimal->find($id)->current();
+        $row = $tableDaralstatfarmer->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class DaralStatAnimalController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableDaralStatAnimal->update($values, $where);
+                $tableDaralstatfarmer->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class DaralStatAnimalController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableDaralStatAnimal = new Application_Model_DaralStatAnimal_DbTable();
-            $tableDaralStatAnimal->deleteMultipleIds($ids);
+            $tableDaralstatfarmer = new Application_Model_Daralstatfarmer_DbTable();
+            $tableDaralstatfarmer->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

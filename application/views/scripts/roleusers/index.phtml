@@ -31,21 +31,21 @@ function updateFilters(paramName, paramValue)
 </script>
 
 <div style="text-align:right">
-<a href="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'index'), null, true); ?>">Reset Filters</a>
-- <a href="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
+<a href="<?php echo $this->url(array('controller' => 'roleusers', 'action' => 'index'), null, true); ?>">Reset Filters</a>
+- <a href="<?php echo $this->url(array('controller' => 'roleusers', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
 
-<form method="get" action="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'index'), null, true); ?>">
+<form method="get" action="<?php echo $this->url(array('controller' => 'roleusers', 'action' => 'index'), null, true); ?>">
 <div>
 Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => 'All',
-  'name' => 'Name',
+  'description' => 'Description',
 )); ?>
 <input type="submit" value="Go" />
 </div>
 </form>
 
-<form method="post" action="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<form method="post" action="<?php echo $this->url(array('controller' => 'roleusers', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
 <table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
     cellpadding="3">
     <thead>
@@ -57,10 +57,10 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </th>
-            <th<?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Name 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
+            <th<?php if ('description' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Description 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </th>
             <th>Actions</th>
@@ -75,10 +75,10 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </th>
-            <th<?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Name 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
+            <th<?php if ('description' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                Description 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </th>
             <th>Actions</th>
@@ -89,9 +89,9 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
         <tr>
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td align="right"><?php echo $row->id; ?></td>
-            <td><?php echo $row->name; ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
+            <td><?php echo $row->description; ?></td>
+            <td align="center"><a href="<?php echo $this->url(array('controller' => 'roleusers', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
+    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'roleusers', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
         </tr>
 <?php endforeach; ?>
     </tbody>

@@ -1,6 +1,6 @@
 <?php
 $tableFarmer = new Application_Model_Farmer_DbTable();
-$tableAnimalType = new Application_Model_AnimalType_DbTable();
+$tableAnimaltype = new Application_Model_Animaltype_DbTable();
 $farmer = new Application_Model_Farmer_DbTable_Farmer();
 ?>
 
@@ -73,7 +73,7 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => '-------------Tout------------',
   'fk_id_farmer' => 'Identifiant eleveur',
-  'fk_animal_type' => 'Type d\'animal',
+  'fk_animaltype' => 'Type d\'animal',
 )); ?> &nbsp 
 <button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
@@ -99,16 +99,16 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('fk_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('fk_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Type d'animal
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('total_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('total_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Total
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
             <th><span class="label label-inverse">Actions</span></th>
@@ -122,15 +122,15 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td align="center"><?php echo $row->id; ?></td>
             <td align="center"><?php echo $row->fk_id_farmer;?></td>
-            <td align="center"><?php echo $row->fk_animal_type; ?></td>
-            <td align="center"><?php echo $row->total_animal_type; ?></td>
+            <td align="center"><?php echo $row->fk_animaltype; ?></td>
+            <td align="center"><?php echo $row->total_animaltype; ?></td>
             <!--  
             <td align="center"><a href="<?php// echo $this->url(array('controller' => 'cheptel', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
     - <a onclick="return confirm('Confirm deletion!');" href="<?php //echo $this->url(array('controller' => 'cheptel', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
         </tr>
         -->
-        <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $row->fk_id_farmer,'fk_animal_type'=>$row->fk_animal_type), null, true); ?>">Afficher</a> 
-    - <a  href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index','fk_id_farmer' => $row->fk_id_farmer,'fk_animal_type'=>$row->fk_animal_type ), null, true); ?>">Modifier</a></td>
+        <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $row->fk_id_farmer,'fk_animaltype'=>$row->fk_animaltype), null, true); ?>">Afficher</a> 
+    - <a  href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index','fk_id_farmer' => $row->fk_id_farmer,'fk_animaltype'=>$row->fk_animaltype ), null, true); ?>">Modifier</a></td>
         </tr>
 <?php  endforeach; ?>
     </tbody>

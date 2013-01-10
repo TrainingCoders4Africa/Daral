@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Rowset definition class for table localite_stat_animal.
+ * Rowset definition class for table localitestatanimal.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_LocaliteStatAnimal_Rowset extends Application_Model_LocaliteStatAnimal_Rowset_Abstract
+class Application_Model_Localitestatanimal_Rowset extends Application_Model_Localitestatanimal_Rowset_Abstract
 {
     // write your custom functions here
 }

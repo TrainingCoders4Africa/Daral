@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Row definition class for table type_notification.
+ * Row definition class for table typenotification.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_TypeNotification_Row extends Application_Model_TypeNotification_Row_Abstract
+class Application_Model_Typenotification_Row extends Application_Model_Typenotification_Row_Abstract
 {
     // write your custom functions here
 }

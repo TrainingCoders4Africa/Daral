@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Row definition class for table type_notification.
+ * Row definition class for table typenotification.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,19 +9,20 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_TypeNotification_Row setFromArray($data)
+ * @method Application_Model_Typenotification_Row setFromArray($data)
  *
  * @property integer $id
  * @property string $libelle
+ * @property string $description
  */
-abstract class Application_Model_TypeNotification_Row_Abstract extends Zend_Db_Table_Row_Abstract
+abstract class Application_Model_Typenotification_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
     /**
      * Set value for 'id' field
      *
      * @param integer $Id
      *
-     * @return Application_Model_TypeNotification_Row
+     * @return Application_Model_Typenotification_Row
      */
     public function setId($Id)
     {
@@ -44,7 +45,7 @@ abstract class Application_Model_TypeNotification_Row_Abstract extends Zend_Db_T
      *
      * @param string $Libelle
      *
-     * @return Application_Model_TypeNotification_Row
+     * @return Application_Model_Typenotification_Row
      */
     public function setLibelle($Libelle)
     {
@@ -62,6 +63,30 @@ abstract class Application_Model_TypeNotification_Row_Abstract extends Zend_Db_T
         return $this->libelle;
     }
 
+    
+    /**
+     * Set value for 'description' field
+     *
+     * @param string $Description
+     *
+     * @return Application_Model_Typenotification_Row
+     */
+    public function setDescription($Description)
+    {
+    	$this->description = $Description;
+    	return $this;
+    }
+    
+    /**
+     * Get value of 'description' field
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+    	return $this->description;
+    }
+    
     /**
      * Get a list of rows of Notification.
      *

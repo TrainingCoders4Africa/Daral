@@ -83,23 +83,23 @@ abstract class Application_Model_Region_Row_Abstract extends Zend_Db_Table_Row_A
     }
 
     /**
-     * Get a list of rows of RegionStatAnimal.
+     * Get a list of rows of Regionstatanimal.
      *
-     * @return Application_Model_RegionStatAnimal_Rowset
+     * @return Application_Model_Regionstatanimal_Rowset
      */
-    public function getRegionStatAnimalRowsByFkRegionName()
+    public function getRegionstatanimalRowsByFkRegionName()
     {
-        return $this->findDependentRowset('Application_Model_RegionStatAnimal_DbTable', 'fk_region_name');
+        return $this->findDependentRowset('Application_Model_Regionstatanimal_DbTable', 'fk_region_name');
     }
 
     /**
-     * Get a list of rows of RegionStatFarmer.
+     * Get a list of rows of Regionstatfarmer.
      *
-     * @return Application_Model_RegionStatFarmer_Rowset
+     * @return Application_Model_Regionstatfarmer_Rowset
      */
-    public function getRegionStatFarmerRowsByFkRegionName()
+    public function getRegionstatfarmerRowsByFkRegionName()
     {
-        return $this->findDependentRowset('Application_Model_RegionStatFarmer_DbTable', 'fk_region_name');
+        return $this->findDependentRowset('Application_Model_Regionstatfarmer_DbTable', 'fk_region_name');
     }
     
     /**

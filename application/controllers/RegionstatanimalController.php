@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table role_users
+ * Controller for table regionstatanimal
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class RoleUsersController extends Zend_Controller_Action
+class RegionstatanimalController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class RoleUsersController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableRoleUsers = new Application_Model_RoleUsers_DbTable();
-        $gridSelect = $tableRoleUsers->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableRegionstatanimal = new Application_Model_Regionstatanimal_DbTable();
+        $gridSelect = $tableRegionstatanimal->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class RoleUsersController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditRoleUsers();
+        $form = new Application_Form_EditRegionstatanimal();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableRoleUsers = new Application_Model_RoleUsers_DbTable();
-                $tableRoleUsers->insert($values);
+                $tableRegionstatanimal = new Application_Model_Regionstatanimal_DbTable();
+                $tableRegionstatanimal->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class RoleUsersController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableRoleUsers = new Application_Model_RoleUsers_DbTable();
-        $form = new Application_Form_EditRoleUsers();
+        $tableRegionstatanimal = new Application_Model_Regionstatanimal_DbTable();
+        $form = new Application_Form_EditRegionstatanimal();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableRoleUsers->find($id)->current();
+        $row = $tableRegionstatanimal->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class RoleUsersController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableRoleUsers->update($values, $where);
+                $tableRegionstatanimal->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class RoleUsersController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableRoleUsers = new Application_Model_RoleUsers_DbTable();
-            $tableRoleUsers->deleteMultipleIds($ids);
+            $tableRegionstatanimal = new Application_Model_Regionstatanimal_DbTable();
+            $tableRegionstatanimal->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

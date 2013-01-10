@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Definition class for table daral_stat_farmer.
+ * Definition class for table daralstatfarmer.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,18 +9,18 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_DaralStatFarmer_Row createRow(array $data, string $defaultSource = null)
- * @method Application_Model_DaralStatFarmer_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
- * @method Application_Model_DaralStatFarmer_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
- * @method Application_Model_DaralStatFarmer_Rowset find()
+ * @method Application_Model_Daralstatfarmer_Row createRow(array $data, string $defaultSource = null)
+ * @method Application_Model_Daralstatfarmer_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
+ * @method Application_Model_Daralstatfarmer_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
+ * @method Application_Model_Daralstatfarmer_Rowset find()
  *
  */
-abstract class Application_Model_DaralStatFarmer_DbTable_Abstract extends Zend_Db_Table_Abstract
+abstract class Application_Model_Daralstatfarmer_DbTable_Abstract extends Zend_Db_Table_Abstract
 {
     /**
      * @var string
      */
-    protected $_name = 'daral_stat_farmer';
+    protected $_name = 'daralstatfarmer';
 
     /**
      * @var array
@@ -49,12 +49,12 @@ abstract class Application_Model_DaralStatFarmer_DbTable_Abstract extends Zend_D
     /**
      * @var string
      */
-    protected $_rowClass = 'Application_Model_DaralStatFarmer_Row';
+    protected $_rowClass = 'Application_Model_Daralstatfarmer_Row';
 
     /**
      * @var string
      */
-    protected $_rowsetClass = 'Application_Model_DaralStatFarmer_Rowset';
+    protected $_rowsetClass = 'Application_Model_Daralstatfarmer_Rowset';
 
     /**
      * Get the table name
@@ -69,7 +69,7 @@ abstract class Application_Model_DaralStatFarmer_DbTable_Abstract extends Zend_D
     /**
      * Create a row object with default values
      *
-     * @return Application_Model_DaralStatFarmer_Row
+     * @return Application_Model_Daralstatfarmer_Row
      */
     public function createDefaultRow()
     {

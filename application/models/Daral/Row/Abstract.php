@@ -97,23 +97,23 @@ abstract class Application_Model_Daral_Row_Abstract extends Zend_Db_Table_Row_Ab
     }
 
     /**
-     * Get a list of rows of DaralStatAnimal.
+     * Get a list of rows of Daralstatanimal.
      *
-     * @return Application_Model_DaralStatAnimal_Rowset
+     * @return Application_Model_Daralstatanimal_Rowset
      */
-    public function getDaralStatAnimalRowsByFkDaralName()
+    public function getDaralstatanimalRowsByFkDaralName()
     {
-        return $this->findDependentRowset('Application_Model_DaralStatAnimal_DbTable', 'fk_daral_name');
+        return $this->findDependentRowset('Application_Model_Daralstatanimal_DbTable', 'fk_daral_name');
     }
 
     /**
-     * Get a list of rows of DaralStatFarmer.
+     * Get a list of rows of Daralstatfarmer.
      *
-     * @return Application_Model_DaralStatFarmer_Rowset
+     * @return Application_Model_Daralstatfarmer_Rowset
      */
-    public function getDaralStatFarmerRowsByFkDaralName()
+    public function getDaralstatfarmerRowsByFkDaralName()
     {
-        return $this->findDependentRowset('Application_Model_DaralStatFarmer_DbTable', 'fk_daral_name');
+        return $this->findDependentRowset('Application_Model_Daralstatfarmer_DbTable', 'fk_daral_name');
     }
 
     /**

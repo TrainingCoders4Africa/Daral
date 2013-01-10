@@ -20,9 +20,10 @@ class Application_Form_EditNotification extends Zend_Form
         );
 
         $tableFarmer = new Application_Model_Farmer_DbTable();
+        $tableUsers = new Application_Model_Users_DbTable();
         $this->addElement(
             $this->createElement('select', 'id_farmer')
-                ->setLabel('Id Farmer')
+                ->setLabel('Eleveur')
                 ->setMultiOptions(array("" => "- - Select - -") + $tableFarmer->fetchPairs())
                 ->setRequired(true)
         );
@@ -30,7 +31,7 @@ class Application_Form_EditNotification extends Zend_Form
         $tableLocalite = new Application_Model_Localite_DbTable();
         $this->addElement(
             $this->createElement('select', 'id_localite')
-                ->setLabel('Id Localite')
+                ->setLabel('Localite')
                 ->setMultiOptions(array("" => "- - Select - -") + $tableLocalite->fetchPairs())
                 ->setRequired(true)
         );
@@ -43,10 +44,10 @@ class Application_Form_EditNotification extends Zend_Form
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
-        $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
+        $tableTypenotification = new Application_Model_Typenotification_DbTable();
         $this->addElement(
             $this->createElement('select', 'type')
-                ->setLabel('Type')->setMultiOptions(array("" => "- - Select - -") + $tableTypeNotification->fetchPairs())
+                ->setLabel('Type')->setMultiOptions(array("" => "- - Select - -") + $tableTypenotification->fetchPairs())
                 ->setRequired(true)
         );
 

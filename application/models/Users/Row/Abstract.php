@@ -169,13 +169,13 @@ abstract class Application_Model_Users_Row_Abstract extends Zend_Db_Table_Row_Ab
     }
 
     /**
-     * Get a row of RoleUsers.
+     * Get a row of Roleusers.
      *
-     * @return Application_Model_RoleUsers_Row
+     * @return Application_Model_Roleusers_Row
      */
-    public function getRoleUsersRowByRole()
+    public function getRoleusersRowByRole()
     {
-        return $this->findParentRow('Application_Model_RoleUsers_DbTable', 'role');
+        return $this->findParentRow('Application_Model_Roleusers_DbTable', 'role');
     }
 
     /**

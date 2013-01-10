@@ -33,8 +33,8 @@ abstract class Application_Model_Daral_DbTable_Abstract extends Zend_Db_Table_Ab
      * @var array
      */
     protected $_dependentTables = array (
-  0 => 'Application_Model_DaralStatAnimal_DbTable',
-  1 => 'Application_Model_DaralStatFarmer_DbTable',
+  0 => 'Application_Model_Daralstatanimal_DbTable',
+  1 => 'Application_Model_Daralstatfarmer_DbTable',
   2 => 'Application_Model_Farmer_DbTable',
   3 => 'Application_Model_Farmer_DbTable',
   4 => 'Application_Model_Users_DbTable',

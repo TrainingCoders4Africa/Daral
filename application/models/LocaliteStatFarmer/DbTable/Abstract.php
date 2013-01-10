@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Definition class for table localite_stat_farmer.
+ * Definition class for table localitestatfarmer.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,18 +9,18 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_LocaliteStatFarmer_Row createRow(array $data, string $defaultSource = null)
- * @method Application_Model_LocaliteStatFarmer_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
- * @method Application_Model_LocaliteStatFarmer_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
- * @method Application_Model_LocaliteStatFarmer_Rowset find()
+ * @method Application_Model_Localitestatfarmer_Row createRow(array $data, string $defaultSource = null)
+ * @method Application_Model_Localitestatfarmer_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
+ * @method Application_Model_Localitestatfarmer_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
+ * @method Application_Model_Localitestatfarmer_Rowset find()
  *
  */
-abstract class Application_Model_LocaliteStatFarmer_DbTable_Abstract extends Zend_Db_Table_Abstract
+abstract class Application_Model_Localitestatfarmer_DbTable_Abstract extends Zend_Db_Table_Abstract
 {
     /**
      * @var string
      */
-    protected $_name = 'localite_stat_farmer';
+    protected $_name = 'localitestatfarmer';
 
     /**
      * @var array
@@ -49,12 +49,12 @@ abstract class Application_Model_LocaliteStatFarmer_DbTable_Abstract extends Zen
     /**
      * @var string
      */
-    protected $_rowClass = 'Application_Model_LocaliteStatFarmer_Row';
+    protected $_rowClass = 'Application_Model_Localitestatfarmer_Row';
 
     /**
      * @var string
      */
-    protected $_rowsetClass = 'Application_Model_LocaliteStatFarmer_Rowset';
+    protected $_rowsetClass = 'Application_Model_Localitestatfarmer_Rowset';
 
     /**
      * Get the table name
@@ -69,7 +69,7 @@ abstract class Application_Model_LocaliteStatFarmer_DbTable_Abstract extends Zen
     /**
      * Create a row object with default values
      *
-     * @return Application_Model_LocaliteStatFarmer_Row
+     * @return Application_Model_Localitestatfarmer_Row
      */
     public function createDefaultRow()
     {

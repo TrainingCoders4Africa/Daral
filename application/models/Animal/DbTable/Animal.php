@@ -14,11 +14,11 @@ class Application_Model_Animal_DbTable_Animal extends Zend_Db_Table_Abstract
 {
 	protected $_name = 'animal';
 	
-	public function addAnimal($id_farmer,$animal_type)
+	public function addAnimal($id_farmer,$animaltype)
 	{
 		$data= array(
 				'fk_id_farmer'=>$id_farmer,
-				'fk_animal_type'=>$animal_type,
+				'fk_animaltype'=>$animaltype,
 				'photo_left'=>"VUE GAUCHE",
 				'photo_right'=>"VUE DROITE",
 				'photo_front'=>"VUE FACE",

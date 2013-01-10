@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Rowset definition class for table type_notification.
+ * Rowset definition class for table typenotification.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_TypeNotification_Rowset extends Application_Model_TypeNotification_Rowset_Abstract
+class Application_Model_Typenotification_Rowset extends Application_Model_Typenotification_Rowset_Abstract
 {
     // write your custom functions here
 }

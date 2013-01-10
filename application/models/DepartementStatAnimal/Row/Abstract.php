@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Row definition class for table departement_stat_animal.
+ * Row definition class for table departementstatanimal.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,21 +9,21 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_DepartementStatAnimal_Row setFromArray($data)
+ * @method Application_Model_Departementstatanimal_Row setFromArray($data)
  *
  * @property integer $id
  * @property string $fk_departement_name
- * @property string $fk_animal_type
- * @property integer $total_animal_type
+ * @property string $fk_animaltype
+ * @property integer $total_animaltype
  */
-abstract class Application_Model_DepartementStatAnimal_Row_Abstract extends Zend_Db_Table_Row_Abstract
+abstract class Application_Model_Departementstatanimal_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
     /**
      * Set value for 'id' field
      *
      * @param integer $Id
      *
-     * @return Application_Model_DepartementStatAnimal_Row
+     * @return Application_Model_Departementstatanimal_Row
      */
     public function setId($Id)
     {
@@ -46,7 +46,7 @@ abstract class Application_Model_DepartementStatAnimal_Row_Abstract extends Zend
      *
      * @param string $FkDepartementName
      *
-     * @return Application_Model_DepartementStatAnimal_Row
+     * @return Application_Model_Departementstatanimal_Row
      */
     public function setFkDepartementName($FkDepartementName)
     {
@@ -65,59 +65,59 @@ abstract class Application_Model_DepartementStatAnimal_Row_Abstract extends Zend
     }
 
     /**
-     * Set value for 'fk_animal_type' field
+     * Set value for 'fk_animaltype' field
      *
-     * @param string $FkAnimalType
+     * @param string $FkAnimaltype
      *
-     * @return Application_Model_DepartementStatAnimal_Row
+     * @return Application_Model_Departementstatanimal_Row
      */
-    public function setFkAnimalType($FkAnimalType)
+    public function setFkAnimaltype($FkAnimaltype)
     {
-        $this->fk_animal_type = $FkAnimalType;
+        $this->fk_animaltype = $FkAnimaltype;
         return $this;
     }
 
     /**
-     * Get value of 'fk_animal_type' field
+     * Get value of 'fk_animaltype' field
      *
      * @return string
      */
-    public function getFkAnimalType()
+    public function getFkAnimaltype()
     {
-        return $this->fk_animal_type;
+        return $this->fk_animaltype;
     }
 
     /**
-     * Set value for 'total_animal_type' field
+     * Set value for 'total_animaltype' field
      *
-     * @param integer $TotalAnimalType
+     * @param integer $TotalAnimaltype
      *
-     * @return Application_Model_DepartementStatAnimal_Row
+     * @return Application_Model_Departementstatanimal_Row
      */
-    public function setTotalAnimalType($TotalAnimalType)
+    public function setTotalAnimaltype($TotalAnimaltype)
     {
-        $this->total_animal_type = $TotalAnimalType;
+        $this->total_animaltype = $TotalAnimaltype;
         return $this;
     }
 
     /**
-     * Get value of 'total_animal_type' field
+     * Get value of 'total_animaltype' field
      *
      * @return integer
      */
-    public function getTotalAnimalType()
+    public function getTotalAnimaltype()
     {
-        return $this->total_animal_type;
+        return $this->total_animaltype;
     }
 
     /**
-     * Get a row of AnimalType.
+     * Get a row of Animaltype.
      *
-     * @return Application_Model_AnimalType_Row
+     * @return Application_Model_Animaltype_Row
      */
-    public function getAnimalTypeRowByFkAnimalType()
+    public function getAnimaltypeRowByFkAnimaltype()
     {
-        return $this->findParentRow('Application_Model_AnimalType_DbTable', 'fk_animal_type');
+        return $this->findParentRow('Application_Model_Animaltype_DbTable', 'fk_animaltype');
     }
 
     /**

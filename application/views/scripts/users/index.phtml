@@ -1,5 +1,5 @@
 <?php
-$tableRoleUsers = new Application_Model_RoleUsers_DbTable();
+$tableRoleusers = new Application_Model_Roleusers_DbTable();
 $tableDaral = new Application_Model_Daral_DbTable();
 ?>
 
@@ -86,7 +86,7 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 <?php
-    echo $this->formSelect('role', $this->paramrole, array('onchange' => 'updateFilters(\'role\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableRoleUsers->fetchPairs());
+    echo $this->formSelect('role', $this->paramrole, array('onchange' => 'updateFilters(\'role\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableRoleusers->fetchPairs());
 ?>
             </th>
             <th<?php if ('user_daral' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
@@ -132,7 +132,7 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 <?php
-    echo $this->formSelect('role', $this->paramrole, array('onchange' => 'updateFilters(\'role\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableRoleUsers->fetchPairs());
+    echo $this->formSelect('role', $this->paramrole, array('onchange' => 'updateFilters(\'role\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableRoleusers->fetchPairs());
 ?>
             </th>
             <th<?php if ('user_daral' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
@@ -154,7 +154,7 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td><?php echo $row->username; ?></td>
             <td><?php echo $row->password; ?></td>
             <td><?php echo $row->date_created; ?></td>
-            <td><?php     $linkedRow = $tableRoleUsers->find($row->role)->current();
+            <td><?php     $linkedRow = $tableRoleusers->find($row->role)->current();
     if ($linkedRow) {
         echo $linkedRow->getZodekenAutoLabel();
     } else {

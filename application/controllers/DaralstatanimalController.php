@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table type_notification
+ * Controller for table daralstatanimal
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class TypeNotificationController extends Zend_Controller_Action
+class DaralstatanimalController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class TypeNotificationController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
-        $gridSelect = $tableTypeNotification->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableDaralstatanimal = new Application_Model_Daralstatanimal_DbTable();
+        $gridSelect = $tableDaralstatanimal->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,16 +41,16 @@ class TypeNotificationController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditTypeNotification();
+        $form = new Application_Form_EditDaralstatanimal();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
-                $tableTypeNotification->insert($values);
+                $tableDaralstatanimal = new Application_Model_Daralstatanimal_DbTable();
+                $tableDaralstatanimal->insert($values);
                     
-                $this->_helper->redirector->gotoUrl("/notification/create");
+                $this->_helper->redirector('index');
                 exit;
             }
         }
@@ -60,11 +60,11 @@ class TypeNotificationController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
-        $form = new Application_Form_EditTypeNotification();
+        $tableDaralstatanimal = new Application_Model_Daralstatanimal_DbTable();
+        $form = new Application_Form_EditDaralstatanimal();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableTypeNotification->find($id)->current();
+        $row = $tableDaralstatanimal->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class TypeNotificationController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableTypeNotification->update($values, $where);
+                $tableDaralstatanimal->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class TypeNotificationController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
-            $tableTypeNotification->deleteMultipleIds($ids);
+            $tableDaralstatanimal = new Application_Model_Daralstatanimal_DbTable();
+            $tableDaralstatanimal->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

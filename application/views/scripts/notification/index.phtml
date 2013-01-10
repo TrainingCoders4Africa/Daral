@@ -1,7 +1,7 @@
 <?php
 $tableFarmer = new Application_Model_Farmer_DbTable();
 $tableLocalite = new Application_Model_Localite_DbTable();
-$tableTypeNotification = new Application_Model_TypeNotification_DbTable();
+$tableTypenotification = new Application_Model_Typenotification_DbTable();
 $tableUsers = new Application_Model_Users_DbTable();
 ?>
 
@@ -41,9 +41,9 @@ function updateFilters(paramName, paramValue)
 </div>
 
         <ul class="breadcrumb">
-            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Notifications</a> <span class="divider">/</span></li>
-            <li class="active">Historique</li>
+            <li><a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>" class="black" >Liste des Notifications</a> <span class="divider">/</span></li>
+            <li class="active">Nouvelle Notification</li>
         </ul>
 
 <div
@@ -114,7 +114,7 @@ function updateFilters(paramName, paramValue)
 			<a
 				href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
 			</span></th>
-			<th>Actions</th>
+		<?php if ($tableUsers->isAdmin() === TRUE){ ?>	<th>Actions</th><?php }?>
 		</tr>
 	</thead>
 
@@ -137,20 +137,22 @@ function updateFilters(paramName, paramValue)
 				echo $linkedRow->id_localite, ' (unlinked)';
 			} ?></td>
 			<td><?php echo $row->date; ?></td>
-			<td><?php     $linkedRow = $tableTypeNotification->find($row->type)->current();
+			<td><?php     $linkedRow = $tableTypenotification->find($row->type)->current();
 			if ($linkedRow) {
 				echo $linkedRow->getZodekenAutoLabel();
 			} else {
 				echo $linkedRow->type, ' (unlinked)';
 			} ?></td>
+			<?php if ($tableUsers->isAdmin() === TRUE){ ?>
 			<td style="text-align: left"><a title="Envoyer sms"
 				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'sendsms', 'id' => $row->id, 'id_localite' => $row->id_localite, 'id_farmer' => $row->id_farmer, 'type' => $row->type), null, true); ?>"><i
-				class="icon-mail-open"></i></a> - <a title="Modifier"
+				class="icon-mail-open"></i>
+				</a>- <a title="Modifier"
 				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
 				class="icon-pencil"></i></a> - <a title="Archiver"
 				onclick="return confirm('Confirmez la suppression!');"
 				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
-				class="icon-trash"></i></a></td>
+				class="icon-trash"></i></a></td><?php }?>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table localite_stat_animal
+ * Controller for table departementstatanimal
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class LocaliteStatAnimalController extends Zend_Controller_Action
+class DepartementstatanimalController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class LocaliteStatAnimalController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableLocaliteStatAnimal = new Application_Model_LocaliteStatAnimal_DbTable();
-        $gridSelect = $tableLocaliteStatAnimal->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableDepartementstatanimal = new Application_Model_Departementstatanimal_DbTable();
+        $gridSelect = $tableDepartementstatanimal->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class LocaliteStatAnimalController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditLocaliteStatAnimal();
+        $form = new Application_Form_EditDepartementstatanimal();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableLocaliteStatAnimal = new Application_Model_LocaliteStatAnimal_DbTable();
-                $tableLocaliteStatAnimal->insert($values);
+                $tableDepartementstatanimal = new Application_Model_Departementstatanimal_DbTable();
+                $tableDepartementstatanimal->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class LocaliteStatAnimalController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableLocaliteStatAnimal = new Application_Model_LocaliteStatAnimal_DbTable();
-        $form = new Application_Form_EditLocaliteStatAnimal();
+        $tableDepartementstatanimal = new Application_Model_Departementstatanimal_DbTable();
+        $form = new Application_Form_EditDepartementstatanimal();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableLocaliteStatAnimal->find($id)->current();
+        $row = $tableDepartementstatanimal->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class LocaliteStatAnimalController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableLocaliteStatAnimal->update($values, $where);
+                $tableDepartementstatanimal->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class LocaliteStatAnimalController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableLocaliteStatAnimal = new Application_Model_LocaliteStatAnimal_DbTable();
-            $tableLocaliteStatAnimal->deleteMultipleIds($ids);
+            $tableDepartementstatanimal = new Application_Model_Departementstatanimal_DbTable();
+            $tableDepartementstatanimal->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

@@ -34,8 +34,8 @@ abstract class Application_Model_Localite_DbTable_Abstract extends Zend_Db_Table
      */
     protected $_dependentTables = array (
   0 => 'Application_Model_Daral_DbTable',
-  1 => 'Application_Model_LocaliteStatAnimal_DbTable',
-  2 => 'Application_Model_LocaliteStatFarmer_DbTable',
+  1 => 'Application_Model_Localitestatanimal_DbTable',
+  2 => 'Application_Model_Localitestatfarmer_DbTable',
   3 => 'Application_Model_Notification_DbTable',
 );
 

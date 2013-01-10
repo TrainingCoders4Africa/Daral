@@ -14,7 +14,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
            
 			$farmer = new Application_Model_Farmer_DbTable_Farmer();
 			$user = new Application_Model_Users_DbTable_Users();
-			 
+			$tableUsers = new Application_Model_Users_DbTable();
 			
 			$daral_current = $user->getDaral(); 
 			
@@ -29,8 +29,9 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $notification=$this->view->baseUrl().'/notification';
 		   $media=$this->view->baseUrl().'/media';			
 		   $veterinaire=$this->view->baseUrl().'/veterinaire';
-		   
-            return '
+		   $animal=$this->view->baseUrl().'/animaltype';
+		   $typenotification=$this->view->baseUrl().'/typenotification';
+            $html = '
 			<div class="navbar-inner" >
                 <ul class="nav pull-right">
                     
@@ -57,14 +58,53 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
     <!----------- TABLEAU DE BORD ------------>
     <div class="sidebar-nav">
         <a href="'.$dash.'" class="nav-header"><i class="icon-th-large"></i>Tableau de bord</a>
-    <!------------------END------------------->
+    <!------------------END------------------->';
         
-            
-   <!--------------MON DARAL------------------>
-
-        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-up" id="chevron-mon-daral" style="margin-left:8.3em"></i></a>
-        <ul id="mon-daral-menu" class="nav nav-list in collapse">
-
+            if ($tableUsers->isAdmin())
+            {
+            	$html.='
+            			<!---------------CONSOLE ADMIN---------------->
+        <a href="#admin-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-cog"></i>Administration<i class="icon-chevron-down" id="chevron-admin" style="margin-left: 6.5em"></i></a>
+         <ul id="admin-menu" class="nav nav-list collapse">
+         <script type="text/javascript">
+        $("a").click(function(){
+		  $(this).find("i#chevron-admin").toggleClass("icon-chevron-down icon-chevron-up");
+		  
+		  });
+        </script>
+               
+            			
+            <li> <a href="#animal-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-animal"></i>Type Animal</a></li>
+              <ul id="animal-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-animal").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$animal.'">Liste</a></li>
+               <li ><a href="'.$animal.'/create">Ajouter</a></li>
+             </ul>
+             
+            <li ><a href="#type-notification-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-chevron-right" id="chevron-type-notification"></i>Type Notification</a></li>
+             <ul id="type-notification-menu" class="nav nav-list collapse">
+             <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-type-notification").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$typenotification.'">Liste</a></li>
+               <li><a href="'.$typenotification.'/create">Ajouter</a></li>
+             </ul>
+               		
+         </ul>
+   <!----------------END----------------------->';
+            }	
+            	
+   $html.='<!--------------MON DARAL------------------>
+        <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-down" id="chevron-mon-daral" style="margin-left:8.3em"></i></a>
+        <ul id="mon-daral-menu" class="nav nav-list collapse">
         
         <script type="text/javascript">
         $("a").click(function(){
@@ -165,6 +205,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
             
             	
                 ';
+            return $html;
 			}
 		}  
 

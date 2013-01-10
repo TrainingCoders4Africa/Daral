@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Definition class for table departement_stat_animal.
+ * Definition class for table departementstatanimal.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  */
-class Application_Model_DepartementStatAnimal_DbTable extends Application_Model_DepartementStatAnimal_DbTable_Abstract
+class Application_Model_Departementstatanimal_DbTable extends Application_Model_Departementstatanimal_DbTable_Abstract
 {
     // write your custom functions here
 }

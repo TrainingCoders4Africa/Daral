@@ -1,6 +1,6 @@
 <?php
 $tableFarmer = new Application_Model_Farmer_DbTable();
-$tableAnimalType = new Application_Model_AnimalType_DbTable();
+$tableAnimaltype = new Application_Model_Animaltype_DbTable();
 ?>
 
 <script type="text/javascript">
@@ -55,7 +55,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => '-------------Tout------------',
   'fk_id_farmer' => 'Identifiant Eleveur',
-  'fk_animal_type' => 'Type d\'animal',
+  'fk_animaltype' => 'Type d\'animal',
   'photo_left' => 'VUE GAUCHE',
   'photo_right' => 'VUE DROITE',
   'photo_front' => 'VUE FACE',
@@ -83,10 +83,10 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
-            <th<?php if ('fk_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('fk_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Type d'animal
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
             </th>
             <th<?php if ('photo_left' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
@@ -117,7 +117,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td align="right"><?php echo $row->id; ?></td>
             <td><?php echo $row->fk_id_farmer; ?></td>
-            <td><?php echo $row->fk_animal_type; ?></td>
+            <td><?php echo $row->fk_animaltype; ?></td>
             <td><?php echo $row->photo_left; ?></td>
             <td><?php echo $row->photo_right; ?></td>
             <td><?php echo $row->photo_front; ?></td>

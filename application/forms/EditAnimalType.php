@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table animal_type.
+ * Form definition for table animaltype.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditAnimalType extends Zend_Form
+class Application_Form_EditAnimaltype extends Zend_Form
 {
     public function init()
     {
@@ -28,11 +28,6 @@ class Application_Form_EditAnimalType extends Zend_Form
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
-        $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Save')
-                ->setAttrib('type', 'submit')
-        );
 
         parent::init();
     }

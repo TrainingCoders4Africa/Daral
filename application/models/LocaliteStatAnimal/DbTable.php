@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Definition class for table localite_stat_animal.
+ * Definition class for table localitestatanimal.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  */
-class Application_Model_LocaliteStatAnimal_DbTable extends Application_Model_LocaliteStatAnimal_DbTable_Abstract
+class Application_Model_Localitestatanimal_DbTable extends Application_Model_Localitestatanimal_DbTable_Abstract
 {
     // write your custom functions here
 }

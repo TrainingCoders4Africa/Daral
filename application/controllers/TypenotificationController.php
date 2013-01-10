@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table daral_stat_farmer
+ * Controller for table typenotification
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class DaralStatFarmerController extends Zend_Controller_Action
+class TypenotificationController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class DaralStatFarmerController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableDaralStatFarmer = new Application_Model_DaralStatFarmer_DbTable();
-        $gridSelect = $tableDaralStatFarmer->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableTypenotification = new Application_Model_Typenotification_DbTable();
+        $gridSelect = $tableTypenotification->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,16 +41,16 @@ class DaralStatFarmerController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditDaralStatFarmer();
+        $form = new Application_Form_EditTypenotification();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableDaralStatFarmer = new Application_Model_DaralStatFarmer_DbTable();
-                $tableDaralStatFarmer->insert($values);
+                $tableTypenotification = new Application_Model_Typenotification_DbTable();
+                $tableTypenotification->insert($values);
                     
-                $this->_helper->redirector('index');
+                $this->_helper->redirector->gotoUrl("/typenotification");
                 exit;
             }
         }
@@ -60,11 +60,11 @@ class DaralStatFarmerController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableDaralStatFarmer = new Application_Model_DaralStatFarmer_DbTable();
-        $form = new Application_Form_EditDaralStatFarmer();
+        $tableTypenotification = new Application_Model_Typenotification_DbTable();
+        $form = new Application_Form_EditTypenotification();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableDaralStatFarmer->find($id)->current();
+        $row = $tableTypenotification->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class DaralStatFarmerController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableDaralStatFarmer->update($values, $where);
+                $tableTypenotification->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class DaralStatFarmerController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableDaralStatFarmer = new Application_Model_DaralStatFarmer_DbTable();
-            $tableDaralStatFarmer->deleteMultipleIds($ids);
+            $tableTypenotification = new Application_Model_Typenotification_DbTable();
+            $tableTypenotification->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

@@ -141,23 +141,23 @@ abstract class Application_Model_Localite_Row_Abstract extends Zend_Db_Table_Row
     }
 
     /**
-     * Get a list of rows of LocaliteStatAnimal.
+     * Get a list of rows of Localitestatanimal.
      *
-     * @return Application_Model_LocaliteStatAnimal_Rowset
+     * @return Application_Model_Localitestatanimal_Rowset
      */
-    public function getLocaliteStatAnimalRowsByFkLocaliteName()
+    public function getLocalitestatanimalRowsByFkLocaliteName()
     {
-        return $this->findDependentRowset('Application_Model_LocaliteStatAnimal_DbTable', 'fk_localite_name');
+        return $this->findDependentRowset('Application_Model_Localitestatanimal_DbTable', 'fk_localite_name');
     }
 
     /**
-     * Get a list of rows of LocaliteStatFarmer.
+     * Get a list of rows of Localitestatfarmer.
      *
-     * @return Application_Model_LocaliteStatFarmer_Rowset
+     * @return Application_Model_Localitestatfarmer_Rowset
      */
-    public function getLocaliteStatFarmerRowsByFkLocaliteName()
+    public function getLocalitestatfarmerRowsByFkLocaliteName()
     {
-        return $this->findDependentRowset('Application_Model_LocaliteStatFarmer_DbTable', 'fk_localite_name');
+        return $this->findDependentRowset('Application_Model_Localitestatfarmer_DbTable', 'fk_localite_name');
     }
 
     /**

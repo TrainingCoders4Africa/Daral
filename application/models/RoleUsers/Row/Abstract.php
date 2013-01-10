@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Row definition class for table role_users.
+ * Row definition class for table roleusers.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,19 +9,19 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_RoleUsers_Row setFromArray($data)
+ * @method Application_Model_Roleusers_Row setFromArray($data)
  *
  * @property integer $id
  * @property string $description
  */
-abstract class Application_Model_RoleUsers_Row_Abstract extends Zend_Db_Table_Row_Abstract
+abstract class Application_Model_Roleusers_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
     /**
      * Set value for 'id' field
      *
      * @param integer $Id
      *
-     * @return Application_Model_RoleUsers_Row
+     * @return Application_Model_Roleusers_Row
      */
     public function setId($Id)
     {
@@ -44,7 +44,7 @@ abstract class Application_Model_RoleUsers_Row_Abstract extends Zend_Db_Table_Ro
      *
      * @param string $Description
      *
-     * @return Application_Model_RoleUsers_Row
+     * @return Application_Model_Roleusers_Row
      */
     public function setDescription($Description)
     {

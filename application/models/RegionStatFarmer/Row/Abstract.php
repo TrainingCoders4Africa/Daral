@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Row definition class for table region_stat_farmer.
+ * Row definition class for table regionstatfarmer.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,20 +9,20 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_RegionStatFarmer_Row setFromArray($data)
+ * @method Application_Model_Regionstatfarmer_Row setFromArray($data)
  *
  * @property integer $id
  * @property string $fk_region_name
  * @property integer $total_farmer
  */
-abstract class Application_Model_RegionStatFarmer_Row_Abstract extends Zend_Db_Table_Row_Abstract
+abstract class Application_Model_Regionstatfarmer_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
     /**
      * Set value for 'id' field
      *
      * @param integer $Id
      *
-     * @return Application_Model_RegionStatFarmer_Row
+     * @return Application_Model_Regionstatfarmer_Row
      */
     public function setId($Id)
     {
@@ -45,7 +45,7 @@ abstract class Application_Model_RegionStatFarmer_Row_Abstract extends Zend_Db_T
      *
      * @param string $FkRegionName
      *
-     * @return Application_Model_RegionStatFarmer_Row
+     * @return Application_Model_Regionstatfarmer_Row
      */
     public function setFkRegionName($FkRegionName)
     {
@@ -68,7 +68,7 @@ abstract class Application_Model_RegionStatFarmer_Row_Abstract extends Zend_Db_T
      *
      * @param integer $TotalFarmer
      *
-     * @return Application_Model_RegionStatFarmer_Row
+     * @return Application_Model_Regionstatfarmer_Row
      */
     public function setTotalFarmer($TotalFarmer)
     {

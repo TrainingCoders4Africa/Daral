@@ -97,23 +97,23 @@ abstract class Application_Model_Departement_Row_Abstract extends Zend_Db_Table_
     }
 
     /**
-     * Get a list of rows of DepartementStatAnimal.
+     * Get a list of rows of Departementstatanimal.
      *
-     * @return Application_Model_DepartementStatAnimal_Rowset
+     * @return Application_Model_Departementstatanimal_Rowset
      */
-    public function getDepartementStatAnimalRowsByFkDepartementName()
+    public function getDepartementstatanimalRowsByFkDepartementName()
     {
-        return $this->findDependentRowset('Application_Model_DepartementStatAnimal_DbTable', 'fk_departement_name');
+        return $this->findDependentRowset('Application_Model_Departementstatanimal_DbTable', 'fk_departement_name');
     }
 
     /**
-     * Get a list of rows of DepartementStatFarmer.
+     * Get a list of rows of Departementstatfarmer.
      *
-     * @return Application_Model_DepartementStatFarmer_Rowset
+     * @return Application_Model_Departementstatfarmer_Rowset
      */
-    public function getDepartementStatFarmerRowsByFkDepartementName()
+    public function getDepartementstatfarmerRowsByFkDepartementName()
     {
-        return $this->findDependentRowset('Application_Model_DepartementStatFarmer_DbTable', 'fk_departement_name');
+        return $this->findDependentRowset('Application_Model_Departementstatfarmer_DbTable', 'fk_departement_name');
     }
 
     /**

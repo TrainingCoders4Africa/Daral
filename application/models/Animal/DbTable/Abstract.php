@@ -39,9 +39,9 @@ abstract class Application_Model_Animal_DbTable_Abstract extends Zend_Db_Table_A
      * @var array
      */
     protected $_referenceMap = array(        
-        'fk_animal_type' => array(
-            'columns' => 'fk_animal_type',
-            'refTableClass' => 'Application_Model_AnimalType_DbTable',
+        'fk_animaltype' => array(
+            'columns' => 'fk_animaltype',
+            'refTableClass' => 'Application_Model_Animaltype_DbTable',
             'refColumns' => 'name'
         ),
 
@@ -82,7 +82,7 @@ abstract class Application_Model_Animal_DbTable_Abstract extends Zend_Db_Table_A
         return $this->createRow(array (
   'id' => NULL,
   'fk_id_farmer' => NULL,
-  'fk_animal_type' => NULL,
+  'fk_animaltype' => NULL,
   'photo_left' => NULL,
   'photo_right' => NULL,
   'photo_front' => NULL,
@@ -132,8 +132,8 @@ abstract class Application_Model_Animal_DbTable_Abstract extends Zend_Db_Table_A
             $select->where('fk_id_farmer = ?', $params['fk_id_farmer']);
         }
 
-        if (isset($params['fk_animal_type']) && !empty($params['fk_animal_type'])) {
-            $select->where('fk_animal_type = ?', $params['fk_animal_type']);
+        if (isset($params['fk_animaltype']) && !empty($params['fk_animaltype'])) {
+            $select->where('fk_animaltype = ?', $params['fk_animaltype']);
         }
 
         if (isset($params['photo_left']) && !empty($params['photo_left'])) {
@@ -159,8 +159,8 @@ abstract class Application_Model_Animal_DbTable_Abstract extends Zend_Db_Table_A
                 $searchWheres[] = $dbAdapter->quoteInto('fk_id_farmer LIKE ?', "%$keywords%");
             }
 
-            if ('all' === $searchMode || 'fk_animal_type' === $searchMode) {
-                $searchWheres[] = $dbAdapter->quoteInto('fk_animal_type LIKE ?', "%$keywords%");
+            if ('all' === $searchMode || 'fk_animaltype' === $searchMode) {
+                $searchWheres[] = $dbAdapter->quoteInto('fk_animaltype LIKE ?', "%$keywords%");
             }
 
             if ('all' === $searchMode || 'photo_left' === $searchMode) {

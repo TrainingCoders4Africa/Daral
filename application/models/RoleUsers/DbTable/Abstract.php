@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Definition class for table role_users.
+ * Definition class for table roleusers.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,18 +9,18 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_RoleUsers_Row createRow(array $data, string $defaultSource = null)
- * @method Application_Model_RoleUsers_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
- * @method Application_Model_RoleUsers_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
- * @method Application_Model_RoleUsers_Rowset find()
+ * @method Application_Model_Roleusers_Row createRow(array $data, string $defaultSource = null)
+ * @method Application_Model_Roleusers_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
+ * @method Application_Model_Roleusers_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
+ * @method Application_Model_Roleusers_Rowset find()
  *
  */
-abstract class Application_Model_RoleUsers_DbTable_Abstract extends Zend_Db_Table_Abstract
+abstract class Application_Model_Roleusers_DbTable_Abstract extends Zend_Db_Table_Abstract
 {
     /**
      * @var string
      */
-    protected $_name = 'role_users';
+    protected $_name = 'roleusers';
 
     /**
      * @var array
@@ -46,12 +46,12 @@ abstract class Application_Model_RoleUsers_DbTable_Abstract extends Zend_Db_Tabl
     /**
      * @var string
      */
-    protected $_rowClass = 'Application_Model_RoleUsers_Row';
+    protected $_rowClass = 'Application_Model_Roleusers_Row';
 
     /**
      * @var string
      */
-    protected $_rowsetClass = 'Application_Model_RoleUsers_Rowset';
+    protected $_rowsetClass = 'Application_Model_Roleusers_Rowset';
 
     /**
      * Get the table name
@@ -66,7 +66,7 @@ abstract class Application_Model_RoleUsers_DbTable_Abstract extends Zend_Db_Tabl
     /**
      * Create a row object with default values
      *
-     * @return Application_Model_RoleUsers_Row
+     * @return Application_Model_Roleusers_Row
      */
     public function createDefaultRow()
     {

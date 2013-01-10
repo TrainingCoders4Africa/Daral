@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table type_notification.
+ * Form definition for table typenotification.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditTypeNotification_Latest extends Zend_Form
+class Application_Form_EditTypenotification_Latest extends Zend_Form
 {
     public function init()
     {
@@ -27,6 +27,17 @@ class Application_Form_EditTypeNotification_Latest extends Zend_Form
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
                 ->addFilter(new Zend_Filter_StringTrim())
         );
+        
+        $this->addElement(
+        		$this->createElement('textarea', 'description')
+        		->setLabel('Description')
+        		->setAttrib('rows', '4')
+        		->setAttrib('cols', '8')
+        		->setAttrib("maxlength", 1000)
+        		->setRequired(true)
+        		->addValidator(new Zend_Validate_StringLength(array("max" => 1000)))
+        );
+        
 
         $this->addElement(
             $this->createElement('button', 'submit')

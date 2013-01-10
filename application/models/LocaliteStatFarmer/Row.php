@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Row definition class for table localite_stat_farmer.
+ * Row definition class for table localitestatfarmer.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_LocaliteStatFarmer_Row extends Application_Model_LocaliteStatFarmer_Row_Abstract
+class Application_Model_Localitestatfarmer_Row extends Application_Model_Localitestatfarmer_Row_Abstract
 {
     // write your custom functions here
 }

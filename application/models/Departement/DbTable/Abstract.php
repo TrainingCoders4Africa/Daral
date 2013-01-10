@@ -33,8 +33,8 @@ abstract class Application_Model_Departement_DbTable_Abstract extends Zend_Db_Ta
      * @var array
      */
     protected $_dependentTables = array (
-  0 => 'Application_Model_DepartementStatAnimal_DbTable',
-  1 => 'Application_Model_DepartementStatFarmer_DbTable',
+  0 => 'Application_Model_Departementstatanimal_DbTable',
+  1 => 'Application_Model_Departementstatfarmer_DbTable',
   2 => 'Application_Model_Localite_DbTable',
 );
 

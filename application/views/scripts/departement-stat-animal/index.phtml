@@ -1,6 +1,6 @@
 <?php
 $tableDepartement = new Application_Model_Departement_DbTable();
-$tableAnimalType = new Application_Model_AnimalType_DbTable();
+$tableAnimaltype = new Application_Model_Animaltype_DbTable();
 ?>
 
 <script type="text/javascript">
@@ -44,7 +44,7 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => 'All',
   'fk_departement_name' => 'Fk Departement Name',
-  'fk_animal_type' => 'Fk Animal Type',
+  'fk_animaltype' => 'Fk Animal Type',
 )); ?>
 <input type="submit" value="Go" />
 </div>
@@ -70,18 +70,18 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
     echo $this->formSelect('fk_departement_name', $this->paramfk_departement_name, array('onchange' => 'updateFilters(\'fk_departement_name\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableDepartement->fetchPairs());
 ?>
             </th>
-            <th<?php if ('fk_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('fk_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 Fk Animal Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 <?php
-    echo $this->formSelect('fk_animal_type', $this->paramfk_animal_type, array('onchange' => 'updateFilters(\'fk_animal_type\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableAnimalType->fetchPairs());
+    echo $this->formSelect('fk_animaltype', $this->paramfk_animaltype, array('onchange' => 'updateFilters(\'fk_animaltype\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableAnimaltype->fetchPairs());
 ?>
             </th>
-            <th<?php if ('total_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('total_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 Total Animal Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </th>
             <th>Actions</th>
@@ -104,18 +104,18 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
     echo $this->formSelect('fk_departement_name', $this->paramfk_departement_name, array('onchange' => 'updateFilters(\'fk_departement_name\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableDepartement->fetchPairs());
 ?>
             </th>
-            <th<?php if ('fk_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('fk_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 Fk Animal Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 <?php
-    echo $this->formSelect('fk_animal_type', $this->paramfk_animal_type, array('onchange' => 'updateFilters(\'fk_animal_type\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableAnimalType->fetchPairs());
+    echo $this->formSelect('fk_animaltype', $this->paramfk_animaltype, array('onchange' => 'updateFilters(\'fk_animaltype\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableAnimaltype->fetchPairs());
 ?>
             </th>
-            <th<?php if ('total_animal_type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+            <th<?php if ('total_animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 Total Animal Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animal_type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animal_type', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'total_animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </th>
             <th>Actions</th>
@@ -132,13 +132,13 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
     } else {
         echo $linkedRow->fk_departement_name, ' (unlinked)';
     } ?></td>
-            <td><?php     $linkedRow = $tableAnimalType->find($row->fk_animal_type)->current();
+            <td><?php     $linkedRow = $tableAnimaltype->find($row->fk_animaltype)->current();
     if ($linkedRow) {
         echo $linkedRow->getZodekenAutoLabel();
     } else {
-        echo $linkedRow->fk_animal_type, ' (unlinked)';
+        echo $linkedRow->fk_animaltype, ' (unlinked)';
     } ?></td>
-            <td align="right"><?php echo $row->total_animal_type; ?></td>
+            <td align="right"><?php echo $row->total_animaltype; ?></td>
             <td align="center"><a href="<?php echo $this->url(array('controller' => 'departement-stat-animal', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
     - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'departement-stat-animal', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
         </tr>

@@ -1,0 +1,106 @@
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Liste des types d'animaux</h1>
+</div>
+
+
+
+<div
+	class="pull-right"><a class="btn btn-info"
+	href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'index'), null, true); ?>"><i
+	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+<a class="btn btn-success"
+	href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'create'), null, true); ?>"><i
+	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+</div>
+<br />
+
+<form method="get"
+	action="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'index'), null, true); ?>">
+<div>Rechercher: <input class="input-large search-query"
+	placeholder="Mots cles..." type="text" name="_kw"
+	value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans
+&nbsp <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => 'All',
+  'name' => 'Name',
+)); ?>&nbsp
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
+</div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<table class="table table-bordered table-condensed ">
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+            <th style="text-align: center;" 
+            <?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Identifiant 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </span></th>
+            <th style="text-align: center;" 
+            <?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Name 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </span></th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach ($this->paginator as $row): ?>
+        <tr>
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
+            <td align="right"><?php echo $row->id; ?></td>
+            <td><?php echo $row->name; ?></td>
+                        <td><a title="Modifier"
+				href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
+				class="icon-pencil"></i></a> - <a title="Archiver"
+				onclick="return confirm('Confirmez la suppression!');"
+				href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
+				class="icon-trash"></i></a></td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table><br />
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');?>
+</div>

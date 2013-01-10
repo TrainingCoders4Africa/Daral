@@ -39,9 +39,9 @@ abstract class Application_Model_National_DbTable_Abstract extends Zend_Db_Table
      * @var array
      */
     protected $_referenceMap = array(        
-        'fk_animal_type' => array(
-            'columns' => 'fk_animal_type',
-            'refTableClass' => 'Application_Model_AnimalType_DbTable',
+        'fk_animaltype' => array(
+            'columns' => 'fk_animaltype',
+            'refTableClass' => 'Application_Model_Animaltype_DbTable',
             'refColumns' => 'name'
         )
     );
@@ -75,8 +75,8 @@ abstract class Application_Model_National_DbTable_Abstract extends Zend_Db_Table
     {
         return $this->createRow(array (
   'id' => NULL,
-  'fk_animal_type' => NULL,
-  'total_animal_type' => NULL,
+  'fk_animaltype' => NULL,
+  'total_animaltype' => NULL,
 ));
     }
         
@@ -119,12 +119,12 @@ abstract class Application_Model_National_DbTable_Abstract extends Zend_Db_Table
             $select->where('id = ?', $params['id']);
         }
 
-        if (isset($params['fk_animal_type']) && !empty($params['fk_animal_type'])) {
-            $select->where('fk_animal_type = ?', $params['fk_animal_type']);
+        if (isset($params['fk_animaltype']) && !empty($params['fk_animaltype'])) {
+            $select->where('fk_animaltype = ?', $params['fk_animaltype']);
         }
 
-        if (isset($params['total_animal_type']) && !empty($params['total_animal_type'])) {
-            $select->where('total_animal_type = ?', $params['total_animal_type']);
+        if (isset($params['total_animaltype']) && !empty($params['total_animaltype'])) {
+            $select->where('total_animaltype = ?', $params['total_animaltype']);
         }
         
         // _kw = keywords, _sm = search mode
@@ -134,8 +134,8 @@ abstract class Application_Model_National_DbTable_Abstract extends Zend_Db_Table
             $keywords = $params['_kw'];
             $searchMode = isset($params['_sm']) && !empty($params['_sm']) ? $params['_sm'] : 'all';
             
-            if ('all' === $searchMode || 'fk_animal_type' === $searchMode) {
-                $searchWheres[] = $dbAdapter->quoteInto('fk_animal_type LIKE ?', "%$keywords%");
+            if ('all' === $searchMode || 'fk_animaltype' === $searchMode) {
+                $searchWheres[] = $dbAdapter->quoteInto('fk_animaltype LIKE ?', "%$keywords%");
             }
                 
             if (!empty($searchWheres)) {

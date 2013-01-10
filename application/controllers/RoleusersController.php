@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table animal_type
+ * Controller for table roleusers
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class AnimalTypeController extends Zend_Controller_Action
+class RoleusersController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class AnimalTypeController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableAnimalType = new Application_Model_AnimalType_DbTable();
-        $gridSelect = $tableAnimalType->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableRoleusers = new Application_Model_Roleusers_DbTable();
+        $gridSelect = $tableRoleusers->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class AnimalTypeController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditAnimalType();
+        $form = new Application_Form_EditRoleusers();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableAnimalType = new Application_Model_AnimalType_DbTable();
-                $tableAnimalType->insert($values);
+                $tableRoleusers = new Application_Model_Roleusers_DbTable();
+                $tableRoleusers->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class AnimalTypeController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableAnimalType = new Application_Model_AnimalType_DbTable();
-        $form = new Application_Form_EditAnimalType();
+        $tableRoleusers = new Application_Model_Roleusers_DbTable();
+        $form = new Application_Form_EditRoleusers();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableAnimalType->find($id)->current();
+        $row = $tableRoleusers->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class AnimalTypeController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableAnimalType->update($values, $where);
+                $tableRoleusers->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class AnimalTypeController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableAnimalType = new Application_Model_AnimalType_DbTable();
-            $tableAnimalType->deleteMultipleIds($ids);
+            $tableRoleusers = new Application_Model_Roleusers_DbTable();
+            $tableRoleusers->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');

@@ -29,16 +29,16 @@ class Application_Form_EditCheptel extends Zend_Form
 		
         
         
-        $tableAnimalType = new Application_Model_AnimalType_DbTable();
+        $tableAnimaltype = new Application_Model_Animaltype_DbTable();
         $this->addElement(
-            $this->createElement('select', 'fk_animal_type')
+            $this->createElement('select', 'fk_animaltype')
                 ->setLabel('Type d\'animal')
-                ->setMultiOptions(array("" => "- - Choisir - -") + $tableAnimalType->fetchPairs())
+                ->setMultiOptions(array("" => "- - Choisir - -") + $tableAnimaltype->fetchPairs())
                 ->setRequired(true)
         );
 
         $this->addElement(
-            $this->createElement('text', 'total_animal_type')
+            $this->createElement('text', 'total_animaltype')
                 ->setLabel('Nombre total')
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_Int())

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Definition class for table animal_type.
+ * Definition class for table animaltype.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,18 +9,18 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_AnimalType_Row createRow(array $data, string $defaultSource = null)
- * @method Application_Model_AnimalType_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
- * @method Application_Model_AnimalType_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
- * @method Application_Model_AnimalType_Rowset find()
+ * @method Application_Model_Animaltype_Row createRow(array $data, string $defaultSource = null)
+ * @method Application_Model_Animaltype_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
+ * @method Application_Model_Animaltype_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
+ * @method Application_Model_Animaltype_Rowset find()
  *
  */
-abstract class Application_Model_AnimalType_DbTable_Abstract extends Zend_Db_Table_Abstract
+abstract class Application_Model_Animaltype_DbTable_Abstract extends Zend_Db_Table_Abstract
 {
     /**
      * @var string
      */
-    protected $_name = 'animal_type';
+    protected $_name = 'animaltype';
 
     /**
      * @var array
@@ -35,11 +35,11 @@ abstract class Application_Model_AnimalType_DbTable_Abstract extends Zend_Db_Tab
     protected $_dependentTables = array (
   0 => 'Application_Model_Animal_DbTable',
   1 => 'Application_Model_Cheptel_DbTable',
-  2 => 'Application_Model_DaralStatAnimal_DbTable',
-  3 => 'Application_Model_DepartementStatAnimal_DbTable',
-  4 => 'Application_Model_LocaliteStatAnimal_DbTable',
+  2 => 'Application_Model_Daralstatanimal_DbTable',
+  3 => 'Application_Model_Departementstatanimal_DbTable',
+  4 => 'Application_Model_Localitestatanimal_DbTable',
   5 => 'Application_Model_National_DbTable',
-  6 => 'Application_Model_RegionStatAnimal_DbTable',
+  6 => 'Application_Model_Regionstatanimal_DbTable',
 );
 
     /**
@@ -52,12 +52,12 @@ abstract class Application_Model_AnimalType_DbTable_Abstract extends Zend_Db_Tab
     /**
      * @var string
      */
-    protected $_rowClass = 'Application_Model_AnimalType_Row';
+    protected $_rowClass = 'Application_Model_Animaltype_Row';
 
     /**
      * @var string
      */
-    protected $_rowsetClass = 'Application_Model_AnimalType_Rowset';
+    protected $_rowsetClass = 'Application_Model_Animaltype_Rowset';
 
     /**
      * Get the table name
@@ -72,7 +72,7 @@ abstract class Application_Model_AnimalType_DbTable_Abstract extends Zend_Db_Tab
     /**
      * Create a row object with default values
      *
-     * @return Application_Model_AnimalType_Row
+     * @return Application_Model_Animaltype_Row
      */
     public function createDefaultRow()
     {
@@ -191,55 +191,6 @@ abstract class Application_Model_AnimalType_DbTable_Abstract extends Zend_Db_Tab
         }
 
         return $return;
-    }
-    
-    /**
-     * Used to fetch a rowset and build an associative array from it.
-     *
-     * The first column is used as key and the second column is used as corresponding value.
-     *
-     * @param string|array|Zend_Db_Table_Select $where  OPTIONAL An SQL WHERE clause or Zend_Db_Table_Select object.
-     * @param string|array                      $order  OPTIONAL An SQL ORDER clause.
-     * @param int                               $count  OPTIONAL An SQL LIMIT count.
-     * @param int                               $offset OPTIONAL An SQL LIMIT offset.
-     * @return array
-     */
-    public function fetchAnimal($where = null, $order = null, $count = null, $offset = null)
-    {
-    	$return = array();
-    
-    	if (!($where instanceof Zend_Db_Table_Select)) {
-    		$select = $this->select();
-    
-    		if ($where !== null) {
-    			$this->_where($select, $where);
-    		}
-    
-    		if ($order !== null) {
-    			$this->_order($select, $order);
-    		}
-    
-    		if ($count !== null || $offset !== null) {
-    			$select->limit($count, $offset);
-    		}
-    
-    	} else {
-    		$select = $where;
-    	}
-    
-    	$stmt = $this->_db->query($select);
-    	$rows = $stmt->fetchAll(Zend_Db::FETCH_NUM);
-    
-    	if (count($rows) == 0) {
-    		return array();
-    	}
-    
-    	foreach ($rows as $row)
-    	{
-    		$return[$row[1]] = $row[1];
-    	}
-    
-    	return $return;
     }
 
     /**

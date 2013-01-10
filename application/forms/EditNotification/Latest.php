@@ -43,11 +43,11 @@ class Application_Form_EditNotification_Latest extends Zend_Form
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
-        $tableTypeNotification = new Application_Model_TypeNotification_DbTable();
+        $tableTypenotification = new Application_Model_Typenotification_DbTable();
         $this->addElement(
             $this->createElement('select', 'type')
                 ->setLabel('Type')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableTypeNotification->fetchPairs())
+                ->setMultiOptions(array("" => "- - Select - -") + $tableTypenotification->fetchPairs())
                 ->setRequired(true)
         );
 

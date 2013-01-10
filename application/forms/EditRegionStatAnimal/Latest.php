@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table region_stat_animal.
+ * Form definition for table regionstatanimal.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditRegionStatAnimal_Latest extends Zend_Form
+class Application_Form_EditRegionstatanimal_Latest extends Zend_Form
 {
     public function init()
     {
@@ -27,17 +27,17 @@ class Application_Form_EditRegionStatAnimal_Latest extends Zend_Form
                 ->setRequired(true)
         );
 
-        $tableAnimalType = new Application_Model_AnimalType_DbTable();
+        $tableAnimaltype = new Application_Model_Animaltype_DbTable();
         $this->addElement(
-            $this->createElement('select', 'fk_animal_type')
-                ->setLabel('Fk Animal Type')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableAnimalType->fetchPairs())
+            $this->createElement('select', 'fk_animaltype')
+                ->setLabel('Fk Animaltype')
+                ->setMultiOptions(array("" => "- - Select - -") + $tableAnimaltype->fetchPairs())
                 ->setRequired(true)
         );
 
         $this->addElement(
-            $this->createElement('text', 'total_animal_type')
-                ->setLabel('Total Animal Type')
+            $this->createElement('text', 'total_animaltype')
+                ->setLabel('Total Animaltype')
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_Int())
                 ->addFilter(new Zend_Filter_StringTrim())

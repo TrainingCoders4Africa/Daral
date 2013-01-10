@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Row definition class for table animal_type.
+ * Row definition class for table animaltype.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,19 +9,19 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_AnimalType_Row setFromArray($data)
+ * @method Application_Model_Animaltype_Row setFromArray($data)
  *
  * @property integer $id
  * @property string $name
  */
-abstract class Application_Model_AnimalType_Row_Abstract extends Zend_Db_Table_Row_Abstract
+abstract class Application_Model_Animaltype_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
     /**
      * Set value for 'id' field
      *
      * @param integer $Id
      *
-     * @return Application_Model_AnimalType_Row
+     * @return Application_Model_Animaltype_Row
      */
     public function setId($Id)
     {
@@ -44,7 +44,7 @@ abstract class Application_Model_AnimalType_Row_Abstract extends Zend_Db_Table_R
      *
      * @param string $Name
      *
-     * @return Application_Model_AnimalType_Row
+     * @return Application_Model_Animaltype_Row
      */
     public function setName($Name)
     {
@@ -67,9 +67,9 @@ abstract class Application_Model_AnimalType_Row_Abstract extends Zend_Db_Table_R
      *
      * @return Application_Model_Animal_Rowset
      */
-    public function getAnimalRowsByFkAnimalType()
+    public function getAnimalRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_Animal_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_Animal_DbTable', 'fk_animaltype');
     }
 
     /**
@@ -77,39 +77,39 @@ abstract class Application_Model_AnimalType_Row_Abstract extends Zend_Db_Table_R
      *
      * @return Application_Model_Cheptel_Rowset
      */
-    public function getCheptelRowsByFkAnimalType()
+    public function getCheptelRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_Cheptel_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_Cheptel_DbTable', 'fk_animaltype');
     }
 
     /**
-     * Get a list of rows of DaralStatAnimal.
+     * Get a list of rows of Daralstatanimal.
      *
-     * @return Application_Model_DaralStatAnimal_Rowset
+     * @return Application_Model_Daralstatanimal_Rowset
      */
-    public function getDaralStatAnimalRowsByFkAnimalType()
+    public function getDaralstatanimalRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_DaralStatAnimal_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_Daralstatanimal_DbTable', 'fk_animaltype');
     }
 
     /**
-     * Get a list of rows of DepartementStatAnimal.
+     * Get a list of rows of Departementstatanimal.
      *
-     * @return Application_Model_DepartementStatAnimal_Rowset
+     * @return Application_Model_Departementstatanimal_Rowset
      */
-    public function getDepartementStatAnimalRowsByFkAnimalType()
+    public function getDepartementstatanimalRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_DepartementStatAnimal_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_Departementstatanimal_DbTable', 'fk_animaltype');
     }
 
     /**
-     * Get a list of rows of LocaliteStatAnimal.
+     * Get a list of rows of Localitestatanimal.
      *
-     * @return Application_Model_LocaliteStatAnimal_Rowset
+     * @return Application_Model_Localitestatanimal_Rowset
      */
-    public function getLocaliteStatAnimalRowsByFkAnimalType()
+    public function getLocalitestatanimalRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_LocaliteStatAnimal_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_Localitestatanimal_DbTable', 'fk_animaltype');
     }
 
     /**
@@ -117,19 +117,19 @@ abstract class Application_Model_AnimalType_Row_Abstract extends Zend_Db_Table_R
      *
      * @return Application_Model_National_Rowset
      */
-    public function getNationalRowsByFkAnimalType()
+    public function getNationalRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_National_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_National_DbTable', 'fk_animaltype');
     }
 
     /**
-     * Get a list of rows of RegionStatAnimal.
+     * Get a list of rows of Regionstatanimal.
      *
-     * @return Application_Model_RegionStatAnimal_Rowset
+     * @return Application_Model_Regionstatanimal_Rowset
      */
-    public function getRegionStatAnimalRowsByFkAnimalType()
+    public function getRegionstatanimalRowsByFkAnimaltype()
     {
-        return $this->findDependentRowset('Application_Model_RegionStatAnimal_DbTable', 'fk_animal_type');
+        return $this->findDependentRowset('Application_Model_Regionstatanimal_DbTable', 'fk_animaltype');
     }
     
     /**

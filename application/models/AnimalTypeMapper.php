@@ -1,29 +1,29 @@
 <?php
 
 /**
- * Data mapper class for table animal_type.
+ * Data mapper class for table animaltype.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_AnimalTypeMapper
+class Application_Model_AnimaltypeMapper
 {
     /**
      *
-     * @var Application_Model_AnimalType_DbTable
+     * @var Application_Model_Animaltype_DbTable
      */
     protected $_dbTable;
 
     public function __construct()
     {
-        $this->_dbTable = new Application_Model_AnimalType_DbTable();
+        $this->_dbTable = new Application_Model_Animaltype_DbTable();
     }
 
     /**
      *
-     * @return Application_Model_AnimalType_DbTable
+     * @return Application_Model_Animaltype_DbTable
      */
     public function getDbTabe()
     {

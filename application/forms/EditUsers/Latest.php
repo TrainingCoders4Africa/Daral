@@ -45,11 +45,11 @@ class Application_Form_EditUsers_Latest extends Zend_Form
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
-        $tableRoleUsers = new Application_Model_RoleUsers_DbTable();
+        $tableRoleusers = new Application_Model_Roleusers_DbTable();
         $this->addElement(
             $this->createElement('select', 'role')
                 ->setLabel('Role')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableRoleUsers->fetchPairs())
+                ->setMultiOptions(array("" => "- - Select - -") + $tableRoleusers->fetchPairs())
                 ->setRequired(true)
         );
 

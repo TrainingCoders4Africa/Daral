@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table role_users.
+ * Form definition for table roleusers.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditRoleUsers extends Zend_Form
+class Application_Form_EditRoleusers extends Zend_Form
 {
     public function init()
     {

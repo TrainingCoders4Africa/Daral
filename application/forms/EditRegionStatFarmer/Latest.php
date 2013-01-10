@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Form definition for table region_stat_farmer.
+ * Form definition for table regionstatfarmer.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Form_EditRegionStatFarmer_Latest extends Zend_Form
+class Application_Form_EditRegionstatfarmer_Latest extends Zend_Form
 {
     public function init()
     {

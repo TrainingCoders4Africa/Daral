@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Definition class for table region_stat_animal.
+ * Definition class for table regionstatanimal.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,18 +9,18 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_RegionStatAnimal_Row createRow(array $data, string $defaultSource = null)
- * @method Application_Model_RegionStatAnimal_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
- * @method Application_Model_RegionStatAnimal_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
- * @method Application_Model_RegionStatAnimal_Rowset find()
+ * @method Application_Model_Regionstatanimal_Row createRow(array $data, string $defaultSource = null)
+ * @method Application_Model_Regionstatanimal_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
+ * @method Application_Model_Regionstatanimal_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
+ * @method Application_Model_Regionstatanimal_Rowset find()
  *
  */
-abstract class Application_Model_RegionStatAnimal_DbTable_Abstract extends Zend_Db_Table_Abstract
+abstract class Application_Model_Regionstatanimal_DbTable_Abstract extends Zend_Db_Table_Abstract
 {
     /**
      * @var string
      */
-    protected $_name = 'region_stat_animal';
+    protected $_name = 'regionstatanimal';
 
     /**
      * @var array
@@ -39,9 +39,9 @@ abstract class Application_Model_RegionStatAnimal_DbTable_Abstract extends Zend_
      * @var array
      */
     protected $_referenceMap = array(        
-        'fk_animal_type' => array(
-            'columns' => 'fk_animal_type',
-            'refTableClass' => 'Application_Model_AnimalType_DbTable',
+        'fk_animaltype' => array(
+            'columns' => 'fk_animaltype',
+            'refTableClass' => 'Application_Model_Animaltype_DbTable',
             'refColumns' => 'name'
         ),
 
@@ -55,12 +55,12 @@ abstract class Application_Model_RegionStatAnimal_DbTable_Abstract extends Zend_
     /**
      * @var string
      */
-    protected $_rowClass = 'Application_Model_RegionStatAnimal_Row';
+    protected $_rowClass = 'Application_Model_Regionstatanimal_Row';
 
     /**
      * @var string
      */
-    protected $_rowsetClass = 'Application_Model_RegionStatAnimal_Rowset';
+    protected $_rowsetClass = 'Application_Model_Regionstatanimal_Rowset';
 
     /**
      * Get the table name
@@ -75,15 +75,15 @@ abstract class Application_Model_RegionStatAnimal_DbTable_Abstract extends Zend_
     /**
      * Create a row object with default values
      *
-     * @return Application_Model_RegionStatAnimal_Row
+     * @return Application_Model_Regionstatanimal_Row
      */
     public function createDefaultRow()
     {
         return $this->createRow(array (
   'id' => NULL,
   'fk_region_name' => NULL,
-  'fk_animal_type' => NULL,
-  'total_animal_type' => NULL,
+  'fk_animaltype' => NULL,
+  'total_animaltype' => NULL,
 ));
     }
         
@@ -130,12 +130,12 @@ abstract class Application_Model_RegionStatAnimal_DbTable_Abstract extends Zend_
             $select->where('fk_region_name = ?', $params['fk_region_name']);
         }
 
-        if (isset($params['fk_animal_type']) && !empty($params['fk_animal_type'])) {
-            $select->where('fk_animal_type = ?', $params['fk_animal_type']);
+        if (isset($params['fk_animaltype']) && !empty($params['fk_animaltype'])) {
+            $select->where('fk_animaltype = ?', $params['fk_animaltype']);
         }
 
-        if (isset($params['total_animal_type']) && !empty($params['total_animal_type'])) {
-            $select->where('total_animal_type = ?', $params['total_animal_type']);
+        if (isset($params['total_animaltype']) && !empty($params['total_animaltype'])) {
+            $select->where('total_animaltype = ?', $params['total_animaltype']);
         }
         
         // _kw = keywords, _sm = search mode
@@ -149,8 +149,8 @@ abstract class Application_Model_RegionStatAnimal_DbTable_Abstract extends Zend_
                 $searchWheres[] = $dbAdapter->quoteInto('fk_region_name LIKE ?', "%$keywords%");
             }
 
-            if ('all' === $searchMode || 'fk_animal_type' === $searchMode) {
-                $searchWheres[] = $dbAdapter->quoteInto('fk_animal_type LIKE ?', "%$keywords%");
+            if ('all' === $searchMode || 'fk_animaltype' === $searchMode) {
+                $searchWheres[] = $dbAdapter->quoteInto('fk_animaltype LIKE ?', "%$keywords%");
             }
                 
             if (!empty($searchWheres)) {

@@ -48,7 +48,7 @@ abstract class Application_Model_Users_DbTable_Abstract extends Zend_Db_Table_Ab
 
         'role' => array(
             'columns' => 'role',
-            'refTableClass' => 'Application_Model_RoleUsers_DbTable',
+            'refTableClass' => 'Application_Model_Roleusers_DbTable',
             'refColumns' => 'description'
         )
     );

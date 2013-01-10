@@ -1,29 +1,29 @@
 <?php
 
 /**
- * Data mapper class for table region_stat_farmer.
+ * Data mapper class for table regionstatfarmer.
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class Application_Model_RegionStatFarmerMapper
+class Application_Model_RegionstatfarmerMapper
 {
     /**
      *
-     * @var Application_Model_RegionStatFarmer_DbTable
+     * @var Application_Model_Regionstatfarmer_DbTable
      */
     protected $_dbTable;
 
     public function __construct()
     {
-        $this->_dbTable = new Application_Model_RegionStatFarmer_DbTable();
+        $this->_dbTable = new Application_Model_Regionstatfarmer_DbTable();
     }
 
     /**
      *
-     * @return Application_Model_RegionStatFarmer_DbTable
+     * @return Application_Model_Regionstatfarmer_DbTable
      */
     public function getDbTabe()
     {

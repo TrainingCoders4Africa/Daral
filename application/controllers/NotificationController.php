@@ -141,7 +141,7 @@ class NotificationController extends Zend_Controller_Action
 
 				//on recupere l'objet type de notification  contenant les informations sur le type de notification
 				$type_notification = $this->_getParam('type');
-				$tableNotification = new Application_Model_TypeNotification_DbTable();
+				$tableNotification = new Application_Model_Typenotification_DbTable();
 				$row_typeNotification = $tableNotification->find($type_notification)->current();
 
 				//on recupere l'objet Eleveur  contenant les informations sur l'eleveur
@@ -153,15 +153,15 @@ class NotificationController extends Zend_Controller_Action
 					
 				$message = '';
 				//notification de type info on envoi le libelle du type de notfication
-				if(stristr($row_typeNotification->getLibelle(), 'vol') === FALSE)
-				{
-					$message = $row_typeNotification->getLibelle();
-				}
-				else
+				if(stristr($row_typeNotification->getLibelle(), 'vol') === 'vol')
 				{
 					//notification de type vol on envoi les informations sur l'eleveur
 					$message = "l'eleveur ".$row_farmer->getFirstnameFarmer()." ".$row_farmer->getLastnameFarmer().
 					" a ete victime d'un ". $row_typeNotification->getLibelle()." avec le numero suivant : ".$row_farmer->getIdFarmer();
+				}
+				else
+				{
+					$message = $row_typeNotification->getLibelle();
 				}
 
 				//on parcourt la liste des eleveurs de cette localite et on leur envoi le message

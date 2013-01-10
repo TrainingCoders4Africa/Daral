@@ -13,7 +13,7 @@
  *
  * @property integer $id
  * @property string $fk_id_farmer
- * @property string $fk_animal_type
+ * @property string $fk_animaltype
  * @property string $photo_left
  * @property string $photo_right
  * @property string $photo_front
@@ -67,26 +67,26 @@ abstract class Application_Model_Animal_Row_Abstract extends Zend_Db_Table_Row_A
     }
 
     /**
-     * Set value for 'fk_animal_type' field
+     * Set value for 'fk_animaltype' field
      *
-     * @param string $FkAnimalType
+     * @param string $FkAnimaltype
      *
      * @return Application_Model_Animal_Row
      */
-    public function setFkAnimalType($FkAnimalType)
+    public function setFkAnimaltype($FkAnimaltype)
     {
-        $this->fk_animal_type = $FkAnimalType;
+        $this->fk_animaltype = $FkAnimaltype;
         return $this;
     }
 
     /**
-     * Get value of 'fk_animal_type' field
+     * Get value of 'fk_animaltype' field
      *
      * @return string
      */
-    public function getFkAnimalType()
+    public function getFkAnimaltype()
     {
-        return $this->fk_animal_type;
+        return $this->fk_animaltype;
     }
 
     /**
@@ -159,13 +159,13 @@ abstract class Application_Model_Animal_Row_Abstract extends Zend_Db_Table_Row_A
     }
 
     /**
-     * Get a row of AnimalType.
+     * Get a row of Animaltype.
      *
-     * @return Application_Model_AnimalType_Row
+     * @return Application_Model_Animaltype_Row
      */
-    public function getAnimalTypeRowByFkAnimalType()
+    public function getAnimaltypeRowByFkAnimaltype()
     {
-        return $this->findParentRow('Application_Model_AnimalType_DbTable', 'fk_animal_type');
+        return $this->findParentRow('Application_Model_Animaltype_DbTable', 'fk_animaltype');
     }
 
     /**

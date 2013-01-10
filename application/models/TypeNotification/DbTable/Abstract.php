@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Definition class for table type_notification.
+ * Definition class for table typenotification.
  *
  * Do NOT write anything in this file, it will be removed when you regenerated.
  *
@@ -9,18 +9,18 @@
  * @author Zodeken
  * @version $Id$
  *
- * @method Application_Model_TypeNotification_Row createRow(array $data, string $defaultSource = null)
- * @method Application_Model_TypeNotification_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
- * @method Application_Model_TypeNotification_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
- * @method Application_Model_TypeNotification_Rowset find()
+ * @method Application_Model_Typenotification_Row createRow(array $data, string $defaultSource = null)
+ * @method Application_Model_Typenotification_Rowset fetchAll(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $count = null, int $offset = null)
+ * @method Application_Model_Typenotification_Row fetchRow(string|array|Zend_Db_Table_Select $where = null, string|array $order = null, int $offset = null)
+ * @method Application_Model_Typenotification_Rowset find()
  *
  */
-abstract class Application_Model_TypeNotification_DbTable_Abstract extends Zend_Db_Table_Abstract
+abstract class Application_Model_Typenotification_DbTable_Abstract extends Zend_Db_Table_Abstract
 {
     /**
      * @var string
      */
-    protected $_name = 'type_notification';
+    protected $_name = 'typenotification';
 
     /**
      * @var array
@@ -46,12 +46,12 @@ abstract class Application_Model_TypeNotification_DbTable_Abstract extends Zend_
     /**
      * @var string
      */
-    protected $_rowClass = 'Application_Model_TypeNotification_Row';
+    protected $_rowClass = 'Application_Model_Typenotification_Row';
 
     /**
      * @var string
      */
-    protected $_rowsetClass = 'Application_Model_TypeNotification_Rowset';
+    protected $_rowsetClass = 'Application_Model_Typenotification_Rowset';
 
     /**
      * Get the table name
@@ -66,13 +66,14 @@ abstract class Application_Model_TypeNotification_DbTable_Abstract extends Zend_
     /**
      * Create a row object with default values
      *
-     * @return Application_Model_TypeNotification_Row
+     * @return Application_Model_Typenotification_Row
      */
     public function createDefaultRow()
     {
         return $this->createRow(array (
   'id' => NULL,
   'libelle' => NULL,
+        		'description' => NULL,
 ));
     }
         
@@ -119,6 +120,10 @@ abstract class Application_Model_TypeNotification_DbTable_Abstract extends Zend_
             $select->where('libelle = ?', $params['libelle']);
         }
         
+        if (isset($params['description']) && !empty($params['description'])) {
+        	$select->where('description = ?', $params['description']);
+        }
+        
         // _kw = keywords, _sm = search mode
         if (isset($params['_kw']) && !empty($params['_kw'])) {
             $dbAdapter = $this->getAdapter();
@@ -128,6 +133,10 @@ abstract class Application_Model_TypeNotification_DbTable_Abstract extends Zend_
             
             if ('all' === $searchMode || 'libelle' === $searchMode) {
                 $searchWheres[] = $dbAdapter->quoteInto('libelle LIKE ?', "%$keywords%");
+            }
+            
+            if ('all' === $searchMode || 'description' === $searchMode) {
+            	$searchWheres[] = $dbAdapter->quoteInto('description LIKE ?', "%$keywords%");
             }
                 
             if (!empty($searchWheres)) {

@@ -13,10 +13,11 @@
  *
  * @property integer $id
  * @property string $id_farmer
- * @property string $id_localite
+ * @property integer $id_localite
  * @property string $date
- * @property string $type
- * @property string $id_user
+ * @property integer $type
+ * @property integer $id_user
+ * @property integer $disabled
  */
 abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
@@ -69,7 +70,7 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     /**
      * Set value for 'id_localite' field
      *
-     * @param string $IdLocalite
+     * @param integer $IdLocalite
      *
      * @return Application_Model_Notification_Row
      */
@@ -82,7 +83,7 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     /**
      * Get value of 'id_localite' field
      *
-     * @return string
+     * @return integer
      */
     public function getIdLocalite()
     {
@@ -115,7 +116,7 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     /**
      * Set value for 'type' field
      *
-     * @param string $Type
+     * @param integer $Type
      *
      * @return Application_Model_Notification_Row
      */
@@ -128,7 +129,7 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     /**
      * Get value of 'type' field
      *
-     * @return string
+     * @return integer
      */
     public function getType()
     {
@@ -138,7 +139,7 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     /**
      * Set value for 'id_user' field
      *
-     * @param string $IdUser
+     * @param integer $IdUser
      *
      * @return Application_Model_Notification_Row
      */
@@ -151,7 +152,7 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     /**
      * Get value of 'id_user' field
      *
-     * @return string
+     * @return integer
      */
     public function getIdUser()
     {
@@ -159,13 +160,26 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     }
 
     /**
-     * Get a row of Users.
+     * Set value for 'disabled' field
      *
-     * @return Application_Model_Users_Row
+     * @param integer $Disabled
+     *
+     * @return Application_Model_Notification_Row
      */
-    public function getUsersRowByIdUser()
+    public function setDisabled($Disabled)
     {
-        return $this->findParentRow('Application_Model_Users_DbTable', 'id_user');
+        $this->disabled = $Disabled;
+        return $this;
+    }
+
+    /**
+     * Get value of 'disabled' field
+     *
+     * @return integer
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
     }
 
     /**
@@ -189,13 +203,23 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     }
 
     /**
-     * Get a row of TypeNotification.
+     * Get a row of Typenotification.
      *
-     * @return Application_Model_TypeNotification_Row
+     * @return Application_Model_Typenotification_Row
      */
-    public function getTypeNotificationRowByType()
+    public function getTypenotificationRowByType()
     {
-        return $this->findParentRow('Application_Model_TypeNotification_DbTable', 'type');
+        return $this->findParentRow('Application_Model_Typenotification_DbTable', 'type');
+    }
+
+    /**
+     * Get a row of Users.
+     *
+     * @return Application_Model_Users_Row
+     */
+    public function getUsersRowByIdUser()
+    {
+        return $this->findParentRow('Application_Model_Users_DbTable', 'id_user');
     }
     
     /**

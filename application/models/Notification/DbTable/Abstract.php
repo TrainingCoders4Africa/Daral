@@ -54,13 +54,13 @@ abstract class Application_Model_Notification_DbTable_Abstract extends Zend_Db_T
         'id_localite' => array(
             'columns' => 'id_localite',
             'refTableClass' => 'Application_Model_Localite_DbTable',
-            'refColumns' => 'name'
+            'refColumns' => 'id'
         ),
 
         'type' => array(
             'columns' => 'type',
-            'refTableClass' => 'Application_Model_TypeNotification_DbTable',
-            'refColumns' => 'libelle'
+            'refTableClass' => 'Application_Model_Typenotification_DbTable',
+            'refColumns' => 'id'
         )
     );
 
@@ -98,6 +98,7 @@ abstract class Application_Model_Notification_DbTable_Abstract extends Zend_Db_T
   'date' => NULL,
   'type' => NULL,
   'id_user' => NULL,
+  'disabled' => '0',
 ));
     }
         

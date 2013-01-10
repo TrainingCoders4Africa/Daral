@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller for table departement_stat_farmer
+ * Controller for table localitestatfarmer
  *
  * @package Daral
  * @author Zodeken
  * @version $Id$
  *
  */
-class DepartementStatFarmerController extends Zend_Controller_Action
+class LocalitestatfarmerController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -19,8 +19,8 @@ class DepartementStatFarmerController extends Zend_Controller_Action
         $sortOrder = $this->_getParam('_so', '');
         $pageNumber = $this->_getParam('page', 1);
         
-        $tableDepartementStatFarmer = new Application_Model_DepartementStatFarmer_DbTable();
-        $gridSelect = $tableDepartementStatFarmer->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+        $tableLocalitestatfarmer = new Application_Model_Localitestatfarmer_DbTable();
+        $gridSelect = $tableLocalitestatfarmer->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
         $paginator = Zend_Paginator::factory($gridSelect);
         $paginator->setItemCountPerPage(20)
             ->setCurrentPageNumber($pageNumber);
@@ -41,14 +41,14 @@ class DepartementStatFarmerController extends Zend_Controller_Action
     
     public function createAction()
     {
-        $form = new Application_Form_EditDepartementStatFarmer();
+        $form = new Application_Form_EditLocalitestatfarmer();
             
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
                     
-                $tableDepartementStatFarmer = new Application_Model_DepartementStatFarmer_DbTable();
-                $tableDepartementStatFarmer->insert($values);
+                $tableLocalitestatfarmer = new Application_Model_Localitestatfarmer_DbTable();
+                $tableLocalitestatfarmer->insert($values);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -60,11 +60,11 @@ class DepartementStatFarmerController extends Zend_Controller_Action
     
     public function updateAction()
     {
-        $tableDepartementStatFarmer = new Application_Model_DepartementStatFarmer_DbTable();
-        $form = new Application_Form_EditDepartementStatFarmer();
+        $tableLocalitestatfarmer = new Application_Model_Localitestatfarmer_DbTable();
+        $form = new Application_Form_EditLocalitestatfarmer();
         $id = (int) $this->_getParam('id', 0);
         
-        $row = $tableDepartementStatFarmer->find($id)->current();
+        $row = $tableLocalitestatfarmer->find($id)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -77,7 +77,7 @@ class DepartementStatFarmerController extends Zend_Controller_Action
         
                 $where = array('id = ?' => $id);
         
-                $tableDepartementStatFarmer->update($values, $where);
+                $tableLocalitestatfarmer->update($values, $where);
                     
                 $this->_helper->redirector('index');
                 exit;
@@ -100,8 +100,8 @@ class DepartementStatFarmerController extends Zend_Controller_Action
         }
         
         if (!empty($ids)) {
-            $tableDepartementStatFarmer = new Application_Model_DepartementStatFarmer_DbTable();
-            $tableDepartementStatFarmer->deleteMultipleIds($ids);
+            $tableLocalitestatfarmer = new Application_Model_Localitestatfarmer_DbTable();
+            $tableLocalitestatfarmer->deleteMultipleIds($ids);
         }
         
         $this->_helper->redirector('index');
