@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `animal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_id_farmer` varchar(30) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
   `photo_left` varchar(100) NOT NULL,
   `photo_right` varchar(100) NOT NULL,
   `photo_front` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -90,12 +90,12 @@ INSERT INTO `categorie` (`id`, `categorie_id`, `max_animal`) VALUES
 CREATE TABLE IF NOT EXISTS `cheptel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_id_farmer` varchar(30) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   `isactive` int(2) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -135,11 +135,11 @@ INSERT INTO `daral` (`id`, `id_localite`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `daralstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_daral_name` varchar(30) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_daral_name` (`fk_daral_name`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_daral_name` (`fk_daral_name`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -231,11 +231,11 @@ INSERT INTO `departement` (`id`, `name`, `region`) VALUES
 CREATE TABLE IF NOT EXISTS `departementstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_departement_name` varchar(50) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_departement_name` (`fk_departement_name`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_departement_name` (`fk_departement_name`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -343,11 +343,11 @@ INSERT INTO `localite` (`id`, `name`, `departement`, `region`) VALUES
 CREATE TABLE IF NOT EXISTS `localitestatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_localite_name` varchar(50) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_localite_name` (`fk_localite_name`,`fk_animal_type`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_localite_name` (`fk_localite_name`,`fk_animaltype`),
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -406,11 +406,11 @@ CREATE TABLE IF NOT EXISTS `media` (
 
 CREATE TABLE IF NOT EXISTS `national` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_animal_type` (`fk_animal_type`),
-  KEY `fk_animal_type_2` (`fk_animal_type`)
+  KEY `fk_animaltype` (`fk_animaltype`),
+  KEY `fk_animaltype_2` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -491,12 +491,12 @@ INSERT INTO `region` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `regionstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_region_name` varchar(50) NOT NULL,
-  `fk_animal_type` varchar(30) NOT NULL,
-  `total_animal_type` int(11) NOT NULL,
+  `fk_animaltype` varchar(30) NOT NULL,
+  `total_animaltype` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_region_name` (`fk_region_name`,`fk_animal_type`),
+  KEY `fk_region_name` (`fk_region_name`,`fk_animaltype`),
   KEY `fk_region_name_2` (`fk_region_name`),
-  KEY `fk_animal_type` (`fk_animal_type`)
+  KEY `fk_animaltype` (`fk_animaltype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -620,14 +620,14 @@ CREATE TABLE IF NOT EXISTS `veterinaire` (
 --
 ALTER TABLE `animal`
   ADD CONSTRAINT `animal_ibfk_1` FOREIGN KEY (`fk_id_farmer`) REFERENCES `farmer` (`id_farmer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `cheptel`
 --
 ALTER TABLE `cheptel`
   ADD CONSTRAINT `cheptel_ibfk_1` FOREIGN KEY (`fk_id_farmer`) REFERENCES `farmer` (`id_farmer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cheptel_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cheptel_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `daral`
@@ -640,7 +640,7 @@ ALTER TABLE `daral`
 --
 ALTER TABLE `daralstatanimal`
   ADD CONSTRAINT `daralstatanimal_ibfk_1` FOREIGN KEY (`fk_daral_name`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `daralstatanimal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `daralstatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `daralstatfarmer`
@@ -659,7 +659,7 @@ ALTER TABLE `departement`
 --
 ALTER TABLE `departementstatanimal`
   ADD CONSTRAINT `departementstatanimal_ibfk_1` FOREIGN KEY (`fk_departement_name`) REFERENCES `departement` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `departementstatanimal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `departementstatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `departementstatfarmer`
@@ -688,7 +688,7 @@ ALTER TABLE `localite`
 --
 ALTER TABLE `localitestatanimal`
   ADD CONSTRAINT `localitestatanimal_ibfk_1` FOREIGN KEY (`fk_localite_name`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `localitestatanimal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `localitestatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `localitestatfarmer`
@@ -707,7 +707,7 @@ ALTER TABLE `media`
 -- Contraintes pour la table `national`
 --
 ALTER TABLE `national`
-  ADD CONSTRAINT `national_ibfk_1` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `national_ibfk_1` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `notification`
@@ -723,7 +723,7 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `regionstatanimal`
   ADD CONSTRAINT `regionstatanimal_ibfk_1` FOREIGN KEY (`fk_region_name`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `regionstatanimal_ibfk_2` FOREIGN KEY (`fk_animal_type`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `regionstatanimal_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `regionstatfarmer`
@@ -741,3 +741,4 @@ ALTER TABLE `users`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
