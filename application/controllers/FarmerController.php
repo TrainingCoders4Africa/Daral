@@ -109,12 +109,22 @@ class FarmerController extends Zend_Controller_Action
     		    $id_farmer=$daral_originel.$rank;
     		    $tableDaral = new Application_Model_Daral_DbTable_Daral();
     		    
-    			 
+    			 //on determine la localite du daral d'inscription
     			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    			
+    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
+    			//on determine le departement du daral d'inscription
+    			$departement = $tableLocalite->getDepartement($id_localite);
+    			
+    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
+    			//on determine la region du daral d'inscription
+    			$region = $tableDepartement->getRegion($departement);
+    			
+    		
     			
     			
     			$farmer->addFarmer($id_farmer,$categorie,$national_id,$address_farmer,$phone_farmer,$registration_date,$daral_originel,$daral_actuel,
-			          $firstname_farmer,$lastname_farmer,$isactive_farmer,$birthdate_farmer,$birthplace_farmer,$id_localite);
+			          $firstname_farmer,$lastname_farmer,$isactive_farmer,$birthdate_farmer,$birthplace_farmer,$id_localite,$departement,$region);
     			
     			
     			// ID CARD GENERATION
@@ -203,11 +213,19 @@ class FarmerController extends Zend_Controller_Action
     			$tableDaral = new Application_Model_Daral_DbTable_Daral();
     			 
     			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    			
+    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
+    			//on determine le departement du daral actuel
+    			$departement = $tableLocalite->getDepartement($id_localite);
+    			 
+    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
+    			//on determine la region du daral actuel
+    			$region = $tableDepartement->getRegion($departement);
     			 
     			 
     			
     			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
-    				$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite); 
+    				$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite,$departement,$region); 
     	
     		 
     			// ID CARD GENERATION

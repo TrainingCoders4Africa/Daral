@@ -20,7 +20,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	//************* FUNCTION FOR ADDING FARMER INTO DATABASE *******************************//
 	
 	public function addFarmer($id_farmer,$categorie,$national_id,$address_farmer,$phone_farmer,$registration_date,$daral_originel,$daral_actuel,
-			$firstname_farmer,$lastname_farmer,$isactive_farmer,$birthdate_farmer,$birthplace_farmer,$id_localite)
+			$firstname_farmer,$lastname_farmer,$isactive_farmer,$birthdate_farmer,$birthplace_farmer,$id_localite,$departement,$region)
 	{
 		$data = array(
 				'id_farmer' => $id_farmer,
@@ -37,6 +37,8 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 				'birthdate_farmer'=>$birthdate_farmer,
 				'birthplace_farmer'=>$birthplace_farmer,
 				'id_localite'=>$id_localite,
+				'departement'=>$departement,
+				'region'=>$region,
 		);
 		$this->insert($data);
 	}
@@ -45,7 +47,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	//**************************** UPDATE FARMER INFO AND SAVE TO DATABASE *******************//
 	
 	public function updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
-    					             $address_farmer,$categorie,$national_id,$daral_actuel,$id_localite)
+    					             $address_farmer,$categorie,$national_id,$daral_actuel,$id_localite,$departement,$region)
 	{
 		 $data = array(
 				
@@ -59,6 +61,8 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 				'birthplace_farmer'=>$birthplace_farmer,
 				'daral_actuel'=>$daral_actuel,
 				'id_localite'=>$id_localite,
+		 		'departement'=>$departement,
+		 		'region'=>$region,
 		); 
 		
 		$this->update($data, 'id_farmer = '.$id_farmer); 

@@ -104,7 +104,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
             	
    $html.='<!--------------MON DARAL------------------>
         <a href="#mon-daral-menu" class="nav-header" data-toggle="collapse"><i class="icon-home"></i>Mon Daral<i class="icon-chevron-down" id="chevron-mon-daral" style="margin-left:8.3em"></i></a>
-        <ul id="mon-daral-menu" class="nav nav-list collapse">
+        <ul id="mon-daral-menu" class="nav nav-list in collapse">
         
         <script type="text/javascript">
         $("a").click(function(){
