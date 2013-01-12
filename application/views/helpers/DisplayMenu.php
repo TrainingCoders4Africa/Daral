@@ -31,6 +31,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $veterinaire=$this->view->baseUrl().'/veterinaire';
 		   $animal=$this->view->baseUrl().'/animaltype';
 		   $typenotification=$this->view->baseUrl().'/typenotification';
+		   $users=$this->view->baseUrl().'/users';
+		   $daral=$this->view->baseUrl().'/daral';
             $html = '
 			<div class="navbar-inner" >
                 <ul class="nav pull-right">
@@ -73,7 +75,30 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  });
         </script>
                
-            			
+            <li> <a href="#daral-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-daral"></i>Gestion daral</a></li>
+              <ul id="daral-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-daral").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$daral.'">Liste</a></li>
+               <li ><a href="'.$daral.'/create">Ajouter</a></li>
+             </ul>
+
+               		<li> <a href="#users-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-users"></i>Gestion Utilisateurs</a></li>
+              <ul id="users-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-users").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$users.'">Liste</a></li>
+               <li ><a href="'.$users.'/create">Ajouter</a></li>
+             </ul>
+               		
             <li> <a href="#animal-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-animal"></i>Type Animal</a></li>
               <ul id="animal-menu" class="nav nav-list collapse">
               <script type="text/javascript">
