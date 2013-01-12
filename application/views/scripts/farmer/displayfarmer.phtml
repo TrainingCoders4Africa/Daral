@@ -32,10 +32,11 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
  {
      foreach ($farmer_cheptel as $row)
     {
+    $animal_type=$row['fk_animaltype'];	
   	echo $row['fk_animaltype'];
   	echo ": ";
   	echo $row['total_animaltype'];
-  	echo "<br/>";
+  	?><span>&nbsp</span><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $this->id,'fk_animaltype'=>$animal_type), null, true); ?>"><i class="icon-zoom-in"></i></a><br/><?php 
     }
  }
  

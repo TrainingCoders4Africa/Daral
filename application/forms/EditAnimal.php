@@ -18,24 +18,21 @@ class Application_Form_EditAnimal extends Zend_Form
 
         $tableFarmer = new Application_Model_Farmer_DbTable();
         $this->addElement(
-            $this->createElement('select', 'fk_id_farmer')
-                ->setLabel('Fk Id Farmer')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableFarmer->fetchPairs())
+            $this->createElement('text', 'fk_id_farmer')
+                ->setLabel('Identifiant Eleveur')
+                //->setMultiOptions(array("" => "- - Select - -") + $tableFarmer->fetchPairs())
                 ->setRequired(true)
         ); 
         
+        
+        
+        
+        
        
-        $tableAnimaltype = new Application_Model_Animaltype_DbTable();
-        $this->addElement(
-            $this->createElement('select', 'fk_animaltype')
-                ->setLabel('Fk Animaltype')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableAnimaltype->fetchPairs())
-                ->setRequired(true)
-        );
-
+        
         $this->addElement(
             $this->createElement('text', 'photo_left')
-                ->setLabel('Photo Left')
+                ->setLabel('VUE GAUCHE')
                 ->setAttrib("maxlength", 100)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 100)))
@@ -44,7 +41,7 @@ class Application_Form_EditAnimal extends Zend_Form
 
         $this->addElement(
             $this->createElement('text', 'photo_right')
-                ->setLabel('Photo Right')
+                ->setLabel('VUE DROITE')
                 ->setAttrib("maxlength", 100)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 100)))
@@ -53,18 +50,14 @@ class Application_Form_EditAnimal extends Zend_Form
 
         $this->addElement(
             $this->createElement('text', 'photo_front')
-                ->setLabel('Photo Front')
+                ->setLabel('VUE FACE')
                 ->setAttrib("maxlength", 100)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 100)))
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
-        $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Save')
-                ->setAttrib('type', 'submit')
-        );
+        
 		
        $this->addElement(
             $this->createElement('hidden', 'id')

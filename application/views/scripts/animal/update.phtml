@@ -13,19 +13,25 @@ $form = $this->form;
 	
 <div class="content">	
 <div class="header">
-   <h1 class="page-title" >Mise a jour info animal</h1>
+   <h1 class="page-title" >Mise &agrave; jour infos animal</h1>
 </div>
 
         <ul class="breadcrumb">
             <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
             <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
             <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
-            <li class="active">Mise a jourinfo animal </li>
+            <li class="active">Mise &agrave; jour infos animal </li>
         </ul>
+<br>
+
+<div align="center">
+<h3 class="alert-info"><?php echo "Identifiant Eleveur: ".substr($this->row['animal_id'],0,8);?></h3>
+<h3 class="alert-success"><?php echo "Identifiant Animal: ".substr($this->row['animal_id'],9);?></h3>
+</div>
 
 <form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
 <div style="position: static; width: 90%; margin: auto;">
-	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>>
+	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
     <?php
     $i = 2;
     
@@ -50,9 +56,7 @@ $form = $this->form;
                 <?php if ($errors): ?>
                     <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
                 <?php endif; ?>
-                <?php if ('submit' == $elementName): ?>
-                    <a class="btn" href="<?php echo $this->url(array('controller' => 'animal'), null, true); ?>">Annuler</a>
-                <?php endif; ?>
+                
 	            </td>
         <?php
         endforeach;
@@ -61,4 +65,11 @@ $form = $this->form;
   </div>
 
 </form>
+<div class="row">
+       
+      <div class="span6"></div>
+        <button class="btn btn-success" type="submit">Valider</button>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel'), null, true); ?>">Annuler</a>
+       </div>
+  </div>
 </div>

@@ -38,6 +38,23 @@ class AnimalController extends Zend_Controller_Action
             $this->view->assign('param' . $paramName, $paramValue);
         }
     }
+    
+    
+    //****************** DISPLAY ANIMAL PHOTO***************************
+    
+    public function displayanimalAction()
+    {
+    	$photo = $this->_getParam('photo');
+    	$this->view->assign(array('photo'=>$photo));
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
 
     public function rechercheAction()
     {
@@ -91,9 +108,9 @@ class AnimalController extends Zend_Controller_Action
     {
         $tableAnimal = new Application_Model_Animal_DbTable();
         $form = new Application_Form_EditAnimal();
-        $id = (int) $this->_getParam('id', 0);
+        $id_farmer = (int) $this->_getParam('id', 0);
         
-        $row = $tableAnimal->find($id)->current();
+        $row = $tableAnimal->find($id_farmer)->current();
 
         if (!$row) {
             $this->_helper->redirector('index');
@@ -104,7 +121,7 @@ class AnimalController extends Zend_Controller_Action
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
         
-                $where = array('id = ?' => $id);
+                $where = array('id = ?' => $id_farmer);
         
                 $tableAnimal->update($values, $where);
                     

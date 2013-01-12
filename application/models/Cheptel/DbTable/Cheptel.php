@@ -17,11 +17,12 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 //*********************************************************************
 //*************************** ADD CHEPTEL******************************
 
-	public function addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype)
+	public function addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype_to_add)
 	{
 	   $tableFarmer = new Application_Model_Farmer_DbTable_Farmer();
 	   $tableCategorie= new Application_Model_Categorie_DbTable_Categorie();
 	   $tableAnimal = new Application_Model_Animal_DbTable_Animal();
+	   $tableAnimaltype = new Application_Model_Animaltype_DbTable_Animaltype();
 	    
 	  
     
@@ -34,22 +35,39 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	             if($row) //farmer already has an entry in the table for this Animaltype
 	             	
 				   { 
-				         $total=$this->getFarmerTotal($fk_id_farmer);//current total for ALL animal types
-				         $total+=$total_animaltype;//new total for ALL animal types
+				         $current_total_all_types=$this->getFarmerTotal($fk_id_farmer);//current total for ALL animal types
+				         $new_total_all_types=$current_total_all_types+$total_animaltype_to_add;//new total for ALL animal types
 				            
-				             	if ($total<= $max_animal)
+				             	if ($new_total_all_types<= $max_animal)
 				             	{
 				             	        //table "cheptel" is updated
 				             		    $row_arr = $row->toArray();
-				             		    $total_animal=$row_arr['total_animaltype'];//current total for Animaltype
-				             		    $total_animal+=$total_animaltype;//new total for Animaltype
-						             	$this->update(array('total_animaltype'=>$total_animal),
+				             		    $current_total_animal_type=$row_arr['total_animaltype'];//current total for Animaltype
+				             		    
+				             		    $new_total_animal_type=$current_total_animal_type+$total_animaltype_to_add;//new total for Animaltype
+						             	$this->update(array('total_animaltype'=>$new_total_animal_type),
 						             			      array('fk_id_farmer=?'=>$fk_id_farmer,'fk_animaltype=?'=>$fk_animaltype));
+						           
+						             	
+						             	//first new animal type rank
+						             	$rank=$current_total_animal_type+1; 
 						             	
 						             	//new animals are inserted
-						             	for($i=0;$i<$total_animaltype;$i++)
+						             	for($i=0;$i<$total_animaltype_to_add;$i++)
 						             	{	
-						             	  $tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype); 
+					
+						             		//determine the rank of the animal to be added in "animal" table in the form 0001 to 9999
+						             		
+						             		$new_animaltype_rank = $this->generateAnimalRank($rank);
+						             		
+						             		$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
+						             		//$tag='C';
+						             		
+						             		$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
+						             		
+						             	    $tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id); 
+						             	    
+						             	    $rank++;//we increment for the next animal 
 						             	}
 				                 
 				             		   return '0=update and insertion ok'; // update and insertion ok
@@ -65,27 +83,41 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 
 	             else //farmer has no previous entry in the table for this animal type
 	             { 
-	             	$total=$this->getFarmerTotal($fk_id_farmer);//current total for ALL Animaltypes
-	             	$total+=$total_animaltype;//new total for ALL Animaltypes
+	             	$current_total_all_types=$this->getFarmerTotal($fk_id_farmer);//current total for ALL Animaltypes
+	             	$new_total_all_types=$current_total_all_types+$total_animaltype_to_add;//new total for ALL Animaltypes
 				             	 
-				             	if ($total<= $max_animal)
+				             	if ($new_total_all_types<= $max_animal)
 				             	{
 				             	    //a new entry is created in "cheptel"
 				             	    $isactive=1;
 				             		$data = array(
 				             				 'fk_id_farmer'=>$fk_id_farmer,
 				             				 'fk_animaltype'=>$fk_animaltype,
-				             				 'total_animaltype'=>$total_animaltype,
+				             				 'total_animaltype'=>$total_animaltype_to_add,
 				             				 'isactive'=>$isactive,
 				             				
 				             				);
 				             		
 				             		$this->insert($data);
 				             		
+				             		//first new animal type rank
+				             		$rank=1;
+				             		
 				             		//new animals are inserted
-				             		for($i=0;$i<$total_animaltype;$i++)
+				             		for($i=0;$i<$total_animaltype_to_add;$i++)
 				             		{
-				             		$tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype);
+				             			//determine the rank of the animal to be added in "animal" table in the form  0001 to 9999
+				             			 
+				             			$new_animaltype_rank = $this->generateAnimalRank($rank);
+				             			 
+				             			$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
+				             			//$tag="C";
+				             			 
+				             			$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
+				             			 
+				             			$tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id);
+				             			
+				             			$rank++;//we increment for the next animal
 				             		}
 				             	
 				             		return '0=insertion ok'; // insertion ok
@@ -160,6 +192,24 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  	{
 	  		return null;
 	  	}
+	  }
+	  
+	  //=================
+	  
+	  public function generateAnimalRank($rank){
+	  	
+	  	$rank_string = (string) $rank;
+	  	
+	  	//The value returned must be exactly 4 characters long
+	  	switch (strlen($rank_string))
+	  	{
+	  		case 1: return "000".$rank_string;break;
+	  		case 2: return "00".$rank_string;break;
+	  		case 3: return "0".$rank_string;break;
+	  		case 4: return $rank_string;break;
+	  		default: return $rank_string;break;
+	  	}
+	  	
 	  }
 	  
 	  /**

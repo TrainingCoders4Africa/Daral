@@ -52,23 +52,17 @@ function updateFilters(paramName, paramValue)
   <?php //echo $this->total_animal.'<br/>';?>
   <?php echo $this->message.'<br/>';?>
   
- <!--  
-</div>
-<div class="pull-right">
-<a class="btn btn-info" href="<?php // echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>"><i class="icon-refresh icon-white">Actualiser</i></a>
-- <a href="<?php // echo $this->url(array('controller' => 'cheptel', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
--->
-  
-  
-<div class="pull-right">
+ 
+
+<div class="pull-right" style="margin-right:1em">
  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
     <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
- <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Inscrire</a>
+ <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Ajouter</a>
     <!--  ********************************************************** -->
  </div> <br />
  
  
- 
+ <div style="margin-left: 1em; padding-bottom:0.5em;">
 <form method="get" action="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>">
 <div>
 Rechercher: <input class="input-large search-query" placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp 
@@ -84,17 +78,13 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
 <table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
     cellpadding="3">
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                </span>
-            </th>
+            
             <th<?php if ('fk_id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Identifiant eleveur
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'fk_id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
@@ -122,7 +112,6 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 <?php foreach ($this->paginator as $row): ?>
         <tr>
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
-            <td align="center"><?php echo $row->id; ?></td>
             <td align="center"><?php echo $row->fk_id_farmer;?></td>
             <td align="center"><?php echo $row->fk_animaltype; ?></td>
             <td align="center"><?php echo $row->total_animaltype; ?></td>
@@ -143,4 +132,6 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');?>
+</div>
+</div>
 </div>

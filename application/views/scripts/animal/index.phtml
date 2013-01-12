@@ -35,7 +35,7 @@ function updateFilters(paramName, paramValue)
 </script>
 <div class="content">	
 <div class="header">
-   <h1 class="page-title" >Ajouter un animal</h1>
+   <h1 class="page-title" >Ajouter un animal </h1>
 </div>
 
         <ul class="breadcrumb">
@@ -72,7 +72,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
             <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Id 
+                <span class="label label-inverse">ID Animal
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 </span>
@@ -115,12 +115,12 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 <?php foreach ($this->paginator as $row): ?>
         <tr>
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
-            <td align="right"><?php echo $row->id; ?></td>
-            <td><?php echo $row->fk_id_farmer; ?></td>
-            <td><?php echo $row->fk_animaltype; ?></td>
-            <td><?php echo $row->photo_left; ?></td>
-            <td><?php echo $row->photo_right; ?></td>
-            <td><?php echo $row->photo_front; ?></td>
+            <td align="center"><?php echo substr($row->animal_id,9); ?></td>
+            <td align="center"><?php echo $row->fk_id_farmer; ?></td>
+            <td align="center"><?php echo $row->fk_animaltype; ?></td>
+            <td align="center"><a class="black" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'displayanimal', 'photo' => $row->photo_left), null, true); ?>">VUE GAUCHE</a></td>
+            <td align="center"><a class="black" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'displayanimal', 'photo' => $row->photo_right),null, true); ?>">VUE DROITE</a></td>
+            <td><a class="black" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'displayanimal', 'photo' => $row->photo_front),null, true); ?>">VUE FACE</a></td>
             <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i class="icon-pencil" ></i></a> 
     - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i class="icon-trash" ></i></a></td>
         </tr>

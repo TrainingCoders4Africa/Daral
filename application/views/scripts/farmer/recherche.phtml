@@ -59,7 +59,7 @@ $(function (){
         </ul>
 
 <br />
-<h3 style="margin-left:2em">Saisissez les 	&eacute;l&eacute;ments de recherche et cliquez sur "valider"...</h3>
+<h3  class="alert-info" align="center"> Saisissez les 	&eacute;l&eacute;ments de recherche et cliquez sur "valider"...</h3>
 <form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
 <div style="position: static; width: 98%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 98%" class="table-bordered" ><tr>
@@ -121,7 +121,7 @@ $(function (){
 
 
 
-<h3 style="text-align:center">R&eacute;sultats :</h3>
+<h3 style="text-align:center" class="alert-success">R&eacute;sultats :</h3>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
 <div style="margin-left:1em; margin-right:1em;">
