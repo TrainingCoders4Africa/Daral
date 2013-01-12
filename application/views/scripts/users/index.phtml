@@ -34,146 +34,98 @@ function updateFilters(paramName, paramValue)
 }
 </script>
 
-<div style="text-align:right">
-<a href="<?php echo $this->url(array('controller' => 'users', 'action' => 'index'), null, true); ?>">Reset Filters</a>
-- <a href="<?php echo $this->url(array('controller' => 'users', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Liste des Utilisateurs</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Daral</a> <span class="divider">/</span></li>
+            <li class="active">Liste</li>
+        </ul>
+
+<div
+	class="pull-right"><a class="btn btn-info"
+	href="<?php echo $this->url(array('controller' => 'users', 'action' => 'index'), null, true); ?>"><i
+	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+<a class="btn btn-success"
+	href="<?php echo $this->url(array('controller' => 'users', 'action' => 'create'), null, true); ?>"><i
+	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+</div>
+<br />
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'users', 'action' => 'index'), null, true); ?>">
 <div>
-Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
+Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp 
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => 'All',
   'username' => 'Username',
   'role' => 'Role',
   'user_daral' => 'User Daral',
-)); ?>
-<input type="submit" value="Go" />
+)); ?>&nbsp
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'users', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
-    cellpadding="3">
+<table class="table table-bordered table-condensed ">
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
+            <th style="text-align: center;" <?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Id 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                           </span>    
             </th>
-            <th<?php if ('username' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Username 
+            <th style="text-align: center;" <?php if ('username' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+               <span class="label label-inverse"> Nom
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'username', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'username', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                               </span>
             </th>
-            <th<?php if ('password' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Password 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'password', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'password', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('date_created' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Date Created 
+            <th style="text-align: center;"<?php if ('date_created' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+               <span class="label label-inverse"> Date Creation 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'date_created', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'date_created', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                               </span>
             </th>
-            <th<?php if ('role' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Role 
+            <th style="text-align: center;" <?php if ('role' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+               <span class="label label-inverse"> Profil 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('role', $this->paramrole, array('onchange' => 'updateFilters(\'role\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableRoleusers->fetchPairs());
-?>
+                               </span>
             </th>
             <th<?php if ('user_daral' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                User Daral 
+                <span class="label label-inverse"> Daral 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'user_daral', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'user_daral', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('user_daral', $this->paramuser_daral, array('onchange' => 'updateFilters(\'user_daral\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableDaral->fetchPairs());
-?>
-            </th>
+        
+                           </span></th>
             <th>Actions</th>
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('username' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Username 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'username', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'username', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('password' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Password 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'password', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'password', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('date_created' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Date Created 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'date_created', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'date_created', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('role' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Role 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'role', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('role', $this->paramrole, array('onchange' => 'updateFilters(\'role\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableRoleusers->fetchPairs());
-?>
-            </th>
-            <th<?php if ('user_daral' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                User Daral 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'user_daral', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'user_daral', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                <?php
-    echo $this->formSelect('user_daral', $this->paramuser_daral, array('onchange' => 'updateFilters(\'user_daral\', this.options[this.selectedIndex].value)'), array('' => '- - Change - -') + $tableDaral->fetchPairs());
-?>
-            </th>
-            <th>Actions</th>
-        </tr>
-    </tfoot>
     <tbody>
 <?php foreach ($this->paginator as $row): ?>
         <tr>
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td align="right"><?php echo $row->id; ?></td>
             <td><?php echo $row->username; ?></td>
-            <td><?php echo $row->password; ?></td>
             <td><?php echo $row->date_created; ?></td>
-            <td><?php     $linkedRow = $tableRoleusers->find($row->role)->current();
-    if ($linkedRow) {
-        echo $linkedRow->getZodekenAutoLabel();
-    } else {
-        echo $linkedRow->role, ' (unlinked)';
-    } ?></td>
-            <td><?php     $linkedRow = $tableDaral->find($row->user_daral)->current();
-    if ($linkedRow) {
-        echo $linkedRow->getZodekenAutoLabel();
-    } else {
-        echo $linkedRow->user_daral, ' (unlinked)';
-    } ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'users', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'users', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
+            <td><?php echo $row->role; ?></td>
+            <td><?php echo $row->user_daral ?></td>
+            <td> <a title="Modifier"
+				href="<?php echo $this->url(array('controller' => 'users', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
+				class="icon-pencil"></i></a> - <a title="Archiver"
+				onclick="return confirm('Confirmez la suppression!');"
+				href="<?php echo $this->url(array('controller' => 'users', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
+				class="icon-trash"></i></a></td>
         </tr>
 <?php endforeach; ?>
     </tbody>
 </table><br />
-<input type="submit" value="Delete Selected Rows" />
-</form>
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',

@@ -61,12 +61,7 @@ class Application_Form_EditUsers extends Zend_Form
                 ->setRequired(true)
         );
 
-        $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Save')
-                ->setAttrib('type', 'submit')
-        );
-
+      
         parent::init();
     }
 }
