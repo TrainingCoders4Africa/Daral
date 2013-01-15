@@ -36,20 +36,7 @@ class Application_Form_EditLocalite extends Zend_Form
                 ->setRequired(true)
         );
 
-        $tableRegion = new Application_Model_Region_DbTable();
-        $this->addElement(
-            $this->createElement('select', 'region')
-                ->setLabel('Region')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableRegion->fetchPairs())
-                ->setRequired(true)
-        );
-
-        $this->addElement(
-            $this->createElement('button', 'submit')
-                ->setLabel('Save')
-                ->setAttrib('type', 'submit')
-        );
-
+     
         parent::init();
     }
 }

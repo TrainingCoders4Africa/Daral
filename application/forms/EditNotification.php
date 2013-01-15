@@ -18,15 +18,13 @@ class Application_Form_EditNotification extends Zend_Form
             $this->createElement('hidden', 'id')
                 
         );
-
-        $tableFarmer = new Application_Model_Farmer_DbTable();
+        
         $tableUsers = new Application_Model_Users_DbTable();
         $this->addElement(
-            $this->createElement('select', 'id_farmer')
-                ->setLabel('Eleveur')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableFarmer->fetchPairs())
-                ->setRequired(true)
+        		$this->createElement('hidden', 'id_user')
+        		->setValue($tableUsers->getUserConnected())
         );
+        
 
         $tableLocalite = new Application_Model_Localite_DbTable();
         $this->addElement(
@@ -51,13 +49,16 @@ class Application_Form_EditNotification extends Zend_Form
                 ->setRequired(true)
         );
 
-        $tableUsers = new Application_Model_Users_DbTable();
         $this->addElement(
-            $this->createElement('select', 'id_user')
-                ->setLabel('Id User')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableUsers->fetchPairs())
-                ->setRequired(true)
+        		$this->createElement('textarea', 'description')
+        		->setLabel('Description')
+        		->setAttrib('rows', '4')
+        		->setAttrib('cols', '8')
+        		->setAttrib("maxlength", 1000)
+        		->setRequired(true)
+        		->addValidator(new Zend_Validate_StringLength(array("max" => 1000)))
         );
+        
 
         parent::init();
     }

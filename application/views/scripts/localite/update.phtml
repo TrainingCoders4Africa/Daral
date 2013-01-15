@@ -1,4 +1,62 @@
-<h1>Update Localite: <?php echo $this->row->getZodekenAutoLabel(); ?></h1>
-
 <?php
-echo $this->form->setAction($this->url());
+$this->headTitle('Modifier Localite');
+$form = $this->form;
+?>
+
+<div class="content">		
+<div class="header">
+   <h2>Modifier Localite</h2>
+</div>
+        <ul class="breadcrumb">
+            
+            <li><a href="<?php echo $this->url(array('controller' => 'localite'), null, true); ?>" class="black" >Notifications</a> <span class="divider">/</span></li>
+            <li class="active">Modification localite</li>
+        </ul>
+<form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
+<div style="position: static; width: 90%; margin: auto;">
+	<table style="background-color : #eeeeee; width: 90%; border-left: 0 solid #DDDDDD;" class="table-bordered" ><tr>
+    <?php
+    $i = 1;
+    
+   
+    
+    /* @var $form Zend_Form */
+    foreach ($form->getElements() as $element):
+        /* @var $element Zend_Form_Element */
+        $errors = $element->getMessages();
+        $elementName = $element->getName();
+        $i++;
+        ?>
+     
+	           
+	            <td width="25%" align=right class="control-group<?php if ($errors) echo ' error'; ?>">
+            	<?php if ($element->getType() != 'Zend_Form_Element_Button'): ?>
+                        <?php echo $element->getLabel(); ?>
+                <?php endif; ?>
+	            </td>
+            	<td width="25%" align="left">
+                <?php echo $element->renderViewHelper(); ?>
+                <?php if ($errors): ?>
+                    <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
+                <?php endif; ?>
+           
+	            </td>
+	                  <?php echo '</tr><tr>'; ?>
+	                  <td width="25%" align=right class="control-group<?php if ($errors) echo ' error'; ?>">&nbsp; 
+	                  </td>
+	                  <td  width="25%" align="left">&nbsp;</td></tr><tr> 
+	                  
+        <?php
+        endforeach;
+        ?>
+        </tr></table>
+         <br/>
+        <div class="row">
+      <div class="span7"></div>
+        <button class="btn btn-success" type="submit">Valider</button>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'localite'), null, true); ?>">Annuler</a>
+       </div>
+  </div>
+
+</form>
+</div>

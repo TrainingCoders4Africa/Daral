@@ -63,7 +63,12 @@ class DaralController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
-                    
+
+                $id_localite = $this->_getParam('id_localite');
+                $tableLocalite = new Application_Model_Localite_DbTable();
+                $row_localite = $tableLocalite->find($id_localite)->current();
+                $values['id_localite'] = $row_localite->getName();
+                
                 $tableDaral = new Application_Model_Daral_DbTable();
                 $tableDaral->insert($values);
                     

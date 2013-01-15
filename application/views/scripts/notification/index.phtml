@@ -42,8 +42,7 @@ function updateFilters(paramName, paramValue)
 
         <ul class="breadcrumb">
             <li><a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'index'), null, true); ?>" class="black" >Liste des Notifications</a> <span class="divider">/</span></li>
-            <li class="active">Nouvelle Notification</li>
+            <li class="active">Historique des Notifications</li>
         </ul>
 
 <div
@@ -86,13 +85,7 @@ function updateFilters(paramName, paramValue)
 			<a
 				href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
 			</span></th>
-			<th style="text-align: center;"
-			<?php if ('id_farmer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-			<span class="label label-inverse">Eleveur <a
-				href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'asc')); ?>'>&#x25B2;</a>
-			<a
-				href='<?php echo $this->url($_GET + array('_sf' => 'id_farmer', '_so' => 'desc')); ?>'>&#x25BC;</a>
-			</span></th>
+			
 			<th style="text-align: center;"
 			<?php if ('id_localite' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
 			<span class="label label-inverse">Localite <a
@@ -114,6 +107,13 @@ function updateFilters(paramName, paramValue)
 			<a
 				href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
 			</span></th>
+			 <th style="text-align: center;" 
+            <?php if ('description' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Description 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </span></th>
 		<?php if ($tableUsers->isAdmin() === TRUE){ ?>	<th>Actions</th><?php }?>
 		</tr>
 	</thead>
@@ -124,12 +124,7 @@ function updateFilters(paramName, paramValue)
 			<td align="center"><input type="checkbox" name="del_id[]"
 				value="<?php echo $row->id; ?>" /></td>
 			<td align="right"><?php echo $row->id; ?></td>
-			<td><?php     $linkedRow = $tableFarmer->getFarmerById($row->id_farmer);
-			if ($linkedRow) {
-				echo $linkedRow->getZodekenAutoLabel();
-			} else {
-				echo $linkedRow->id_farmer, ' (unlinked)';
-			} ?></td>
+			
 			<td><?php     $linkedRow = $tableLocalite->find($row->id_localite)->current();
 			if ($linkedRow) {
 				echo $linkedRow->getZodekenAutoLabel();
@@ -143,6 +138,7 @@ function updateFilters(paramName, paramValue)
 			} else {
 				echo $linkedRow->type, ' (unlinked)';
 			} ?></td>
+			<td align="right"><?php echo $row->description; ?></td>
 			<?php if ($tableUsers->isAdmin() === TRUE){ ?>
 			<td style="text-align: left"><a title="Envoyer sms"
 				href="<?php echo $this->url(array('controller' => 'notification', 'action' => 'sendsms', 'id' => $row->id, 'id_localite' => $row->id_localite, 'id_farmer' => $row->id_farmer, 'type' => $row->type), null, true); ?>"><i

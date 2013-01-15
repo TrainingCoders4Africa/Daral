@@ -27,17 +27,7 @@ class Application_Form_EditTypenotification extends Zend_Form
         		->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
         		->addFilter(new Zend_Filter_StringTrim())
         );
-        
-        $this->addElement(
-        		$this->createElement('textarea', 'description')
-        		->setLabel('Description')
-        		->setAttrib('rows', '4')
-        		->setAttrib('cols', '8')
-        		->setAttrib("maxlength", 1000)
-        		->setRequired(true)
-        		->addValidator(new Zend_Validate_StringLength(array("max" => 1000)))
-        );
-        
+      
 
         
 
