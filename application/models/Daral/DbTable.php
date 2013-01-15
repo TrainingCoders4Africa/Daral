@@ -20,13 +20,13 @@ class Application_Model_Daral_DbTable extends Application_Model_Daral_DbTable_Ab
 		$nbCheptel = "select count(*) from animal";
 		$nbNotific = "select count(*) from notification";
 		$nbNotifVol="select count(*) from notification n,typenotification t where n.type=t.id and t.libelle like '%vol%'";
-		$LastNotifVol="select t.description,n.id_localite from notification n,typenotification t where t.id=n.type order by n.id desc limit 1";
+		$LastNotifVol="select n.description,n.id_localite from notification n order by n.id desc limit 1";
 		
 		
 		$stmt0 = $this->_db->query($nbFarmer);
 		$rows0 = $stmt0->fetchAll(Zend_Db::FETCH_NUM);
 		if (count($rows0) == 0) {
-			return array();
+			return 0;
 		}
 		foreach ($rows0 as $row)
 		{
@@ -37,7 +37,7 @@ class Application_Model_Daral_DbTable extends Application_Model_Daral_DbTable_Ab
 		$stmt1 = $this->_db->query($nbCheptel);
 		$rows1 = $stmt1->fetchAll(Zend_Db::FETCH_NUM);
 		if (count($rows1) == 0) {
-			return array();
+			return 0;
 		}
 		foreach ($rows1 as $row)
 		{
@@ -47,7 +47,7 @@ class Application_Model_Daral_DbTable extends Application_Model_Daral_DbTable_Ab
 		$stmt2 = $this->_db->query($nbNotific);
 		$rows2 = $stmt2->fetchAll(Zend_Db::FETCH_NUM);
 		if (count($rows2) == 0) {
-			return array();
+			return 0;
 		}
 		foreach ($rows2 as $row)
 		{
@@ -57,7 +57,7 @@ class Application_Model_Daral_DbTable extends Application_Model_Daral_DbTable_Ab
 		$stmt3 = $this->_db->query($nbNotifVol);
 		$rows3 = $stmt3->fetchAll(Zend_Db::FETCH_NUM);
 		if (count($rows3) == 0) {
-			return array();
+			return 0;
 		}
 		foreach ($rows3 as $row)
 		{
@@ -67,7 +67,7 @@ class Application_Model_Daral_DbTable extends Application_Model_Daral_DbTable_Ab
 		$stmt4 = $this->_db->query($LastNotifVol);
 		$rows4 = $stmt4->fetchAll(Zend_Db::FETCH_NUM);
 		if (count($rows4) == 0) {
-			return array();
+			return 0;
 		}
 		foreach ($rows4 as $row)
 		{

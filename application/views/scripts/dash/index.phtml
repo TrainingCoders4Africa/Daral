@@ -50,13 +50,17 @@ $tableDepartement = new Application_Model_Departement_DbTable_Departement();
 
 				<div class="alert alert-info">
 					<strong>URGENCE SIGNALEE :: </strong>
-					<blink style="color: RED;"><?php echo $vals[4]." dans la localit&eacute; de "; ?>
+					<blink style="color: RED;">
+					
+					<?php echo $vals[4]." dans la localit&eacute; de "; ?>
 					<?php     $linkedRow = $tableLocalite->find($vals[5])->current();
 									if ($linkedRow) {
 										echo $linkedRow->getZodekenAutoLabel();
 									} else {
 										echo $vals[5], '';
-									} ?></blink>
+									} ?>
+									</blink>
+									
 				</div>
 
 				<div class="block">
@@ -170,7 +174,7 @@ $tableDepartement = new Application_Model_Departement_DbTable_Departement();
 							<thead>
 								<tr>
 									<th style="text-align: center;">Identifiant</th>
-									<th style="text-align: center;">Eleveur</th>
+									<!-- <th style="text-align: center;">Eleveur</th> -->
 									<th style="text-align: center;">Localite</th>
 									<th style="text-align: center;">Date</th>
 									<th style="text-align: center;">Type</th>
@@ -186,8 +190,8 @@ $tableDepartement = new Application_Model_Departement_DbTable_Departement();
 
 									<td style="text-align: center;"><?php echo $notification[0]; ?>
 									</td>
-									<td style="text-align: center;"><?php echo $notification[1]; ?>
-									</td>
+									<!-- <td style="text-align: center;"><?php //echo $notification[1]; ?>
+									</td> -->
 									<td style="text-align: center;"><?php     $linkedRow = $tableLocalite->find($notification[2])->current();
 									if ($linkedRow) {
 										echo $linkedRow->getZodekenAutoLabel();
