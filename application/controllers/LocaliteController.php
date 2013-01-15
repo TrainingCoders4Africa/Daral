@@ -46,7 +46,12 @@ class LocaliteController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
-                    
+
+                $id_departement = $this->_getParam('departement');
+                $tableDepartement = new Application_Model_Departement_DbTable();
+                $row_departement = $tableDepartement->find($id_departement)->current();
+                $values['departement'] = $row_departement->getName();
+                
                 $tableLocalite = new Application_Model_Localite_DbTable();
                 $tableLocalite->insert($values);
                     

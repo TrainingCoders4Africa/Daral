@@ -12,12 +12,12 @@
  * @method Application_Model_Notification_Row setFromArray($data)
  *
  * @property integer $id
- * @property string $id_farmer
  * @property integer $id_localite
  * @property string $date
  * @property integer $type
  * @property integer $id_user
  * @property integer $disabled
+ * @property string $description
  */
 abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
@@ -220,6 +220,29 @@ abstract class Application_Model_Notification_Row_Abstract extends Zend_Db_Table
     public function getUsersRowByIdUser()
     {
         return $this->findParentRow('Application_Model_Users_DbTable', 'id_user');
+    }
+    
+    /**
+     * Set value for 'description' field
+     *
+     * @param string $Description
+     *
+     * @return Application_Model_Typenotification_Row
+     */
+    public function setDescription($Description)
+    {
+    	$this->description = $Description;
+    	return $this;
+    }
+    
+    /**
+     * Get value of 'description' field
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+    	return $this->description;
     }
     
     /**

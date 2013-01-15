@@ -29,7 +29,7 @@ class Application_Form_EditUsers extends Zend_Form
         );
 
         $this->addElement(
-            $this->createElement('text', 'password')
+            $this->createElement('password', 'password')
                 ->setLabel('Password')
                 ->setAttrib("maxlength", 50)
                 ->setRequired(true)

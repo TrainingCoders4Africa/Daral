@@ -14,7 +14,6 @@
  * @property integer $id
  * @property string $name
  * @property string $departement
- * @property string $region
  */
 abstract class Application_Model_Localite_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {

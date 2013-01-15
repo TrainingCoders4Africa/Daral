@@ -79,13 +79,6 @@ Rechercher: <input class="input-large search-query"
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'libelle', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </span></th>
-            <th style="text-align: center;" 
-            <?php if ('description' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Description 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'description', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </span></th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -95,7 +88,6 @@ Rechercher: <input class="input-large search-query"
             <td style="text-align: left"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td align="right"><?php echo $row->id; ?></td>
             <td><?php echo $row->libelle; ?></td>
-            <td><?php echo $row->description; ?>&nbsp</td>
             <td><a title="Modifier"
 				href="<?php echo $this->url(array('controller' => 'typenotification', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
 				class="icon-pencil"></i></a> - <a title="Archiver"

@@ -146,23 +146,19 @@ class NotificationController extends Zend_Controller_Action
 
 				//on recupere l'objet Eleveur  contenant les informations sur l'eleveur
 				////recupere tous les eleveurs dont la localite est egale a celle saisie par l'utilisateur
-				$id_farmer = $this->_getParam('id_farmer');
-				$row_farmer = $farmerModel->getFarmerById($id_farmer);
+				//$id_farmer = $this->_getParam('id_farmer');
+				//$row_farmer = $farmerModel->getFarmerById($id_farmer);
 				$farmers = $farmerModel->fetchAll("IsActive_farmer = '1' AND id_localite='".$row_localite->getName()."'");
 
+				$tableNotification = new Application_Model_Notification_DbTable();
+				$id_notification = (int) $this->_getParam('id', 0);
+				$row_notification = $tableNotification->find($id_notification)->current();
+				
 					
 				$message = '';
 				//notification de type info on envoi le libelle du type de notfication
-				if(stristr($row_typeNotification->getLibelle(), 'vol') === 'vol')
-				{
-					//notification de type vol on envoi les informations sur l'eleveur
-					$message = "l'eleveur ".$row_farmer->getFirstnameFarmer()." ".$row_farmer->getLastnameFarmer().
-					" a ete victime d'un ". $row_typeNotification->getLibelle()." avec le numero suivant : ".$row_farmer->getIdFarmer();
-				}
-				else
-				{
-					$message = $row_typeNotification->getLibelle();
-				}
+				//notification de type vol on envoi les informations sur l'eleveur
+				$message = $row_typeNotification->getLibelle(). ' : '. $row_notification->description;
 
 				//on parcourt la liste des eleveurs de cette localite et on leur envoi le message
 				foreach($farmers as $farmer)

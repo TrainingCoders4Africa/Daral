@@ -46,7 +46,17 @@ class UsersController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
-                    
+
+                $user_daral = $this->_getParam('user_daral');
+                $table_daral = new Application_Model_Daral_DbTable();
+                $row_daral = $table_daral->find($user_daral)->current();
+                $values['user_daral'] = $row_daral->getName();
+                
+                $user_role = $this->_getParam('role');
+                $table_role = new Application_Model_Roleusers_DbTable();
+                $row_role = $table_role->find($user_role)->current();
+                $values['role'] = $row_role->getDescription();
+                
                 $tableUsers = new Application_Model_Users_DbTable();
                 $tableUsers->insert($values);
                     

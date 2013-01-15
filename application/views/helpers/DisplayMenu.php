@@ -33,6 +33,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $typenotification=$this->view->baseUrl().'/typenotification';
 		   $users=$this->view->baseUrl().'/users';
 		   $daral=$this->view->baseUrl().'/daral';
+		   $localite=$this->view->baseUrl().'/localite';
             $html = '
 			<div class="navbar-inner" >
                 <ul class="nav pull-right">
@@ -121,6 +122,18 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
               </script>
                <li ><a href="'.$typenotification.'">Liste</a></li>
                <li><a href="'.$typenotification.'/create">Ajouter</a></li>
+             </ul>
+               		
+              <li> <a href="#localite-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-localite"></i>Localite</a></li>
+              <ul id="localite-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-localite").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$localite.'">Liste</a></li>
+               <li ><a href="'.$localite.'/create">Ajouter</a></li>
              </ul>
                		
          </ul>
