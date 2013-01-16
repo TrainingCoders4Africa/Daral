@@ -1,20 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mar 15 Janvier 2013 à 01:16
--- Version du serveur: 5.5.16
--- Version de PHP: 5.3.8
+-- Généré le: Mer 16 Janvier 2013 à 09:35
+-- Version du serveur: 5.5.25
+-- Version de PHP: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données: `daral`
@@ -26,7 +20,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `animal`
 --
 
-CREATE TABLE IF NOT EXISTS `animal` (
+CREATE TABLE `animal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `animal_id` varchar(13) NOT NULL,
   `fk_id_farmer` varchar(30) NOT NULL,
@@ -34,26 +28,37 @@ CREATE TABLE IF NOT EXISTS `animal` (
   `photo_left` varchar(100) NOT NULL,
   `photo_right` varchar(100) NOT NULL,
   `photo_front` varchar(100) NOT NULL,
+  `isactive` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `animal_id` (`animal_id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `animal`
 --
 
-INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`) VALUES
-(1, '10010001C0001', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(2, '10010002B0001', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(3, '10010002B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(4, '10010002B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(5, '10010002B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(6, '10010002B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(7, '10010001C0002', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(8, '10010001C0003', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png'),
-(9, '10010001C0004', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png');
+INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`, `isactive`) VALUES
+(1, '10010001C0001', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(2, '10010002B0001', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(3, '10010002B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(4, '10010002B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(5, '10010002B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(6, '10010002B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(7, '10010001C0002', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(8, '10010001C0003', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(9, '10010001C0004', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(10, '10010003B0001', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(11, '10010003B0002', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(12, '10010003B0003', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(13, '10010003B0004', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(14, '10010003B0005', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(15, '10010003B0006', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(16, '10010003B0007', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(17, '10010003B0008', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(18, '10010003B0009', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
+(19, '10010003B0010', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1);
 
 -- --------------------------------------------------------
 
@@ -61,7 +66,7 @@ INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo
 -- Structure de la table `animaltype`
 --
 
-CREATE TABLE IF NOT EXISTS `animaltype` (
+CREATE TABLE `animaltype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `animal_tag` char(1) NOT NULL,
@@ -84,7 +89,7 @@ INSERT INTO `animaltype` (`id`, `name`, `animal_tag`) VALUES
 -- Structure de la table `categorie`
 --
 
-CREATE TABLE IF NOT EXISTS `categorie` (
+CREATE TABLE `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categorie_id` int(11) NOT NULL,
   `max_animal` int(11) NOT NULL,
@@ -106,7 +111,7 @@ INSERT INTO `categorie` (`id`, `categorie_id`, `max_animal`) VALUES
 -- Structure de la table `cheptel`
 --
 
-CREATE TABLE IF NOT EXISTS `cheptel` (
+CREATE TABLE `cheptel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_id_farmer` varchar(30) NOT NULL,
   `fk_animaltype` varchar(30) NOT NULL,
@@ -115,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `cheptel` (
   PRIMARY KEY (`id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `cheptel`
@@ -123,7 +128,8 @@ CREATE TABLE IF NOT EXISTS `cheptel` (
 
 INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animaltype`, `total_animaltype`, `isactive`) VALUES
 (1, '10010001', 'Cheval', 4, 1),
-(2, '10010002', 'Boeuf', 5, 1);
+(2, '10010002', 'Boeuf', 5, 1),
+(3, '10010003', 'Boeuf', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +137,7 @@ INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animaltype`, `total_animaltype`
 -- Structure de la table `daral`
 --
 
-CREATE TABLE IF NOT EXISTS `daral` (
+CREATE TABLE `daral` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_localite` varchar(50) NOT NULL,
   `name` varchar(30) NOT NULL COMMENT 'ex: 0102',
@@ -151,8 +157,7 @@ INSERT INTO `daral` (`id`, `id_localite`, `name`) VALUES
 (4, 'Passy', '1004'),
 (5, 'Ndoffane', '1802'),
 (6, 'Ndiedieng', '1801'),
-(7, 'Ndiaffat', '2801'),
-(11, 'Ndiaffat', '10005');
+(7, 'Ndiaffat', '2801');
 
 -- --------------------------------------------------------
 
@@ -160,7 +165,7 @@ INSERT INTO `daral` (`id`, `id_localite`, `name`) VALUES
 -- Structure de la table `daralstatanimal`
 --
 
-CREATE TABLE IF NOT EXISTS `daralstatanimal` (
+CREATE TABLE `daralstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_daral_name` varchar(30) NOT NULL,
   `fk_animaltype` varchar(30) NOT NULL,
@@ -176,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `daralstatanimal` (
 -- Structure de la table `daralstatfarmer`
 --
 
-CREATE TABLE IF NOT EXISTS `daralstatfarmer` (
+CREATE TABLE `daralstatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_daral_name` varchar(30) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -190,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `daralstatfarmer` (
 -- Structure de la table `departement`
 --
 
-CREATE TABLE IF NOT EXISTS `departement` (
+CREATE TABLE `departement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `region` varchar(50) NOT NULL,
@@ -256,7 +261,7 @@ INSERT INTO `departement` (`id`, `name`, `region`) VALUES
 -- Structure de la table `departementstatanimal`
 --
 
-CREATE TABLE IF NOT EXISTS `departementstatanimal` (
+CREATE TABLE `departementstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_departement_name` varchar(50) NOT NULL,
   `fk_animaltype` varchar(30) NOT NULL,
@@ -272,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `departementstatanimal` (
 -- Structure de la table `departementstatfarmer`
 --
 
-CREATE TABLE IF NOT EXISTS `departementstatfarmer` (
+CREATE TABLE `departementstatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_departement_name` varchar(50) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -286,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `departementstatfarmer` (
 -- Structure de la table `farmer`
 --
 
-CREATE TABLE IF NOT EXISTS `farmer` (
+CREATE TABLE `farmer` (
   `rank_farmer` int(11) NOT NULL AUTO_INCREMENT,
   `id_farmer` varchar(30) NOT NULL,
   `categorie` int(11) NOT NULL,
@@ -313,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `farmer` (
   KEY `departement` (`departement`,`region`),
   KEY `departement_2` (`departement`),
   KEY `region` (`region`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Contenu de la table `farmer`
@@ -321,7 +326,8 @@ CREATE TABLE IF NOT EXISTS `farmer` (
 
 INSERT INTO `farmer` (`rank_farmer`, `id_farmer`, `categorie`, `national_id`, `address_farmer`, `phone_farmer`, `registration_date`, `daral_originel`, `daral_actuel`, `firstname_farmer`, `lastname_farmer`, `isactive_farmer`, `birthdate_farmer`, `birthplace_farmer`, `id_localite`, `departement`, `region`) VALUES
 (40, '10010001', 2, '1209812347788', 'Matam', '221775312740', '2013-01-11', '1001', '1802', 'Adama', 'Tounkara', 1, '1967-01-01', 'Matam', 'Ndoffane', 'Kaolack', 'Kaolack'),
-(41, '10010002', 1, '1219812347789', 'Podor', '775989808', '2013-01-11', '1001', '1001', 'Baba', 'Samb', 1, '1960-02-02', 'Podor', 'Diossong', 'Foundiougne', 'Fatick');
+(41, '10010002', 1, '1219812347789', 'Podor', '775989808', '2013-01-11', '1001', '1001', 'Baba', 'Samb', 1, '1960-02-02', 'Podor', 'Diossong', 'Foundiougne', 'Fatick'),
+(42, '10010003', 1, '1234812347788', 'Ziguinchor', '22178675433', '2013-01-15', '1001', '1001', 'Doudou', 'Drame', 1, '1975-06-02', 'Ziguinchor', 'Diossong', 'Foundiougne', 'Fatick');
 
 -- --------------------------------------------------------
 
@@ -329,7 +335,7 @@ INSERT INTO `farmer` (`rank_farmer`, `id_farmer`, `categorie`, `national_id`, `a
 -- Structure de la table `langue`
 --
 
-CREATE TABLE IF NOT EXISTS `langue` (
+CREATE TABLE `langue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(100) NOT NULL,
   `pays` varchar(100) NOT NULL,
@@ -343,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `langue` (
 -- Structure de la table `localite`
 --
 
-CREATE TABLE IF NOT EXISTS `localite` (
+CREATE TABLE `localite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `departement` varchar(50) NOT NULL,
@@ -371,7 +377,7 @@ INSERT INTO `localite` (`id`, `name`, `departement`) VALUES
 -- Structure de la table `localitestatanimal`
 --
 
-CREATE TABLE IF NOT EXISTS `localitestatanimal` (
+CREATE TABLE `localitestatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_localite_name` varchar(50) NOT NULL,
   `fk_animaltype` varchar(30) NOT NULL,
@@ -387,7 +393,7 @@ CREATE TABLE IF NOT EXISTS `localitestatanimal` (
 -- Structure de la table `localitestatfarmer`
 --
 
-CREATE TABLE IF NOT EXISTS `localitestatfarmer` (
+CREATE TABLE `localitestatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_localite_name` varchar(50) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -401,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `localitestatfarmer` (
 -- Structure de la table `maladie`
 --
 
-CREATE TABLE IF NOT EXISTS `maladie` (
+CREATE TABLE `maladie` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(100) NOT NULL,
   `symptomes` text NOT NULL,
@@ -417,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `maladie` (
 -- Structure de la table `media`
 --
 
-CREATE TABLE IF NOT EXISTS `media` (
+CREATE TABLE `media` (
   `id_media` int(11) NOT NULL AUTO_INCREMENT,
   `titre` varchar(250) NOT NULL,
   `langue` varchar(100) NOT NULL,
@@ -435,7 +441,7 @@ CREATE TABLE IF NOT EXISTS `media` (
 -- Structure de la table `national`
 --
 
-CREATE TABLE IF NOT EXISTS `national` (
+CREATE TABLE `national` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_animaltype` varchar(30) NOT NULL,
   `total_animaltype` int(11) NOT NULL,
@@ -450,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `national` (
 -- Structure de la table `notification`
 --
 
-CREATE TABLE IF NOT EXISTS `notification` (
+CREATE TABLE `notification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_farmer` varchar(30) DEFAULT '',
   `id_localite` int(11) NOT NULL,
@@ -465,14 +471,18 @@ CREATE TABLE IF NOT EXISTS `notification` (
   KEY `id_user` (`id_user`),
   KEY `type` (`type`),
   KEY `type_2` (`type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `notification`
 --
 
 INSERT INTO `notification` (`id`, `id_farmer`, `id_localite`, `date`, `type`, `id_user`, `disabled`, `description`) VALUES
-(15, '', 6, '2013-01-15 00:00:00', 1, 2, 0, 'vol de vache');
+(15, '', 6, '2013-01-15 00:00:00', 1, 2, 0, 'vol de vache'),
+(16, '', 2, '2013-01-15 00:00:00', 1, 1, 0, 'eleveur Adama Tounkara id=10010001 a perdu une vache id=5'),
+(17, '', 1, '2013-01-15 00:00:00', 5, 1, 0, 'l eleveur Baba Samb id=10010002 a perdu un boeuf id=1'),
+(18, '', 1, '2013-01-15 00:00:00', 5, 1, 0, 'l eleveur Baba Samb id=10010002 a perdu un boeuf id=1'),
+(19, '', 2, '2013-01-15 00:00:00', 2, 1, 0, 'peste equine declaree');
 
 -- --------------------------------------------------------
 
@@ -480,7 +490,7 @@ INSERT INTO `notification` (`id`, `id_farmer`, `id_localite`, `date`, `type`, `i
 -- Structure de la table `region`
 --
 
-CREATE TABLE IF NOT EXISTS `region` (
+CREATE TABLE `region` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
@@ -513,7 +523,7 @@ INSERT INTO `region` (`id`, `name`) VALUES
 -- Structure de la table `regionstatanimal`
 --
 
-CREATE TABLE IF NOT EXISTS `regionstatanimal` (
+CREATE TABLE `regionstatanimal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_region_name` varchar(50) NOT NULL,
   `fk_animaltype` varchar(30) NOT NULL,
@@ -530,7 +540,7 @@ CREATE TABLE IF NOT EXISTS `regionstatanimal` (
 -- Structure de la table `regionstatfarmer`
 --
 
-CREATE TABLE IF NOT EXISTS `regionstatfarmer` (
+CREATE TABLE `regionstatfarmer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_region_name` varchar(50) NOT NULL,
   `total_farmer` int(11) NOT NULL,
@@ -545,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `regionstatfarmer` (
 -- Structure de la table `roleusers`
 --
 
-CREATE TABLE IF NOT EXISTS `roleusers` (
+CREATE TABLE `roleusers` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `description` varchar(20) NOT NULL COMMENT 'valeur = admin ou gerant',
   PRIMARY KEY (`id`),
@@ -566,13 +576,13 @@ INSERT INTO `roleusers` (`id`, `description`) VALUES
 -- Structure de la table `typenotification`
 --
 
-CREATE TABLE IF NOT EXISTS `typenotification` (
+CREATE TABLE `typenotification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(30) NOT NULL,
   `description` varchar(300) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `libelle` (`libelle`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `typenotification`
@@ -580,9 +590,10 @@ CREATE TABLE IF NOT EXISTS `typenotification` (
 
 INSERT INTO `typenotification` (`id`, `libelle`, `description`) VALUES
 (1, 'vol de vache', ''),
-(2, 'epidemie de maladie de vache', ''),
+(2, 'peste equine', ''),
 (3, 'vol de chevaux', ''),
-(4, 'vol de moutons', '');
+(4, 'vol de moutons', ''),
+(5, 'vol de boeufs', '');
 
 -- --------------------------------------------------------
 
@@ -590,7 +601,7 @@ INSERT INTO `typenotification` (`id`, `libelle`, `description`) VALUES
 -- Structure de la table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
@@ -624,7 +635,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `date_created`, `role`, `user
 -- Structure de la table `veterinaire`
 --
 
-CREATE TABLE IF NOT EXISTS `veterinaire` (
+CREATE TABLE `veterinaire` (
   `rank_veterinaire` int(11) NOT NULL AUTO_INCREMENT,
   `id_veterinaire` varchar(30) NOT NULL,
   `adresse_veterinaire` varchar(100) NOT NULL,
@@ -764,7 +775,3 @@ ALTER TABLE `regionstatfarmer`
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roleusers` (`description`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`user_daral`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
