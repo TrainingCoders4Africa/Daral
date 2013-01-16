@@ -39,6 +39,16 @@ class NationalController extends Zend_Controller_Action
         }
     }
     
+    
+    public function displaystatAction(){
+    	$latitude='37.7831';
+    	$longitude='-122.4039';
+    	//$this->_helper->layout->setLayout('layout2');
+    	    
+    	$this->view->assign(array('latitude'=>$latitude,'longitude'=>$longitude));
+    
+    }
+    
     public function createAction()
     {
         $form = new Application_Form_EditNational();

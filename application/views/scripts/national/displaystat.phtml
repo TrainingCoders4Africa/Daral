@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript">
+			function initialize() {
+				var latlng = new google.maps.LatLng(14.646039720201001,  -17.426376342773438);
+				var settings = {
+					zoom: 7,
+					center: latlng,
+					mapTypeControl: true,
+					mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+					navigationControl: true,
+					navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+					mapTypeId: google.maps.MapTypeId.TERRAIN};
+				var map = new google.maps.Map(document.getElementById("map_canvas"), settings);
+				var contentString = '<div id="content">'+
+					'<div id="siteNotice">'+
+					'</div>'+
+					'<h1 id="firstHeading" class="firstHeading">H¿genhaug</h1>'+
+					'<div id="bodyContent">'+
+					'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'+
+					'</div>'+
+					'</div>';
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+				
+				var companyImage = new google.maps.MarkerImage('images/logo.png',
+					new google.maps.Size(100,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(50,50)
+				);
+
+				var companyShadow = new google.maps.MarkerImage('images/logo_shadow.png',
+					new google.maps.Size(130,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(65, 50));
+
+				var companyPos = new google.maps.LatLng(57.0442, 9.9116);
+
+				var companyMarker = new google.maps.Marker({
+					position: companyPos,
+					map: map,
+					icon: companyImage,
+					shadow: companyShadow,
+					title:"H¿genhaug",
+					zIndex: 3});
+				
+				var trainImage = new google.maps.MarkerImage('images/train.png',
+					new google.maps.Size(50,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(50,50)
+				);
+
+				var trainShadow = new google.maps.MarkerImage('images/train_shadow.png',
+					new google.maps.Size(70,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(60, 50)
+				);
+
+				var trainPos = new google.maps.LatLng(57.0429, 9.9173);
+
+				var trainMarker = new google.maps.Marker({
+					position: trainPos,
+					map: map,
+					icon: trainImage,
+					shadow: trainShadow,
+					title:"Train Station",
+					zIndex: 2
+				});
+
+				var parkingImage = new google.maps.MarkerImage('images/parking.png',
+					new google.maps.Size(50,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(50,50)
+				);
+
+				var parkingShadow = new google.maps.MarkerImage('images/parking_shadow.png',
+					new google.maps.Size(70,50),
+					new google.maps.Point(0,0),
+					new google.maps.Point(60, 50)
+				);
+
+				var parkingPos = new google.maps.LatLng(14.64,-17.426376);
+
+				var parkingMarker = new google.maps.Marker({
+					position: parkingPos,
+					map: map,
+					icon: parkingImage,
+					shadow: parkingShadow,
+					title:"Parking Lot",
+					zIndex: 1
+				});
+				
+				google.maps.event.addListener(companyMarker, 'click', function() {
+					infowindow.open(map,companyMarker);
+				});
+			}
+		</script>
+	</head>
+	<body onload="initialize()">
+	
+	<?php 
+	
+	$tableNational = new Application_Model_National_DbTable();
+	
+	$vals = $tableNational->getNationalStats();
+	
+	?>
+	<div class="content">
+	<div class="header">
+   <h1 class="page-title" >Statistiques Nationales</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Statistiques </a><span class="divider">/</span></li>
+            <li class="active">Pays</li>
+        </ul>
+        
+       
+<div style="margin-left: 1em ;margin-right: 1em; padding-bottom:0.5em;">        
+	<div class="row-fluid">
+	 	<div class="block">
+
+					<a href="#page-stats" class="block-heading" data-toggle="collapse">Dernieres Statistiques 
+						</a>
+					<div id="page-stats" class="block-body collapse in">
+
+						<div class="stat-widget-container">
+							<div class="stat-widget">
+								<div class="stat-button">
+									<p class="title">
+    
+    
+    							<?php $test=0;?>
+    
+									<?php echo $vals[0]; ?></p>
+									<p class="detail">Eleveurs</p>
+								</div>
+							</div>
+
+							<div class="stat-widget">
+								<div class="stat-button">
+									<p class="title">
+
+									<?php echo $vals[1]; ?></p>
+									<p class="detail">Animaux</p>
+								</div>
+							</div>
+
+							<div class="stat-widget">
+								<div class="stat-button">
+									<p class="title">
+
+									<?php echo $vals[2]; ?></p>
+									<p class="detail">Notifications</p>
+								</div>
+							</div>
+
+							<div class="stat-widget">
+								<div class="stat-button">
+									<p class="title">
+
+									<?php echo $vals[3]; ?></p>
+									<p class="detail">Cas de vol</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+	</div>
+</div>
+		<div id="map_canvas" style="width:800px; height:600px;margin-left:2em;"></div>
+	</div>
+	</body>
+</html>
+
+

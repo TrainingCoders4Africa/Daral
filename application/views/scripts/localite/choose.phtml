@@ -40,33 +40,33 @@ function updateFilters(paramName, paramValue)
 </div>
 
         <ul class="breadcrumb">
-            <li><a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li class="active">Liste des localites</li>
+            <li><a href="#" class="black">Statistiques</a><span class="divider">/</span></li>
+            <li class="active">Liste des localit&eacute;s</li>
             
         </ul>
 
-<div class="pull-right">
-<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'index'), null, true); ?>">
-<i class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
-<a class="btn btn-success"
-	href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'create'), null, true); ?>"><i
-	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+<div class="pull-right" style="margin-right:1em">
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'choose'), null, true); ?>">
+<i class=" icon-refresh icon-white"></i> Actualiser</a> 
+
 </div>
 <br />
+<div style="margin-left: 1em; padding-bottom:0.5em;">
 <form method="get" action="<?php echo $this->url(array('controller' => 'localite', 'action' => 'index'), null, true); ?>">
 <div>
 Rechercher: <input class="input-large search-query"
-	placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans
-&nbsp <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
-  'all' => 'All',
-  'name' => 'Name',
+	placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp; dans
+&nbsp; <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => 'Tout',
+  'name' => 'Localite',
   'departement' => 'Departement',
-)); ?>&nbsp
+)); ?>&nbsp;
 <button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'localite', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
 <table  class="table table-bordered table-condensed ">
     <thead>
         <tr>
@@ -100,19 +100,20 @@ Rechercher: <input class="input-large search-query"
             <td align="right"><?php echo $row->id; ?></td>
             <td><?php echo $row->name; ?></td>
             <td align="right"><?php echo $row->departement; ?></td> 
-            <td><a title="Modifier"
-				href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
-				class="icon-pencil"></i></a> - <a title="Archiver"
-				onclick="return confirm('Confirmez la suppression!');"
-				href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
-				class="icon-trash"></i></a></td></tr>
+            <td align="center"><a  href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'displaystat','name'=>$row->name,'departement'=>$row->departement), null, true); ?>" >
+              <i class="icon-zoom-in"></i></a> 
+              </td>
+          
 <?php endforeach; ?>
     </tbody>
 </table><br />
-<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
+</div>
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+</form>
 
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');?>
+</div>
 </div>

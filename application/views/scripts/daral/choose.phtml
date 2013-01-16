@@ -1,5 +1,6 @@
 <?php
 $tableLocalite = new Application_Model_Localite_DbTable();
+
 ?>
 
 <script type="text/javascript">
@@ -38,21 +39,22 @@ function updateFilters(paramName, paramValue)
 </div>
 
         <ul class="breadcrumb">
-            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Daral</a> <span class="divider">/</span></li>
-            <li class="active">Liste</li>
+            <li><a href="#" class="black">Statistiques</a><span class="divider">/</span></li>
+            <li class="active">Liste des darals</li>
         </ul>
 
 
-<div
-	class="pull-right"><a class="btn btn-info"
-	href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>"><i
-	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
-<a class="btn btn-success"
-	href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'create'), null, true); ?>"><i
-	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+<div class="pull-right" style="margin-right:1em"><a class="btn btn-info"
+	href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'choose'), null, true); ?>"><i
+	class=" icon-refresh icon-white"></i> Actualiser</a> 
+
 </div>
 <br />
+
+<div style="margin-left: 1em; padding-bottom:0.5em;">
+
+
+
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>">
 <div>
@@ -66,7 +68,12 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 </div>
 </form>
 
+
+
+
+
 <form method="post" action="<?php echo $this->url(array('controller' => 'daral', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
 <table  class="table table-bordered table-condensed ">
     <thead>
         <tr>
@@ -95,20 +102,21 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td  align="right"><?php echo $row->name; ?></td>
             <td><?php echo $row->id_localite; ?></td>
-            <td align="center"><a  href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'displaystat'), null, true); ?>" ><i class="icon-zoom-in"></i></a> 
-            - <a title="Modifier"
-				href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
-				class="icon-pencil"></i></a> - <a title="Archiver"
-				onclick="return confirm('Confirmez la suppression!');"
-				href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
-				class="icon-trash"></i></a></td>
+            <td align="center"><a  href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'displaystat','name'=>$row->name,'localite'=>$row->id_localite), null, true); ?>" ><i class="icon-zoom-in"></i></a> 
+           </td>
             </tr>
 <?php endforeach; ?>
     </tbody>
 </table><br />
-<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
-
+</div>
+</form>
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');?>
+
+</div>
+
+
+
+
 </div>

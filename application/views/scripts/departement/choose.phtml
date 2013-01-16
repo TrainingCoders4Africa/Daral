@@ -1,0 +1,113 @@
+<?php
+$tableRegion = new Application_Model_Region_DbTable();
+?>
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+<div class="content">
+
+<div class="header">
+   <h1 class="page-title" >Liste des d&eacute;partements</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Statistiques</a><span class="divider">/</span></li>
+            <li class="active">D&eacute;partements</li>
+            
+        </ul>
+        
+<div class="pull-right" style="margin-right:1em">        
+        
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'departement', 'action' => 'choose'), null, true); ?>">
+<i class=" icon-refresh icon-white"></i> Actualiser</a> 
+
+</div>
+<br />
+<div style="margin-left: 1em; padding-bottom:0.5em;">
+
+
+<form method="get" action="<?php echo $this->url(array('controller' => 'departement', 'action' => 'index'), null, true); ?>">
+<div>
+Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp;dans&nbsp;
+<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => 'Tout',
+  'name' => 'Departement',
+  'region' => 'Region',
+)); ?>&nbsp;
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button></div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'departement', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
+<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
+    cellpadding="3">
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+           
+            <th<?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">D&eacute;partements
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('region' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">R&eacute;gions 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'region', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'region', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+<?php foreach ($this->paginator as $row): ?>
+        <tr>
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
+            <td><?php echo $row->name; ?></td>
+            <td><?php echo $row->region ?></td>
+  			<td align="center"><a  href="<?php echo $this->url(array('controller' => 'departement', 'action' => 'displaystat','departement'=>$row->name,'region'=>$row->region), null, true); ?>" >
+              <i class="icon-zoom-in"></i></a> 
+              </td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table><br />
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+</div>
+</form>
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');?>
+</div>
+
+</div>

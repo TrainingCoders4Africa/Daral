@@ -34,6 +34,9 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $users=$this->view->baseUrl().'/users';
 		   $daral=$this->view->baseUrl().'/daral';
 		   $localite=$this->view->baseUrl().'/localite';
+		   $departement=$this->view->baseUrl().'/departement';
+		   $region=$this->view->baseUrl().'/region';
+		   $national=$this->view->baseUrl().'/national';
             $html = '
 			<div class="navbar-inner" >
                 <ul class="nav pull-right">
@@ -216,11 +219,11 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		  });
         </script>
-               <li ><a href="'.$daral.'">Darals</a></li>
-               <li><a href="#">Localites</a></li>
-               <li><a href="#">Departements</a></li>
-               <li><a href="#">Regions</a></li>
-               <li><a href="#">Pays</a></li>
+               <li ><a href="'.$daral.'/choose">Darals</a></li>
+               <li><a href="'.$localite.'/choose">Localites</a></li>
+               <li><a href="'.$departement.'/choose">Departements</a></li>
+               <li><a href="'.$region.'/choose">Regions</a></li>
+               <li><a href="'.$national.'/displaystat">Pays</a></li> 
          </ul>
    <!----------------END----------------------->
    

@@ -39,6 +39,57 @@ class DepartementController extends Zend_Controller_Action
         }
     }
     
+    
+    
+    
+    
+    
+    public function chooseAction(){ //displays list of departement in order to choose from to get statistics
+    	$this->getFrontController()->getRequest()->setParams($_GET);
+    
+    	// zsf = zodeken sort field, zso = zodeken sort order
+    	$sortField = $this->_getParam('_sf', '');
+    	$sortOrder = $this->_getParam('_so', '');
+    	$pageNumber = $this->_getParam('page', 1);
+    
+    
+    	$tableDepartement = new Application_Model_Departement_DbTable();
+    	$gridSelect = $tableDepartement->getDbSelectByParams($this->_getAllParams(), $sortField, $sortOrder);
+    	$paginator = Zend_Paginator::factory($gridSelect);
+    	$paginator->setItemCountPerPage(20)
+    	->setCurrentPageNumber($pageNumber);
+    
+    	$this->view->assign(array(
+    			'paginator' => $paginator,
+    			'sortField' => $sortField,
+    			'sortOrder' => $sortOrder,
+    			'pageNumber' => $pageNumber,
+    			 
+    	));
+    
+    	foreach ($this->_getAllParams() as $paramName => $paramValue)
+    	{
+    		// prepend 'param' to avoid error of setting private/protected members
+    		$this->view->assign('param' . $paramName, $paramValue);
+    	}
+    
+    
+    }
+    
+    
+    public function displaystatAction(){
+    	$latitude='37.7831';
+    	$longitude='-122.4039';
+    	//$this->_helper->layout->setLayout('layout2');
+    	$departement= $this->_getParam('departement');
+    	$region= $this->_getParam('region');
+    	$this->view->assign(array('latitude'=>$latitude,'longitude'=>$longitude,'departement'=>$departement,'region'=>$region));
+    
+    }
+    
+    
+    
+    
     public function createAction()
     {
         $form = new Application_Form_EditDepartement();
