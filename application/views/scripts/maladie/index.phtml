@@ -30,99 +30,78 @@ function updateFilters(paramName, paramValue)
 }
 </script>
 
-<div style="text-align:right">
-<a href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'index'), null, true); ?>">Reset Filters</a>
-- <a href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'create'), null, true); ?>">Add New</a></div><br />
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Liste des maladies</h1>
+</div>
+
+        <ul class="breadcrumb">
+
+            <li class="active">Liste des maladies</li>
+        </ul>
+
+<div
+	class="pull-right"><a class="btn btn-info"
+	href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'index'), null, true); ?>"><i
+	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+<a class="btn btn-success"
+	href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'create'), null, true); ?>"><i
+	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+</div>
+<br />
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'index'), null, true); ?>">
 <div>
-Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
+Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp 
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => 'All',
   'libelle' => 'Libelle',
   'symptomes' => 'Symptomes',
   'type' => 'Type',
   'vaccin' => 'Vaccin',
-)); ?>
-<input type="submit" value="Go" />
+)); ?>&nbsp
+<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
-    cellpadding="3">
+<table class="table table-bordered table-condensed ">
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
+            <th style="text-align: center;" <?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Id 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                </span> 
             </th>
-            <th<?php if ('libelle' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Libelle 
+            <th style="text-align: center;" <?php if ('libelle' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Libelle 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'libelle', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'libelle', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                </span> 
             </th>
-            <th<?php if ('symptomes' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Symptomes 
+            <th style="text-align: center;" <?php if ('symptomes' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Symptomes 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'symptomes', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'symptomes', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                </span> 
             </th>
-            <th<?php if ('type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Type 
+            <th style="text-align: center;" <?php if ('type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Type 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                </span> 
             </th>
-            <th<?php if ('vaccin' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Vaccin 
+            <th style="text-align: center;" <?php if ('vaccin' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Vaccin 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'vaccin', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'vaccin', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
+                </span> 
             </th>
             <th>Actions</th>
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Id 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('libelle' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Libelle 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'libelle', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'libelle', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('symptomes' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Symptomes 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'symptomes', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'symptomes', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('type' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Type 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'type', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th<?php if ('vaccin' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                Vaccin 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'vaccin', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'vaccin', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </th>
-            <th>Actions</th>
-        </tr>
-    </tfoot>
     <tbody>
 <?php foreach ($this->paginator as $row): ?>
         <tr>
@@ -132,14 +111,17 @@ Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td><?php echo $row->symptomes; ?></td>
             <td><?php echo $row->type; ?></td>
             <td><?php echo $row->vaccin; ?></td>
-            <td align="center"><a href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'update', 'id' => $row->id), null, true); ?>">Edit</a> 
-    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>">Delete</a></td>
+            <td> <a title="Modifier"
+				href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
+				class="icon-pencil"></i></a> - <a title="Archiver"
+				onclick="return confirm('Confirmez la suppression!');"
+				href="<?php echo $this->url(array('controller' => 'maladie', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i
+				class="icon-trash"></i></a></td>
         </tr>
 <?php endforeach; ?>
     </tbody>
 </table><br />
-<input type="submit" value="Delete Selected Rows" />
-</form>
+<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',

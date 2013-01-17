@@ -37,6 +37,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $departement=$this->view->baseUrl().'/departement';
 		   $region=$this->view->baseUrl().'/region';
 		   $national=$this->view->baseUrl().'/national';
+		   $maladie=$this->view->baseUrl().'/maladie';
+		   $langue=$this->view->baseUrl().'/langue';
             $html = '
 			<div class="navbar-inner" >
                 <ul class="nav pull-right">
@@ -137,6 +139,30 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
               </script>
                <li ><a href="'.$localite.'">Liste</a></li>
                <li ><a href="'.$localite.'/create">Ajouter</a></li>
+             </ul>
+               		
+               		 <li> <a href="#maladie-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-maladie"></i>Maladie</a></li>
+              <ul id="maladie-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-maladie").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$maladie.'">Liste</a></li>
+               <li ><a href="'.$maladie.'/create">Ajouter</a></li>
+             </ul>
+               		
+               		 <li> <a href="#langue-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-langue"></i>Langue</a></li>
+              <ul id="langue-menu" class="nav nav-list collapse">
+              <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-langue").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="'.$langue.'">Liste</a></li>
+               <li ><a href="'.$langue.'/create">Ajouter</a></li>
              </ul>
                		
          </ul>

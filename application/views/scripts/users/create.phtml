@@ -16,8 +16,8 @@ $tableUsers = new Application_Model_Users_DbTable();
 </div>
 
         <ul class="breadcrumb">
-            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Liste des utilisateurs</a> <span class="divider">/</span></li>
+            
+            <li><a href="<?php echo $this->url(array('controller' => 'users'), null, true); ?>" class="black" >Liste des utilisateurs</a> <span class="divider">/</span></li>
             <li class="active">Nouveau Utilisateur</li>
         </ul>
 <form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
@@ -47,9 +47,6 @@ $tableUsers = new Application_Model_Users_DbTable();
                 <?php if ($errors): ?>
                     <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
                 <?php endif; ?>
-                <?php if ('submit' == $elementName): ?>
-                    <a class="btn" href="<?php echo $this->url(array('controller' => 'notification'), null, true); ?>">Annuler</a>
-                <?php endif; ?>
 	            </td>
         <?php
         endforeach;
@@ -60,7 +57,7 @@ $tableUsers = new Application_Model_Users_DbTable();
       <div class="span7"></div>
         <button class="btn btn-success" type="submit">Valider</button>
         
-        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'notification'), null, true); ?>">Annuler</a>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'users'), null, true); ?>">Annuler</a>
        </div>
   </div>
 
