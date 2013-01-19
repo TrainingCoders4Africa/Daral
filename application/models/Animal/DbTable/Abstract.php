@@ -148,6 +148,10 @@ abstract class Application_Model_Animal_DbTable_Abstract extends Zend_Db_Table_A
             $select->where('photo_front = ?', $params['photo_front']);
         }
         
+        if (isset($params['isactive']) && !empty($params['isactive'])) {
+        	$select->where('isactive = ?', $params['isactive']);
+        }
+        
         // _kw = keywords, _sm = search mode
         if (isset($params['_kw']) && !empty($params['_kw'])) {
             $dbAdapter = $this->getAdapter();

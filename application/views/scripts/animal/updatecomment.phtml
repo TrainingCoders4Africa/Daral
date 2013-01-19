@@ -1,33 +1,29 @@
-<?php
-$this->headTitle('Gestion du cheptel: enregistrement');
-$form = new Application_Form_Cheptel();
+<?php 
+
 $form = $this->form;
 ?>
 
 
 	
-
-
 <div class="content">	
 <div class="header">
-
-   <h1 class="page-title" >Ajouter des animaux</h1>
+   <h1 class="page-title" >Mise a jour des informations</h1>
 </div>
 
         <ul class="breadcrumb">
             <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
             <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
-            <li class="active">Ajouter des animaux</li>
+            <li class="active">Mise a jour signes particuliers</li>
         </ul>
-
-        
- <br>
+       
+   <h3  class="alert-info" align="center"><?php echo "ID ".$this->animal_type.": ".substr($this->animal_id,9); ?></h3>
    
 <form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
 <div style="position: static; width: 90%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
     <?php
     $i = 1;
+ 
     
    
     
@@ -44,18 +40,12 @@ $form = $this->form;
             	<?php if ($element->getType() != 'Zend_Form_Element_Button'&& $element->getType() != 'Zend_Form_Element_File'): ?>
                         <?php echo $element->getLabel(); ?>                        
                 <?php endif; ?>
-                <?php if($element->getType() == 'Zend_Form_Element_File'):?>
-                <?php echo "Photo: "; ?>
-                <?php endif; ?>
+                
                 
 	            </td>
             	<td width="25%" align="left">
             	<?php if($element->getType() != 'Zend_Form_Element_File'):?>
                 <?php echo $element->renderViewHelper(); ?>
-                <?php endif; ?>
-                
-                <?php if($element->getType() == 'Zend_Form_Element_File'):?>
-                <?php echo $this->form->photo; ?>
                 <?php endif; ?>
                 
                 
@@ -71,15 +61,14 @@ $form = $this->form;
         </tr></table>
         <br/>
         <div class="row">
-      <div class="span5"></div>
+      <div class="span7"></div>
         <button class="btn btn-success" type="submit">Valider</button>
-        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel'), null, true); ?>">Annuler</a>
+        <a class="btn btn-info" href="javascript:history.back();">Annuler</a>
        </div>
   </div>
   
 
 </form>
-
 </div>
 
 

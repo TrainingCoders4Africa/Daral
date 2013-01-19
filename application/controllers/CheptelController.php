@@ -66,46 +66,56 @@ class CheptelController extends Zend_Controller_Action
 	
 	public function rechercheAction()
 	{
+		
+		$form = new Application_Form_EditCheptel2();
+		$this->view->form = $form;
 		$this->getFrontController()->getRequest()->setParams($_GET);
-
+		
 		// zsf = zodeken sort field, zso = zodeken sort order
 		$sortField = $this->_getParam('_sf', '');
 		$sortOrder = $this->_getParam('_so', '');
 		$pageNumber = $this->_getParam('page', 1);
-
+		//$isactive= $this->_getParam('isactive_farmer','1');
+		
+		$params = array();
+		$params['isactive']= '1' ;
+		
+		
+		if (isset($_POST['fk_id_farmer']) && !empty($_POST['fk_id_farmer'])) {
+			$params['fk_id_farmer'] = $_POST['fk_id_farmer'];
+		}
+		
+		if (isset($_POST['fk_animaltype']) && !empty($_POST['fk_animaltype'])) {
+			$params['fk_animaltype'] = $_POST['fk_animaltype'];
+		}
+		
+		
+		
+		
+		
 		$tableCheptel = new Application_Model_Cheptel_DbTable_Cheptel();
-		$gridSelect = $tableCheptel->getDbSelectByParams(array(), $sortField, $sortOrder);
+		$gridSelect = $tableCheptel->getDbSelectByParams($params, $sortField, $sortOrder);
 		$paginator = Zend_Paginator::factory($gridSelect);
-		$paginator->setItemCountPerPage(20)
+		$paginator->setItemCountPerPage(5)
 		->setCurrentPageNumber($pageNumber);
-
-
-		//--------------- test add --------------------
-
-		$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
-		$fk_id_farmer=$session->fk_id_farmer;
-		$fk_animaltype=$session->fk_animaltype;
-		$total_animaltype=$session->total_animaltype;
-		$message=$session->message;
-
-		//---------------------------------------------
-
+		
+		
+		
+		
 		$this->view->assign(array(
-            'paginator' => $paginator,
-            'sortField' => $sortField,
-            'sortOrder' => $sortOrder,
-            'pageNumber' => $pageNumber,
-        		'fk_id_farmer'=>$fk_id_farmer,
-        		'fk_id_animal'=>$fk_animaltype,
-        		'total_animal'=>$total_animaltype,
-        		'message'=>$message,
+				'paginator' => $paginator,
+				'sortField' => $sortField,
+				'sortOrder' => $sortOrder,
+				'pageNumber' => $pageNumber,
+		
 		));
-
+		
 		foreach ($this->_getAllParams() as $paramName => $paramValue)
 		{
 			// prepend 'param' to avoid error of setting private/protected members
 			$this->view->assign('param' . $paramName, $paramValue);
 		}
+		
 	}
 	
 	
@@ -117,7 +127,7 @@ class CheptelController extends Zend_Controller_Action
 	public function addAction()
 	{
 		$form = new Application_Form_Cheptel();
-	
+	     
 	
 	
 		if ($this->getRequest()->isPost())
@@ -125,25 +135,30 @@ class CheptelController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			if ($form->isValid($formData)  )
 			{
+				
+				
 				$fk_id_farmer = $form->getValue('fk_id_farmer');
 				$fk_animaltype = $form->getValue('fk_animaltype');
 				$total_animaltype = $form->getValue('total_animaltype');
 				 
 				$session = new Zend_Session_Namespace('session'); //variable used to send values to the index view for test
-				//$session->fk_id_farmer=$fk_id_farmer;
-				//$session->fk_animaltype=$fk_animaltype;
-				//$session->total_animaltype=$total_animaltype;
+				
 					
 				 
 				$cheptel = new Application_Model_Cheptel_DbTable_Cheptel();
 				try{
 					$result=$cheptel->addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype);
-					$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$fk_id_farmer);
+					switch ($result)
+					{
+						case  1: $this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$fk_id_farmer);break;
+						case  0: $this->_redirector->gotoUrl('/cheptel/errorfarmer');
+						case -1: $this->_redirector->gotoUrl('/cheptel/errormax');
+ 					}
 				} catch (Exception $e)
 				{
 					die('Erreur: '.$e->getMessage());
 				}
-				//$message = $cheptel->addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype);
+				
 				$session->message=$result;
 				
 				
@@ -152,21 +167,50 @@ class CheptelController extends Zend_Controller_Action
 	
 	
 			else
-			{//The form was not valid or the photo was not successfully uploaded
+			{//The form was not valid 
 				
-				$form->populate($formData);
+					
+					$form->populate($formData);
+				    $this->view->form = $form;
+				
+				
 			}
 		}
 		
-		else{
-		$id_farmer = $this->_getParam('id');
+		else
 		
-		$form->populate(array('fk_id_farmer'=>$id_farmer));
-		$this->view->form = $form;
-		}
-	}
+		{
+			
+		     $id_farmer = $this->_getParam('id');
+		      
+		      if(isset($id_farmer))
+		
+             	    {    
+	    	              $form->populate(array('fk_id_farmer'=>$id_farmer)); 
+	    	              $this->view->form = $form; 
+		            }
+	         else 
+		      {
+		           $this->view->form = $form;
+		
+		       }
 	
-}	
+		}
+	
+    }
+
+    public function errorfarmerAction()
+    {
+    	
+    }
+    
+    public function errormaxAction()
+    {
+    	
+    	
+    }
+    
+}
 //############################################################################################################################################
 
 /*	public function createAction()

@@ -1,39 +1,34 @@
-<?php
-$this->headTitle('Modificaion animal: ' . 
-    $this->row->getZodekenAutoLabel());
+<?php 
+
+//$this->title = "update info eleveur";
+//$this->headTitle($this->title);
 $form = $this->form;
-
-
 ?>
-	<script>
+
+
+<script>
 	$(function() {
-		$( "#Dateevenappr" ).datepicker();
+		$( "#birthdate_farmer" ).datepicker();
 	});
-	</script>
+</script>
 	
 <div class="content">	
 <div class="header">
-   <h1 class="page-title" >Mise &agrave; jour infos animal</h1>
+   <h1 class="page-title" >Mise a jour des informations</h1>
 </div>
 
         <ul class="breadcrumb">
             <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
             <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
-            <li class="active">Mise &agrave; jour infos animal </li>
+            <li class="active">Mise a jour des informations</li>
         </ul>
-<br>
 
-<div align="center">
-<h3 class="alert-info"><?php echo "Identifiant Eleveur: ".substr($this->row['animal_id'],0,8);?></h3>
-<h3 class="alert-success"><?php echo "Identifiant Animal: ".substr($this->row['animal_id'],9);?></h3>
-</div>
-
-<form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
+<form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
 <div style="position: static; width: 90%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
     <?php
-    $i = 2;
+    $i = 1;
+    $flag = 0;
     
    
     
@@ -47,12 +42,37 @@ $form = $this->form;
         <?php if($i%2 == 1) echo '</tr><tr>'; ?>
 	           
 	            <td width="25%" align="right" class="control-group<?php if ($errors) echo ' error'; ?>">
-            	<?php if ($element->getType() != 'Zend_Form_Element_Button'): ?>
-                        <?php echo $element->getLabel(); ?>
+            	<?php if ($element->getType() != 'Zend_Form_Element_Button'&& $element->getType() != 'Zend_Form_Element_File'): ?>
+                        <?php echo $element->getLabel(); ?>                        
                 <?php endif; ?>
+                <?php if($element->getType() == 'Zend_Form_Element_File'):?>
+                <?php 
+                   switch($flag)
+                   {
+                   	case 0: echo "vue gauche: ";break;
+                   	case 1: echo "vue droite: ";break;
+                   	case 2: echo "vue face: ";break;
+                   } ?>
+                <?php endif; ?>
+                
 	            </td>
             	<td width="25%" align="left">
+            	<?php if($element->getType() != 'Zend_Form_Element_File'):?>
                 <?php echo $element->renderViewHelper(); ?>
+                <?php endif; ?>
+                
+                <?php if($element->getType() == 'Zend_Form_Element_File'):?>
+                <?php 
+                   switch ($flag)
+                   {
+                   	case 0: echo $this->form->photo_left;break;
+                   	case 1: echo $this->form->photo_right;break;
+                   	case 2: echo $this->form->photo_front;break;
+                   }?>
+                <?php $flag++; endif; ?>
+                
+                
+               
                 <?php if ($errors): ?>
                     <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
                 <?php endif; ?>
@@ -62,14 +82,14 @@ $form = $this->form;
         endforeach;
         ?>
         </tr></table>
-  </div>
-
-</form>
-<div class="row">
-       
-      <div class="span6"></div>
+        <br/>
+        <div class="row">
+      <div class="span7"></div>
         <button class="btn btn-success" type="submit">Valider</button>
-        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel'), null, true); ?>">Annuler</a>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer'), null, true); ?>">Annuler</a>
        </div>
   </div>
+  
+
+</form>
 </div>

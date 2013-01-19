@@ -47,38 +47,28 @@ function updateFilters(paramName, paramValue)
             <li class="active">Cheptel</li>
         </ul>
   
-  <?php //echo $this->fk_id_farmer.'<br/>';?>
-  <?php //echo $this->fk_id_animal.'<br/>';?>
-  <?php //echo $this->total_animal.'<br/>';?>
-  <?php echo $this->message.'<br/>';?>
+ <div style="margin-left: 1em;margin-right:1em"> 
   
- 
+</div> 
 
-<div class="pull-right" style="margin-right:1em">
- <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
-    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
- <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Ajouter</a>
-    <!--  ********************************************************** -->
- </div> <br />
+
  
  
  <div style="margin-left: 1em; padding-bottom:0.5em;">
 <form method="get" action="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>">
 <div>
-Rechercher: <input class="input-large search-query" placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp; dans &nbsp; 
-<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
-  'all' => '-------------Tout------------',
-  'fk_id_farmer' => 'Identifiant eleveur',
-  'fk_animaltype' => 'Type d\'animal',
-)); ?> &nbsp; 
-<button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
+<a class="btn" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
+<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
+    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+ <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Ajouter</a>
+   
 </div>
 
 
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<div style="margin-left:1em; margin-right:1em;">
+<div style="margin-left:0em; margin-right:1em;">
 <table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
     cellpadding="3">
     <thead>
@@ -121,13 +111,12 @@ Rechercher: <input class="input-large search-query" placeholder="Mots cles..." t
         </tr>
         -->
         <td align="center"><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $row->fk_id_farmer,'fk_animaltype'=>$row->fk_animaltype), null, true); ?>"><i class="icon-zoom-in"></i></a> 
-    - <a  href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index','fk_id_farmer' => $row->fk_id_farmer,'fk_animaltype'=>$row->fk_animaltype ), null, true); ?>"><i class="icon-pencil"></i></a></td>
+    
         </tr>
 <?php  endforeach; ?>
     </tbody>
 </table><br />
 </div>
-<button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
 </form>
 
 <?php echo $this->paginationControl($this->paginator,

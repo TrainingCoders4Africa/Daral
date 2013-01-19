@@ -70,11 +70,11 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 						             	    $rank++;//we increment for the next animal 
 						             	}
 				                 
-				             		   return '0=update and insertion ok'; // update and insertion ok
+				             		   return 1; // update and insertion ok
 				             	}
 				             	
 				             	else{ 
-				             		   return '1=no insertion: maximum exceeded';//no insertion: maximum exceeded 
+				             		   return -1;//no insertion: maximum exceeded 
 				             	    }
 				             	
 				             
@@ -120,12 +120,12 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             			$rank++;//we increment for the next animal
 				             		}
 				             	
-				             		return '0=insertion ok'; // insertion ok
+				             		return 1; // insertion ok
 				             	}
 				             	 
 				             	else
 				             	{
-				             		return '1=non insertion maximum exceeded';//no insertion: maximum exceeded
+				             		return -1;//no insertion: maximum exceeded
 				             	}
 	             	
 	             	
@@ -138,7 +138,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	   
 	   else 
 	        {
-	        	return '3=no such farmer in data base';//no such farmer in data base
+	        	return 0;//no such farmer in data base
 	        }
 	        
 	   } 

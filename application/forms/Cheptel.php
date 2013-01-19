@@ -47,7 +47,10 @@ class Application_Form_Cheptel extends Zend_Form
         		->setMultiOptions(array("" => "- - Choisir - -") + $tableAnimaltype->fetchAnimal())
         		->setRequired(true)
         );
-
+		
+        
+       
+       
         
 
         parent::init();

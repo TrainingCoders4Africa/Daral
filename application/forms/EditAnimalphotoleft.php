@@ -8,7 +8,7 @@
  * @version $Id$
  *
  */
-class Application_Form_EditAnimal extends Zend_Form
+class Application_Form_EditAnimalphotoleft extends Zend_Form
 {
     public function init()
     {
@@ -21,6 +21,7 @@ class Application_Form_EditAnimal extends Zend_Form
         $this->addElement(
             $this->createElement('text', 'fk_id_farmer')
                 ->setLabel('Identifiant Eleveur')
+        		->setAttrib('readonly', 'readonly')
                 //->setMultiOptions(array("" => "- - Select - -") + $tableFarmer->fetchPairs())
                 ->setRequired(true)
         ); 
@@ -37,26 +38,7 @@ class Application_Form_EditAnimal extends Zend_Form
         
         
         
-        $photo_right = new Zend_Form_Element_File('photo_right');
-        $photo_right->setDestination(IMAGE_PATH)
-        ->setRequired(true)
-        ->addValidator('Count', false, 1)
-        // only JPEG, PNG, and GIFs
-        ->addValidator('Extension', false, 'jpg,png');
-        
-        $this->addElement($photo_right,'photo_right');
-        
-        
-        
-        $photo_front = new Zend_Form_Element_File('photo_front');
-        $photo_front->setDestination(IMAGE_PATH)
-        ->setRequired(true)
-        ->addValidator('Count', false, 1)
-        // only JPEG, PNG, and GIFs
-        ->addValidator('Extension', false, 'jpg,png');
-        
-        $this->addElement($photo_front,'photo_front');
-      
+       
         
        
         
