@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mer 16 Janvier 2013 à 09:35
+-- Généré le: Sam 19 Janvier 2013 à 20:40
 -- Version du serveur: 5.5.25
 -- Version de PHP: 5.4.4
 
@@ -29,36 +29,48 @@ CREATE TABLE `animal` (
   `photo_right` varchar(100) NOT NULL,
   `photo_front` varchar(100) NOT NULL,
   `isactive` tinyint(4) NOT NULL DEFAULT '1',
+  `comment` varchar(1000) NOT NULL DEFAULT 'R.A.S',
   PRIMARY KEY (`id`),
   UNIQUE KEY `animal_id` (`animal_id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Contenu de la table `animal`
 --
 
-INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`, `isactive`) VALUES
-(1, '10010001C0001', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(2, '10010002B0001', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(3, '10010002B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(4, '10010002B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(5, '10010002B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(6, '10010002B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(7, '10010001C0002', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(8, '10010001C0003', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(9, '10010001C0004', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(10, '10010003B0001', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(11, '10010003B0002', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(12, '10010003B0003', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(13, '10010003B0004', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(14, '10010003B0005', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(15, '10010003B0006', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(16, '10010003B0007', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(17, '10010003B0008', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(18, '10010003B0009', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1),
-(19, '10010003B0010', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1);
+INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`, `isactive`, `comment`) VALUES
+(1, '10010001C0001', '10010001', 'Cheval', 'car.jpg', 'car.jpg', 'image.jpg', 1, 'R.A.S'),
+(2, '10010002B0001', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(3, '10010002B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(4, '10010002B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(5, '10010002B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(6, '10010002B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(7, '10010001C0002', '10010001', 'Cheval', 'image.jpg', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(8, '10010001C0003', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(9, '10010001C0004', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(10, '10010003B0001', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'Tache marron sur le cote droit'),
+(11, '10010003B0002', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(12, '10010003B0003', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(13, '10010003B0004', '10010003', 'Boeuf', 'no_photo.png', 'user_icon.jpg', 'no_photo.png', 1, 'R.A.S'),
+(14, '10010003B0005', '10010003', 'Boeuf', 'image.jpg', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(15, '10010003B0006', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(16, '10010003B0007', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(17, '10010003B0008', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'image.jpg', 1, 'R.A.S'),
+(18, '10010003B0009', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(19, '10010003B0010', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(20, '10010001B0001', '10010001', 'Boeuf', 'user_icon.jpg', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(21, '10010001B0002', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(22, '10010001B0003', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(23, '10010001B0004', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(24, '10010001B0005', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(25, '10010001B0006', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(26, '10010001B0007', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(27, '10010001B0008', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(28, '10010001B0009', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(29, '10010001B0010', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
+(30, '10010003C0001', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S');
 
 -- --------------------------------------------------------
 
@@ -120,7 +132,7 @@ CREATE TABLE `cheptel` (
   PRIMARY KEY (`id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `cheptel`
@@ -129,7 +141,31 @@ CREATE TABLE `cheptel` (
 INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animaltype`, `total_animaltype`, `isactive`) VALUES
 (1, '10010001', 'Cheval', 4, 1),
 (2, '10010002', 'Boeuf', 5, 1),
-(3, '10010003', 'Boeuf', 10, 1);
+(3, '10010003', 'Boeuf', 10, 1),
+(4, '10010001', 'Boeuf', 10, 1),
+(5, '10010003', 'Cheval', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `connexion`
+--
+
+CREATE TABLE `connexion` (
+  `id_cnx` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `ip` varchar(30) NOT NULL,
+  `connectionDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_cnx`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `connexion`
+--
+
+INSERT INTO `connexion` (`id_cnx`, `user`, `ip`, `connectionDate`) VALUES
+(4, 1, '::1', '2013-01-19 19:17:05');
 
 -- --------------------------------------------------------
 
@@ -471,7 +507,7 @@ CREATE TABLE `notification` (
   KEY `id_user` (`id_user`),
   KEY `type` (`type`),
   KEY `type_2` (`type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Contenu de la table `notification`
@@ -482,7 +518,8 @@ INSERT INTO `notification` (`id`, `id_farmer`, `id_localite`, `date`, `type`, `i
 (16, '', 2, '2013-01-15 00:00:00', 1, 1, 0, 'eleveur Adama Tounkara id=10010001 a perdu une vache id=5'),
 (17, '', 1, '2013-01-15 00:00:00', 5, 1, 0, 'l eleveur Baba Samb id=10010002 a perdu un boeuf id=1'),
 (18, '', 1, '2013-01-15 00:00:00', 5, 1, 0, 'l eleveur Baba Samb id=10010002 a perdu un boeuf id=1'),
-(19, '', 2, '2013-01-15 00:00:00', 2, 1, 0, 'peste equine declaree');
+(19, '', 2, '2013-01-15 00:00:00', 2, 1, 0, 'peste equine declaree'),
+(20, '', 1, '2013-01-17 00:00:00', 5, 1, 0, 'l eleveur id=10010003 a perdu un boeuf id=1');
 
 -- --------------------------------------------------------
 
@@ -666,6 +703,12 @@ ALTER TABLE `animal`
 ALTER TABLE `cheptel`
   ADD CONSTRAINT `cheptel_ibfk_1` FOREIGN KEY (`fk_id_farmer`) REFERENCES `farmer` (`id_farmer`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cheptel_ibfk_2` FOREIGN KEY (`fk_animaltype`) REFERENCES `animaltype` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `connexion`
+--
+ALTER TABLE `connexion`
+  ADD CONSTRAINT `connexion_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 
 --
 -- Contraintes pour la table `daral`
