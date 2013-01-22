@@ -39,6 +39,72 @@ class UsersController extends Zend_Controller_Action
         }
     }
     
+      public function adminAction()
+    {
+        $this->getFrontController()->getRequest()->setParams($_GET);
+        
+        // zsf = zodeken sort field, zso = zodeken sort order
+        $sortField = $this->_getParam('_sf', '');
+        $sortOrder = $this->_getParam('_so', '');
+        $pageNumber = $this->_getParam('page', 1);
+        
+        
+        
+        
+        $tableUsers = new Application_Model_Users_DbTable();
+        $gridSelect = $tableUsers->getDbSelectByParams(array('role'=>'admin'), $sortField, $sortOrder);
+        $paginator = Zend_Paginator::factory($gridSelect);
+        $paginator->setItemCountPerPage(20)
+            ->setCurrentPageNumber($pageNumber);
+            
+        $this->view->assign(array(
+            'paginator' => $paginator,
+            'sortField' => $sortField,
+            'sortOrder' => $sortOrder,
+            'pageNumber' => $pageNumber,
+        ));
+        
+        foreach ($this->_getAllParams() as $paramName => $paramValue)
+        {
+            // prepend 'param' to avoid error of setting private/protected members
+            $this->view->assign('param' . $paramName, $paramValue);
+        }
+    }
+    
+    
+       public function gerantAction()
+    {
+        $this->getFrontController()->getRequest()->setParams($_GET);
+        
+        // zsf = zodeken sort field, zso = zodeken sort order
+        $sortField = $this->_getParam('_sf', '');
+        $sortOrder = $this->_getParam('_so', '');
+        $pageNumber = $this->_getParam('page', 1);
+        
+        
+        
+        
+        $tableUsers = new Application_Model_Users_DbTable();
+        $gridSelect = $tableUsers->getDbSelectByParams(array('role'=>'gerant'), $sortField, $sortOrder);
+        $paginator = Zend_Paginator::factory($gridSelect);
+        $paginator->setItemCountPerPage(20)
+            ->setCurrentPageNumber($pageNumber);
+            
+        $this->view->assign(array(
+            'paginator' => $paginator,
+            'sortField' => $sortField,
+            'sortOrder' => $sortOrder,
+            'pageNumber' => $pageNumber,
+        ));
+        
+        foreach ($this->_getAllParams() as $paramName => $paramValue)
+        {
+            // prepend 'param' to avoid error of setting private/protected members
+            $this->view->assign('param' . $paramName, $paramValue);
+        }
+    }
+    
+    
     public function createAction()
     {
         $form = new Application_Form_EditUsers();
@@ -46,17 +112,7 @@ class UsersController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $values = $form->getValues();
-
-                $user_daral = $this->_getParam('user_daral');
-                $table_daral = new Application_Model_Daral_DbTable();
-                $row_daral = $table_daral->find($user_daral)->current();
-                $values['user_daral'] = $row_daral->getName();
-                
-                $user_role = $this->_getParam('role');
-                $table_role = new Application_Model_Roleusers_DbTable();
-                $row_role = $table_role->find($user_role)->current();
-                $values['role'] = $row_role->getDescription();
-                
+                    
                 $tableUsers = new Application_Model_Users_DbTable();
                 $tableUsers->insert($values);
                     

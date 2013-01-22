@@ -103,6 +103,26 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'user_daral', '_so' => 'desc')); ?>'>&#x25BC;</a>
         
                            </span></th>
+                           
+            <th style="text-align: center;" <?php if ('Telephone' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+               <span class="label label-inverse"> Profil 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'Telephone', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'Telephone', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                               </span>
+            </th>
+            <th<?php if ('Adresse' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse"> Daral 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'Adresse', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'Adresse', '_so' => 'desc')); ?>'>&#x25BC;</a>
+        
+                           </span></th>
+                           
+            <th<?php if ('Email' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse"> Daral 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'Email', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'Email', '_so' => 'desc')); ?>'>&#x25BC;</a>
+        
+                           </span></th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -115,6 +135,9 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td><?php echo $row->date_created; ?></td>
             <td><?php echo $row->role; ?></td>
             <td><?php echo $row->user_daral ?></td>
+            <td><?php echo $row->Telephone; ?></td>
+            <td><?php echo $row->Adresse ?></td>
+            <td><?php echo $row->Email ?></td>
             <td> <a title="Modifier"
 				href="<?php echo $this->url(array('controller' => 'users', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
 				class="icon-pencil"></i></a> - <a title="Archiver"

@@ -61,7 +61,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 						             		$new_animaltype_rank = $this->generateAnimalRank($rank);
 						             		
 						             		$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
-						             		//$tag='C';
+						             		
 						             		
 						             		$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
 						             		
@@ -171,6 +171,30 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  		    return 0;
 	  	}
 	  }
+	  
+	  //*************************************************
+	  //**********  GET FARMER TOTAL ANIMAL TYPE ********************
+	  
+	  public function getFarmerTotalAnimalType($id_farmer,$animaltype)
+	  {
+	  	$tableFarmer= new Application_Model_Farmer_DbTable_Farmer();
+	  	if($tableFarmer->exist_farmer($id_farmer))
+	  	{
+	  		$rows=$this->fetchAll(array('fk_id_farmer=?'=>$id_farmer,'fk_animaltype=?'=>$animaltype));
+	  
+	  		$rows_arr = $rows->toArray();
+	  
+	  		
+	  		// print_r($rows_arr[0]['total_animaltype']);break;
+	  		return $rows_arr[0]['total_animaltype'];
+	  	}
+	  
+	  	else
+	  	{
+	  		return 0;
+	  	}
+	  }
+	  
  //*************************************************
  //**********  GET FARMER CHEPTEL ********************
 	  
@@ -211,7 +235,17 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  	}
 	  	
 	  }
+	  public function updateCheptel($id_farmer,$animaltype,$new_total)
+	  {
+	  	$data = array(
 	  
+	  				
+	  			'total_animaltype'=>$new_total
+	  
+	  	);
+	  
+	  	$this->update($data,'fk_id_farmer=\''.$id_farmer.'\'and fk_animaltype=\''.$animaltype.'\'');
+	  }
 	  /**
 	   * Get Db_Select for pagination by params sent from controller
 	   *
@@ -276,7 +310,11 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	  
 	  	return $select;
 	  }  
-    
+
+	  
+	  
+	  	    
+	  
 }
 
 

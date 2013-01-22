@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 19 Janvier 2013 à 20:40
+-- Généré le: Mar 22 Janvier 2013 à 13:51
 -- Version du serveur: 5.5.25
 -- Version de PHP: 5.4.4
 
@@ -30,47 +30,69 @@ CREATE TABLE `animal` (
   `photo_front` varchar(100) NOT NULL,
   `isactive` tinyint(4) NOT NULL DEFAULT '1',
   `comment` varchar(1000) NOT NULL DEFAULT 'R.A.S',
+  `isstolen` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `animal_id` (`animal_id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 --
 -- Contenu de la table `animal`
 --
 
-INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`, `isactive`, `comment`) VALUES
-(1, '10010001C0001', '10010001', 'Cheval', 'car.jpg', 'car.jpg', 'image.jpg', 1, 'R.A.S'),
-(2, '10010002B0001', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(3, '10010002B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(4, '10010002B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(5, '10010002B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(6, '10010002B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(7, '10010001C0002', '10010001', 'Cheval', 'image.jpg', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(8, '10010001C0003', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(9, '10010001C0004', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(10, '10010003B0001', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'Tache marron sur le cote droit'),
-(11, '10010003B0002', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(12, '10010003B0003', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(13, '10010003B0004', '10010003', 'Boeuf', 'no_photo.png', 'user_icon.jpg', 'no_photo.png', 1, 'R.A.S'),
-(14, '10010003B0005', '10010003', 'Boeuf', 'image.jpg', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(15, '10010003B0006', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(16, '10010003B0007', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(17, '10010003B0008', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'image.jpg', 1, 'R.A.S'),
-(18, '10010003B0009', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(19, '10010003B0010', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(20, '10010001B0001', '10010001', 'Boeuf', 'user_icon.jpg', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(21, '10010001B0002', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(22, '10010001B0003', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(23, '10010001B0004', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(24, '10010001B0005', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(25, '10010001B0006', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(26, '10010001B0007', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(27, '10010001B0008', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(28, '10010001B0009', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(29, '10010001B0010', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S'),
-(30, '10010003C0001', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S');
+INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`, `isactive`, `comment`, `isstolen`) VALUES
+(1, '10010001C0001', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
+(2, '10010001C0002', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(3, '10010001B0001', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(4, '10010001B0002', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(5, '10010001B0003', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(6, '10010001B0004', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(7, '10010001B0005', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(8, '10010001B0006', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
+(9, '10010001B0007', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(10, '10010001B0008', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(11, '10010001B0009', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(12, '10010001B0010', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(13, '10010002C0001', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 1),
+(14, '10010002C0002', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(15, '10010002C0003', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(16, '10010002C0004', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(17, '10010002C0005', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(18, '10010002C0006', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(19, '10010003C0001', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(20, '10010003C0002', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(21, '10010003C0003', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(22, '10010003C0004', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(23, '10010003C0005', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(24, '10010003C0006', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(25, '10010003C0007', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(26, '10010003C0008', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(27, '10010001B0011', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(28, '10010001B0012', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(29, '10010001B0013', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
+(30, '10010001B0014', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(31, '10010001B0015', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(32, '10010001B0016', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(33, '10010001B0017', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(34, '10010001B0018', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(35, '10010001B0019', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(36, '10010001B0020', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(37, '10010001B0021', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(38, '10010001B0022', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(39, '10010001B0023', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(40, '10010001B0024', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(41, '10010001B0025', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(42, '10010001B0026', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(43, '10010001B0027', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(44, '10010001B0028', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(45, '10010001B0029', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(46, '10010001B0030', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(47, '10010001B0031', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(48, '10010001B0032', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(49, '10010001B0033', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(50, '10010001B0034', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(51, '10010001B0035', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0);
 
 -- --------------------------------------------------------
 
@@ -132,18 +154,17 @@ CREATE TABLE `cheptel` (
   PRIMARY KEY (`id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `cheptel`
 --
 
 INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animaltype`, `total_animaltype`, `isactive`) VALUES
-(1, '10010001', 'Cheval', 4, 1),
-(2, '10010002', 'Boeuf', 5, 1),
-(3, '10010003', 'Boeuf', 10, 1),
-(4, '10010001', 'Boeuf', 10, 1),
-(5, '10010003', 'Cheval', 1, 1);
+(1, '10010001', 'Cheval', 1, 1),
+(2, '10010001', 'Boeuf', 33, 1),
+(3, '10010002', 'Cheval', 6, 1),
+(4, '10010003', 'Cheval', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -158,14 +179,14 @@ CREATE TABLE `connexion` (
   `connectionDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_cnx`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `connexion`
 --
 
 INSERT INTO `connexion` (`id_cnx`, `user`, `ip`, `connectionDate`) VALUES
-(4, 1, '::1', '2013-01-19 19:17:05');
+(8, 1, '::1', '2013-01-22 12:45:57');
 
 -- --------------------------------------------------------
 
@@ -180,7 +201,7 @@ CREATE TABLE `daral` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `id_localite` (`id_localite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `daral`
@@ -238,7 +259,7 @@ CREATE TABLE `departement` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `region` (`region`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Contenu de la table `departement`
@@ -354,7 +375,7 @@ CREATE TABLE `farmer` (
   KEY `departement` (`departement`,`region`),
   KEY `departement_2` (`departement`),
   KEY `region` (`region`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Contenu de la table `farmer`
@@ -363,7 +384,9 @@ CREATE TABLE `farmer` (
 INSERT INTO `farmer` (`rank_farmer`, `id_farmer`, `categorie`, `national_id`, `address_farmer`, `phone_farmer`, `registration_date`, `daral_originel`, `daral_actuel`, `firstname_farmer`, `lastname_farmer`, `isactive_farmer`, `birthdate_farmer`, `birthplace_farmer`, `id_localite`, `departement`, `region`) VALUES
 (40, '10010001', 2, '1209812347788', 'Matam', '221775312740', '2013-01-11', '1001', '1802', 'Adama', 'Tounkara', 1, '1967-01-01', 'Matam', 'Ndoffane', 'Kaolack', 'Kaolack'),
 (41, '10010002', 1, '1219812347789', 'Podor', '775989808', '2013-01-11', '1001', '1001', 'Baba', 'Samb', 1, '1960-02-02', 'Podor', 'Diossong', 'Foundiougne', 'Fatick'),
-(42, '10010003', 1, '1234812347788', 'Ziguinchor', '22178675433', '2013-01-15', '1001', '1001', 'Doudou', 'Drame', 1, '1975-06-02', 'Ziguinchor', 'Diossong', 'Foundiougne', 'Fatick');
+(42, '10010003', 1, '1234812347788', 'Ziguinchor', '22178675433', '2013-01-15', '1001', '1001', 'Doudou', 'Drame', 1, '1975-06-02', 'Ziguinchor', 'Diossong', 'Foundiougne', 'Fatick'),
+(43, 'particulier', 1, 'inconnu', 'inconnu', 'inconnu', '2013-01-20', '1001', '1001', 'inconnu', 'inconnu', 0, '2013-01-01', 'inconnu', 'Diossong', 'Fatick', 'Fatick'),
+(44, 'distributeur', 1, 'inconnu', 'inconnu', 'inconnu', '2013-01-20', '1001', '1001', 'inconnu', 'inconnu', 0, '2013-01-20', 'inconnu', 'Diossong', 'Fatick', 'Fatick');
 
 -- --------------------------------------------------------
 
@@ -392,7 +415,7 @@ CREATE TABLE `localite` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `departement` (`departement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `localite`
@@ -532,7 +555,7 @@ CREATE TABLE `region` (
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `region`
@@ -640,6 +663,44 @@ INSERT INTO `typenotification` (`id`, `libelle`, `description`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `role` varchar(20) NOT NULL,
+  `user_daral` varchar(30) NOT NULL COMMENT 'un admin s''attribue un daral et en fonction des besoins il peut modifier cette information',
+  `Is_Active` tinyint(1) DEFAULT '1',
+  `Telephone` varchar(20) DEFAULT NULL,
+  `Adresse` varchar(50) DEFAULT NULL,
+  `Email` varchar(30) DEFAULT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  KEY `role` (`role`,`user_daral`),
+  KEY `user_daral` (`user_daral`),
+  KEY `role_2` (`role`),
+  KEY `user_daral_2` (`user_daral`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `date_created`, `role`, `user_daral`, `Is_Active`, `Telephone`, `Adresse`, `Email`, `prenom`, `nom`) VALUES
+(1, 'mansour', 'passer', '2012-12-04 00:00:00', 'admin', '1001', 1, '77111111111', 'daral add 1', 'user1@daral.sn', 'mansour', 'fall'),
+(2, 'sada', 'passer', '2012-12-05 00:00:00', 'admin', '1002', 1, '77111111112', 'daral add 2', 'user2@daral.sn', 'sada kalidou', 'sow'),
+(3, 'amdane', 'passer', '2012-12-06 00:00:00', 'admin', '1003', 1, '77111111113', 'daral add 3', 'user3@daral.sn', 'amdane', 'samb'),
+(4, 'sokhna', 'passer', '2012-12-21 00:00:00', 'admin', '1004', 1, '77111111114', 'daral add 4', 'user4@daral.sn', 'sokhna', 'sagna'),
+(5, 'gerant', 'passer', '2013-01-09 00:00:00', 'gerant', '1001', 1, '77111111115', 'daral add 5', 'user5@daral.sn', 'amadou', 'sow');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users_old`
+--
+
+CREATE TABLE `users_old` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `date_created` datetime NOT NULL,
@@ -654,10 +715,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Contenu de la table `users`
+-- Contenu de la table `users_old`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `date_created`, `role`, `user_daral`) VALUES
+INSERT INTO `users_old` (`id`, `username`, `password`, `date_created`, `role`, `user_daral`) VALUES
 (1, 'mansour', 'passer', '2012-12-04 00:00:00', 'admin', '1001'),
 (2, 'sada', 'passer', '2012-12-05 00:00:00', 'admin', '1002'),
 (3, 'amdane', 'passer', '2012-12-06 00:00:00', 'admin', '1003'),
@@ -673,6 +734,26 @@ INSERT INTO `users` (`id`, `username`, `password`, `date_created`, `role`, `user
 --
 
 CREATE TABLE `veterinaire` (
+  `rank_veterinaire` int(11) NOT NULL AUTO_INCREMENT,
+  `id_veterinaire` varchar(30) NOT NULL,
+  `adresse_veterinaire` varchar(100) NOT NULL,
+  `localite_veterinaire` int(11) NOT NULL,
+  `firstname_veterinaire` varchar(30) NOT NULL,
+  `lastname_veterinaire` varchar(30) NOT NULL,
+  `IsActive_veterinaire` int(2) NOT NULL,
+  `email_veterinaire` varchar(30) NOT NULL,
+  PRIMARY KEY (`rank_veterinaire`),
+  UNIQUE KEY `id_veterinaire` (`id_veterinaire`,`email_veterinaire`),
+  KEY `localite_veterinaire` (`localite_veterinaire`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `veterinaire_old`
+--
+
+CREATE TABLE `veterinaire_old` (
   `rank_veterinaire` int(11) NOT NULL AUTO_INCREMENT,
   `id_veterinaire` varchar(30) NOT NULL,
   `adresse_veterinaire` varchar(100) NOT NULL,
@@ -708,7 +789,7 @@ ALTER TABLE `cheptel`
 -- Contraintes pour la table `connexion`
 --
 ALTER TABLE `connexion`
-  ADD CONSTRAINT `connexion_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `connexion_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users_old` (`id`);
 
 --
 -- Contraintes pour la table `daral`
@@ -752,10 +833,10 @@ ALTER TABLE `departementstatfarmer`
 -- Contraintes pour la table `farmer`
 --
 ALTER TABLE `farmer`
-  ADD CONSTRAINT `farmer_ibfk_17` FOREIGN KEY (`region`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `farmer_ibfk_13` FOREIGN KEY (`daral_actuel`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `farmer_ibfk_15` FOREIGN KEY (`id_localite`) REFERENCES `localite` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `farmer_ibfk_16` FOREIGN KEY (`departement`) REFERENCES `departement` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `farmer_ibfk_17` FOREIGN KEY (`region`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `farmer_ibfk_8` FOREIGN KEY (`categorie`) REFERENCES `categorie` (`categorie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `farmer_ibfk_9` FOREIGN KEY (`daral_originel`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -797,7 +878,7 @@ ALTER TABLE `national`
 ALTER TABLE `notification`
   ADD CONSTRAINT `notification_ibfk_23` FOREIGN KEY (`id_localite`) REFERENCES `localite` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `notification_ibfk_24` FOREIGN KEY (`type`) REFERENCES `typenotification` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notification_ibfk_25` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `notification_ibfk_25` FOREIGN KEY (`id_user`) REFERENCES `users_old` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `regionstatanimal`
@@ -813,8 +894,8 @@ ALTER TABLE `regionstatfarmer`
   ADD CONSTRAINT `regionstatfarmer_ibfk_1` FOREIGN KEY (`fk_region_name`) REFERENCES `region` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `users`
+-- Contraintes pour la table `users_old`
 --
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roleusers` (`description`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`user_daral`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `users_old`
+  ADD CONSTRAINT `users_old_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roleusers` (`description`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_old_ibfk_2` FOREIGN KEY (`user_daral`) REFERENCES `daral` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;

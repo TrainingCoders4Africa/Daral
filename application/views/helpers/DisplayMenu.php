@@ -29,7 +29,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $notification=$this->view->baseUrl().'/notification';
 		   $media=$this->view->baseUrl().'/media';			
 		   $veterinaire=$this->view->baseUrl().'/veterinaire';
-		   $animal=$this->view->baseUrl().'/animaltype';
+		   $animaltype=$this->view->baseUrl().'/animaltype';
+		   $animal=$this->view->baseUrl().'/animal';
 		   $typenotification=$this->view->baseUrl().'/typenotification';
 		   $users=$this->view->baseUrl().'/users';
 		   $daral=$this->view->baseUrl().'/daral';
@@ -113,8 +114,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		      });
               </script>
-               <li ><a href="'.$animal.'">Liste</a></li>
-               <li ><a href="'.$animal.'/create">Ajouter</a></li>
+               <li ><a href="'.$animaltype.'">Liste</a></li>
+               <li ><a href="'.$animaltype.'/create">Ajouter</a></li>
              </ul>
              
             <li ><a href="#type-notification-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-chevron-right" id="chevron-type-notification"></i>Type Notification</a></li>
@@ -195,7 +196,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
              
              <li> <a href="#cheptel-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-cheptel"></i>Cheptel</a></li>
               <ul id="cheptel-menu" class="nav nav-list collapse">
-              <script type="text/javascript">
+              <script type="text/javascript"> 
               $("a").click(function(){
 		      $(this).find("i#chevron-cheptel").toggleClass("icon-chevron-right icon-chevron-down");
 		  
@@ -203,7 +204,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
               </script>
                <li ><a href="'.$cheptel.'/add">Ajouter des animaux</a></li>
                <li ><a href="'.$cheptel.'">Afficher le Cheptel</a></li>
-               <li ><a href="'.$cheptel.'/recherche">Rechercher</a></li>
+               <li ><a href="'.$animal.'/recherche">Rechercher</a></li>
              </ul>
              
             <li ><a href="#notification-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-chevron-right" id="chevron-notifications"></i>Notifications</a></li>
@@ -216,6 +217,18 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
               </script>
                <li ><a href="'.$notification.'/create">Nouvelle Notification</a></li>
                <li><a href="'.$notification.'">Historique</a></li>
+             </ul>
+             
+             <li ><a href="#transaction-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-chevron-right" id="chevron-transactions"></i>Transactions</a></li>
+             <ul id="transaction-menu" class="nav nav-list collapse">
+             <script type="text/javascript">
+              $("a").click(function(){
+		      $(this).find("i#chevron-transactions").toggleClass("icon-chevron-right icon-chevron-down");
+		  
+		      });
+              </script>
+               <li ><a href="#">Nouvelle</a></li>
+               <li><a href="#">Historique</a></li>
              </ul>
         
         </ul>
@@ -253,7 +266,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
          </ul>
    <!----------------END----------------------->
    
-   <!---------------CONTACTS------------------->
+    <!---------------CONTACTS------------------->
         <a href="#contact-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-book"></i>Contacts<i class="icon-chevron-down" id="chevron-contacts" style="margin-left:8.8em"></i></a>
          <ul id="contact-menu" class="nav nav-list collapse">
          <script type="text/javascript">
@@ -263,8 +276,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  });
         </script>
                <li ><a href="'.$veterinaire.'">Veterinaires</a></li>
-               <li><a href="#">Administrateur</a></li>
-               <li><a href="#">Autres Gerants</a></li>
+               <li><a href="'.$users.'/admin">Administrateur</a></li>
+               <li><a href="'.$users.'/gerant">Autres Gerants</a></li>
          </ul>
          
    <!---------------END------------------------>

@@ -57,7 +57,7 @@ function updateFilters(paramName, paramValue)
  <div style="margin-left: 1em; padding-bottom:0.5em;">
 <form method="get" action="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>">
 <div>
-<a class="btn" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
+<a class="btn" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
 <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
     <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
  <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add'), null, true); ?>"><i class="icon-plus icon-white"></i> Ajouter</a>

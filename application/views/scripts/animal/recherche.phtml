@@ -1,6 +1,7 @@
 <?php
-$tableFarmer = new Application_Model_Farmer_DbTable();
-$tableAnimaltype = new Application_Model_Animaltype_DbTable();
+$this->headTitle('Animal: recherche');
+$tableAnimal = new Application_Model_Animal_DbTable();
+$form = $this->form;
 ?>
 
 <script type="text/javascript">
@@ -32,35 +33,93 @@ function updateFilters(paramName, paramValue)
 
     self.location.href = '?' + newQuery.join('&');
 }
+
+
 </script>
+
 <script>
 
 $(function (){
-	   $(".pop").popover({placement:'left',trigger:'hover',delay:{show:10,hide:10}}); 
+	   $(".pop").popover({placement:'left',delay: { show: 10, hide: 10 },trigger: 'hover'}); 
 	});
 </script>
-<div class="content">	
+    
+
+
+<div class = "content"  >
 <div class="header">
-   <h1 class="page-title" >Cheptel: liste des animaux </h1>
+  <h1 class="page-title">	Animal: recherche</h1>
 </div>
 
         <ul class="breadcrumb">
             <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Cheptel</a> <span class="divider">/</span></li>
-            <li class="active">Liste des animaux</li>
+            <li><a href="#" class="black" >Animal</a> <span class="divider">/</span></li>
+            <li class="active">Recherche</li>
         </ul>
-<div style="margin-left: 1em"><a class="btn btn-info" href="javascript:history.back();">Retour</a></div>  
-<br/>        
-<form>
-<div style="margin-left: 1em; padding-bottom:0.5em;">
-<a class="btn" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
-<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
-    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
 
-</div>
+<br />
+<h3  class="alert-info" align="center"> Saisissez les 	&eacute;l&eacute;ments de recherche et cliquez sur "valider"...</h3>
+<form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
+<div style="position: static; width: 98%; margin: auto;">
+	<table style="background-color : #eeeeee; width: 98%" class="table-bordered" ><tr>
+    <?php
+    $i = 0;
+    
+    /* @var $form Zend_Form */
+    foreach ($form->getElements() as $element):
+        /* @var $element Zend_Form_Element */
+        $errors = $element->getMessages();
+        $elementName = $element->getName();
+       
+        ?>
+        <?php if( $elementName != 'photo' && $elementName != 'address_farmer' && $elementName !='rank_farmer'
+        	&& $elementName !='registration_date'): ?>
+
+        	<?php 	$i++; ?>
+        		<?php  if($i%2 == 0) echo '</tr><tr>'; ?>
+       		
+	          
+		            <td width="22%" align="right" class="control-group<?php if ($errors) echo ' error'; ?>">
+		            	<?php if ($element->getType() != 'Zend_Form_Element_Button'&& $element->getType() != 'Zend_Form_Element_File'): ?>
+		                        <?php echo $element->getLabel(); ?>                        
+		                <?php endif; ?>
+		                
+	                
+		            </td>
+	            	<td width="22" align="left">
+		            	<?php if($element->getType() != 'Zend_Form_Element_File'):?>
+		                <?php echo $element->renderViewHelper(); ?>
+		                <?php endif; ?>
+		                
+		                
+		               
+		                <?php if ($errors): ?>
+		                    <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
+		                <?php endif; ?>
+	                
+		            </td>
+	 <?php endif; ?>
+	 
+       
+     <?php  endforeach; ?>
+      </tr></table>
+        <br/>
+        <div class="row">
+      <div class="span7"></div>
+        <button class="btn btn-success" type="submit">Valider</button>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'animal'), null, true); ?>">Annuler</a>
+       </div>
+  </div>
+  
+
 </form>
 
-<form method="post" action="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+
+
+<h3 style="text-align:center" class="alert-success">R&eacute;sultats :</h3>
+
+
+ <form method="post" action="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
 <div style="margin-left:1em; margin-right:1em;">
 <table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
     cellpadding="3">
@@ -128,7 +187,8 @@ $(function (){
                                                                    <?php if ($row->photo_right == "no_photo.png"){?><i class="icon-plus" ></i><?php } else {?><i class="icon-pencil"></i><?php }?> </a></td>
             <td><a class="black" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'displayanimal', 'photo' => $row->photo_front),null, true); ?>">VUE FACE</a>-<a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'updatephotofront', 'id' => $row->animal_id), null, true); ?>">
                                                                    <?php if ($row->photo_front == "no_photo.png"){?><i class="icon-plus" ></i><?php } else {?><i class="icon-pencil"></i><?php }?></a></td>
-            <td align="center"><a href="#" class="pop black" data-content="<?php echo $row->comment; ?> "data-original-title="Signes particuliers"><i class="icon-info-sign"></i></a>&nbsp;-<a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'updatecomment', 'id' => $row->animal_id), null, true); ?>">     
+            <td align="center"><a  href="#" class="pop black" data-content="<?php echo $row->comment; ?> "data-original-title="Signes particuliers"><i class="icon-info-sign"></i></a>&nbsp;-<a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'updatecomment', 'id' => $row->animal_id), null, true); ?>">     
+            
                                                                   <?php if ($row->comment == "R.A.S"){?><i class="icon-plus" ></i><?php } else {?><i class="icon-pencil"></i><?php }?> </a></td>
             <td align="center"><a title="supprimer" onclick="return confirm('Confirmer la suppression?');" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'delete', 'del_id' => $row->animal_id,'animal_type'=>$row->fk_animaltype,'id_farmer'=>$row->fk_id_farmer), null, true); ?>"><i class="icon-trash"></i></a>
                      <?php if ($row->isstolen) {?>
@@ -148,4 +208,7 @@ $(function (){
 </form>
 
 
+
+
 </div>
+

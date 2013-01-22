@@ -1,0 +1,143 @@
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Contacts des Veterinaires</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'contact'), null, true); ?>" class="black">Contacts</a><span class="divider">/</span></li>
+            <li><a href="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'index'), null, true); ?>" class="black" >Veterinaires</a> <span class="divider">/</span></li>
+            <li class="active">Liste</li>
+        </ul>
+
+<div
+	class="pull-right"><a class="btn btn-info"
+	href="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'index'), null, true); ?>"><i
+	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+<a class="btn btn-success"
+	href="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'create'), null, true); ?>"><i
+	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
+</div>
+<br />
+
+<form method="get" action="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'index'), null, true); ?>">
+<div>
+Search for: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> in 
+<?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
+  'all' => 'All',
+  'id_veterinaire' => 'Id',
+  'adresse_veterinaire' => 'Adresse',
+  'firstname_veterinaire' => 'Prenom',
+  'lastname_veterinaire' => 'Nom',
+  'email_veterinaire' => 'Email',
+)); ?>
+<input type="submit" value="Go" />
+</div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<table class="table table-bordered table-condensed ">
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+            
+            <th<?php if ('id_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Id  
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                  </span>
+            </th>
+            <th<?php if ('adresse_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Adresse  
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'adresse_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'adresse_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                 </span>
+            </th>
+            <th<?php if ('localite_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Localite  
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'localite_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'localite_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                 </span>
+            </th>
+            <th<?php if ('firstname_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Prenom 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'firstname_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'firstname_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                 </span>
+            </th>
+            <th<?php if ('lastname_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Nom 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lastname_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'lastname_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                 </span>
+            </th>
+            <th<?php if ('IsActive_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">IsActive 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'IsActive_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'IsActive_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                 </span>
+            </th>
+            <th<?php if ('email_veterinaire' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Email
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'email_veterinaire', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'email_veterinaire', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                 </span>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>   
+    <tbody>
+<?php foreach ($this->paginator as $row): ?>
+        <tr>
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->rank_veterinaire; ?>" /></td>
+            <td ><?php echo $row->rank_veterinaire; ?></td>
+            <td><?php echo $row->id_veterinaire; ?></td>
+            <td><?php echo $row->adresse_veterinaire; ?></td>
+            <td ><?php echo $row->localite_veterinaire; ?></td>
+            <td><?php echo $row->firstname_veterinaire; ?></td>
+            <td><?php echo $row->lastname_veterinaire; ?></td>
+            <td ><?php echo $row->IsActive_veterinaire; ?></td>
+            <td><?php echo $row->email_veterinaire; ?></td>
+            <td align="center"><a href="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'update', 'id' => $row->rank_veterinaire), null, true); ?>">Edit</a> 
+    - <a onclick="return confirm('Confirm deletion!');" href="<?php echo $this->url(array('controller' => 'veterinaire', 'action' => 'delete', 'del_id' => $row->rank_veterinaire), null, true); ?>">Delete</a></td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table><br />
+<input type="submit" value="Delete Selected Rows" />
+</form>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');?>
+</div>
