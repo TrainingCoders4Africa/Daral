@@ -18,6 +18,12 @@
     <h4>Transaction r&eacute;ussie et enregistr&eacute;e</h4>
     </div>
     <div style="margin-left:1em;">
-    <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'transactions', 'action' => 'index'), null, true); ?>"><i class="icon-chevron-left"></i>-- OK --  </a>
+    <div><p><?php $elements_facture=$this->elements_facture;?></p></div>
+    <div>
+    <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'transactions', 'action' => 'index'), null, true); ?>">
+         &nbsp;OK&nbsp;   </a>
+     <a target="_blank" class="btn btn-success" href="<?php echo $this->url(array('controller' => 'transactions', 'action' => 'printfacture','elements_facture'=>$elements_facture), null, true); ?>"><i class="icon-print"></i>Imprimer une facture </a>
+     </div>
+    </div>
     </div>
 </div>

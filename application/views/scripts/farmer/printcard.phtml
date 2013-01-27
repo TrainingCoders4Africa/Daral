@@ -1,0 +1,19 @@
+
+  <div id="printableArea" style="margin-left:20em"><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "380 " height = "200 "  alt="photo" class ="thumbnail "/></div>
+  <div style="margin-left:30em">
+  <input type="button" onclick="printDiv('printableArea')" value="LANCER IMPRESSION" />
+  
+  </div>
+
+<script type="text/javascript"> 
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>

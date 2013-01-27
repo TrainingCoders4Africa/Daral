@@ -15,7 +15,8 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
         
 <div style="margin-left:2em;">
   <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class="icon-chevron-left"></i>Retourner &agrave la liste </a>
-
+  <a target="_blank" class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'printcard','id'=>$this->id), null, true); ?>"><i class="icon-print"></i>Imprimer </a>
+  
 <br/>
   <div style="margin-left:20em"><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
 

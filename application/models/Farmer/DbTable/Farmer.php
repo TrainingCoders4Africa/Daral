@@ -313,7 +313,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	//****************************************************************************************************************//
 	//*********** CREATES THE IMAGE OF THE "DARAL ID CARD" USING THE FARMER'S PICTURE AND INFO ***********************//
 	
-	public function createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer)
+	public function createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$registration_date,$categorie)
 	{
 		$Op_Syst=$this->getOS();
 		
@@ -339,7 +339,8 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 		  	$nom=$lastname_farmer;
 		  	$prenom=$firstname_farmer;
 		  	$id=$id_farmer;
-		  	
+		  	$reg_date=$registration_date;
+		  	$categ=$categorie;
 		  	
 		  	$noir = imagecolorallocate($destination, 0, 0, 0);
 		  	$path=IMAGE_PATH."\\".$id.".png";
@@ -366,14 +367,21 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 					$nom=$lastname_farmer;
 					$prenom=$firstname_farmer;
 					$id=$id_farmer;
+					$reg_date=$registration_date;
+					$categ=$categorie;
+					 
 					 
 				
 					$noir = imagecolorallocate($destination, 0, 0, 0);
 				    $path=IMAGE_PATH."/".$id.".png";
 				}
-		imagestring($destination,3,137,67,"NOM: ".$nom,$noir);
-		imagestring($destination,3,137,87,"PRENOM: ".$prenom,$noir);
-		imagestring($destination,3,137,107,"IDENTIFIANT: ".$id,$noir);
+		imagestring($destination,2,117,67,"NOM: ".$nom,$noir);
+		imagestring($destination,2,117,87,"PRENOM: ".$prenom,$noir);
+		imagestring($destination,2,117,107,"IDENTIFIANT: ".$id,$noir);
+		imagestring($destination,2,117,127,"DATE D'INSCRIPTION: ".$reg_date,$noir);
+		imagestring($destination,2,117,147,"CATEGORIE: ".$categ,$noir);
+		
+		
 		//imagestring($destination,3,137,127,"src: ".$namePhoto,$noir); // for debugging
 	
 		imagecopymerge($destination, $source,

@@ -145,7 +145,8 @@ class TransactionsController extends Zend_Controller_Action
     			$animaltype= $form->getValue('animaltype');
     			$info_buyer = $form->getValue('info_buyer');
     			$animal_ids = explode(";",$form->getValue('animal_id'));
-    		    $nb_animals=count($animal_ids);
+    		    $nb_animals=count($animal_ids);//used to check against farmer category
+    		    $transaction_date=date("d.m.y");
     			//print_r($count_ids);break;
     			
     			// !!!!check infos !!!!!
@@ -158,7 +159,13 @@ class TransactionsController extends Zend_Controller_Action
 				
 			  if($error_log=='none;')	
 			  	    			
-			  {
+			  {   
+			  	$elements_facture='';
+			  	$elements_facture.=$transaction_date.";";
+			    $elements_facture.=$id_seller.";";
+			    $elements_facture.=$id_buyer.";";
+			    $elements_facture.=$info_buyer.";";
+			   
 			  	foreach ($animal_ids as $animal_id)
 			  	  {
 			  	    
@@ -178,11 +185,11 @@ class TransactionsController extends Zend_Controller_Action
     				);
     				$tableTransactions->insert($transaction_data);
     				//!!! redirect to success message success message !!!
-    				
+    				$elements_facture.=$res['animal_id'].";";
     				
     			   }
     			   
-    			   $this->_redirector->gotoUrl('/transactions/displaysuccess/message/');
+    			   $this->_redirector->gotoUrl('/transactions/displaysuccess/elementfacture/'.$elements_facture);
 			  }
     		  else 
     		  {
@@ -215,7 +222,15 @@ class TransactionsController extends Zend_Controller_Action
     //=================================
     public function displaysuccessAction()
     {
+    	$elements_facture = $this->_getParam('elementfacture');
+    	$this->view->assign(array('elements_facture'=>$elements_facture));
+    }
     
+    public function printfactureAction()
+    {
+    	$this->_helper->layout->setLayout('layout2');
+    	$elements_facture = $this->_getParam('elements_facture');
+    	$this->view->assign(array('elements_facture'=>$elements_facture));
     }
     
     

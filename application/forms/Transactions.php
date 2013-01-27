@@ -43,7 +43,7 @@ class Application_Form_Transactions extends Zend_Form
         
         $this->addElement(
         		$this->createElement('textarea', 'info_buyer')
-        		->setLabel('Info Client')
+        		->setLabel('Details')
         		->setAttrib('rows', '4')
         		->setAttrib('cols', '8')
         		->setAttrib("maxlength", 1000)

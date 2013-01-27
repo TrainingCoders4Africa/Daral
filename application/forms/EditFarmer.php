@@ -46,6 +46,15 @@ class Application_Form_EditFarmer extends Zend_Form
         $tableCategorie = new Application_Model_Categorie_DbTable();
         
         $this->addElement(
+        		$this->createElement('text', 'registration_date')
+        		->setLabel('Date d\'inscription')
+        		//->setValue(date("Y-m-d"))
+        		->setAttrib('readonly','readonly')
+        		->setRequired(true)
+        		->addFilter(new Zend_Filter_StringTrim())
+        );
+        
+        $this->addElement(
             $this->createElement('select', 'categorie')
                 ->setLabel('Categorie ')
                 ->setMultiOptions(array("" => "- - - - - - - - - Choisir - - - - - - - - -") + $tableCategorie->fetchPairs())
@@ -139,13 +148,13 @@ class Application_Form_EditFarmer extends Zend_Form
         
         
         
-        $this->addElement(
+       /* $this->addElement(
         		$this->createElement('hidden', 'registration_date')
         		// ->setLabel('Registration Date')
         		->setValue(date("Y-m-d"))
         		//->setRequired(true)
         		->addFilter(new Zend_Filter_StringTrim())
-        );
+        );*/
         
         
         

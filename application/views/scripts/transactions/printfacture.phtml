@@ -1,0 +1,41 @@
+
+
+<div id="printableArea" style="margin-left:2em">
+  <h3>FACTURE</h3>
+  <?php  $elements_facture=$this->elements_facture;
+              $facture=explode(';', $elements_facture);
+              $count=count($facture);
+              $date=$facture[0];
+              $seller=$facture[1];   $buyer=$facture[2]; $info=$facture[3]; ?>
+   <div><p>DATE: <?php echo " ".$date;?></p></div>
+              
+   <div><p>IDENTIFIANT VENDEUR: <?php echo " ".$seller;?></p></div>
+   
+   <div><p>IDENTIFIANT ACHETEUR: <?php echo " ".$buyer;?></p></div>
+   
+   <div><p>DETAILS: <?php echo " ".$info;?></p></div>
+      <div><p>IDENTIFIANTS DES BETES:</p>
+           <p><?php for($i=4;$i<$count;$i++){ echo $facture[$i]."   ";}?></p>
+      </div>
+   
+</div>
+
+
+  <div style="margin-left: 2em">
+  <input type="button" onclick="printDiv('printableArea')" value="LANCER IMPRESSION" />
+  
+  </div>
+
+<script type="text/javascript"> 
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>
+

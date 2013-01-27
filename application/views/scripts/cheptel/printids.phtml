@@ -1,0 +1,23 @@
+
+
+  <div id="printableArea" style="margin-left:2em">
+  <h3 align="center">LISTE DES IDENTIFIANTS</h3>
+   <p><?php  $ids=$this->ids; print_r($ids); ?></p>
+   </div>
+  <div align="center">
+  <input type="button" onclick="printDiv('printableArea')" value="LANCER IMPRESSION" />
+  
+  </div>
+
+<script type="text/javascript"> 
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>

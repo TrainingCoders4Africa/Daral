@@ -130,7 +130,8 @@ class FarmerController extends Zend_Controller_Action
     			// ID CARD GENERATION
     			$filename = $form->photo->getFileName();
     			$filename= $farmer->resize_picture($filename);
-    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
+    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
     			
     			$session = new Zend_Session_Namespace('session'); //variable used to send values to the displaycardAction()
     			$session->photo_path = $path;// to be used by the displaycardAction()
@@ -196,6 +197,11 @@ class FarmerController extends Zend_Controller_Action
     			$firstname_farmer = $form->getValue('firstname_farmer');
     			$lastname_farmer = $form->getValue('lastname_farmer');
     			$phone_farmer = $form->getValue('phone_farmer');
+    			$registration_date=$form->getValue('registration_date');
+    			//**** put registration date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$registration_date)));
+    			$registration_date=$date;
+    			//*********
     			$birthdate_farmer = $form->getValue('birthdate_farmer');
     			//**** put date into SQL Format
     			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
@@ -231,7 +237,10 @@ class FarmerController extends Zend_Controller_Action
     			// ID CARD GENERATION
     			$filename = $form->photo->getFileName();
     			$filename= $farmer->resize_picture($filename);
-    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
+    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
+    			    
+    			//$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
     			
     		
     			$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$id_farmer);
@@ -270,6 +279,21 @@ class FarmerController extends Zend_Controller_Action
       $id_farmer = $this->_getParam('id');
       $this->view->assign(array('id'=>$id_farmer));
       
+    }
+    
+    //**************************************************************************************************//
+    //									       PRINT MEMBER CARD
+    //**************************************************************************************************//
+    
+    public function printcardAction()
+    
+    
+    {
+    	 
+    	$this->_helper->layout->setLayout('layout2');
+    	$id_farmer = $this->_getParam('id');
+    	$this->view->assign(array('id'=>$id_farmer));
+    
     }
     
     //**************************************************************************************************//

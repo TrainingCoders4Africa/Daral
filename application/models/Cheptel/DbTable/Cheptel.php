@@ -54,6 +54,8 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 						             	
 						             	$rank=$tableAnimal->get_total_animal_type_registered($fk_id_farmer,$tag)+1; 
 						             	
+						             	$ids='';
+						             	
 						             	//new animals are inserted
 						             	for($i=0;$i<$total_animaltype_to_add;$i++)
 						             	{	
@@ -66,16 +68,17 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 						             		
 						             		$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
 						             		
+						             		$ids.="  ".$animal_id;
 						             	    $tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id); 
 						             	    
 						             	    $rank++;//we increment for the next animal 
 						             	}
 				                 
-				             		   return 1; // update and insertion ok
+				             		   return array('res'=>1,'ids'=>$ids); // update and insertion ok
 				             	}
 				             	
 				             	else{ 
-				             		   return -1;//no insertion: maximum exceeded 
+				             		   return array('res'=>-1,'ids'=>$ids); ;//no insertion: maximum exceeded 
 				             	    }
 				             	
 				             
@@ -101,7 +104,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             		
 				             		$this->insert($data);
 				             		
-				             		
+				             		$ids='';
 				             		//first new animal type rank
 				             		$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
 				             		
@@ -117,18 +120,19 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             			
 				             			 
 				             			$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
-				             			 
+				             			
+				             			$ids.="  ".$animal_id;
 				             			$tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id);
 				             			
 				             			$rank++;//we increment for the next animal
 				             		}
 				             	
-				             		return 1; // insertion ok
+				             		return array('res'=>1,'ids'=>$ids); ; // insertion ok
 				             	}
 				             	 
 				             	else
 				             	{
-				             		return -1;//no insertion: maximum exceeded
+				             		return array('res'=>-1,'ids'=>$ids); ;//no insertion: maximum exceeded
 				             	}
 	             	
 	             	
@@ -141,7 +145,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	   
 	   else 
 	        {
-	        	return 0;//no such farmer in data base
+	        	return array('res'=>0,'ids'=>array()); ;//no such farmer in data base
 	        }
 	        
 	   } 

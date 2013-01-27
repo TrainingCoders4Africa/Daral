@@ -148,9 +148,10 @@ class CheptelController extends Zend_Controller_Action
 				$cheptel = new Application_Model_Cheptel_DbTable_Cheptel();
 				try{
 					$result=$cheptel->addCheptel($fk_id_farmer,$fk_animaltype,$total_animaltype);
-					switch ($result)
+					$ids=$result['ids'];
+					switch ($result['res'])
 					{
-						case  1: $this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$fk_id_farmer);break;
+						case  1: $this->_redirector->gotoUrl('/cheptel/success/ids/'.$ids);break;
 						case  0: $this->_redirector->gotoUrl('/cheptel/errorfarmer');
 						case -1: $this->_redirector->gotoUrl('/cheptel/errormax');
  					}
@@ -210,6 +211,19 @@ class CheptelController extends Zend_Controller_Action
     	
     }
     
+    public function successAction()
+    {
+    	$ids = $this->_getParam('ids');
+    	$this->view->assign(array('ids'=>$ids));
+    	 
+    }
+    
+    public function printidsAction()
+    {
+    	$this->_helper->layout->setLayout('layout2');
+    	$ids = $this->_getParam('animal_ids');
+    	$this->view->assign(array('ids'=>$ids));
+    }
 }
 //############################################################################################################################################
 
