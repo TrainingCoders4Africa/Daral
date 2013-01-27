@@ -12,9 +12,10 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
             <li><a href="#" class="black" >Eleveurs</a> <span class="divider">/</span></li>
             <li class="active">Profil Eleveur </li>
         </ul>
-               <div style="margin-left: 1em"><a class="btn btn-info" href="javascript:history.back();">Retour</a></div>  
         
 <div style="margin-left:2em;">
+  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class="icon-chevron-left"></i>Retourner &agrave la liste </a>
+
 <br/>
   <div style="margin-left:20em"><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
 
@@ -38,7 +39,7 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
   	echo $row['fk_animaltype'];
   	echo ": ";
   	echo $row['total_animaltype'];
-  	?><span>&nbsp</span><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $this->id,'fk_animaltype'=>$animal_type), null, true); ?>"><i class="icon-zoom-in"></i></a><br/><?php 
+  	?><span>&nbsp;</span><a href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'index', 'fk_id_farmer' => $this->id,'fk_animaltype'=>$animal_type), null, true); ?>"><i class="icon-zoom-in"></i></a><br/><?php 
     }
  }
  
@@ -68,7 +69,7 @@ $farmer_info=$farmer->getFarmer($this->id);
    <li>Lieu de naissance: <?php echo " ".$farmer_info['birthplace_farmer']; ?></li>
   </ul>
   
-  <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit','id'=>$this->id), null, true); ?>"><i class="icon-pencil icon-white"></i>Mettre &agrave jour les infos</a>
+  <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit','id'=>$this->id), null, true); ?>"><i class="icon-pencil icon-white"></i>Mettre &agrave; jour les infos</a>
 </div>
 </div>
 </div>

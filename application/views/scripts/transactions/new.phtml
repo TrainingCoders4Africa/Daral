@@ -1,0 +1,128 @@
+<?php
+$this->headTitle('Transaction: enregistrer une transaction');
+$tableAnimal = new Application_Model_Animal_DbTable();
+$form = $this->form;
+?>
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+
+
+</script>
+
+<script>
+
+$(function (){
+	   $(".pop").popover({placement:'left',delay: { show: 10, hide: 10 },trigger: 'hover'}); 
+	});
+</script>
+    
+
+
+<div class = "content"  >
+<div class="header">
+  <h1 class="page-title">	Transaction: nouvelle</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Transactions</a> <span class="divider">/</span></li>
+            <li class="active">Enregistrer une transaction</li>
+        </ul>
+
+
+<form class="form-horizontal" method="post" action="<?php echo $this->url();  ?>" enctype="multipart/form-data">
+<div style="position: static; width: 98%; margin: auto;">
+	<table style="background-color : #eeeeee; width: 98%" class="table-bordered" ><tr>
+    <?php
+    $i = 0;
+    
+    /* @var $form Zend_Form */
+    foreach ($form->getElements() as $element):
+        /* @var $element Zend_Form_Element */
+        $errors = $element->getMessages();
+        $elementName = $element->getName();
+       
+        ?>
+        <?php if( $elementName != 'photo' && $elementName != 'address_farmer' && $elementName !='rank_farmer'
+        	&& $elementName !='registration_date'): ?>
+
+        	<?php 	$i++; ?>
+        		<?php  if($i%2 == 0) echo '</tr><tr>'; ?>
+       		
+	          
+		            <td width="22%" align="right" class="control-group<?php if ($errors) echo ' error'; ?>">
+		            	<?php if ($element->getType() != 'Zend_Form_Element_Button'&& $element->getType() != 'Zend_Form_Element_File'): ?>
+		                        <?php echo $element->getLabel(); ?>                        
+		                <?php endif; ?>
+		                
+	                
+		            </td>
+	            	<td width="22" align="left">
+		            	<?php if($element->getType() != 'Zend_Form_Element_File'):?>
+		                <?php echo $element->renderViewHelper(); ?>
+		                <?php endif; ?>
+		                
+		                
+		               
+		                <?php if ($errors): ?>
+		                    <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
+		                <?php endif; ?>
+	                
+		            </td>
+	 <?php endif; ?>
+	 
+       
+     <?php  endforeach; ?>
+         
+      </tr></table>
+      <p>( * ) Identifiant &agrave; huit chiffres 'particulier':00000000 ,'distributeur': 99999999</p>
+      <p>( ** ) Identifiants des b&ecirc;tes s&eacute;par&eacute;s par des points-virgules (ex: "0010;0015")</p>
+      
+        <br/>
+        <div class="row">
+      <div class="span7"></div>
+        <button class="btn btn-success" type="submit">Valider</button>
+        <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'animal'), null, true); ?>">Annuler</a>
+       </div>
+  </div>
+  
+
+</form>
+
+
+
+
+
+
+
+</div>
+
+

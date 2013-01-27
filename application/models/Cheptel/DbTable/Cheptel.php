@@ -35,14 +35,14 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 	             if($row) //farmer already has an entry in the table for this Animaltype
 	             	
 				   { 
-				         $current_total_all_types=$this->getFarmerTotal($fk_id_farmer);//current total for ALL animal types
+				         $current_total_all_types=$tableAnimal->get_farmer_total_all_types($fk_id_farmer);//current total for ALL animal types
 				         $new_total_all_types=$current_total_all_types+$total_animaltype_to_add;//new total for ALL animal types
 				            
 				             	if ($new_total_all_types<= $max_animal)
 				             	{
 				             	        //table "cheptel" is updated
 				             		    $row_arr = $row->toArray();
-				             		    $current_total_animal_type=$row_arr['total_animaltype'];//current total for Animaltype
+				             		    $current_total_animal_type=$tableAnimal->get_current_total_animal_type($fk_id_farmer,$fk_animaltype);//current total for Animaltype
 				             		    
 				             		    $new_total_animal_type=$current_total_animal_type+$total_animaltype_to_add;//new total for Animaltype
 						             	$this->update(array('total_animaltype'=>$new_total_animal_type),
@@ -50,17 +50,18 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 						           
 						             	
 						             	//first new animal type rank
-						             	$rank=$current_total_animal_type+1; 
+						             	$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
+						             	
+						             	$rank=$tableAnimal->get_total_animal_type_registered($fk_id_farmer,$tag)+1; 
 						             	
 						             	//new animals are inserted
 						             	for($i=0;$i<$total_animaltype_to_add;$i++)
 						             	{	
 					
-						             		//determine the rank of the animal to be added in "animal" table in the form 0001 to 9999
+						             		//give the rank of the animal to be added in "animal" table in the form 0001 to 9999
 						             		
 						             		$new_animaltype_rank = $this->generateAnimalRank($rank);
 						             		
-						             		$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
 						             		
 						             		
 						             		$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
@@ -83,7 +84,7 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 
 	             else //farmer has no previous entry in the table for this animal type
 	             { 
-	             	$current_total_all_types=$this->getFarmerTotal($fk_id_farmer);//current total for ALL Animaltypes
+	             	$current_total_all_types=$tableAnimal->get_farmer_total_all_types($fk_id_farmer);//current total for ALL Animaltypes
 	             	$new_total_all_types=$current_total_all_types+$total_animaltype_to_add;//new total for ALL Animaltypes
 				             	 
 				             	if ($new_total_all_types<= $max_animal)
@@ -100,18 +101,20 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             		
 				             		$this->insert($data);
 				             		
+				             		
 				             		//first new animal type rank
-				             		$rank=1;
+				             		$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
+				             		
+				             		$rank=$tableAnimal->get_total_animal_type_registered($fk_id_farmer,$tag)+1;
 				             		
 				             		//new animals are inserted
 				             		for($i=0;$i<$total_animaltype_to_add;$i++)
 				             		{
-				             			//determine the rank of the animal to be added in "animal" table in the form  0001 to 9999
+				             			//give the rank of the animal to be added in "animal" table in the form  0001 to 9999
 				             			 
 				             			$new_animaltype_rank = $this->generateAnimalRank($rank);
 				             			 
-				             			$tag= $tableAnimaltype->getAnimalTag($fk_animaltype);
-				             			//$tag="C";
+				             			
 				             			 
 				             			$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
 				             			 

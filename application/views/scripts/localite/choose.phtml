@@ -71,12 +71,7 @@ Rechercher: <input class="input-large search-query"
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
-            <th  style="text-align: center;"<?php if ('id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Identifiant 
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'asc')); ?>'>&#x25B2;</a>
-                <a href='<?php echo $this->url($_GET + array('_sf' => 'id', '_so' => 'desc')); ?>'>&#x25BC;</a>
-                
-            </span></th>
+            
             <th  style="text-align: center;"<?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
                 <span class="label label-inverse">Nom 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
@@ -97,7 +92,6 @@ Rechercher: <input class="input-large search-query"
 <?php foreach ($this->paginator as $row): ?>
         <tr>
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
-            <td align="right"><?php echo $row->id; ?></td>
             <td><?php echo $row->name; ?></td>
             <td align="right"><?php echo $row->departement; ?></td> 
             <td align="center"><a  href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'displaystat','name'=>$row->name,'departement'=>$row->departement), null, true); ?>" >

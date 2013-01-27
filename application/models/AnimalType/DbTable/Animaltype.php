@@ -5,7 +5,7 @@
 error_reporting(E_ALL);
 
 /**
- * Model for table localite
+ * Model for table animaltype
  *
  * @package Daral
  * @author Mansour
@@ -29,5 +29,14 @@ class Application_Model_Animaltype_DbTable_Animaltype extends Zend_Db_Table_Abst
 		return $animal_tag;
 	
 	
+	}
+	
+	public function get_animal_types()
+	{
+	   $sql="select name from animaltype";
+	   $stmt = $this->_db->query($sql);
+	   $rows=$stmt->fetchAll(PDO::FETCH_COLUMN);
+	   return $rows;
+		
 	}
 }

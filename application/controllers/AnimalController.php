@@ -136,7 +136,7 @@ class AnimalController extends Zend_Controller_Action
     
     
     
-    public function  warnAction()
+    public function  warnAction()//signaler une bete comme volee
     {
     	
     	
@@ -171,7 +171,7 @@ class AnimalController extends Zend_Controller_Action
     
     
     
-    public function  unwarnAction()
+    public function  unwarnAction()//ne plus signaler une bete comme volee
     {
     	 
     	 
@@ -430,6 +430,7 @@ class AnimalController extends Zend_Controller_Action
    
     }
     
+   
     
     
     

@@ -10,12 +10,14 @@
 <script src="<?php echo $this->baseUrl(); ?>/js/ui/jquery.ui.widget.js"></script>
 <script src="<?php echo $this->baseUrl(); ?>/js/ui/jquery.ui.datepicker.js"></script>
 <script src="<?php echo $this->baseUrl(); ?>/js/ui/jquery.ui.datepicker-fr.js"></script>
+<script src="<?php echo $this->baseUrl(); ?>/js/gmaps.js"></script>
 
 <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/jquery.ui.all.css') ?> 
 <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/smoothness/jquery-ui-1.9.1.custom.css') ?> 
 <script src="<?php echo $this->baseUrl(); ?>/bootstrap/js/bootstrap.min.js"></script> 
 <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/bootstrap/css/bootstrap.css'); ?>
 <?php echo $this->headLink()->appendStylesheet($this->baseUrl().'/css/styles.css') ?>
+
 
 <style type="text/css">
     
@@ -808,16 +810,27 @@ var mapOptions = {
 	<div class=""  style="width:95%;margin:auto;margin-top:1em;">
 		<div class="navbar"> 
 			
-			
-		<?php echo $this->displayMenu();?>
+	<?php  $auth = Zend_Auth::getInstance();
+	       $request = Zend_Controller_Front::getInstance()->getRequest();
+           $controller = $request->getControllerName();
+     ?>
+	<?php if($auth->hasIdentity() || $controller=='auth') {?>				
+	<?php echo $this->displayMenu();?>
 		
 
 		
 		
-		<?php echo $this->layout()->content ?>
+	<?php echo $this->layout()->content ?>
 		
-		
+	<?php }else { ?>	
+	
+	<div style="margin-left:2em;">
+  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'index'), null, true); ?>"><i class="icon-chevron-left"></i>Se connecter &agrave; DARAL</a>
+
+  <br/>
+	<?php }?>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

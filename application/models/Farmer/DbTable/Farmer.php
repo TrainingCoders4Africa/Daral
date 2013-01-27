@@ -139,7 +139,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 		$IsActive_farmer = '1';
 			
-		$row = $this->fetchRow(array('id_farmer = '.$id_farmer,'isactive_farmer = '.$IsActive_farmer));
+		$row = $this->fetchRow(array('id_farmer = ?'=>$id_farmer,'isactive_farmer = ?'=>$IsActive_farmer));
 		if (!$row) {
 			return false;
 		}
@@ -147,6 +147,114 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	
 	}
 	
+	//*********************************************************************************************************************************//
+	//********************* Checks if buyer is an active farmer or is identified as 'particulier' or 'distributeur' *******************//
+	
+	public function check_buyer($id_buyer,$nb_animals,$animaltype)
+
+	{
+		if ($this->exist_farmer($id_buyer) || $id_buyer == '00000000' || $id_buyer == '99999999') // 00000000: acheteur particulier;99999999: distributeur
+		{ 
+			if($id_buyer!='00000000' && $id_buyer!='99999999' && $this->will_exceed_category($id_buyer,$nb_animals,$animaltype))
+			{
+				return "Impossible d'enregistrer la transaction: le maximum de betes pour la categorie de l'acheteur sera depasse";
+			}
+		
+			else 
+			{
+			 return '';
+			}//we return an empty string meaning 'ok'
+		}
+		else 
+		{ return "L'identifiant du client n'est pas valide;";}
+	}
+	
+	//**********************************************************************************//
+	//**********************                            *******************************//
+	public function will_exceed_category($id_buyer,$nb_animals,$animaltype)
+	{
+		
+		$total_animaltype_to_add = $nb_animals;
+		
+		$tableCheptel = new Application_Model_Cheptel_DbTable_Cheptel();
+		$tableCategorie= new Application_Model_Categorie_DbTable_Categorie();
+		$tableAnimal = new Application_Model_Animal_DbTable_Animal();
+		$tableAnimaltype = new Application_Model_Animaltype_DbTable_Animaltype();
+		
+			
+				
+				
+				
+			$categorie = $this->getCategorie($id_buyer);
+			$max_animal= $tableCategorie->getMaxAnimal($categorie);
+			
+			$row_b = $tableCheptel->fetchRow($tableCheptel->select()->where('fk_id_farmer=?',$id_buyer)->where('fk_animaltype=?',$animaltype));
+			
+				
+				
+			if($row_b) //buyer already has an entry in the table for this Animaltype
+					
+			{
+		
+				$current_total_all_types=$tableAnimal->get_farmer_total_all_types($id_buyer);//current total for ALL animal types
+				$new_total_all_types=$current_total_all_types+$total_animaltype_to_add;//new total for ALL animal types
+		
+				if ($new_total_all_types<= $max_animal)
+				{
+					return false;
+				}
+		
+				else
+				{
+					return true;
+				}
+		
+		
+		
+			}
+		
+			else //farmer has no previous entry in the table for this animal type
+			{
+		
+				
+				$current_total_all_types=$tableAnimal->get_farmer_total_all_types($id_buyer);//current total for ALL Animaltypes
+				$new_total_all_types=$current_total_all_types+$total_animaltype_to_add;//new total for ALL Animaltypes
+				if ($new_total_all_types<= $max_animal)
+				{
+					return false;
+				}
+				
+				else
+				{
+					return true;//no insertion: maximum exceeded
+				}
+		
+		
+		
+			}
+		
+		
+		
+		
+		
+		
+	}
+	//*******************************************************************************//
+	//********************* Checks if seller is an active farmer  *******************//
+	
+	public function check_seller($id_seller)
+	
+	{
+		if ($this->exist_farmer($id_seller)) 
+		{
+			return '';
+		}//we return an empty string meaning 'ok'
+		else 
+		{
+			return "L'identifiant du vendeur n'est pas valide;";
+		
+		}
+	}
 	
 	
 	//*************************************************************************************************//

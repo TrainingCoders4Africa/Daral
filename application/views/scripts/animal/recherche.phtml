@@ -175,9 +175,9 @@ $(function (){
            
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id ?>" /></td>
             <?php if($row->isstolen) {?>
-            <td align="center"><blink title="bete signalee comme volee" style="color:red"><?php echo substr($row->animal_id,9); ?></blink></td>
+            <td align="center"><blink title="<?php echo $row->animal_id; ?> :bete signalee comme volee" style="color:red"><?php echo substr($row->animal_id,9); ?></blink></td>
             <?php } else {?> 
-             <td align="center"><?php echo substr($row->animal_id,9); ?></td>
+             <td title="<?php echo $row->animal_id; ?>" align="center"><?php echo substr($row->animal_id,9); ?></td>
             <?php }?>
             <td align="center"><?php echo $row->fk_id_farmer; ?></td>
             <td align="center"><?php echo $row->fk_animaltype; ?></td>

@@ -1,32 +1,34 @@
 <?php if ($this->pageCount): ?>
-<div class="paginationControl">
+<div class="pagination">
+<ul>
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url($_GET + array('page' => $this->previous)); ?>">
-    &lt; Previous
-  </a> |
+
+ <li class="active"> <a href="<?php echo $this->url($_GET + array('page' => $this->previous)); ?>">
+&lt; &lt;  </a></li> 
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <li class="disabled"><a href="#"> &lt; &lt;</a></li> 
 <?php endif; ?>
  
 <!-- Numbered page links -->
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
-    <a href="<?php echo $this->url($_GET + array('page' => $page)); ?>">
+    <li class="active"><a href="<?php echo $this->url($_GET + array('page' => $page)); ?>">
         <?php echo $page; ?>
-    </a> |
+    </a></li> 
   <?php else: ?>
-    <?php echo $page; ?> |
+    <li class="disabled"><a href="#"><?php echo $page; ?> </a></li>
   <?php endif; ?>
 <?php endforeach; ?>
  
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url($_GET + array('page' => $this->next)); ?>">
-    Next &gt;
-  </a>
+  <li class="active"><a href="<?php echo $this->url($_GET + array('page' => $this->next)); ?>">
+    &gt; &gt; 
+  </a></li>
 <?php else: ?>
-  <span class="disabled">Next &gt;</span>
+  <li class="disabled"><a href="#">&gt; &gt; </a></li>
 <?php endif; ?>
+</ul>
 </div>
 <?php endif; ?>

@@ -288,10 +288,12 @@ class FarmerController extends Zend_Controller_Action
             
         	$farmer = new Application_Model_Farmer_DbTable_Farmer();
         	$tableCheptel = new Application_Model_Cheptel_DbTable_Cheptel();
+        	$tableAnimal = new Application_Model_Animal_DbTable_Animal();
             foreach ($ids as $id)
             {
             	$farmer->archiveFarmer($id);
             	$tableCheptel->update(array('isactive'=>'0'),array('fk_id_farmer=?'=>$id) );
+            	$tableAnimal->delete_all_farmer_animal($id);
             	
             	
             }

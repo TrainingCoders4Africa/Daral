@@ -78,4 +78,14 @@ class Application_Model_National_DbTable extends Application_Model_National_DbTa
 		return $return;
 	}
 	
+	public function get_national_animaltype_total($animal_type)
+	{
+	
+		$sql="select count(*) from animal a where a.isactive = 1 and a.fk_animaltype='".$animal_type."' ";	
+		$stmt = $this->_db->query($sql);
+		$rows= $stmt->fetchAll(Zend_Db::FETCH_NUM);
+		return $rows[0][0];
+	
+	}
+	
 }

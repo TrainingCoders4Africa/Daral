@@ -54,7 +54,7 @@ $(function (){
 <form>
 <div style="margin-left: 1em; padding-bottom:0.5em;">
 <a class="btn" href="<?php echo $this->url(array('controller' => 'animal', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
-<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
+<a class="btn btn-info" href="<?php echo $this->url();?>" ><i class=" icon-refresh icon-white"></i> Actualiser</a>
     <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
 
 </div>
@@ -116,9 +116,9 @@ $(function (){
            
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id ?>" /></td>
             <?php if($row->isstolen) {?>
-            <td align="center"><blink title="bete signalee comme volee" style="color:red"><?php echo substr($row->animal_id,9); ?></blink></td>
+            <td align="center"><blink title="<?php echo $row->animal_id; ?> : bete signalee comme volee" style="color:red"><?php echo substr($row->animal_id,9); ?></blink></td>
             <?php } else {?> 
-             <td align="center"><?php echo substr($row->animal_id,9); ?></td>
+             <td title="<?php echo $row->animal_id; ?>" align="center"><?php echo substr($row->animal_id,9); ?></td>
             <?php }?>
             <td align="center"><?php echo $row->fk_id_farmer; ?></td>
             <td align="center"><?php echo $row->fk_animaltype; ?></td>
@@ -141,9 +141,11 @@ $(function (){
 <?php endforeach; ?>
     </tbody>
 </table><br />
+
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');?>
+
 </div>
 </form>
 

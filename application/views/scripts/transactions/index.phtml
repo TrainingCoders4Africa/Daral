@@ -1,0 +1,133 @@
+<?php
+$tableFarmer = new Application_Model_Farmer_DbTable();
+$tableAnimaltype = new Application_Model_Animaltype_DbTable();
+?>
+
+<script type="text/javascript">
+function toggleCheckboxes(source)
+{
+    var checkboxes = document.getElementsByName('del_id[]');
+    for (var i = 0; i < checkboxes.length; i++)
+    {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function updateFilters(paramName, paramValue)
+{
+    var newQuery = [];
+    var args = {};
+    var query = location.search.indexOf('?') > -1 ? location.search.substring(1).split('&') : [];
+
+    for (var pairIndex = 0; pairIndex < query.length; pairIndex++) {
+        var param = query[pairIndex].split('=');
+        args[param[0]] = param[1];
+    }
+
+    args[paramName] = paramValue;
+    for (var key in args)
+    {
+        newQuery.push(key + '=' + encodeURIComponent(args[key]));
+    }
+
+    self.location.href = '?' + newQuery.join('&');
+}
+</script>
+<script>
+
+$(function (){
+	   $(".pop").popover({placement:'left',trigger:'hover',delay:{show:10,hide:10}}); 
+	});
+</script>
+<div class="content">	
+<div class="header">
+   <h1 class="page-title" >Transaction: Historique </h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Transactions</a> <span class="divider">/</span></li>
+            <li class="active">Historique</li>
+        </ul>
+<div style="margin-left: 1em"><a class="btn btn-info" href="javascript:history.back();">Retour</a></div>  
+<br/>        
+<form>
+<div style="margin-left: 1em; padding-bottom:0.5em;">
+<a class="btn" href="<?php echo $this->url(array('controller' => 'transactions', 'action' => 'recherche'), null, true); ?>"><i class="icon-search"></i>Rechercher</a>
+<a class="btn btn-info" href="<?php echo $this->url();?>" ><i class=" icon-refresh icon-white"></i> Actualiser</a>
+    <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
+
+</div>
+</form>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'transactions', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
+<table width="100%" border="1" style="border-collapse:collapse" cellspacing="0" 
+    cellpadding="3">
+    <thead>
+        <tr>
+            <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
+            <th<?php if ('id_seller' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">ID Vendeur
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_seller', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_seller', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('id_buyer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">ID Acheteur
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_buyer', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'id_buyer', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('info_buyer' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Info Transaction</span>
+            </th>
+            <th<?php if ('animaltype' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Type de b&ecirc;te
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'animaltype', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'animaltype', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('animal_id' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">ID b&ecirc;te 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'animal_id', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'animal_id', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            <th<?php if ('transaction_date' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Date Transaction
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'transaction_date', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'transaction_date', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                </span>
+            </th>
+            
+            
+            
+        </tr>
+    </thead>
+    
+    <tbody>
+<?php foreach ($this->paginator as $row): ?>
+        <tr>
+           
+            <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id ?>" /></td>
+            <td align="center"><?php echo $row->id_seller; ?></td>
+            <td align="center"><?php echo $row->id_buyer; ?></td>
+            <td><?php echo $row->info_buyer; ?></td>
+            <td align="center"><?php echo $row->animaltype; ?></td>
+            <td align="center"><?php echo $row->animal_id; ?></td>
+            <td ><?php echo $row->transaction_date; ?></td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table><br />
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');?>
+
+</div>
+</form>
+
+
+</div>

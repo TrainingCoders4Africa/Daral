@@ -1,0 +1,37 @@
+<?php $error_string=$this->error_list; 
+  $errors_arr = (explode(';',$error_string));
+?>
+
+<div class="content" >
+<div class="header">
+
+   <h1 class="page-title" >Erreur Transaction!!</h1>
+</div>
+
+        <ul class="breadcrumb">
+            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Transactions</a> <span class="divider">/</span></li>
+            <li class="active">Liste des erreurs</li>
+        </ul>
+
+        
+ <br>
+    <div class="alert alert-danger" style="margin-left:1em;margin-right:1em;">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>Transaction impossible!</h4>
+    
+    <ul>
+    <?php foreach ($errors_arr as $error):?>
+        <?php if($error!='none'):?>
+    
+        <li><?php echo $error;?></li>
+    
+        <?php endif;?>
+    <?php endforeach;?>
+    </ul>
+    
+    </div>
+    
+    <div style="margin-left: 1em"><a class="btn btn-info" href="javascript:history.back();">Retour</a></div>  
+    
+</div>

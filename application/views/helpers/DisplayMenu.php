@@ -40,6 +40,8 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $national=$this->view->baseUrl().'/national';
 		   $maladie=$this->view->baseUrl().'/maladie';
 		   $langue=$this->view->baseUrl().'/langue';
+		   $transactions=$this->view->baseUrl().'/transactions';
+		   
             $html = '
 			<div class="navbar-inner" >
                 <ul class="nav pull-right">
@@ -227,8 +229,9 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		      });
               </script>
-               <li ><a href="#">Nouvelle</a></li>
-               <li><a href="#">Historique</a></li>
+               <li ><a href="'.$transactions.'/new">Nouvelle</a></li>
+               <li><a href="'.$transactions.'/index">Historique</a></li>
+                <li><a href="'.$transactions.'/recherche">Rechercher</a></li>
              </ul>
         
         </ul>

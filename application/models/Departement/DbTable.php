@@ -80,9 +80,15 @@ class Application_Model_Departement_DbTable extends Application_Model_Departemen
 	
 		return $return;
 	
+	}
 	
+	public function get_departement_animaltype_total($animal_type,$departement)
+	{
+		$sql="select count(*) from animal a, farmer f where f.isactive_farmer = 1 and f.departement='".$departement."' and f.id_farmer=a.fk_id_farmer and a.isactive=1 and a.fk_animaltype='".$animal_type."' ";
 	
-	
+		$stmt = $this->_db->query($sql);
+		$rows= $stmt->fetchAll(Zend_Db::FETCH_NUM);
+		return $rows[0][0];
 	
 	}
 }

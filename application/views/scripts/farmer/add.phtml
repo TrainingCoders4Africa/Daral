@@ -73,16 +73,7 @@ $categories= $tableCategorie->displayCategories();
         <?php
         endforeach;
         ?>
-              <td  ><div class="btn btn-group"><a class="btn btn-warning" data-toggle="dropdown" href="#"> ?</a>
-  <ul class="dropdown-menu">
-  <?php foreach ($categories as $categorie): ?>
-    <li><a href="#"><?php echo $categorie;?></a></li>
-    
-    <li class="divider"></li>
-    <?php endforeach; ?>
-  </ul></div>
-  
-                      </td><td></td>                                               
+                                                         
                                                                                     
                                                                         
                                                                                      
@@ -91,6 +82,14 @@ $categories= $tableCategorie->displayCategories();
                                                                      
                                                                      
         </tr></table>
+        <div>
+        <p>
+        ( ? )
+        <?php foreach ($categories as $categorie): ?>
+        <?php echo $categorie; echo " | "?>
+        <?php endforeach; ?>
+         </p>
+        </div>
         <br/>
         
         
