@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 22 Janvier 2013 à 13:51
+-- Généré le: Dim 27 Janvier 2013 à 04:04
 -- Version du serveur: 5.5.25
 -- Version de PHP: 5.4.4
 
@@ -35,64 +35,128 @@ CREATE TABLE `animal` (
   UNIQUE KEY `animal_id` (`animal_id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=116 ;
 
 --
 -- Contenu de la table `animal`
 --
 
 INSERT INTO `animal` (`id`, `animal_id`, `fk_id_farmer`, `fk_animaltype`, `photo_left`, `photo_right`, `photo_front`, `isactive`, `comment`, `isstolen`) VALUES
-(1, '10010001C0001', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
+(1, '10010001C0001', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
 (2, '10010001C0002', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(3, '10010001B0001', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(4, '10010001B0002', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(5, '10010001B0003', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(6, '10010001B0004', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(7, '10010001B0005', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(8, '10010001B0006', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
-(9, '10010001B0007', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(10, '10010001B0008', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(11, '10010001B0009', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(12, '10010001B0010', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(13, '10010002C0001', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 1),
-(14, '10010002C0002', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(15, '10010002C0003', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(16, '10010002C0004', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(17, '10010002C0005', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(18, '10010002C0006', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(19, '10010003C0001', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(20, '10010003C0002', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(21, '10010003C0003', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(22, '10010003C0004', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(23, '10010003C0005', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(24, '10010003C0006', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(25, '10010003C0007', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(26, '10010003C0008', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(27, '10010001B0011', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(28, '10010001B0012', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(29, '10010001B0013', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
-(30, '10010001B0014', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(31, '10010001B0015', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(32, '10010001B0016', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(33, '10010001B0017', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(34, '10010001B0018', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(35, '10010001B0019', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(36, '10010001B0020', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(37, '10010001B0021', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(38, '10010001B0022', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(39, '10010001B0023', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(40, '10010001B0024', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(41, '10010001B0025', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(42, '10010001B0026', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(43, '10010001B0027', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(44, '10010001B0028', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(45, '10010001B0029', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(46, '10010001B0030', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(47, '10010001B0031', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(48, '10010001B0032', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(49, '10010001B0033', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(50, '10010001B0034', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
-(51, '10010001B0035', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0);
+(3, '10010001C0003', '10010006', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(4, '10010001C0004', '10010006', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(5, '10010001C0005', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(6, '10010001C0006', '10010001', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(7, '10010001B0001', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(8, '10010001B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(9, '10010001B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(10, '10010001B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(11, '10010001B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(12, '10010001B0006', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(13, '10010001B0007', '10010001', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(14, '10010002B0001', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(15, '10010002B0002', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(16, '10010002B0003', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(17, '10010002B0004', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(18, '10010002B0005', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(19, '10010002B0006', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(20, '10010002B0007', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(21, '10010002B0008', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(22, '10010002C0001', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(23, '10010002C0002', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(24, '10010002C0003', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(25, '10010002C0004', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(26, '10010002C0005', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(27, '10010002C0006', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(28, '10010002C0007', '10010002', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(29, '10010003C0001', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(30, '10010003C0002', '10010003', 'Cheval', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(31, '10010003B0001', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(32, '10010003B0002', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(33, '10010003B0003', '10010006', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(34, '10010003B0004', '10010003', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(35, '10010002B0009', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(36, '10010002B0010', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(37, '10010002B0011', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(38, '10010002B0012', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(39, '10010002B0013', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(40, '10010002B0014', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(41, '10010002B0015', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(42, '10010002B0016', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(43, '10010002B0017', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(44, '10010002B0018', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(45, '10010002B0019', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(46, '10010002B0020', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(47, '10010002B0021', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(48, '10010002B0022', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(49, '10010002B0023', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(50, '10010002B0024', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(51, '10010002B0025', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(52, '10010002B0026', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(53, '10010002B0027', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(54, '10010002B0028', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(55, '10010002B0029', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(56, '10010002B0030', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(57, '10010002B0031', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(58, '10010002B0032', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(59, '10010002B0033', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(60, '10010002B0034', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(61, '10010002B0035', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(62, '10010002B0036', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(63, '10010002B0037', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(64, '10010002B0038', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(65, '10010002B0039', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(66, '10010002B0040', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(67, '10010002B0041', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(68, '10010002B0042', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(69, '10010002B0043', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(70, '10010002B0044', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(71, '10010002B0045', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(72, '10010002B0046', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(73, '10010002B0047', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(74, '10010002B0048', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(75, '10010002B0049', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(76, '10010002B0050', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(77, '10010002B0051', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(78, '10010002B0052', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(79, '10010002B0053', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(80, '10010002B0054', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(81, '10010002B0055', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(82, '10010002B0056', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(83, '10010002B0057', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(84, '10010002B0058', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(85, '10010002B0059', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(86, '10010002B0060', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(87, '10010002B0061', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(88, '10010002B0062', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(89, '10010002B0063', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(90, '10010002B0064', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(91, '10010002B0065', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(92, '10010002B0066', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(93, '10010002B0067', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(94, '10010002B0068', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(95, '10010002B0069', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(96, '10010002B0070', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(97, '10010002B0071', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(98, '10010002B0072', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(99, '10010002B0073', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(100, '10010002B0074', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(101, '10010002B0075', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(102, '10010002B0076', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(103, '10010002B0077', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(104, '10010002B0078', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(105, '10010002B0079', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(106, '10010002B0080', '00000000', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
+(107, '10010002B0081', '00000000', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 0, 'R.A.S', 0),
+(108, '10010002B0082', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(109, '10010002B0083', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(110, '10010002B0084', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(111, '10010002B0085', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(112, '10010002B0086', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(113, '10010002B0087', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(114, '10010002B0088', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0),
+(115, '10010002B0089', '10010002', 'Boeuf', 'no_photo.png', 'no_photo.png', 'no_photo.png', 1, 'R.A.S', 0);
 
 -- --------------------------------------------------------
 
@@ -154,17 +218,21 @@ CREATE TABLE `cheptel` (
   PRIMARY KEY (`id`),
   KEY `fk_id_farmer` (`fk_id_farmer`,`fk_animaltype`),
   KEY `fk_animaltype` (`fk_animaltype`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `cheptel`
 --
 
 INSERT INTO `cheptel` (`id`, `fk_id_farmer`, `fk_animaltype`, `total_animaltype`, `isactive`) VALUES
-(1, '10010001', 'Cheval', 1, 1),
-(2, '10010001', 'Boeuf', 33, 1),
-(3, '10010002', 'Cheval', 6, 1),
-(4, '10010003', 'Cheval', 8, 1);
+(1, '10010001', 'Cheval', 3, 1),
+(2, '10010001', 'Boeuf', 3, 1),
+(3, '10010002', 'Boeuf', 90, 1),
+(4, '10010002', 'Cheval', 5, 1),
+(5, '10010003', 'Cheval', 5, 1),
+(6, '10010003', 'Boeuf', 4, 1),
+(7, '10010006', 'Boeuf', 1, 1),
+(8, '10010006', 'Cheval', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -179,14 +247,14 @@ CREATE TABLE `connexion` (
   `connectionDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_cnx`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `connexion`
 --
 
 INSERT INTO `connexion` (`id_cnx`, `user`, `ip`, `connectionDate`) VALUES
-(8, 1, '::1', '2013-01-22 12:45:57');
+(15, 1, '::1', '2013-01-27 00:11:17');
 
 -- --------------------------------------------------------
 
@@ -259,7 +327,7 @@ CREATE TABLE `departement` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `region` (`region`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Contenu de la table `departement`
@@ -375,7 +443,7 @@ CREATE TABLE `farmer` (
   KEY `departement` (`departement`,`region`),
   KEY `departement_2` (`departement`),
   KEY `region` (`region`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Contenu de la table `farmer`
@@ -385,8 +453,10 @@ INSERT INTO `farmer` (`rank_farmer`, `id_farmer`, `categorie`, `national_id`, `a
 (40, '10010001', 2, '1209812347788', 'Matam', '221775312740', '2013-01-11', '1001', '1802', 'Adama', 'Tounkara', 1, '1967-01-01', 'Matam', 'Ndoffane', 'Kaolack', 'Kaolack'),
 (41, '10010002', 1, '1219812347789', 'Podor', '775989808', '2013-01-11', '1001', '1001', 'Baba', 'Samb', 1, '1960-02-02', 'Podor', 'Diossong', 'Foundiougne', 'Fatick'),
 (42, '10010003', 1, '1234812347788', 'Ziguinchor', '22178675433', '2013-01-15', '1001', '1001', 'Doudou', 'Drame', 1, '1975-06-02', 'Ziguinchor', 'Diossong', 'Foundiougne', 'Fatick'),
-(43, 'particulier', 1, 'inconnu', 'inconnu', 'inconnu', '2013-01-20', '1001', '1001', 'inconnu', 'inconnu', 0, '2013-01-01', 'inconnu', 'Diossong', 'Fatick', 'Fatick'),
-(44, 'distributeur', 1, 'inconnu', 'inconnu', 'inconnu', '2013-01-20', '1001', '1001', 'inconnu', 'inconnu', 0, '2013-01-20', 'inconnu', 'Diossong', 'Fatick', 'Fatick');
+(43, '00000000', 1, 'inconnu', 'inconnu', 'inconnu', '2013-01-20', '1001', '1001', 'acheteur particulier', 'acheteur particulier', 0, '2013-01-01', 'inconnu', 'Diossong', 'Fatick', 'Fatick'),
+(44, '99999999', 1, 'inconnu', 'inconnu', 'inconnu', '2013-01-20', '1001', '1001', 'distributeur', 'distributeur', 0, '2013-01-20', 'inconnu', 'Diossong', 'Fatick', 'Fatick'),
+(45, '10010006', 2, '1209812347767', 'Podor', '22178675433', '2013-01-23', '1001', '1001', 'Assane', 'Fall', 1, '1956-04-02', 'Podor', 'Diossong', 'Foundiougne', 'Fatick'),
+(46, '10010007', 2, '1209812345488', 'Koumpentoum', '775989808', '2013-01-25', '1001', '1001', 'Fabara', 'Diong', 0, '1967-01-01', 'Koumpentoum', 'Diossong', 'Foundiougne', 'Fatick');
 
 -- --------------------------------------------------------
 
@@ -412,6 +482,7 @@ CREATE TABLE `localite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `departement` varchar(50) NOT NULL,
+  `LatLng` varchar(100) NOT NULL DEFAULT '(14.646039720201001,  -17.426376342773438)' COMMENT 'latitudes et longitudes Google Map',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `departement` (`departement`)
@@ -421,14 +492,14 @@ CREATE TABLE `localite` (
 -- Contenu de la table `localite`
 --
 
-INSERT INTO `localite` (`id`, `name`, `departement`) VALUES
-(1, 'Diossong', 'Foundiougne'),
-(2, 'Nioro Allassane Tall', 'Foundiougne'),
-(3, 'Ndiaffat', 'Matam'),
-(4, 'Djilor', 'Foundiougne'),
-(5, 'Ndiedieng', 'Kaolack'),
-(6, 'Ndoffane', 'Kaolack'),
-(7, 'Passy', 'Foundiougne');
+INSERT INTO `localite` (`id`, `name`, `departement`, `LatLng`) VALUES
+(1, 'Diossong', 'Foundiougne', '(13.932901,-16.333938)'),
+(2, 'Nioro Allassane Tall', 'Foundiougne', '(13.791405,-16.335411)'),
+(3, 'Ndiaffat', 'Kaolack', '(14.090045,-16.167204)'),
+(4, 'Djilor', 'Foundiougne', '(14.056857,-16.335234)'),
+(5, 'Ndiedieng', 'Kaolack', '(13.947062,-16.158543)'),
+(6, 'Ndoffane', 'Kaolack', '(13.914656,-15.927694)'),
+(7, 'Passy', 'Foundiougne', '(13.983795,-16.259816)');
 
 -- --------------------------------------------------------
 
@@ -555,7 +626,7 @@ CREATE TABLE `region` (
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Contenu de la table `region`
@@ -629,6 +700,43 @@ CREATE TABLE `roleusers` (
 INSERT INTO `roleusers` (`id`, `description`) VALUES
 (1, 'admin'),
 (2, 'gerant');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_seller` varchar(20) NOT NULL,
+  `id_buyer` varchar(20) NOT NULL,
+  `info_buyer` varchar(1000) NOT NULL,
+  `animaltype` varchar(20) NOT NULL,
+  `animal_id` varchar(20) NOT NULL,
+  `transaction_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Contenu de la table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `id_seller`, `id_buyer`, `info_buyer`, `animaltype`, `animal_id`, `transaction_date`) VALUES
+(1, '10010002', '10010003', 'r a s', 'Boeuf', '10010002B0001', '2013-01-26 02:16:33'),
+(2, '10010001', '10010002', 'ras', 'Cheval', '10010001C0001', '2013-01-26 02:20:38'),
+(3, '10010001', '10010002', 'ras', 'Boeuf', '10010001B0002', '2013-01-26 02:22:44'),
+(4, '10010001', '10010002', 'ras', 'Boeuf', '10010001B0003', '2013-01-26 02:22:44'),
+(5, '10010001', '10010002', 'ras', 'Boeuf', '10010001B0004', '2013-01-26 02:22:44'),
+(6, '10010001', '10010002', 'ras', 'Boeuf', '10010001B0005', '2013-01-26 02:22:44'),
+(7, '10010003', '10010006', 'ras', 'Boeuf', '10010003B0003', '2013-01-26 02:32:23'),
+(8, '10010001', '10010006', 'ras', 'Cheval', '10010001C0003', '2013-01-26 02:35:36'),
+(9, '10010001', '10010006', 'ras', 'Cheval', '10010001C0004', '2013-01-26 02:35:36'),
+(10, '10010002', '10010003', 'ras', 'Cheval', '10010002C0002', '2013-01-26 17:58:14'),
+(11, '10010002', '10010003', 'ras', 'Cheval', '10010002C0003', '2013-01-26 17:58:14'),
+(12, '10010002', '10010003', 'ras', 'Cheval', '10010002C0005', '2013-01-26 17:58:14'),
+(13, '10010002', '00000000', 'ras', 'Boeuf', '10010002B0080', '2013-01-26 18:32:47'),
+(14, '10010002', '00000000', 'ras', 'Boeuf', '10010002B0081', '2013-01-26 18:32:47');
 
 -- --------------------------------------------------------
 
