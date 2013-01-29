@@ -375,11 +375,11 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 					$noir = imagecolorallocate($destination, 0, 0, 0);
 				    $path=IMAGE_PATH."/".$id.".png";
 				}
-		imagestring($destination,2,117,67,"NOM: ".$nom,$noir);
-		imagestring($destination,2,117,87,"PRENOM: ".$prenom,$noir);
-		imagestring($destination,2,117,107,"IDENTIFIANT: ".$id,$noir);
-		imagestring($destination,2,117,127,"DATE D'INSCRIPTION: ".$reg_date,$noir);
-		imagestring($destination,2,117,147,"CATEGORIE: ".$categ,$noir);
+		imagestring($destination,2,117,27,"NOM: ".$nom,$noir);
+		imagestring($destination,2,117,47,"PRENOM: ".$prenom,$noir);
+		imagestring($destination,2,117,67,"IDENTIFIANT: ".$id,$noir);
+		imagestring($destination,2,117,87,"DATE D'INSCRIPTION: ".$reg_date,$noir);
+		imagestring($destination,2,117,107,"CATEGORIE: ".$categ,$noir);//WAS 147,127...DESC
 		
 		
 		//imagestring($destination,3,137,127,"src: ".$namePhoto,$noir); // for debugging
@@ -395,7 +395,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 	//*****************************************************************************************//
 	//********************** RESIZE PICTURE TO 90X120 PIXELS **********************************//
 	
-	public function resize_picture($filename)
+	public function resize_picture($filename,$id_farmer)
 	{
 		
 		$Op_Syst=$this->getOS();
@@ -420,8 +420,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 				imagecopyresampled($destination, $source, 0, 0, 0, 0, $width_destination, $heigth_destination, $width_source, $heigth_source);
 					
 					
-				$namePhoto = substr(strrchr($filename,"\\"),1,20);
-				$generated_file_path=IMAGE_PATH."\mini_".$namePhoto;
+				$generated_file_path=IMAGE_PATH."\mini_".$id_farmer.'.jpg';
 				
 			}
 			
@@ -445,8 +444,8 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 				imagecopyresampled($destination, $source, 0, 0, 0, 0, $width_destination, $heigth_destination, $width_source, $heigth_source);
 			
 			
-				$namePhoto = substr(strrchr($filename,"/"),1,20);
-				$generated_file_path=IMAGE_PATH."/mini_".$namePhoto;
+			    $generated_file_path=IMAGE_PATH."/mini_".$id_farmer.'.jpg';
+			    
 			}
 				if($this->is_png($filename))
 				{
@@ -457,6 +456,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 				}
 				return $generated_file_path;
 	}
+	
 	
 	
 }

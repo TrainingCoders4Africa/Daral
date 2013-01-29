@@ -41,6 +41,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		   $maladie=$this->view->baseUrl().'/maladie';
 		   $langue=$this->view->baseUrl().'/langue';
 		   $transactions=$this->view->baseUrl().'/transactions';
+		   $jpegcam=$this->view->baseUrl().'/jpegcam';
 		   
             $html = '
 			<div class="navbar-inner" >
@@ -69,7 +70,9 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
     <!----------- TABLEAU DE BORD ------------>
     <div class="sidebar-nav">
         <a href="'.$dash.'" class="nav-header"><i class="icon-th-large"></i>Tableau de bord</a>
-    <!------------------END------------------->';
+    <!------------------END------------------->    
+        ';
+    
         
             if ($tableUsers->isAdmin())
             {
@@ -191,7 +194,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		      });
               </script>
-               <li ><a href="'.$farmer.'/add">Inscrire</a></li>
+               <li ><a href="'.$farmer.'/selectaddmethod">Inscrire</a></li>
                <li ><a href="'.$farmer.'">Afficher la Liste</a></li>
                <li ><a href="'.$farmer.'/recherche">Rechercher</a></li>
              </ul>

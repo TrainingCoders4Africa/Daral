@@ -60,7 +60,10 @@ class FarmerController extends Zend_Controller_Action
         }
     }
 
-    
+    public function selectaddmethodAction()
+    {
+    	
+    }
     //**************************************************************************************************//
     //									       ADD
     //**************************************************************************************************//
@@ -129,7 +132,7 @@ class FarmerController extends Zend_Controller_Action
     			
     			// ID CARD GENERATION
     			$filename = $form->photo->getFileName();
-    			$filename= $farmer->resize_picture($filename);
+    			$filename= $farmer->resize_picture($filename,$id_farmer);
     			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
     			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
     			
@@ -177,6 +180,106 @@ class FarmerController extends Zend_Controller_Action
     	$this->view->assign("id_farmer",$id_farmer); 
     }
     
+    //**************************************************************************************************//
+    //									       ADD 2 : WITH JPEGCAM
+    //**************************************************************************************************//
+    public function add2Action()
+    {
+    	$form = new Application_Form_Farmer2();
+    	 
+    	if ($this->getRequest()->isPost())
+    	{ // the user has clicked on the submit button "Ajouter"
+    		$formData = $this->getRequest()->getPost();
+    		if ($form->isValid($formData) )
+    		{
+    
+    			$firstname_farmer=$form->getValue('firstname_farmer');
+    			$lastname_farmer = $form->getValue('lastname_farmer');
+    			$national_id = $form->getValue('national_id');
+    			$address_farmer = $form->getValue('address_farmer');
+    			$phone_farmer = $form->getValue('phone_farmer');
+    			$birthdate_farmer = $form->getValue('birthdate_farmer');
+    			 
+    			//**** put date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
+    			$birthdate_farmer=$date;
+    			//*********
+    			$birthplace_farmer = $form->getValue('birthplace_farmer');
+    			$categorie = $form->getValue('categorie');
+    			$registration_date= $form->getValue('registration_date');
+    			$isactive_farmer = $form->getValue('isactive_farmer');//already set to '1' */
+    			 
+    			 
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$user = new Application_Model_Users_DbTable_Users();
+    			 
+    			$daral_number = $user->getDaral();
+    			$daral_originel = $daral_number;
+    			$daral_actuel = $daral_originel;
+    			 
+    			 
+    			$rank=$farmer->getFarmerRank($daral_originel);//use "daral_originel" to avoid assigning twice or more the same ID,
+    			//a farmer is never really deleted so we have a history of all the number
+    			// already attributed
+    
+    
+    			$id_farmer=$daral_originel.$rank;
+    			$tableDaral = new Application_Model_Daral_DbTable_Daral();
+    
+    			//on determine la localite du daral d'inscription
+    			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    			 
+    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
+    			//on determine le departement du daral d'inscription
+    			$departement = $tableLocalite->getDepartement($id_localite);
+    			 
+    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
+    			//on determine la region du daral d'inscription
+    			$region = $tableDepartement->getRegion($departement);
+    			 
+    
+    			 
+    			 
+    			$farmer->addFarmer($id_farmer,$categorie,$national_id,$address_farmer,$phone_farmer,$registration_date,$daral_originel,$daral_actuel,
+    					$firstname_farmer,$lastname_farmer,$isactive_farmer,$birthdate_farmer,$birthplace_farmer,$id_localite,$departement,$region);
+    			 
+    			 
+    			// ID CARD GENERATION
+    			$tableFarmer= new Application_Model_Farmer_DbTable_Farmer();
+    			$Op_Syst=$tableFarmer->getOS();
+    			
+    			if($Op_Syst=='WINDOWS')
+    			{
+    			   $filename =IMAGE_PATH.'\photo\jpegcam_photo.jpg';
+    			}
+    			else 
+    			{
+    		    	$filename= IMAGE_PATH.'/photo/jpegcam_photo.jpg';	
+    			}
+    			 
+    			$filename= $farmer->resize_picture($filename,$id_farmer);
+    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
+    			 
+    			$session = new Zend_Session_Namespace('session'); //variable used to send values to the displaycardAction()
+    			$session->photo_path = $path;// to be used by the displaycardAction()
+    			$session->firstname_farmer=$firstname_farmer;
+    			$session->lastname_farmer=$lastname_farmer;
+    			$session->id_farmer=$id_farmer;
+    
+    
+    			$this->_helper->redirector('displaycard','farmer');
+    		}
+    
+    
+    		else
+    		{//The form was not valid or the photo was not successfully uploaded
+    			$form->populate($formData);
+    		}
+    	}
+    
+    	$this->view->form = $form;
+    }
     
     
     //**************************************************************************************************//
@@ -186,84 +289,16 @@ class FarmerController extends Zend_Controller_Action
   
     public function editAction()
     {
-    	$form = new Application_Form_EditFarmer();
-    	$this->view->form = $form;
+    	$id_farmer = $this->_getParam('id');
+    	$this->view->assign(array('id'=>$id_farmer));
+    }
     
-    	if ($this->getRequest()->isPost()) {
-    		$formData = $this->getRequest()->getPost();
-    		if ($form->isValid($formData)&& $form->photo->receive()) {
-    			 
-    			$id_farmer = $form->getValue('id_farmer');
-    			$firstname_farmer = $form->getValue('firstname_farmer');
-    			$lastname_farmer = $form->getValue('lastname_farmer');
-    			$phone_farmer = $form->getValue('phone_farmer');
-    			$registration_date=$form->getValue('registration_date');
-    			//**** put registration date into SQL Format
-    			$date=implode('-',array_reverse(explode('/',$registration_date)));
-    			$registration_date=$date;
-    			//*********
-    			$birthdate_farmer = $form->getValue('birthdate_farmer');
-    			//**** put date into SQL Format
-    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
-    			$birthdate_farmer=$date;
-    			//*********
-    			$birthplace_farmer = $form->getValue('birthplace_farmer');
-    			$address_farmer = $form->getValue('address_farmer');
-    			$categorie = $form->getValue('categorie');
-    			$national_id = $form->getValue('national_id');
-    			$daral_actuel = $form->getValue('daral_actuel');
+    //=====================================
     
-    				
-    			 
-    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
-    			$tableDaral = new Application_Model_Daral_DbTable_Daral();
-    			 
-    			$id_localite = $tableDaral->getLocalite($daral_actuel);
-    			
-    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
-    			//on determine le departement du daral actuel
-    			$departement = $tableLocalite->getDepartement($id_localite);
-    			 
-    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
-    			//on determine la region du daral actuel
-    			$region = $tableDepartement->getRegion($departement);
-    			 
-    			 
-    			
-    			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
-    				$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite,$departement,$region); 
-    	
-    		 
-    			// ID CARD GENERATION
-    			$filename = $form->photo->getFileName();
-    			$filename= $farmer->resize_picture($filename);
-    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
-    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
-    			    
-    			//$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
-    			
-    		
-    			$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$id_farmer);
-    		  //$this->_helper->redirector('index','farmer');
-    		}
-    
-    		else {
-    			$id_farmer = $this->_getParam('id');
-    
-    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
-    			$form->populate($farmer->getFarmer($id_farmer));
-    			$form->populate($formData);
-    		}
-    	}
-    	
-    	else {
-    		$id_farmer = $this->_getParam('id');
-    
-    		$farmer = new Application_Model_Farmer_DbTable_Farmer();
-    		$form->populate($farmer->getFarmer($id_farmer));
-    		 
-    	}
-    
+    public function selectphotoeditoptionAction()
+    {
+    	$id_farmer = $this->_getParam('id');
+    	$this->view->assign(array('id'=>$id_farmer));
     }
     
     //**************************************************************************************************//
@@ -328,6 +363,284 @@ class FarmerController extends Zend_Controller_Action
        }
     }
     
+    //====================================================================
+    
+    public function takepictureAction()
+    {
+    	
+    }
+    
+    
+    
+    //====================================================================
+    public function editfarmeruploadAction() //the user has the option to modify the picture and uploads it "manually"
+    {
+    	$form = new Application_Form_EditFarmer();
+    	$this->view->form = $form;
+    	
+    	if ($this->getRequest()->isPost()) {
+    		$formData = $this->getRequest()->getPost();
+    		if ($form->isValid($formData)&& $form->photo->receive()) {
+    	
+    			$id_farmer = $form->getValue('id_farmer');
+    			$firstname_farmer = $form->getValue('firstname_farmer');
+    			$lastname_farmer = $form->getValue('lastname_farmer');
+    			$phone_farmer = $form->getValue('phone_farmer');
+    			$registration_date=$form->getValue('registration_date');
+    			//**** put registration date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$registration_date)));
+    			$registration_date=$date;
+    			//*********
+    			$birthdate_farmer = $form->getValue('birthdate_farmer');
+    			//**** put date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
+    			$birthdate_farmer=$date;
+    			//*********
+    			$birthplace_farmer = $form->getValue('birthplace_farmer');
+    			$address_farmer = $form->getValue('address_farmer');
+    			$categorie = $form->getValue('categorie');
+    			$national_id = $form->getValue('national_id');
+    			$daral_actuel = $form->getValue('daral_actuel');
+    	
+    	
+    	
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$tableDaral = new Application_Model_Daral_DbTable_Daral();
+    	
+    			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    			 
+    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
+    			//on determine le departement du daral actuel
+    			$departement = $tableLocalite->getDepartement($id_localite);
+    	
+    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
+    			//on determine la region du daral actuel
+    			$region = $tableDepartement->getRegion($departement);
+    	
+    	
+    			 
+    			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
+    					$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite,$departement,$region);
+    			 
+    			 
+    			// ID CARD GENERATION
+    			$filename = $form->photo->getFileName();
+    			$filename= $farmer->resize_picture($filename,$id_farmer);
+    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
+    				
+    			//$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
+    			 
+    	
+    			$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$id_farmer);
+    			//$this->_helper->redirector('index','farmer');
+    		}
+    	
+    		else {
+    			$id_farmer = $this->_getParam('id');
+    	
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$form->populate($farmer->getFarmer($id_farmer));
+    			$form->populate($formData);
+    		}
+    	}
+    	 
+    	else {
+    		$id_farmer = $this->_getParam('id');
+    	
+    		$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    		$form->populate($farmer->getFarmer($id_farmer));
+    		 
+    	}
+    	
+    }
+    
+    //====================================================================
+    public function editfarmerjpegcamAction() //the user has the option to modify the picture and uses the jpegcam
+    {
+    	$form = new Application_Form_EditFarmerJpegCam();
+    	$this->view->form = $form;
+    	 
+    	if ($this->getRequest()->isPost()) {
+    		$formData = $this->getRequest()->getPost();
+    		if ($form->isValid($formData)) {
+    			 
+    			$id_farmer = $form->getValue('id_farmer');
+    			$firstname_farmer = $form->getValue('firstname_farmer');
+    			$lastname_farmer = $form->getValue('lastname_farmer');
+    			$phone_farmer = $form->getValue('phone_farmer');
+    			$registration_date=$form->getValue('registration_date');
+    			//**** put registration date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$registration_date)));
+    			$registration_date=$date;
+    			//*********
+    			$birthdate_farmer = $form->getValue('birthdate_farmer');
+    			//**** put date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
+    			$birthdate_farmer=$date;
+    			//*********
+    			$birthplace_farmer = $form->getValue('birthplace_farmer');
+    			$address_farmer = $form->getValue('address_farmer');
+    			$categorie = $form->getValue('categorie');
+    			$national_id = $form->getValue('national_id');
+    			$daral_actuel = $form->getValue('daral_actuel');
+    			 
+    			 
+    			 
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$tableDaral = new Application_Model_Daral_DbTable_Daral();
+    			 
+    			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    	
+    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
+    			//on determine le departement du daral actuel
+    			$departement = $tableLocalite->getDepartement($id_localite);
+    			 
+    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
+    			//on determine la region du daral actuel
+    			$region = $tableDepartement->getRegion($departement);
+    			 
+    			 
+    	
+    			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
+    					$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite,$departement,$region);
+    	
+    	
+    			// ID CARD GENERATION
+    			$tableFarmer= new Application_Model_Farmer_DbTable_Farmer();
+    			$Op_Syst=$tableFarmer->getOS();
+    			 
+    			if($Op_Syst=='WINDOWS')
+    			{
+    				$filename =IMAGE_PATH.'\photo\jpegcam_photo.jpg';
+    			}
+    			else
+    			{
+    				$filename= IMAGE_PATH.'/photo/jpegcam_photo.jpg';
+    			}
+    			
+    			$filename= $farmer->resize_picture($filename,$id_farmer);
+    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
+    	
+    			//$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
+    	
+    			 
+    			$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$id_farmer);
+    			//$this->_helper->redirector('index','farmer');
+    		}
+    		 
+    		else {
+    			$id_farmer = $this->_getParam('id');
+    			 
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$form->populate($farmer->getFarmer($id_farmer));
+    			$form->populate($formData);
+    		}
+    	}
+    	
+    	else {
+    		$id_farmer = $this->_getParam('id');
+    		 
+    		$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    		$form->populate($farmer->getFarmer($id_farmer));
+    		 
+    	}
+    }
+    
+    
+    //====================================================================
+    public function nophotoeditAction() //the user does not have the option to modify the picture 
+    {
+    	$form = new Application_Form_EditFarmerJpegCam();//exactly the same as for editfarmerjpecamAction()
+    	$this->view->form = $form;
+    
+    	if ($this->getRequest()->isPost()) {
+    		$formData = $this->getRequest()->getPost();
+    		if ($form->isValid($formData)) {
+    
+    			$id_farmer = $form->getValue('id_farmer');
+    			$firstname_farmer = $form->getValue('firstname_farmer');
+    			$lastname_farmer = $form->getValue('lastname_farmer');
+    			$phone_farmer = $form->getValue('phone_farmer');
+    			$registration_date=$form->getValue('registration_date');
+    			//**** put registration date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$registration_date)));
+    			$registration_date=$date;
+    			//*********
+    			$birthdate_farmer = $form->getValue('birthdate_farmer');
+    			//**** put date into SQL Format
+    			$date=implode('-',array_reverse(explode('/',$birthdate_farmer)));
+    			$birthdate_farmer=$date;
+    			//*********
+    			$birthplace_farmer = $form->getValue('birthplace_farmer');
+    			$address_farmer = $form->getValue('address_farmer');
+    			$categorie = $form->getValue('categorie');
+    			$national_id = $form->getValue('national_id');
+    			$daral_actuel = $form->getValue('daral_actuel');
+    
+    
+    
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$tableDaral = new Application_Model_Daral_DbTable_Daral();
+    
+    			$id_localite = $tableDaral->getLocalite($daral_actuel);
+    			 
+    			$tableLocalite = new Application_Model_Localite_DbTable_Localite();
+    			//on determine le departement du daral actuel
+    			$departement = $tableLocalite->getDepartement($id_localite);
+    
+    			$tableDepartement = new Application_Model_Departement_DbTable_Departement();
+    			//on determine la region du daral actuel
+    			$region = $tableDepartement->getRegion($departement);
+    
+    
+    			 
+    			$farmer->updateFarmer($id_farmer,$firstname_farmer,$lastname_farmer,$phone_farmer,$birthdate_farmer,$birthplace_farmer,
+    					$address_farmer,$categorie,$national_id,$daral_actuel,$id_localite,$departement,$region);
+    			 
+    			 
+    			// ID CARD GENERATION
+    			$tableFarmer= new Application_Model_Farmer_DbTable_Farmer();
+    			$Op_Syst=$tableFarmer->getOS();
+    
+    			if($Op_Syst=='WINDOWS')
+    			{
+    				$filename =IMAGE_PATH."\mini_".$id_farmer.'.jpg';
+    			}
+    			else
+    			{
+    				$filename= IMAGE_PATH."/mini_".$id_farmer.'.jpg';
+    			}
+    			 
+    			//$filename= $farmer->resize_picture($filename,$id_farmer);
+    			$reg_date_std_format=implode('/',array_reverse(explode('-',$registration_date)));
+    			$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer,$reg_date_std_format,$categorie);//path to the ID Card
+    			 
+    			//$path=$farmer->createCard($filename,$lastname_farmer,$firstname_farmer,$id_farmer);//path to the ID Card
+    			 
+    
+    			$this->_redirector->gotoUrl('/farmer/displayfarmer/id/'.$id_farmer);
+    			//$this->_helper->redirector('index','farmer');
+    		}
+    		 
+    		else {
+    			$id_farmer = $this->_getParam('id');
+    
+    			$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    			$form->populate($farmer->getFarmer($id_farmer));
+    			$form->populate($formData);
+    		}
+    	}
+    	 
+    	else {
+    		$id_farmer = $this->_getParam('id');
+    		 
+    		$farmer = new Application_Model_Farmer_DbTable_Farmer();
+    		$form->populate($farmer->getFarmer($id_farmer));
+    		 
+    	}
+    }
     //**************************************************************************************************//
     //									       SEARCH
     //**************************************************************************************************//
@@ -430,56 +743,3 @@ class FarmerController extends Zend_Controller_Action
     }
 }
 
-/* public function createAction()
- {
-$form = new Application_Form_EditFarmer();
-
-if ($this->_request->isPost()) {
-if ($form->isValid($this->_request->getPost())) {
-$values = $form->getValues();
-
-$tableFarmer = new Application_Model_Farmer_DbTable();
-$tableFarmer->insert($values);
-
-$this->_helper->redirector('index');
-exit;
-}
-}
-
-$this->view->form = $form;
-} */
-    
-
-/* public function updateAction()
- {
-$tableFarmer = new Application_Model_Farmer_DbTable();
-//$form = new Application_Form_EditFarmer();
-$form = new Application_Form_Farmer();
-$id = (int) $this->_getParam('id', 0);
-
-$row = $tableFarmer->find($id)->current();
-
-if (!$row) {
-$this->_helper->redirector('index');
-exit;
-}
-
-if ($this->_request->isPost()) {
-if ($form->isValid($this->_request->getPost())) {
-$values = $form->getValues();
-
-$where = array('rank_farmer = ?' => $id);
-
-$tableFarmer->update($values, $where);
-
-$this->_helper->redirector('index');
-exit;
-}
-} else {
-
-$form->populate($row->toArray());
-}
-
-$this->view->form = $form;
-$this->view->row = $row;
-} */
