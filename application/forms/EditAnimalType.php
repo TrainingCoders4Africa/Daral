@@ -28,6 +28,15 @@ class Application_Form_EditAnimaltype extends Zend_Form
                 ->addFilter(new Zend_Filter_StringTrim())
         );
 
+        $this->addElement(
+        		$this->createElement('text', 'animal_tag')
+        		->setLabel('Tag')
+        		->setAttrib("maxlength", 30)
+        		->setRequired(true)
+        		->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
+        		->addFilter(new Zend_Filter_StringTrim())
+        );
+        
 
         parent::init();
     }

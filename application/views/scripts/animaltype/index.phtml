@@ -49,7 +49,7 @@ function updateFilters(paramName, paramValue)
 
 <form method="get"
 	action="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'index'), null, true); ?>">
-<div>Rechercher: <input class="input-large search-query"
+<div style="margin-left: 1em; padding-bottom:0.5em;">Rechercher: <input class="input-large search-query"
 	placeholder="Mots cles..." type="text" name="_kw"
 	value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans
 &nbsp <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
@@ -61,7 +61,7 @@ function updateFilters(paramName, paramValue)
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'animal-type', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<table class="table table-bordered table-condensed ">
+<div style="margin-left:1em; margin-right:1em;"><table class="table table-bordered table-condensed " >
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
@@ -79,6 +79,14 @@ function updateFilters(paramName, paramValue)
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 
             </span></th>
+            
+            <th style="text-align: center;" 
+            <?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
+                <span class="label label-inverse">Tag 
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'animal_tag', '_so' => 'asc')); ?>'>&#x25B2;</a>
+                <a href='<?php echo $this->url($_GET + array('_sf' => 'animal_tag', '_so' => 'desc')); ?>'>&#x25BC;</a>
+                
+            </span></th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -88,6 +96,7 @@ function updateFilters(paramName, paramValue)
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td align="right"><?php echo $row->id; ?></td>
             <td><?php echo $row->name; ?></td>
+            <td><?php echo $row->animal_tag; ?></td>
                         <td><a title="Modifier"
 				href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
 				class="icon-pencil"></i></a> - <a title="Archiver"
@@ -97,7 +106,7 @@ function updateFilters(paramName, paramValue)
         </tr>
 <?php endforeach; ?>
     </tbody>
-</table><br />
+</table></daral><br />
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 <?php echo $this->paginationControl($this->paginator,

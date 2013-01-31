@@ -64,7 +64,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'users', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
-<table class="table table-bordered table-condensed ">
+<div style="margin-left:1em; margin-right:1em;"><table class="table table-bordered table-condensed " >
     <thead>
         <tr>
             <th><input type="checkbox" onchange="toggleCheckboxes(this);" /></th>
