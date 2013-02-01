@@ -54,7 +54,7 @@ function updateFilters(paramName, paramValue)
 </div>
 <br />
 <form method="get" action="<?php echo $this->url(array('controller' => 'localite', 'action' => 'index'), null, true); ?>">
-<div>
+<div style="margin-left: 1em; padding-bottom:0.5em;">
 Rechercher: <input class="input-large search-query"
 	placeholder="Mots cles..." type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans
 &nbsp <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
@@ -108,7 +108,7 @@ Rechercher: <input class="input-large search-query"
 				class="icon-trash"></i></a></td></tr>
 <?php endforeach; ?>
     </tbody>
-</table><br />
+</table></daral><br />
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 

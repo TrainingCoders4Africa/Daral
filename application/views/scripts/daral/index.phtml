@@ -55,7 +55,7 @@ function updateFilters(paramName, paramValue)
 <br />
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>">
-<div>
+<div style="margin-left: 1em; padding-bottom:0.5em;">
 Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp; dans &nbsp; 
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
   'all' => 'Tout',
@@ -67,6 +67,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
 </form>
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'daral', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left:1em; margin-right:1em;">
 <table  class="table table-bordered table-condensed ">
     <thead>
         <tr>
@@ -105,7 +106,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             </tr>
 <?php endforeach; ?>
     </tbody>
-</table><br />
+</table></daral></div><br />
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 <?php echo $this->paginationControl($this->paginator,

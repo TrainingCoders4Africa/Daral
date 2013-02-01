@@ -13,6 +13,7 @@
  *
  * @property integer $id
  * @property string $name
+ * @property string $animal_tag
  */
 abstract class Application_Model_Animaltype_Row_Abstract extends Zend_Db_Table_Row_Abstract
 {
@@ -60,6 +61,29 @@ abstract class Application_Model_Animaltype_Row_Abstract extends Zend_Db_Table_R
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Set value for 'animal_tag' field
+     *
+     * @param string animal_tag
+     *
+     * @return Application_Model_Animaltype_Row
+     */
+    public function setAnimalTag($animal_tag)
+    {
+    	$this->animal_tag = $animal_tag;
+    	return $this;
+    }
+    
+    /**
+     * Get value of 'animal_tag' field
+     *
+     * @return string
+     */
+    public function getAnimalTag()
+    {
+    	return $this->animal_tag;
     }
 
     /**
