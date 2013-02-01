@@ -25,7 +25,7 @@ class AuthController extends Zend_Controller_Action
 				$user = $auth->getIdentity()->id;
 				//verifier si l'ordinateur ou le user n'a pas deja une cnx en cours
 				$tableCnx = new Application_Model_DbTable_Connection();
-				$cnx = $tableCnx->fetchRow("user=$user");
+				$cnx = $tableCnx->fetchRow(array("user=?"=>$user));
 				if(!$cnx)
 				{
 					//insertion dans la table des personnes actuelment connectées
@@ -37,12 +37,12 @@ class AuthController extends Zend_Controller_Action
 				}
 				else
 				{
-					echo "<b style='color:red;'> Vous etes deja connecte! Nouvelle refusee...</b>";
+					echo "<div align=\"center\"><b style='color:red;'> Vous &ecirc;tes dej&agrave; connect&eacute;! Nouvelle connexion refus&eacute;e...</b></div>";
 				}
 			}
 			
 			else{
-			  echo "<b style='color:red;'> Nom d'utilisateur ou mot de passe incorrect!! Essayez a nouveau </b>";
+			  echo "<div align=\"center\"><b style='color:red;'> Nom d'utilisateur ou mot de passe incorrect!! Essayez &agrave; nouveau svp</b></div>";
 			}
 		}
 	   }

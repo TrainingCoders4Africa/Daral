@@ -3,7 +3,7 @@
 <div id="printableArea" style="margin-left:2em">
   <h3>FACTURE</h3>
   <?php  $elements_facture=$this->elements_facture;
-              $facture=explode(';', $elements_facture);
+              $facture=explode('~', $elements_facture);
               $count=count($facture);
               $date=$facture[0];
               $seller=$facture[1];   $buyer=$facture[2]; $info=$facture[3]; ?>
@@ -15,7 +15,7 @@
    
    <div><p>DETAILS: <?php echo " ".$info;?></p></div>
       <div><p>IDENTIFIANTS DES BETES:</p>
-           <p><?php for($i=4;$i<$count;$i++){ echo $facture[$i]."   ";}?></p>
+           <p><?php for($i=4;$i<$count;$i++){ echo $facture[$i]."  -  ";}?></p>
       </div>
    
 </div>

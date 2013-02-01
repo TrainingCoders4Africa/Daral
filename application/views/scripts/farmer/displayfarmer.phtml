@@ -13,12 +13,13 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
             <li class="active">Profil Eleveur </li>
         </ul>
         
-<div style="margin-left:2em;">
-  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class="icon-chevron-left"></i>Retourner &agrave la liste </a>
+<div align="center"><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
+        
+<div align="center">
+  <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>"><i class="icon-chevron-left"></i>Retourner &agrave; la liste </a>
   <a target="_blank" class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'printcard','id'=>$this->id), null, true); ?>"><i class="icon-print"></i>Imprimer </a>
-  
+</div>  
 <br/>
-  <div style="margin-left:20em"><img src="<?php echo $this->baseUrl()?>/image/<?php echo $this->id; ?>.png" width = "400 " height = "170 "  alt="photo" class ="thumbnail "/></div>
 
       
 
@@ -29,7 +30,7 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
 <hr>
 <div class="container-fluid">
 <div class="row-fluid">
-<div class="span5">
+<div class="span6">
  <p><b>CHEPTEL: </b></p>
 <?php 
  if($farmer_cheptel!=null) 
@@ -52,7 +53,7 @@ $cheptel= new  Application_Model_Cheptel_DbTable_Cheptel();
   <br>
   <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'cheptel', 'action' => 'add','id'=>$this->id), null, true); ?>"><i class="icon-plus icon-white"></i>Ajouter des animaux</a>
 </div>
-<div class="span7" style="border-left: 1px solid gray;">
+<div class="span6" style="border-left: 1px solid gray;">
 <div style="margin-left:1em">
 <p><b>INFORMATIONS PERSONNELLES:</b></p>
 
@@ -61,17 +62,16 @@ $farmer_info=$farmer->getFarmer($this->id);
 ?>
   <ul>
    <li>Date d'inscription:<?php echo " ".$farmer_info['registration_date']; ?></li>
-   <li>Categorie:  <?php echo " ".$farmer_info['categorie']; ?></li>
+   <li>Cat&eacute;gorie:  <?php echo " ".$farmer_info['categorie']; ?></li>
    <li>Daral d'appartenance: <?php echo " ".$farmer_info['daral_actuel']; ?> </li>
    <li>No d'identification nationale: <?php echo " ".$farmer_info['national_id']; ?> </li>
-   <li>Telephone: <?php echo " ".$farmer_info['phone_farmer']; ?></li>
+   <li>T&eacute;l&eacute;phone: <?php echo " ".$farmer_info['phone_farmer']; ?></li>
    <li>Adresse: <?php  echo " ".$farmer_info['address_farmer']?></li>
    <li>Date de naissance: <?php echo " ".$farmer_info['birthdate_farmer']; ?></li>
    <li>Lieu de naissance: <?php echo " ".$farmer_info['birthplace_farmer']; ?></li>
   </ul>
   
   <a class="btn btn-success" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'edit','id'=>$this->id), null, true); ?>"><i class="icon-pencil icon-white"></i>Mettre &agrave; jour les infos</a>
-</div>
 </div>
 </div>
 </div>

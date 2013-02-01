@@ -161,6 +161,11 @@ $(function (){
 </table><br />
 
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+<br><br>
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');
+?>
 </div>
 </form>
 
@@ -172,14 +177,13 @@ $(function (){
   <div class="modal-body">
   </div>
   <div class="modal-footer"> <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'farmer', 'action' => 'index'), null, true); ?>">Fermer</a> </div>
-</div>
+
+  
+  </div>
 
 
 
 
 
-<?php echo $this->paginationControl($this->paginator,
-                                    'Sliding',
-                                    'pagination_control.phtml');
-?>
+
 </div>

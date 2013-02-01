@@ -151,7 +151,7 @@ class CheptelController extends Zend_Controller_Action
 					$ids=$result['ids'];
 					switch ($result['res'])
 					{
-						case  1: $this->_redirector->gotoUrl('/cheptel/success/ids/'.$ids);break;
+						case  1: $this->_redirector->gotoUrl('/cheptel/success/ids/'.$ids.'/total/'.$total_animaltype);break;
 						case  0: $this->_redirector->gotoUrl('/cheptel/errorfarmer');
 						case -1: $this->_redirector->gotoUrl('/cheptel/errormax');
  					}
@@ -214,7 +214,8 @@ class CheptelController extends Zend_Controller_Action
     public function successAction()
     {
     	$ids = $this->_getParam('ids');
-    	$this->view->assign(array('ids'=>$ids));
+    	$total= $this->_getParam('total');
+    	$this->view->assign(array('ids'=>$ids,'total'=>$total));
     	 
     }
     
@@ -222,7 +223,8 @@ class CheptelController extends Zend_Controller_Action
     {
     	$this->_helper->layout->setLayout('layout2');
     	$ids = $this->_getParam('animal_ids');
-    	$this->view->assign(array('ids'=>$ids));
+    	$total= $this->_getParam('total');
+    	$this->view->assign(array('ids'=>$ids,'total'=>$total));
     }
 }
 //############################################################################################################################################

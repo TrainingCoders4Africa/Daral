@@ -161,11 +161,11 @@ class TransactionsController extends Zend_Controller_Action
 			  	    			
 			  {   
 			  	$elements_facture='';
-			  	$elements_facture.=$transaction_date.";";
-			    $elements_facture.=$id_seller.";";
-			    $elements_facture.=$id_buyer.";";
-			    $elements_facture.=$info_buyer.";";
-			   
+			  	$elements_facture.=$transaction_date."~";
+			    $elements_facture.=$id_seller."~";
+			    $elements_facture.=$id_buyer."~";
+			    $elements_facture.=$info_buyer."~";
+			    
 			  	foreach ($animal_ids as $animal_id)
 			  	  {
 			  	    
@@ -183,18 +183,22 @@ class TransactionsController extends Zend_Controller_Action
     						'animal_id'=>$res['animal_id'],
     						 
     				);
+    				
     				$tableTransactions->insert($transaction_data);
     				//!!! redirect to success message success message !!!
-    				$elements_facture.=$res['animal_id'].";";
+    				$elements_facture.=$res['animal_id']."~";
     				
     			   }
+    			   $session = new Zend_Session_Namespace('elements_facture'); //variable used to send values to the displaysuccessAction()
+    			   $session->elements_facture = $elements_facture;
     			   
-    			   $this->_redirector->gotoUrl('/transactions/displaysuccess/elementfacture/'.$elements_facture);
+    			   $this->_helper->redirector('displaysuccess','transactions');
 			  }
     		  else 
     		  {
-    		  	
-    		  	$this->_redirector->gotoUrl('/transactions/displayerror/error_log/'.$error_log);
+    		  	$session = new Zend_Session_Namespace('error_log'); //variable used to send values to the displayerrorAction()
+    		  	$session->error_log=$error_log;
+    		  	$this->_helper->redirector('displayerror','transactions');
     		  		
     		  }
     			
@@ -215,22 +219,34 @@ class TransactionsController extends Zend_Controller_Action
     
     public function displayerrorAction()
     {
-    	$this->view->error_list = $this->_getParam('error_log');
+    	//$this->view->error_list = $this->_getParam('error_log');
+    	$session = new Zend_Session_Namespace('error_log');
+    	 
+    	
+    	$error_log = $session->error_log;
+    	$this->view->assign("error_list",$error_log);
     }
     
     
     //=================================
     public function displaysuccessAction()
     {
-    	$elements_facture = $this->_getParam('elementfacture');
-    	$this->view->assign(array('elements_facture'=>$elements_facture));
+    	
+    	$session = new Zend_Session_Namespace('elements_facture');
+    	
+    	 
+    	$elements_facture = $session->elements_facture;
+    	$this->view->assign("elements_facture",$elements_facture);
     }
     
     public function printfactureAction()
     {
     	$this->_helper->layout->setLayout('layout2');
-    	$elements_facture = $this->_getParam('elements_facture');
-    	$this->view->assign(array('elements_facture'=>$elements_facture));
+    	
+    	$session = new Zend_Session_Namespace('elements_facture');
+    	 
+    	$elements_facture = $session->elements_facture;
+    	$this->view->assign("elements_facture",$elements_facture);
     }
     
     

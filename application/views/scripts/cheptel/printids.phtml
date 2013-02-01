@@ -2,7 +2,46 @@
 
   <div id="printableArea" style="margin-left:2em">
   <h3 align="center">LISTE DES IDENTIFIANTS</h3>
-   <p><?php  $ids=$this->ids; print_r($ids); ?></p>
+   <?php  $ids=$this->ids;
+          $total=$this->total; 
+          $ids_arr=explode(";", $ids);
+    ?>
+    <p>
+    <?php 
+
+         function generateAnimalRank($rank){
+	  	
+	  	$rank_string = (string) $rank;
+	  	
+	  	//The value returned must be exactly 4 characters long
+	  	switch (strlen($rank_string))
+	  	{
+	  		case 1: return "000".$rank_string;break;
+	  		case 2: return "00".$rank_string;break;
+	  		case 3: return "0".$rank_string;break;
+	  		case 4: return $rank_string;break;
+	  		default: return $rank_string;break;
+	  	}
+	  	
+	  }
+	  
+          $base_id=substr($ids_arr[0],0,9);
+          $first_id_num=substr($ids_arr[0],9);
+          
+                   
+          for($i=0;$i<$total;$i++)
+          {
+             $rank=$first_id_num + $i;
+             $id=generateAnimalRank($rank);
+             $animal_id=$base_id.$id;
+             echo $animal_id."  -  ";
+          }
+
+   ?>
+    
+    
+    
+    </p>
    </div>
   <div align="center">
   <input type="button" onclick="printDiv('printableArea')" value="LANCER IMPRESSION" />

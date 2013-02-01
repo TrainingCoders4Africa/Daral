@@ -157,7 +157,7 @@ class Application_Model_Farmer_DbTable_Farmer extends Zend_Db_Table_Abstract
 		{ 
 			if($id_buyer!='00000000' && $id_buyer!='99999999' && $this->will_exceed_category($id_buyer,$nb_animals,$animaltype))
 			{
-				return "Impossible d'enregistrer la transaction: le maximum de betes pour la categorie de l'acheteur sera depasse";
+				return "Impossible d'enregistrer la transaction: le maximum de betes pour la categorie de l'acheteur sera depasse ;";
 			}
 		
 			else 

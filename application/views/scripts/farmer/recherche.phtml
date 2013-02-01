@@ -213,7 +213,13 @@ $(function (){
 </table><br />
 
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button>
+<br><br>
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml');
+?>
 </div>
+
 </form>
 
  
@@ -230,8 +236,5 @@ $(function (){
 
 
 
-<?php echo $this->paginationControl($this->paginator,
-                                    'Sliding',
-                                    'pagination_control.phtml');
-?>
+
 </div>

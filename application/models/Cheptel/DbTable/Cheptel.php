@@ -68,8 +68,11 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 						             		
 						             		$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
 						             		
-						             		$ids.="  ".$animal_id;
-						             	    $tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id); 
+						             		if($i==0){ $ids.=$animal_id;}
+						             		elseif ($i==($total_animaltype_to_add-1)){ $ids.=";".$animal_id;}
+						             		
+						             	     $tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id);
+						             		 
 						             	    
 						             	    $rank++;//we increment for the next animal 
 						             	}
@@ -121,7 +124,15 @@ class Application_Model_Cheptel_DbTable_Cheptel extends Zend_Db_Table_Abstract
 				             			 
 				             			$animal_id=$fk_id_farmer.$tag.$new_animaltype_rank;
 				             			
-				             			$ids.="  ".$animal_id;
+				             			if($i==0){
+				             				$ids.=$animal_id;
+				             			}
+				             			elseif ($i==($total_animaltype_to_add-1)){
+				             				$ids.=";".$animal_id;
+				             				
+				             			}
+				             			 
+				             			
 				             			$tableAnimal->addAnimal($fk_id_farmer,$fk_animaltype,$animal_id);
 				             			
 				             			$rank++;//we increment for the next animal
