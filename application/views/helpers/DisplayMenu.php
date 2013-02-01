@@ -207,7 +207,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		      });
               </script>
-               <li ><a href="'.$cheptel.'/add">Ajouter des animaux</a></li>
+               <li ><a href="'.$cheptel.'/add">Ajouter des b&ecirc;tes</a></li>
                <li ><a href="'.$cheptel.'">Afficher le Cheptel</a></li>
                <li ><a href="'.$animal.'/recherche">Rechercher</a></li>
              </ul>
@@ -242,7 +242,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
    <!---------------END------------------------>
    
    <!---------------MEDIATHEQUE---------------->
-        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>Mediatheque<i class="icon-chevron-down" id="chevron-media" style="margin-left: 7.0em"></i></a>
+        <a href="#media-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-film"></i>M&eacute;diatheque<i class="icon-chevron-down" id="chevron-media" style="margin-left: 7.0em"></i></a>
          <ul id="media-menu" class="nav nav-list collapse">
          <script type="text/javascript">
         $("a").click(function(){
@@ -250,7 +250,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		  });
         </script>
-               <li ><a href="'.$media.'">Liste des videos</a></li>
+               <li ><a href="'.$media.'">Liste des vid&eacute;os</a></li>
                <li><a href="#">Recherche</a></li>
          </ul>
    <!----------------END----------------------->
@@ -265,9 +265,9 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  });
         </script>
                <li ><a href="'.$daral.'/choose">Darals</a></li>
-               <li><a href="'.$localite.'/choose">Localites</a></li>
-               <li><a href="'.$departement.'/choose">Departements</a></li>
-               <li><a href="'.$region.'/choose">Regions</a></li>
+               <li><a href="'.$localite.'/choose">Localit&eacute;s</a></li>
+               <li><a href="'.$departement.'/choose">D&eacute;partements</a></li>
+               <li><a href="'.$region.'/choose">R&eacute;gions</a></li>
                <li><a href="'.$national.'/displaystat">Pays</a></li> 
          </ul>
    <!----------------END----------------------->
@@ -281,9 +281,9 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  
 		  });
         </script>
-               <li ><a href="'.$veterinaire.'">Veterinaires</a></li>
+               <li ><a href="'.$veterinaire.'">V&eacute;t&eacute;rinaires</a></li>
                <li><a href="'.$users.'/admin">Administrateur</a></li>
-               <li><a href="'.$users.'/gerant">Autres Gerants</a></li>
+               <li><a href="'.$users.'/gerant">Autres G&eacute;rants</a></li>
          </ul>
          
    <!---------------END------------------------>

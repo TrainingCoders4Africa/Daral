@@ -91,4 +91,11 @@ class Application_Model_Departement_DbTable extends Application_Model_Departemen
 		return $rows[0][0];
 	
 	}
+	
+	public function get_departement_latlng($departement)
+	{
+		$res=$this->fetchRow(array("name=?"=>$departement));
+		$latlng=$res->toArray();
+		return $latlng;
+	}
 }

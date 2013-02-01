@@ -92,4 +92,11 @@ class Application_Model_Region_DbTable extends Application_Model_Region_DbTable_
 		return $rows[0][0];
 	
 	}
+	
+	public function get_region_latlng($region)
+	{
+		$res=$this->fetchRow(array("name=?"=>$region));
+		$latlng=$res->toArray();
+		return $latlng;
+	}
 }
