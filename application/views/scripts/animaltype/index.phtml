@@ -32,14 +32,14 @@ function updateFilters(paramName, paramValue)
 
 <div class="content">	
 <div class="header">
-   <h1 class="page-title" >Liste des types d'animaux</h1>
+   <h1 class="page-title" >Liste des types de b&ecirc;tes</h1>
 </div>
 
 
 
-<div
-	class="pull-right"><a class="btn btn-info"
-	href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'index'), null, true); ?>"><i
+<div class="pull-right" style="margin-right:2em">
+	
+	<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'index'), null, true); ?>"><i
 	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
 <a class="btn btn-success"
 	href="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'create'), null, true); ?>"><i
@@ -51,11 +51,11 @@ function updateFilters(paramName, paramValue)
 	action="<?php echo $this->url(array('controller' => 'animaltype', 'action' => 'index'), null, true); ?>">
 <div style="margin-left: 1em; padding-bottom:0.5em;">Rechercher: <input class="input-large search-query"
 	placeholder="Mots cles..." type="text" name="_kw"
-	value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans
+	value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp; dans
 &nbsp <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
-  'all' => 'All',
-  'name' => 'Name',
-)); ?>&nbsp
+  'all' => 'Tout',
+  'name' => 'Nom',
+)); ?>&nbsp;
 <button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
@@ -74,7 +74,7 @@ function updateFilters(paramName, paramValue)
             </span></th>
             <th style="text-align: center;" 
             <?php if ('name' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-                <span class="label label-inverse">Name 
+                <span class="label label-inverse">Nom
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'name', '_so' => 'desc')); ?>'>&#x25BC;</a>
                 

@@ -21,7 +21,7 @@ class Application_Form_EditAnimaltype extends Zend_Form
 
         $this->addElement(
             $this->createElement('text', 'name')
-                ->setLabel('Name')
+                ->setLabel('Nom')
                 ->setAttrib("maxlength", 30)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 30)))

@@ -1,6 +1,5 @@
 <?php
 
-
 class AuthController extends Zend_Controller_Action
 {
 
@@ -17,32 +16,14 @@ class AuthController extends Zend_Controller_Action
 	   
 	   if($request->isPost()){
 	    if($form->isValid($request->getPost())){
-			if($this->_process($form->getValues()))
-			{
-				//recuperation des infos de lutilisateur
-				$auth = Zend_Auth::getInstance();
-				$ip = $_SERVER['REMOTE_ADDR'];
-				$user = $auth->getIdentity()->id;
-				//verifier si l'ordinateur ou le user n'a pas deja une cnx en cours
-				$tableCnx = new Application_Model_DbTable_Connection();
-				$cnx = $tableCnx->fetchRow(array("user=?"=>$user));
-				if(!$cnx)
-				{
-					//insertion dans la table des personnes actuelment connectées
-					$tableCnx->addConnection($user,$ip);
-					
-					//We are authenticated, redirect me to Dashboard page
-					//$this->_helper->redirector->gotoSimple('index','index');		
-					$this->_helper->redirector->gotoSimple('index','dash');
-				}
-				else
-				{
-					echo "<div align=\"center\"><b style='color:red;'> Vous &ecirc;tes dej&agrave; connect&eacute;! Nouvelle connexion refus&eacute;e...</b></div>";
-				}
+			if($this->_process($form->getValues())){
+			//We are authenticated, redirect me to Dashboard page
+			//$this->_helper->redirector->gotoSimple('index','index');		
+			$this->_helper->redirector->gotoSimple('index','dash');
 			}
 			
 			else{
-			  echo "<div align=\"center\"><b style='color:red;'> Nom d'utilisateur ou mot de passe incorrect!! Essayez &agrave; nouveau svp</b></div>";
+			  echo "<b style='color:red;'> Nom d'utilisateur ou mot de passe incorrect!! Essayez a nouveau </b>";
 			}
 		}
 	   }
@@ -80,12 +61,6 @@ class AuthController extends Zend_Controller_Action
 
     public function logoutAction()
     {
-		$auth = Zend_Auth::getInstance();
-		$user = $auth->getIdentity()->id;
-		//suppression de la table des personnes actuelment connectées
-		$tableCnx = new Application_Model_DbTable_Connection();
-		$tableCnx->deleteConnection($user);
-		
         Zend_Auth::getInstance()->clearIdentity();
         $this->_helper->redirector->gotoSimple('index','index'); // back to login page
     }

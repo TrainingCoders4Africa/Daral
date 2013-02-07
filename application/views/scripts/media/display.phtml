@@ -1,0 +1,27 @@
+<html>
+<head>
+
+</head>
+<?php 
+$tableMedia = new Application_Model_Media_DbTable(); 
+$tableLangue = new Application_Model_Langue_DbTable();
+$tableMaladie = new Application_Model_Maladie_DbTable();
+?>     
+<br/>
+<div class="content">
+<p><b>INFORMATIONS VIDEO:</b></p>
+
+<?php 
+$media_info=$tableMedia->getMedia($this->id);
+$idLangue=$media_info['langue'];
+$idMaladie=$media_info['maladie'];
+$langue_info=$tableLangue->getLangue($idLangue);
+$maladie_info=$tableMaladie->getMaladie($idMaladie);
+?>
+  <ul>
+   <li>Titre:<?php echo " ".$media_info['titre']; ?></li>
+   <li>Langue:  <?php echo " ".$langue_info['libelle']; ?></li>
+   <li>Maladie: <?php echo " ".$maladie_info['libelle']; ?> </li>
+   <li>Description: <?php echo " ".$media_info['description']; ?> </li>
+  </ul>
+</div>

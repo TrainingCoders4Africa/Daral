@@ -1,4 +1,15 @@
-<h1>Update Media: <?php echo $this->row->getZodekenAutoLabel(); ?></h1>
+<script>
+	$(function() {
+		$( "#date_insertion" ).datepicker();
+	});
+</script>
+<div class="content">
+<div class="header">
+   <h1 class="page-title" >Mise a jour des informations</h1>
+</div>
+<ul class="breadcrumb">
+	<li><a href="#" class="black">Mediatheque</a><span class="divider">/</span></li>
+	<li class="active">Mise a jour de la video <?php echo $this->row->getZodekenAutoLabel(); ?></li>
+</ul>
+</div>
 
-<?php
-echo $this->form->setAction($this->url());

@@ -22,15 +22,15 @@ class Application_Form_EditDaral extends Zend_Form
         $tableLocalite = new Application_Model_Localite_DbTable();
         $this->addElement(
             $this->createElement('select', 'id_localite')
-                ->setLabel('Id Localite')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableLocalite->fetchPairs())
+                ->setLabel('Localite')
+                ->setMultiOptions(array("" => "- - Choisir - -") + $tableLocalite->fetchPairs())
                 ->setRequired(true)
         );
 
         $this->addElement(
             $this->createElement('text', 'name')
-                ->setLabel('Name')
-                ->setAttrib("maxlength", 30)
+                ->setLabel('Numero Daral')
+                ->setAttrib("maxlength", 4)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 30)))
                 ->addFilter(new Zend_Filter_StringTrim())

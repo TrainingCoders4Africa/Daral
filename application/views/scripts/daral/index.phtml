@@ -96,9 +96,8 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
             <td align="center"><input type="checkbox" name="del_id[]" value="<?php echo $row->id; ?>" /></td>
             <td  align="right"><?php echo $row->name; ?></td>
             <td><?php echo $row->id_localite; ?></td>
-            <td align="center"><a  href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'displaystat'), null, true); ?>" ><i class="icon-zoom-in"></i></a> 
-            - <a title="Modifier"
-				href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
+            <td align="center">    
+            <a title="Modifier" href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'update', 'id' => $row->id), null, true); ?>"><i
 				class="icon-pencil"></i></a> - <a title="Archiver"
 				onclick="return confirm('Confirmez la suppression!');"
 				href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'delete', 'del_id' => $row->id), null, true); ?>"><i

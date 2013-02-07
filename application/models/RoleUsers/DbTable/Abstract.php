@@ -181,7 +181,7 @@ abstract class Application_Model_Roleusers_DbTable_Abstract extends Zend_Db_Tabl
 
         foreach ($rows as $row)
         {
-            $return[$row[0]] = $row[1];
+            $return[$row[1]] = $row[1];
         }
 
         return $return;

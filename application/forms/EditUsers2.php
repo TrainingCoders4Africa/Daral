@@ -8,7 +8,7 @@
  * @version $Id$
  *
  */
-class Application_Form_EditUsers extends Zend_Form
+class Application_Form_EditUsers2 extends Zend_Form
 {
     public function init()
     {
@@ -19,7 +19,7 @@ class Application_Form_EditUsers extends Zend_Form
                 
         );
 
-        
+       
         
         $this->addElement(
         		$this->createElement('text', 'prenom')
@@ -78,7 +78,7 @@ class Application_Form_EditUsers extends Zend_Form
         );
 
         $this->addElement(
-            $this->createElement('password', 'password')
+            $this->createElement('text', 'password')
                 ->setLabel('Mot de passe')
                 ->setAttrib("maxlength", 50)
                 ->setRequired(true)
@@ -89,8 +89,8 @@ class Application_Form_EditUsers extends Zend_Form
         $this->addElement(
             $this->createElement('text', 'date_created')
                 ->setLabel('Date Creation')
-                ->setValue(date("d-m-Y H:i:s"))
         		->setAttrib('readonly','readonly')
+                ->setValue(date("d-m-Y H:i:s"))
                 ->setRequired(true)
                 ->addFilter(new Zend_Filter_StringTrim())
         );
@@ -99,7 +99,7 @@ class Application_Form_EditUsers extends Zend_Form
         $this->addElement(
             $this->createElement('select', 'role')
                 ->setLabel('Role')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableRoleusers->fetchPairs())
+                ->setMultiOptions(array("" => "- - Choisir - -") + $tableRoleusers->fetchPairs())
                 ->setRequired(true)
         );
 
@@ -107,7 +107,7 @@ class Application_Form_EditUsers extends Zend_Form
         $this->addElement(
             $this->createElement('select', 'user_daral')
                 ->setLabel('Daral Assigne')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableDaral->fetchPairs())
+                ->setMultiOptions(array("" => "- - Choisir - -") + $tableDaral->fetchPairs())
                 ->setRequired(true)
         );
 

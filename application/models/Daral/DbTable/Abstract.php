@@ -198,7 +198,7 @@ abstract class Application_Model_Daral_DbTable_Abstract extends Zend_Db_Table_Ab
 
         foreach ($rows as $row)
         {
-            $return[$row[0]] = $row[1];
+            $return[$row[2]] = $row[1];
         }
 
         return $return;

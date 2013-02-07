@@ -127,7 +127,7 @@ class UsersController extends Zend_Controller_Action
     public function updateAction()
     {
         $tableUsers = new Application_Model_Users_DbTable();
-        $form = new Application_Form_EditUsers();
+        $form = new Application_Form_EditUsers2();
         $id = (int) $this->_getParam('id', 0);
         
         $row = $tableUsers->find($id)->current();

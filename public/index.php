@@ -8,6 +8,10 @@ defined('APPLICATION_PATH')
 defined('IMAGE_PATH')
     || define('IMAGE_PATH', realpath(dirname(__FILE__) . '/image'));
 
+// Define path to video directory
+defined('VIDEO_PATH')
+|| define('VIDEO_PATH', realpath(dirname(__FILE__) . '/video'));
+
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -30,7 +34,9 @@ require_once 'Zend/Application.php';
 $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini',
-	IMAGE_PATH
-);
+	IMAGE_PATH,
+	VIDEO_PATH
+		);
+		
 $application->bootstrap()
             ->run();

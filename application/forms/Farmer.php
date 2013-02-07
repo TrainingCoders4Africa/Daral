@@ -87,6 +87,7 @@ class Application_Form_Farmer extends Zend_Form
         		$this->createElement('text', 'phone_farmer')
         		->setLabel('T&eacute;l&eacute;phone')
         		->setAttrib("maxlength", 100)
+        		->setValue('221')
         		->setRequired(true)
         		->addValidator(new Zend_Validate_StringLength(array("max" => 100)))
         		->addFilter(new Zend_Filter_StringTrim())

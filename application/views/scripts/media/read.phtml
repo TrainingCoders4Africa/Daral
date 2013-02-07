@@ -1,0 +1,27 @@
+<html>
+<head>
+
+</head>
+<div class="content">	
+	<div class="header">
+	   <h1 class="page-title" >Liste des videos</h1>
+	</div>
+	<ul class="breadcrumb">
+		<li><a href="#" class="black">Mediatheque</a><span class="divider">/</span></li>
+		<li class="active" >Liste des videos</li>
+	</ul>
+	<div style="text-align:right;margin-right:1em">
+	<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>"> Toutes les videos</a>
+	</div>
+	<br />
+	<div class="container">
+		<div class="row" align="center">
+			<?php
+				$idVideo = $this->idVideo;
+				$Video ="http://www.youtube.com/embed/".$idVideo;
+			?>
+				<iframe id="ytplayer" type="text/html" width="640" height="390" 
+					src="<?php echo $Video ?>" frameborder="1" />
+		</div>
+	</div>
+</div>

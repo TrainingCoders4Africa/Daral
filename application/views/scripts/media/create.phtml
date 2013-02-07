@@ -1,28 +1,58 @@
 <?php
+require_once 'Zend/Loader.php';
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+
 $this->headTitle('Media');
 $form = $this->form;
+
 ?>
-
-
 	
 <div class="content">	
 <div class="header">
    <h1 class="page-title" >Nouveau Media</h1>
 </div>
-
-        <ul class="breadcrumb">
-            <li><a href="#" class="black">Mediatheque</a><span class="divider">/</span></li>
-            <li class="active" >Nouveau Media</li>
-        </ul>
+	<ul class="breadcrumb">
+		<li><a href="#" class="black">Mediatheque</a><span class="divider">/</span></li>
+		<li class="active" >Nouveau Media</li>
+	</ul>
 <br/><br/>
-<form class="form-horizontal" method="post" action="<?php echo $this->url(); ?>">
+<?php
+$token = "";
+function getAuthSubRequestUrl()
+{
+	$next = 'http://localhost:8090/Daral-master/public/media/create';
+	$scope = 'http://gdata.youtube.com';
+	$secure = false;
+	$session = true;
+	return Zend_Gdata_AuthSub::getAuthSubTokenUri($next, $scope, $secure, $session);
+}
+
+function getAuthSubHttpClient()
+{
+	if (!isset($_SESSION['sessionToken']) && !isset($_GET['token']) )
+	{
+		echo '<a class="btn" href="' . getAuthSubRequestUrl() . '">Connexion pour uplaod!</a>';
+		return;
+	}
+	else if (!isset($_SESSION['sessionToken']) && isset($_GET['token'])) 
+	{
+	  $_SESSION['sessionToken'] = Zend_Gdata_AuthSub::getAuthSubSessionToken($_GET['token']);
+	}
+	$httpClient = Zend_Gdata_AuthSub::getHttpClient($_SESSION['sessionToken']);
+	return $httpClient;
+}
+$httpClient = getAuthSubHttpClient();
+if (isset($_SESSION['sessionToken']))
+$token = $_SESSION['sessionToken'];
+echo "*******".$token;
+?>
+<form class="form-horizontal"  action="<?php echo $this->url(array('controller' => 'media', 'action' => 'upload')) ?>" method="post" enctype="multipart/form-data">
 <div style="position: static; width: 90%; margin: auto;">
 	<table style="background-color : #eeeeee; width: 90%" class="table-bordered" ><tr>
     <?php
     $i = 1;
-    
-   
-    
+	
     /* @var $form Zend_Form */
     foreach ($form->getElements() as $element):
         /* @var $element Zend_Form_Element */
@@ -30,15 +60,24 @@ $form = $this->form;
         $elementName = $element->getName();
         $i++;
         ?>
-        <?php if($i%2 == 1) echo '</tr><tr>'; ?>
+        <?php if($i%2 == 1) echo '</tr><br><tr>'; ?>
 	           
 	            <td width="25%" align="right" class="control-group<?php if ($errors) echo ' error'; ?>">
-            	<?php if ($element->getType() != 'Zend_Form_Element_Button'): ?>
-                        <?php echo $element->getLabel(); ?>
+            	<?php if ($element->getType() != 'Zend_Form_Element_Button'&& $element->getType() != 'Zend_Form_Element_File'): ?>
+                        <?php echo $element->getLabel(); ?>                        
+                <?php endif; ?>
+				<?php if($element->getType() == 'Zend_Form_Element_File'):?>
+                <?php echo "Lien: "; ?>
                 <?php endif; ?>
 	            </td>
             	<td width="25%" align="left">
+                <?php if($element->getType() != 'Zend_Form_Element_File'):?>
                 <?php echo $element->renderViewHelper(); ?>
+                <?php endif; ?>
+                
+                <?php if($element->getType() == 'Zend_Form_Element_File'):?>
+                <?php echo $this->form->lien; ?>
+                <?php endif; ?>
                 <?php if ($errors): ?>
                     <span class="help-inline"><?php echo implode(', ', $errors); ?></span>
                 <?php endif; ?>
@@ -46,11 +85,10 @@ $form = $this->form;
                     <a class="btn" href="<?php echo $this->url(array('controller' => 'media'), null, true); ?>">Annuler</a>
                 <?php endif; ?>
 	            </td>
+				<td><input type="hidden" name="token" value="<?php echo $token; ?>"></td>
         <?php
         endforeach;
         ?>
         </tr></table>
   </div>
-
 </form>
-    

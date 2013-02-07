@@ -21,7 +21,7 @@ class Application_Form_EditLocalite extends Zend_Form
 
         $this->addElement(
             $this->createElement('text', 'name')
-                ->setLabel('Name')
+                ->setLabel('Nom')
                 ->setAttrib("maxlength", 50)
                 ->setRequired(true)
                 ->addValidator(new Zend_Validate_StringLength(array("max" => 50)))
@@ -32,7 +32,7 @@ class Application_Form_EditLocalite extends Zend_Form
         $this->addElement(
             $this->createElement('select', 'departement')
                 ->setLabel('Departement')
-                ->setMultiOptions(array("" => "- - Select - -") + $tableDepartement->fetchPairs())
+                ->setMultiOptions(array("" => "- - Choisir - -") + $tableDepartement->fetchPairs())
                 ->setRequired(true)
         );
 

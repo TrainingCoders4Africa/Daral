@@ -40,16 +40,16 @@ function updateFilters(paramName, paramValue)
 </div>
 
         <ul class="breadcrumb">
-            <li><a href="#" class="black">Mon Daral</a><span class="divider">/</span></li>
-            <li><a href="#" class="black" >Daral</a> <span class="divider">/</span></li>
+            <li><a href="#" class="black">Administration</a><span class="divider">/</span></li>
+            <li><a href="#" class="black" >Utilisateurs</a> <span class="divider">/</span></li>
             <li class="active">Liste</li>
         </ul>
 
-<div
-	class="pull-right"><a class="btn btn-info"
-	href="<?php echo $this->url(array('controller' => 'users', 'action' => 'index'), null, true); ?>"><i
+<div class="pull-right" style="margin-right:2em;">
+	
+	<a class="btn btn-info"href="<?php echo $this->url(array('controller' => 'users', 'action' => 'index'), null, true); ?>"><i
 	class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
-<a class="btn btn-success"
+    <a class="btn btn-success"
 	href="<?php echo $this->url(array('controller' => 'users', 'action' => 'create'), null, true); ?>"><i
 	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
 </div>
@@ -57,13 +57,13 @@ function updateFilters(paramName, paramValue)
 
 <form method="get" action="<?php echo $this->url(array('controller' => 'users', 'action' => 'index'), null, true); ?>">
 <div style="margin-left: 1em; padding-bottom:0.5em;">
-Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp dans &nbsp 
+Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($this->param_kw); ?>" /> &nbsp; dans &nbsp; 
 <?php echo $this->formSelect('_sm', $this->param_sm, array(), array (
-  'all' => 'All',
+  'all' => 'Tout',
   'username' => 'Username',
   'role' => 'Role',
-  'user_daral' => 'User Daral',
-)); ?>&nbsp
+  'user_daral' => 'Daral Assigne',
+)); ?>&nbsp;
 <button class="btn" type="submit"><i class="icon-search"></i>Rechercher</button>
 </div>
 </form>
@@ -80,13 +80,13 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                            </span>    
             </th>
             <th style="text-align: center;" <?php if ('username' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-               <span class="label label-inverse"> Nom
+               <span class="label label-inverse"> Username
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'username', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'username', '_so' => 'desc')); ?>'>&#x25BC;</a>
                                </span>
             </th>
             <th style="text-align: center;"<?php if ('date_created' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-               <span class="label label-inverse"> Date Creation 
+               <span class="label label-inverse"> Date Cr&eacute;ation 
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'date_created', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'date_created', '_so' => 'desc')); ?>'>&#x25BC;</a>
                                </span>
@@ -105,7 +105,7 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
                            </span></th>
                            
             <th style="text-align: center;" <?php if ('Telephone' == $this->sortField) echo ' class="sort-field sort-', htmlspecialchars($this->param_so), '"'; ?>>
-               <span class="label label-inverse"> Profil 
+               <span class="label label-inverse"> T&eacute;l&eacute;phone
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'Telephone', '_so' => 'asc')); ?>'>&#x25B2;</a>
                 <a href='<?php echo $this->url($_GET + array('_sf' => 'Telephone', '_so' => 'desc')); ?>'>&#x25BC;</a>
                                </span>
@@ -147,9 +147,12 @@ Rechercher: <input type="text" name="_kw" value="<?php echo htmlspecialchars($th
         </tr>
 <?php endforeach; ?>
     </tbody>
-</table></daral><br />
+</table></div><br />
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');
+
+?>
+</div>

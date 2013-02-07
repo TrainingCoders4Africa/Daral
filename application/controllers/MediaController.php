@@ -8,6 +8,10 @@
  * @version $Id$
  *
  */
+require_once 'Zend/Loader.php';
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+
 class MediaController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -37,74 +41,39 @@ class MediaController extends Zend_Controller_Action
             // prepend 'param' to avoid error of setting private/protected members
             $this->view->assign('param' . $paramName, $paramValue);
         }
+		
+		
     }
     
     public function createAction()
     {
         $form = new Application_Form_EditMedia();
-            
-        if ($this->_request->isPost()) {
-            if ($form->isValid($this->_request->getPost())) {
-                $values = $form->getValues();
-                    
-                $tableMedia = new Application_Model_Media_DbTable();
-                $tableMedia->insert($values);
-                    
-                $this->_helper->redirector('index');
-                exit;
-            }
-        }
-        
-        $this->view->form = $form;
+		
+		$this->view->form = $form;
     }
-    
-    public function updateAction()
+	
+	public function readAction()
     {
-        $tableMedia = new Application_Model_Media_DbTable();
-        $form = new Application_Form_EditMedia();
-        $id = (int) $this->_getParam('id', 0);
-        
-        $row = $tableMedia->find($id)->current();
+        $idVideo = $this->_getParam('idVideo');
+		$this->view->assign("idVideo",$idVideo);
+    }
+	
+	public function searchAction()
+    {
+        //$type = $this->_getParam('_sm');
+		$search = $this->_getParam('_kw');
+		/* $tableMedia = new Application_Model_Media_DbTable();
+		if($type == 'all')
+		{
+			$videoFeed = $tableMedia->searchAll($search);
+		}
+		if($type == 'langue' || $type == 'maladie')
+		{
+			$videoFeed = $tableMedia->searchTags($search);
+		}
+		 */
+		$this->view->assign("search",$search);
+		//$this->view->assign("videoFeed",$videoFeed);
+    }
 
-        if (!$row) {
-            $this->_helper->redirector('index');
-            exit;
-        }
-            
-        if ($this->_request->isPost()) {
-            if ($form->isValid($this->_request->getPost())) {
-                $values = $form->getValues();
-        
-                $where = array('id_media = ?' => $id);
-        
-                $tableMedia->update($values, $where);
-                    
-                $this->_helper->redirector('index');
-                exit;
-            }
-        } else {
-            
-            $form->populate($row->toArray());
-        }
-        
-        $this->view->form = $form;
-        $this->view->row = $row;
-    }
-    
-    public function deleteAction()
-    {
-        $ids = $this->_getParam('del_id', array());
-        
-        if (!is_array($ids)) {
-            $ids = array($ids);
-        }
-        
-        if (!empty($ids)) {
-            $tableMedia = new Application_Model_Media_DbTable();
-            $tableMedia->deleteMultipleIds($ids);
-        }
-        
-        $this->_helper->redirector('index');
-        exit;
-    }
 }

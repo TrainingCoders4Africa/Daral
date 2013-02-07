@@ -1,6 +1,5 @@
 <?php
-$tableLangue = new Application_Model_Langue_DbTable();
-$tableMaladie = new Application_Model_Maladie_DbTable();
+$search = $this->search;
 ?>
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <script type="text/javascript">
@@ -33,26 +32,20 @@ function updateFilters(paramName, paramValue)
     self.location.href = '?' + newQuery.join('&');
 }
 </script>
-
-
 <div class="content">	
 	<div class="header">
 	   <h1 class="page-title" >Liste des vid&eacute;os</h1>
 	</div>
 	<ul class="breadcrumb">
 		<li><a href="#" class="black">M&eacute;diatheque</a><span class="divider">/</span></li>
-		<li class="active" >Liste des vid&eacute;os</li>
+		<li class="active" >R&eacute;sultat recherche pour : <?php echo $search ?></li>
 	</ul>
 	
+	<div style="text-align:right;margin-right:2em;">
+	<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>"> Toutes les videos</a>
+	</div>
 	
-	
-	
-	<div style="text-align:right; margin-right:1em">
-	<a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'media', 'action' => 'index'), null, true); ?>"><i class=" icon-refresh icon-white"></i> Actualiser</a>
-	<a class="btn btn-success" href="http://www.youtube.com/user/daralproject?feature=guide" target="_blank"><i class="icon-plus icon-white"></i> Nouvelle video</a>
-	</div> <br />
-	
-	<div style="margin-left:1em;">
+	<div style="margin-left:2em">
 	<form method="get" action="<?php echo $this->url(array('controller' => 'media', 'action' => 'search'), null, true); ?>">
 	<div>
 	Recherche : 
@@ -60,6 +53,7 @@ function updateFilters(paramName, paramValue)
 	<input type="submit" value="Rechercher" />
 	</div>
 	</form>
+	</div>
 	
 	
 	<div class="container">
@@ -72,8 +66,13 @@ function updateFilters(paramName, paramValue)
 				$query = $yt->newVideoQuery();
 				$query->setAuthor('daralproject');
 				$query->setOrderBy('relevance');
-				//$query->setVideoQuery('test');
-				$videoFeed = $yt->getVideoFeed("http://gdata.youtube.com/feeds/api/users/daralproject/uploads");
+				//*****format search string ******
+				
+				$search=preg_replace( '/\s+/', ' ', $search);
+				$search =implode('+',explode(" ",$search));
+				 
+				//********************************
+				$videoFeed = $yt->getVideoFeed("http://gdata.youtube.com/feeds/api/users/daralproject/uploads/?q='.$search.'");
 				foreach ($videoFeed as $video) : $thumbs = $video->getVideoThumbnails();
 				$count = 1;
 				?>

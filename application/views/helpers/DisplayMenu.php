@@ -52,15 +52,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
                             <i class="icon-user"></i>'.$this->view->loggedInAs().'
                             <i class="icon-caret-down"></i>
                         </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="#">My Account</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
-                            <li class="divider visible-phone"></li>
-                            <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
-                        </ul>
-                    </li>
+                   
                     
                 </ul>
                 <span class="brand" href="#">DARAL '.$daral_current.'</span>
@@ -135,7 +127,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
                <li><a href="'.$typenotification.'/create">Ajouter</a></li>
              </ul>
                		
-              <li> <a href="#localite-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-localite"></i>Localite</a></li>
+              <li> <a href="#localite-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-localite"></i>Localit&eacute;</a></li>
               <ul id="localite-menu" class="nav nav-list collapse">
               <script type="text/javascript">
               $("a").click(function(){
@@ -147,29 +139,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
                <li ><a href="'.$localite.'/create">Ajouter</a></li>
              </ul>
                		
-               		 <li> <a href="#maladie-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-maladie"></i>Maladie</a></li>
-              <ul id="maladie-menu" class="nav nav-list collapse">
-              <script type="text/javascript">
-              $("a").click(function(){
-		      $(this).find("i#chevron-maladie").toggleClass("icon-chevron-right icon-chevron-down");
-		  
-		      });
-              </script>
-               <li ><a href="'.$maladie.'">Liste</a></li>
-               <li ><a href="'.$maladie.'/create">Ajouter</a></li>
-             </ul>
-               		
-               		 <li> <a href="#langue-menu" class="nav-header " data-toggle="collapse" ><i class="icon-chevron-right" id="chevron-langue"></i>Langue</a></li>
-              <ul id="langue-menu" class="nav nav-list collapse">
-              <script type="text/javascript">
-              $("a").click(function(){
-		      $(this).find("i#chevron-langue").toggleClass("icon-chevron-right icon-chevron-down");
-		  
-		      });
-              </script>
-               <li ><a href="'.$langue.'">Liste</a></li>
-               <li ><a href="'.$langue.'/create">Ajouter</a></li>
-             </ul>
+               		 
                		
          </ul>
    <!----------------END----------------------->';
@@ -251,7 +221,7 @@ class Zend_View_Helper_DisplayMenu extends Zend_View_Helper_Abstract
 		  });
         </script>
                <li ><a href="'.$media.'">Liste des vid&eacute;os</a></li>
-               <li><a href="#">Recherche</a></li>
+               <li><a href="'.$media.'/search">Recherche</a></li>
          </ul>
    <!----------------END----------------------->
 

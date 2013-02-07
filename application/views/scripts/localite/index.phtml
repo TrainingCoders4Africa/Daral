@@ -34,18 +34,23 @@ function updateFilters(paramName, paramValue)
 }
 </script>
 
+
+
 <div class="content">	
 <div class="header">
    <h1 class="page-title" >Liste des localit&eacute;s</h1>
 </div>
 
         <ul class="breadcrumb">
-            <li><a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>" class="black">Mon Daral</a><span class="divider">/</span></li>
+            <li><a href="<?php echo $this->url(array('controller' => 'daral', 'action' => 'index'), null, true); ?>" class="black">Administration</a><span class="divider">/</span></li>
             <li class="active">Liste des localites</li>
             
         </ul>
 
-<div class="pull-right">
+        
+        
+        
+<div class="pull-right" style="margin-right:2em">
 <a class="btn btn-info" href="<?php echo $this->url(array('controller' => 'localite', 'action' => 'index'), null, true); ?>">
 <i class=" icon-refresh icon-white"></i> Actualiser</a> <!--  ****  changed 'action'=>'create' into 'action'=>'add' ***  -->
 <a class="btn btn-success"
@@ -53,6 +58,8 @@ function updateFilters(paramName, paramValue)
 	class="icon-plus icon-white"></i> Ajouter</a> <!--  ********************************************************** -->
 </div>
 <br />
+
+
 <form method="get" action="<?php echo $this->url(array('controller' => 'localite', 'action' => 'index'), null, true); ?>">
 <div style="margin-left: 1em; padding-bottom:0.5em;">
 Rechercher: <input class="input-large search-query"
@@ -66,7 +73,11 @@ Rechercher: <input class="input-large search-query"
 </div>
 </form>
 
+
+
+
 <form method="post" action="<?php echo $this->url(array('controller' => 'localite', 'action' => 'delete'), null, true); ?>" onsubmit="return confirm('Delete selected rows?');">
+<div style="margin-left: 2em;margin-right:2em">
 <table  class="table table-bordered table-condensed ">
     <thead>
         <tr>
@@ -108,11 +119,15 @@ Rechercher: <input class="input-large search-query"
 				class="icon-trash"></i></a></td></tr>
 <?php endforeach; ?>
     </tbody>
-</table><br />
+</table>
 <button class="btn btn-danger" type="submit"><i class=" icon-trash icon-white"></i> Supprimer</button></form>
 
 
 <?php echo $this->paginationControl($this->paginator,
                                     'Sliding',
                                     'pagination_control.phtml');?>
+
+</div>
+<br />
+
 </div>
