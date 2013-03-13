@@ -1,4 +1,3 @@
-
 <div class="content">
 
 
@@ -30,7 +29,7 @@
     	ie: !!navigator.userAgent.match(/MSIE/),
     	protocol: location.protocol.match(/https/i) ? 'https' : 'http',
     	callback: null, // user callback for completed uploads
-    	swf_url: '<?php echo $this->baseUrl();?>/../application/views/scripts/jpegcam/webcam.swf', // URI to webcam.swf movie (defaults to cwd)
+    	swf_url: '<?php echo $this->baseUrl();?>/application/views/scripts/jpegcam/webcam.swf', // URI to webcam.swf movie (defaults to cwd)
     	shutter_url:'<?php echo $this->baseUrl();?>/../application/views/scripts/jpegcam/shutter.mp3', // URI to shutter.mp3 sound
     	api_url: '', // URL to upload script
     	loaded: false, // true when webcam movie finishes loading
